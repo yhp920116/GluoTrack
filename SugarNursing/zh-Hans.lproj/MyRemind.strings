@@ -1,0 +1,90 @@
+
+/* Class = "IBUILabel"; text = "每天次数"; ObjectID = "0wn-ir-dAL"; */
+"0wn-ir-dAL.text" = "每天次数";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "1Yd-kC-RrC"; */
+"1Yd-kC-RrC.text" = "Label";
+
+/* Class = "IBUITabBarItem"; title = "Plan"; ObjectID = "3rW-pS-f30"; */
+"3rW-pS-f30.title" = "监控计划";
+
+/* Class = "IBUILabel"; text = " "; ObjectID = "5ko-DJ-t8R"; */
+"5ko-DJ-t8R.text" = " ";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "6Vr-5y-DWu"; */
+"6Vr-5y-DWu.text" = "Label";
+
+/* Class = "IBUILabel"; text = "点击选择时间"; ObjectID = "6cC-qW-eiu"; */
+"6cC-qW-eiu.text" = "点击选择时间";
+
+/* Class = "IBUIBarButtonItem"; title = "菜单"; ObjectID = "8BL-DO-HiO"; */
+"8BL-DO-HiO.title" = "菜单";
+
+/* Class = "IBUILabel"; text = "重复天数"; ObjectID = "ASZ-os-mAG"; */
+"ASZ-os-mAG.text" = "重复天数";
+
+/* Class = "IBUITextField"; placeholder = "输入剂量"; ObjectID = "BE4-do-zco"; */
+"BE4-do-zco.placeholder" = "输入剂量";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "DJP-U2-pm5"; */
+"DJP-U2-pm5.text" = "Label";
+
+/* Class = "IBUILabel"; text = "点击选择药物"; ObjectID = "EEt-cH-NTy"; */
+"EEt-cH-NTy.text" = "点击选择药物";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "GiQ-o4-27K"; */
+"GiQ-o4-27K.text" = "Label";
+
+/* Class = "IBUILabel"; text = "点击选择时间"; ObjectID = "PZn-O8-Lkt"; */
+"PZn-O8-Lkt.text" = "点击选择时间";
+
+/* Class = "IBUISegmentedControl"; VHM-65-1bD.segmentTitles[0] = "Y"; ObjectID = "VHM-65-1bD"; */
+"VHM-65-1bD.segmentTitles[0]" = "Y";
+
+/* Class = "IBUISegmentedControl"; VHM-65-1bD.segmentTitles[1] = "N"; ObjectID = "VHM-65-1bD"; */
+"VHM-65-1bD.segmentTitles[1]" = "N";
+
+/* Class = "IBUILabel"; text = "开始日期"; ObjectID = "XEE-e2-fes"; */
+"XEE-e2-fes.text" = "开始日期";
+
+/* Class = "IBUILabel"; text = "服用单位"; ObjectID = "Yhs-JH-iis"; */
+"Yhs-JH-iis.text" = "服用单位";
+
+/* Class = "IBUINavigationItem"; title = "我的提醒"; ObjectID = "dVT-Pf-XUr"; */
+"dVT-Pf-XUr.title" = "我的提醒";
+
+/* Class = "IBUILabel"; text = "服用方法"; ObjectID = "h9l-h0-IMj"; */
+"h9l-h0-IMj.text" = "服用方法";
+
+/* Class = "IBUIButton"; normalTitle = "增加提醒"; ObjectID = "iCf-QQ-7Yy"; */
+"iCf-QQ-7Yy.normalTitle" = "增加提醒";
+
+/* Class = "IBUITabBarItem"; title = "Remind"; ObjectID = "k56-Dy-CmS"; */
+"k56-Dy-CmS.title" = "我的提醒";
+
+/* Class = "IBUILabel"; text = "点击选择天数"; ObjectID = "kta-Uq-a63"; */
+"kta-Uq-a63.text" = "点击选择天数";
+
+/* Class = "IBUINavigationItem"; title = "Remind Detail"; ObjectID = "lIO-C4-n4s"; */
+"lIO-C4-n4s.title" = "Remind Detail";
+
+/* Class = "IBUILabel"; text = "服用剂量"; ObjectID = "lsM-hS-yFg"; */
+"lsM-hS-yFg.text" = "服用剂量";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "nzw-nw-8c3"; */
+"nzw-nw-8c3.text" = "Label";
+
+/* Class = "IBUILabel"; text = "药物名称"; ObjectID = "oHL-yW-i4y"; */
+"oHL-yW-i4y.text" = "药物名称";
+
+/* Class = "IBUILabel"; text = "点击选择次数"; ObjectID = "rOL-d1-UB2"; */
+"rOL-d1-UB2.text" = "点击选择次数";
+
+/* Class = "IBUILabel"; text = "服药时间"; ObjectID = "riQ-P5-oLz"; */
+"riQ-P5-oLz.text" = "服药时间";
+
+/* Class = "IBUILabel"; text = "点击选择用法"; ObjectID = "utL-n1-lbp"; */
+"utL-n1-lbp.text" = "点击选择用法";
+
+/* Class = "IBUILabel"; text = "点击选择单位"; ObjectID = "vXC-iq-MC6"; */
+"vXC-iq-MC6.text" = "点击选择单位";

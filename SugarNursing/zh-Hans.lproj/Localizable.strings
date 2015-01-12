@@ -1,0 +1,130 @@
+/* 
+  Localizable.strings
+  SugarNursing
+
+  Created by Dan on 14-11-5.
+  Copyright (c) 2014年 Tisson. All rights reserved.
+*/
+
+"glucose" = "血糖";
+"hemoglobin" = "糖化血红蛋白";
+
+/* Basic */
+"New Version" = "发现新版本";
+"Skip" = "忽略";
+"Go to Store" = "下载更新";
+
+/* SSPullToRefreshView */
+"Pull down to refresh…" = "下拉刷新…";
+"Release to refresh…" = "释放刷新…";
+"Loading…" = "加载中…";
+"Last Updated: %@" = "上次更新: %@";
+
+
+/* HUD */
+"Login.." = "登录中..";
+"Error" = "错误";
+"Dismiss" = "取消";
+"Loading..." = "加载中...";
+"Server is busy" = "网络繁忙";
+
+
+/* Left Menu */
+"Advise" = "医生建议";
+"Test Result" = "检测数据";
+"Control Effect" = "控糖成效";
+"Recovery Log" = "康复日志";
+"My Tips" = "我的提醒";
+"Member Center" = "个人中心";
+"Service Center" = "服务中心";
+"Log Out" = "退出登录";
+
+/* Login And Register */
+"Register" = "手机注册";
+"Registering..." = "注册中...";
+"Register succeed" = "注册成功，请登录";
+"Resetting..." = "重置密码中...";
+"Reset" = "重设密码";
+"Reset succeed" = "重设成功";
+"hongkong" = "香港";
+
+
+"notice"="提示";
+"errorphonenumber"="手机号码非法，请重新填写";
+"sure"="确定";
+
+"willsendthecodeto"="我们将发送验证码短信到这个号码";
+"surephonenumber"="确认手机号码";
+"cancel"="取消";
+"Sending code" = "发送验证码";
+"Sending code succeed" = "验证码发送成功";
+
+
+"codesenderrormsg"="验证码发送失败 请稍后重试";
+"codesenderrtitle"="发送失败";
+
+"maxcodemsg"="请求验证码超上限 请稍后重试";
+"maxcode"="超过上限";
+
+"codetoooftenmsg"="客户端请求发送短信验证过于频繁";
+
+"countrychoose"="选择国家或地区";
+"choosegender"="选择性别";
+"female"="女";
+"male"="男";
+"Format is not avaliable" = "格式填写不正确";
+
+
+/* Test Tracker */
+"Cancel" = "取消";
+"30 days recently" = "近30天";
+"Select By Day" = "按日查询";
+"No Data" = "没有数据";
+
+
+/* Member Center */
+"Verify your account" = "验证账户";
+"Verifying..." = "验证中...";
+"Rebinding..." = "重新绑定中...";
+"Rebind Your Mobile"="重新绑定";
+"Rebind succeed" = "绑定成功";
+"Setting"="设置";
+"Personal Information" = "个人信息";
+"Please edit your info" = "请填写你的资料";
+"Please fill your info" = "点击查看详情";
+"Setting when purchase" = "请购买糖博士由医生设置";
+"Binding your email in our Home" = "请登录官方网站绑定邮箱";
+"You can change only once" = "只能修改一次";
+"No avaliable" = "无";
+"Avaliable" = "开通";
+"years old" = "岁";
+"Saving Data" = "保存数据中";
+"Data Updated" = "数据更新成功";
+"Thumbnail uploading" = "正在上传图片";
+"Upload succeed" = "上传成功";
+
+/* Medical History */
+"Medical Record" = "既往病史";
+"Please describe your case" = "请简述你的病例";
+"Medical Case" = "病例资料";
+"Add Medical Record" = "新增病史";
+"Edit Meical Record" = "编辑病史";
+
+/* About Us */
+"About Us" = "关于我们";
+
+"Terms of service" = "服务条款";
+
+"FeedBack" = "用户反馈";
+
+/* Service center */
+"Send Message Succeed" = "消息发送成功";
+
+/* Add New Recovery Record */
+"detect" = "检测";
+"diet" = "饮食";
+"exercise" = "运动";
+"drug" = "用药";
+"Add New Recovery Record" = "新增日志";
+"Edit Recovery Record" = "编辑日志";
+

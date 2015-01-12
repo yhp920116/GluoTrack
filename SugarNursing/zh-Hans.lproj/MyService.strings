@@ -1,0 +1,24 @@
+
+/* Class = "IBUIButton"; normalTitle = "刷新"; ObjectID = "0uH-hq-VGw"; */
+"0uH-hq-VGw.normalTitle" = "刷新";
+
+/* Class = "IBUIButton"; normalTitle = "我要留言"; ObjectID = "I0S-8f-CbO"; */
+"I0S-8f-CbO.normalTitle" = "我要留言";
+
+/* Class = "IBUINavigationItem"; title = "我的客服"; ObjectID = "OWC-oC-gZe"; */
+"OWC-oC-gZe.title" = "我的客服";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "TBQ-OS-0nb"; */
+"TBQ-OS-0nb.text" = "Label";
+
+/* Class = "IBUIBarButtonItem"; title = "菜单"; ObjectID = "Tgp-1e-1e3"; */
+"Tgp-1e-1e3.title" = "菜单";
+
+/* Class = "IBUILabel"; text = "万能的客服将在看到留言后答复您，请耐心等候哦"; ObjectID = "VDk-QU-lHp"; */
+"VDk-QU-lHp.text" = "万能的客服将在看到留言后答复您，请耐心等候哦";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "cZW-ph-CgM"; */
+"cZW-ph-CgM.text" = "Label";
+
+/* Class = "IBUILabel"; text = "留言记录"; ObjectID = "dcO-X1-1UQ"; */
+"dcO-X1-1UQ.text" = "留言记录";

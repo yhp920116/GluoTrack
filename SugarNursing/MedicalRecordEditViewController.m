@@ -1,0 +1,195 @@
+//
+//  MedicalHistoryEditViewController.m
+//  SugarNursing
+//
+//  Created by Dan on 14-11-26.
+//  Copyright (c) 2014年 Tisson. All rights reserved.
+//
+
+#import "MedicalRecordEditViewController.h"
+#import "MyTextView.h"
+
+@interface MedicalRecordEditViewController ()<UITextFieldDelegate, UITextViewDelegate>{
+    MBProgressHUD *hud;
+}
+
+
+@property (weak, nonatomic) IBOutlet UITextField *medicalNameField;
+@property (weak, nonatomic) IBOutlet UITextField *dateField;
+@property (weak, nonatomic) IBOutlet UITextField *hospitalField;
+@property (weak, nonatomic) IBOutlet UITextField *treatMentField;
+@property (weak, nonatomic) IBOutlet MyTextView *treatPlanField;
+
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIView *datePickerView;
+
+@property (strong, nonatomic) UITextField *activeTextField;
+
+
+@end
+
+@implementation MedicalRecordEditViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self configureMedicalRecord];
+}
+
+- (void)configureRightBarButton
+{
+    if (!self.navigationItem.rightBarButtonItem) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
+    }
+    
+}
+
+- (void)configureMedicalRecord
+{
+    self.medicalNameField.text = self.medicalRecord.mediName;
+    self.dateField.text = self.medicalRecord.diagTime;
+    self.hospitalField.text = self.medicalRecord.diagHosp;
+    self.treatMentField.text = self.medicalRecord.treatMent;
+    self.treatPlanField.text = self.medicalRecord.treatPlan;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.view endEditing:YES];
+    
+    switch (indexPath.row) {
+        case 1:
+        {
+            [self configureRightBarButton];
+            if ([self.medicalRecord.diagTime isEqualToString:@""] || !self.medicalRecord.diagTime) {
+                self.datePicker.date = [NSDate date];
+            }else{
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *date = [dateFormatter dateFromString:self.dateField.text];
+                [self.datePicker setDate:date animated:NO];
+            }
+            
+            [self showDatePickerView];
+            break;
+        }
+        default:
+            break;
+    }
+    
+}
+
+- (void)showDatePickerView
+{
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    
+    hud.margin = 0;
+    hud.customView = self.datePickerView;
+    hud.mode = MBProgressHUDModeCustomView;
+    [hud show:YES];
+}
+
+- (IBAction)pickerViewBtnTapped:(id)sender
+{
+    UIButton *btn = (UIButton *)sender;
+    switch (btn.tag) {
+        case 1001:
+            break;
+        case 1002:
+        {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSString *dateString = [dateFormatter stringFromDate:self.datePicker.date];
+            self.dateField.text = dateString;
+            break;
+        }
+    }
+    [hud hide:YES];
+}
+
+- (void)save:(id)sender
+{
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    
+    hud.labelText = NSLocalizedString(@"Saving Data", nil);
+    [hud show:YES];
+    
+    NSMutableDictionary *parameters = [@{@"method":@"mediRecordEdit",
+                                 @"sign":@"sign",
+                                 @"sessionId":[NSString sessionID],
+                                 @"linkManId":[NSString linkmanID],
+                                 @"mediName":self.medicalNameField.text,
+                                 @"mediRecord":self.medicalRecord.mediRecord ? self.medicalRecord.mediRecord : NSLocalizedString(@"Please fill your info", nil),
+                                 @"diagHosp":self.hospitalField.text,
+                                 @"diagTime":self.dateField.text,
+                                 @"treatMent":self.treatMentField.text,
+                                 @"treatPlan":self.treatPlanField.text,} mutableCopy];
+    
+    switch (self.medicalHistoryType) {
+        case MedicalHistoryTypeEdit:
+            [parameters setValue:self.medicalRecord.mediHistId forKey:@"mediHistId"];
+            break;
+        case MedicalHistoryTypeAdd:
+            break;
+        default:
+            break;
+    }
+    
+    NSURLSessionDataTask *editRecordTask = [GCRequest userEditMedicalRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        if (!error) {
+            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+                
+                // Add Mode needs to create a new MedicalRecord
+                if (!self.medicalRecord) {
+                    MedicalRecord *newMedicalRecord = [MedicalRecord createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    UserID *userId = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    userId.userId = [NSString userID];
+                    userId.linkManId = [NSString linkmanID];
+                    newMedicalRecord.userid = userId;
+                    
+                    self.medicalRecord = newMedicalRecord;
+                }
+                
+                [self.medicalRecord updateCoreDataForData:responseData withKeyPath:nil];
+                [self updateMedicalRecord];
+                
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = NSLocalizedString(@"Data Updated", nil);
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText  = [responseData valueForKey:@"ret_msg"];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            }
+            
+        }else{
+            [hud hide:YES];
+        }
+    }];
+    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:editRecordTask delegate:nil];
+}
+
+- (void)updateMedicalRecord
+{
+    self.medicalRecord.mediName = self.medicalNameField.text;
+    self.medicalRecord.diagTime = self.dateField.text;
+    self.medicalRecord.diagHosp = self.hospitalField.text;
+    self.medicalRecord.treatMent = self.treatMentField.text;
+    self.medicalRecord.treatPlan =  self.treatPlanField.text;
+    self.medicalRecord.mediRecord = self.medicalRecord.mediRecord ? self.medicalRecord.mediRecord : NSLocalizedString(@"Please fill your info", nil);
+    [[CoreDataStack sharedCoreDataStack] saveContext];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self configureRightBarButton];
+}
+
+
+@end

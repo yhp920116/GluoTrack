@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RemindViewController"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UE3-bC-cQ3">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="dataSource" destination="-1" id="fwg-Ne-3Zz"/>
+                <outlet property="delegate" destination="-1" id="f0d-uK-hek"/>
+            </connections>
+            <point key="canvasLocation" x="293" y="355"/>
+        </tableView>
+        <view contentMode="scaleToFill" id="Hl7-M4-mAA">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fxi-R5-8KW">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
+                    <color key="backgroundColor" red="0.93725496529999996" green="0.93725496529999996" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                    <state key="normal" title="增加提醒">
+                        <color key="titleColor" red="0.17254902420000001" green="0.49019610879999997" blue="0.77647066119999997" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="AddRemind:" destination="-1" eventType="touchUpInside" id="285-sg-dzk"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.78039215689999997" blue="0.75686274509999996" alpha="1" colorSpace="deviceRGB"/>
+            <constraints>
+                <constraint firstItem="Fxi-R5-8KW" firstAttribute="top" secondItem="Hl7-M4-mAA" secondAttribute="top" id="Ama-7b-N6a"/>
+                <constraint firstAttribute="trailing" secondItem="Fxi-R5-8KW" secondAttribute="trailing" id="Grp-tP-U44"/>
+                <constraint firstAttribute="bottom" secondItem="Fxi-R5-8KW" secondAttribute="bottom" id="k0u-4b-Rya"/>
+                <constraint firstItem="Fxi-R5-8KW" firstAttribute="leading" secondItem="Hl7-M4-mAA" secondAttribute="leading" id="tM9-6f-vIe"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,412 @@
+//
+//  PatientDataViewController.m
+//  SugarNursing
+//
+//  Created by Dan on 14-11-26.
+//  Copyright (c) 2014年 Tisson. All rights reserved.
+//
+
+#import "PatientDataViewController.h"
+#import "PatientImage.h"
+#import <QuartzCore/QuartzCore.h>
+#import "MyTextView.h"
+#import <MWPhotoBrowser.h>
+
+
+@interface PatientDataViewController ()<UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,MWPhotoBrowserDelegate,PatientImageDelegate>{
+    MBProgressHUD *hud;
+}
+
+@property (weak, nonatomic) IBOutlet MyTextView *textView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+@property (strong, nonatomic) UIImage *uploadImage;
+@property (strong, nonatomic) NSMutableArray *photos;
+
+@end
+
+@implementation PatientDataViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.title = NSLocalizedString(@"Medical Case", nil);
+    
+    [self configureTextView];
+    [self configureMedicalRecordImages];
+}
+
+#pragma mark - Configuration
+
+- (void)configureTextView
+{
+    self.textView.text = self.medicalRecord.mediRecord;
+    self.textView.placeholder = NSLocalizedString(@"Please describe your case", nil);
+    self.textView.placeholderColor = [UIColor lightGrayColor];
+    [[self.textView layer] setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor]];
+    [[self.textView layer] setBorderWidth:1.0];
+}
+
+- (void)configureMedicalRecordImages
+{
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    hud.mode = MBProgressHUDModeText;
+    
+    NSDictionary *parameters = @{@"method":@"getMediRecordAttach",
+                                 @"sign":@"sign",
+                                 @"sessionId":[NSString sessionID],
+                                 @"mediHistId":self.medicalRecord.mediHistId};
+    [GCRequest userGEtMedicalREcordImagesWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        if (!error) {
+            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+                
+                // 清除缓存
+                self.medicalRecord.recordPhoto = nil;
+                
+                NSArray *responseImages = [responseData objectForKey:@"mediAttach"];
+                NSMutableOrderedSet *recordPhotos = [[NSMutableOrderedSet alloc] initWithCapacity:10];
+
+                for (NSDictionary *imageDic in responseImages) {
+                    RecordPhoto *photo = [RecordPhoto createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    [photo updateCoreDataForData:imageDic withKeyPath:nil];
+                    
+                    [recordPhotos addObject:photo];
+                }
+                
+                self.medicalRecord.recordPhoto = recordPhotos;
+                [[CoreDataStack sharedCoreDataStack] saveContext];
+            
+                hud.labelText = NSLocalizedString(@"Data Updated", nil);
+                [hud show:YES];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                
+                // 刷新页面
+                [self.collectionView reloadData];
+                
+            }else{
+                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            }
+        }
+    }];
+ 
+}
+
+- (void)configureRightBarButton
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.view endEditing:YES];
+}
+
+- (void)updateDataToServer
+{
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    
+    hud.labelText = NSLocalizedString(@"Saving Data", nil);
+    [hud show:YES];
+    
+    NSMutableArray *uploadImages = [@[] mutableCopy];
+    for (RecordPhoto *photo in self.medicalRecord.recordPhoto) {
+        NSDictionary *photoDic = @{@"attachName":photo.attachName,
+                                   @"attachPath":photo.attachPath};
+        [uploadImages addObject:photoDic];
+    }
+    NSString *uploadJsonString = [uploadImages JSONString];
+    
+    NSDictionary *parameters = @{@"method":@"mediRecordEdit",
+                                 @"sign":@"sign",
+                                 @"sessionId":[NSString sessionID],
+                                 @"linkManId":[NSString linkmanID],
+                                 @"mediHistId":self.medicalRecord.mediHistId,
+                                 @"mediName":self.medicalRecord.mediName,
+                                 @"mediRecord":self.textView.text,
+                                 @"diagTime":self.medicalRecord.diagTime,
+                                 @"mediAttach":uploadJsonString
+                                 };
+    
+    
+    NSURLSessionDataTask *editRecordTask = [GCRequest userEditMedicalRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        if (!error) {
+            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+                
+                self.medicalRecord.mediRecord = self.textView.text;
+                [[CoreDataStack sharedCoreDataStack] saveContext];
+                
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = NSLocalizedString(@"Data Updated", nil);
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            }else{
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            }
+        }else {
+            [hud hide:YES];
+        }
+    }];
+    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:editRecordTask delegate:nil];
+}
+
+- (void)save:(id)sender
+{
+    [self updateDataToServer];
+}
+
+#pragma mark - UICollectionView Datasource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.medicalRecord.recordPhoto.count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PatientImage *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
+    
+    [self configureImageCell:cell atIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (void)configureImageCell:(PatientImage *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    RecordPhoto *photo = [self.medicalRecord.recordPhoto objectAtIndex:indexPath.row];
+    [cell.patientDataImageView sd_setImageWithURL:[NSURL URLWithString:photo.attachPath] placeholderImage:[UIImage imageNamed:@"thumbDefault"]];
+    cell.indexPath = indexPath;
+    cell.backgroundColor = [UIColor lightGrayColor];
+}
+
+#pragma mark - UICollectionView Delegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableArray *photos = [[NSMutableArray alloc] initWithCapacity:10];
+    MWPhoto *photo;
+    
+    
+    for (RecordPhoto *recordPhoto in self.medicalRecord.recordPhoto) {
+        
+        NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:recordPhoto.attachPath]];
+        UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:key];
+        photo = [MWPhoto photoWithImage:image];
+        photo.caption = recordPhoto.attachName;
+        [photos addObject:photo];
+    }
+    self.photos = photos;
+    
+    MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    photoBrowser.displayActionButton = NO;
+    photoBrowser.displayNavArrows = NO;
+    photoBrowser.displaySelectionButtons = NO;
+    photoBrowser.alwaysShowControls = YES;
+    photoBrowser.zoomPhotosToFill = YES;
+    photoBrowser.enableGrid = NO;
+    photoBrowser.startOnGrid = NO;
+    photoBrowser.enableSwipeToDismiss = YES;
+    [photoBrowser setCurrentPhotoIndex:indexPath.row];
+    
+    if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)]) {
+        // conditionly check for any version >= iOS 8
+        [self showViewController:photoBrowser sender:nil];
+        
+    } else
+    {
+        // iOS 7 or below
+        [self.navigationController pushViewController:photoBrowser animated:YES];
+    }
+
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize retVal = CGSizeMake(80, 80);
+    return retVal;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0, 5, 0, 5);
+}
+
+#pragma mark - PatientImageCellDelegate
+
+- (void)patientImage:(PatientImage *)patientImage imageDeleted:(NSIndexPath *)indexPath
+{
+    NSMutableOrderedSet *photos = [self.medicalRecord.recordPhoto mutableCopy];
+    [photos removeObjectAtIndex:indexPath.row];
+    self.medicalRecord.recordPhoto = photos;
+    
+    [self.collectionView reloadData];
+    [self configureRightBarButton];
+}
+
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser
+{
+    return self.medicalRecord.recordPhoto.count;
+}
+
+- (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index
+{
+    if (index < self.medicalRecord.recordPhoto.count) {
+        return [self.photos objectAtIndex:index];
+    }
+    return nil;
+}
+
+
+#pragma mark - ButtonAction
+
+- (IBAction)AddPatientImage:(id)sender
+{
+    [self showImagePickerSheet];
+}
+
+- (void)showImagePickerSheet
+{
+    UIActionSheet *sheet;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        sheet = [[UIActionSheet alloc] initWithTitle:@"选择图片" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从图库选择",@"从相册选择", nil];
+    
+    }
+    else {
+        sheet = [[UIActionSheet alloc] initWithTitle:@"选择图片" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从图库选择",@"从相册选择", nil];
+    }
+    [sheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSUInteger soureType = 0;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        switch (buttonIndex) {
+            case 0:
+                return;
+            case 1:
+                soureType = UIImagePickerControllerSourceTypeCamera;
+                break;
+            case 2:
+                soureType = UIImagePickerControllerSourceTypePhotoLibrary;
+                break;
+            case 3:
+                soureType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                break;
+        }
+    }else{
+        switch (buttonIndex) {
+            case 0:
+                return;
+            case 1:
+                soureType = UIImagePickerControllerSourceTypePhotoLibrary;
+                break;
+            case 2:
+                soureType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                break;
+
+        }
+    }
+    
+    
+    UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    imagePickerVC.sourceType = soureType;
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+#pragma mark - ImagePickerViewControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:@"public.image"]) {
+        self.uploadImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    }
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self uploadImageToServer];
+    
+}
+
+- (void)uploadImageToServer
+{
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText = NSLocalizedString(@"Thumbnail uploading", nil);
+    [hud show:YES];
+    
+    NSData *imageData = UIImageJPEGRepresentation(self.uploadImage, 0.5);
+    NSDictionary *parameters = @{@"method": @"uploadFile",
+                                 @"fileType": @"2"};
+    NSURLSessionDataTask *uploadThumbnialTask = [GCRequest userUploadFileWithParameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"file" fileName:@"medicalCase.jpg" mimeType:@"image/jpeg"];
+        
+        
+    } withBlock:^(NSDictionary *responseData, NSError *error){
+        
+        if (!error) {
+            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+                
+                [self configureRightBarButton];
+                
+                // 保存用户图片URL
+                NSString * uploadImageURL = [ParseData parseDictionary:responseData ForKeyPath:@"fileUrl"];
+                
+                // 缓存在CoreData中，没有保存
+                
+                RecordPhoto *photo = [RecordPhoto createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                photo.attachName = @"name";
+                photo.attachPath = uploadImageURL;
+                
+                NSMutableOrderedSet *photos = [self.medicalRecord.recordPhoto mutableCopy];
+                [photos addObject:photo];
+                self.medicalRecord.recordPhoto = photos;
+                
+                // 刷新
+                [self.collectionView reloadData];
+                
+                hud.labelText = NSLocalizedString(@"Upload succeed", nil);
+                [hud hide:YES];
+
+            }else{
+                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            }
+        }else {
+            [hud hide:YES];
+        }
+    }];
+    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:uploadThumbnialTask delegate:nil];
+}
+
+#pragma mark - TextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self configureRightBarButton];
+}
+
+
+
+@end

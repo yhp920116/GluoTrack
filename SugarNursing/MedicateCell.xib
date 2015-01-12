@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MedicateCell" id="qes-0v-6sK" customClass="MedicateCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qes-0v-6sK" id="bgz-VT-hEk">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzj-JI-XtA">
+                        <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zv2-Rn-xmF" customClass="CustomLabel">
+                                <rect key="frame" x="0.0" y="11" width="73" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxI-hk-2F4" customClass="CustomLabel">
+                                <rect key="frame" x="81" y="11" width="73" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyy-tj-UG1" customClass="CustomLabel">
+                                <rect key="frame" x="162" y="11" width="73" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zM-Xq-VXy" customClass="CustomLabel">
+                                <rect key="frame" x="225" y="11" width="73" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Gyy-tj-UG1" firstAttribute="width" secondItem="5zM-Xq-VXy" secondAttribute="width" id="3Qp-9J-rXq"/>
+                            <constraint firstAttribute="centerY" secondItem="zv2-Rn-xmF" secondAttribute="centerY" id="HDU-bA-bin"/>
+                            <constraint firstAttribute="centerY" secondItem="bxI-hk-2F4" secondAttribute="centerY" id="P8R-mg-etK"/>
+                            <constraint firstItem="bxI-hk-2F4" firstAttribute="leading" secondItem="zv2-Rn-xmF" secondAttribute="trailing" constant="8" id="SHG-U0-ujk"/>
+                            <constraint firstItem="5zM-Xq-VXy" firstAttribute="leading" secondItem="Gyy-tj-UG1" secondAttribute="trailing" constant="-10" id="Sxd-yT-D01"/>
+                            <constraint firstItem="bxI-hk-2F4" firstAttribute="width" secondItem="zv2-Rn-xmF" secondAttribute="width" id="YqE-hg-5hh"/>
+                            <constraint firstItem="zv2-Rn-xmF" firstAttribute="width" secondItem="zzj-JI-XtA" secondAttribute="width" multiplier="0.25" id="gTq-26-bX0"/>
+                            <constraint firstAttribute="centerY" secondItem="Gyy-tj-UG1" secondAttribute="centerY" id="h7y-60-iAg"/>
+                            <constraint firstItem="bxI-hk-2F4" firstAttribute="width" secondItem="Gyy-tj-UG1" secondAttribute="width" id="jaO-tv-tpR"/>
+                            <constraint firstItem="zv2-Rn-xmF" firstAttribute="leading" secondItem="zzj-JI-XtA" secondAttribute="leading" id="q6x-cl-HJe"/>
+                            <constraint firstAttribute="centerY" secondItem="5zM-Xq-VXy" secondAttribute="centerY" id="rtw-NO-o9r"/>
+                            <constraint firstItem="Gyy-tj-UG1" firstAttribute="leading" secondItem="bxI-hk-2F4" secondAttribute="trailing" constant="8" id="tRA-jx-4r7"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="zzj-JI-XtA" firstAttribute="leading" secondItem="bgz-VT-hEk" secondAttribute="leading" constant="15" id="1Ma-uc-hdJ"/>
+                    <constraint firstAttribute="trailing" secondItem="zzj-JI-XtA" secondAttribute="trailing" constant="15" id="9NL-IJ-lZc"/>
+                    <constraint firstItem="zzj-JI-XtA" firstAttribute="top" secondItem="bgz-VT-hEk" secondAttribute="top" id="fnb-eV-KFf"/>
+                    <constraint firstAttribute="bottom" secondItem="zzj-JI-XtA" secondAttribute="bottom" id="pOl-TD-pHi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+            <connections>
+                <outlet property="dosageLabel" destination="Gyy-tj-UG1" id="inz-wQ-iaU"/>
+                <outlet property="medicateTypeLabel" destination="zv2-Rn-xmF" id="bne-Xi-8Lp"/>
+                <outlet property="unitsLabel" destination="5zM-Xq-VXy" id="WbX-Ez-WQi"/>
+                <outlet property="usageLabel" destination="bxI-hk-2F4" id="HZ7-7m-CD7"/>
+            </connections>
+            <point key="canvasLocation" x="261" y="265"/>
+        </tableViewCell>
+    </objects>
+</document>

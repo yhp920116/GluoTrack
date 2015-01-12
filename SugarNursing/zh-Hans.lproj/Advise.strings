@@ -1,0 +1,12 @@
+
+/* Class = "IBUINavigationItem"; title = "医生建议"; ObjectID = "05e-cF-Mj7"; */
+"05e-cF-Mj7.title" = "医生建议";
+
+/* Class = "IBUILabel"; text = "Advise"; ObjectID = "NdV-4o-GcG"; */
+"NdV-4o-GcG.text" = "Advise";
+
+/* Class = "IBUILabel"; text = "2014-11-23"; ObjectID = "X9i-y3-xsT"; */
+"X9i-y3-xsT.text" = "2014-11-23";
+
+/* Class = "IBUIBarButtonItem"; title = "菜单"; ObjectID = "vya-tz-TgA"; */
+"vya-tz-TgA.title" = "菜单";

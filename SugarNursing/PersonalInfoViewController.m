@@ -1,0 +1,423 @@
+//
+//  PersonalInfoViewController.m
+//  SugarNursing
+//
+//  Created by Dan on 14-11-24.
+//  Copyright (c) 2014年 Tisson. All rights reserved.
+//
+
+#import "PersonalInfoViewController.h"
+#import "UtilsMacro.h"
+#import "ThumbnailImageView.h"
+#import "CustomLabel.h"
+
+
+@interface PersonalInfoViewController ()<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate>{
+    MBProgressHUD *hud;
+}
+
+
+@property (weak, nonatomic) IBOutlet UITextField *userNameField;
+@property (weak, nonatomic) IBOutlet UILabel *userNameTips;
+@property (weak, nonatomic) IBOutlet UITextField *realNameField;
+@property (weak, nonatomic) IBOutlet UITextField *identityCardField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UILabel *emailTips;
+@property (weak, nonatomic) IBOutlet CustomLabel *serverLabel;
+@property (weak, nonatomic) IBOutlet UITextField *genderField;
+@property (weak, nonatomic) IBOutlet UITextField *birthDateField;
+@property (strong, nonatomic) IBOutlet UIView *datePickerView;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet ThumbnailImageView *thumbnail;
+
+@property (strong, nonatomic) NSString *thumbnailURLString;
+@property (strong, nonatomic) UIImage *thumbnailImage;
+
+@property (strong, nonatomic) UIActionSheet *sheet;
+@property (strong, nonatomic) UITextField *activeTextField;
+
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchController;
+@property (strong, nonatomic) UserInfo *userInfo;
+
+@end
+
+@implementation PersonalInfoViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = NSLocalizedString(@"Personal Information", nil);
+    [self configureFetchController];
+    [self configureUserInfo];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (void)configureFetchController
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userid.userId = %@ && userid.linkManId = %@",[NSString userID],[NSString linkmanID]];
+    self.fetchController = [UserInfo fetchAllGroupedBy:nil sortedBy:@"userid.userId" ascending:YES withPredicate:predicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
+    
+    if (self.fetchController.fetchedObjects.count == 0) {
+        self.userInfo = nil;
+    }else{
+        self.userInfo = self.fetchController.fetchedObjects[0];
+
+    }
+}
+
+- (void)configureUserInfo
+{
+    [self.thumbnail sd_setImageWithURL:[NSURL URLWithString:self.userInfo.headImageUrl] placeholderImage:[UIImage imageNamed:@"thumbDefault"]];
+    self.userNameField.text = self.userInfo.userName;
+    self.realNameField.text = self.userInfo.realName;
+    self.identityCardField.text = self.userInfo.identifyCard;
+    self.identityCardField.userInteractionEnabled = NO;
+    self.emailField.text = self.userInfo.email;
+    self.emailField.userInteractionEnabled = NO;
+    self.genderField.text = self.userInfo.sex;
+    self.birthDateField.text = self.userInfo.birthday;
+    self.serverLabel.text = self.userInfo.servLevel;
+    
+    if ([self.userNameField.text isEqualToString:@""]) {
+        self.userNameField.userInteractionEnabled = YES;
+        self.userNameTips.text = NSLocalizedString(@"You can change only once", nil);
+    }else{
+        self.userNameField.userInteractionEnabled = NO;
+    }
+    
+    if ([self.identityCardField.text isEqualToString:@""]) {
+        self.identityCardField.text = NSLocalizedString(@"Setting when purchase", nil);
+    }
+    
+    if ([self.emailField.text isEqualToString:@""]) {
+        self.emailTips.text = NSLocalizedString(@"Binding your email in our Home", nil);
+    }
+}
+
+#pragma mark - NSFetchedControllerDelegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self configureUserInfo];
+}
+
+#pragma mark - TableViewDelegate/DataSource
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0 ) {
+        return 100;
+    }
+    return 44;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.activeTextField resignFirstResponder];
+
+    switch (indexPath.row) {
+        case 0:
+            [self showsImagePickerSheet];
+            break;
+        case 5:
+            [self showsGenderPickerSheet];
+            break;
+        case 6:
+        {
+            if ([self.birthDateField.text isEqualToString:@""]) {
+                [self.datePicker setDate:[NSDate date]];
+            }else{
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+                
+                [self.datePicker setDate:[dateFormatter dateFromString:self.birthDateField.text] ];
+            }
+            
+            [self showsDatePicker];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+#pragma mark - PickerView
+
+- (void)showsDatePicker
+{
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    
+    hud.margin = 0;
+    hud.customView = self.datePickerView;
+    hud.mode = MBProgressHUDModeCustomView;
+    [hud show:YES];
+}
+
+- (IBAction)pickerViewBtn:(id)sender
+{
+    UIButton *btn = (UIButton *)sender;
+    switch (btn.tag) {
+        case 1001:
+            break;
+        case 1002:
+        {
+            [self configureSaveBarButtonItemHidden:NO];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            self.birthDateField.text = [dateFormatter stringFromDate:self.datePicker.date];
+            break;
+        }
+        default:
+            break;
+    }
+
+    [hud hide:YES];
+}
+
+- (void)userInfoSave:(id)sender
+{
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText = NSLocalizedString(@"Saving Data", nil);
+    [hud show:YES];
+    
+    // Check the format
+    if (![ParseData parseDateStringIsAvaliable:self.birthDateField.text format:@"yyyy-MM-dd"]) {
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"Format is not avaliable", nil);
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        return;
+    }
+    
+    [self updateDataToServer];
+}
+
+- (void)updateDataToCoreData
+{
+    
+    NSDictionary *newInfo = [@{@"birthday": self.birthDateField.text,
+                               @"email": self.emailField.text,
+                               @"identifyCard": self.identityCardField.text,
+                               @"sex":self.genderField.text,
+                               @"realName": self.realNameField.text,
+                               @"userName": self.userNameField.text,
+                               @"headImageUrl": !self.thumbnailURLString ? self.userInfo.headImageUrl : self.thumbnailURLString} mutableCopy];
+  
+    [self.userInfo updateCoreDataForData:newInfo withKeyPath:nil];
+    [[CoreDataStack sharedCoreDataStack] saveContext];
+}
+
+- (void)uploadThumbnailToServer
+{
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    hud.labelText = NSLocalizedString(@"Thumbnail uploading", nil);
+    [hud show:YES];
+    
+    NSData *imageData = UIImageJPEGRepresentation(self.thumbnailImage, 0.5);
+    NSDictionary *parameters = @{@"method": @"uploadFile",
+                                 @"fileType": @"2"};
+    NSURLSessionDataTask *uploadThumbnialTask = [GCRequest userUploadFileWithParameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"file" fileName:@"thumbnail.jpg" mimeType:@"image/jpeg"];
+        
+        
+    } withBlock:^(NSDictionary *responseData, NSError *error){
+
+        if (!error) {
+            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+                
+                // 保存用户图片URL
+                self.thumbnailURLString = [ParseData parseDictionary:responseData ForKeyPath:@"fileUrl"];
+                
+                [self updateDataToServer];
+                
+                hud.labelText = NSLocalizedString(@"Upload succeed", nil);
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            }else{
+                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            }
+        }else {
+            [hud hide:YES];
+        }
+    }];
+    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:uploadThumbnialTask delegate:nil];
+}
+
+- (void)updateDataToServer
+{
+    NSDictionary *parameters = @{@"method":@"linkManInfoEdit",
+                                 @"sign":@"sign",
+                                 @"sessionId":[NSString sessionID],
+                                 @"linkManId":[NSString linkmanID],
+                                 @"birthday": self.birthDateField.text,
+                                 @"email": self.emailField.text,
+                                 @"identifyCard": self.identityCardField.text,
+                                 @"sex":self.genderField.text,
+                                 @"realName": self.realNameField.text,
+                                 @"userName": self.userNameField.text,
+                                 @"headImageUrl": !self.thumbnailURLString ? self.userInfo.headImageUrl : self.thumbnailURLString,
+                                 };
+    NSURLSessionDataTask *editUserInfoTask = [GCRequest userEditUserInfoWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        
+        if (!error) {
+            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+                // CoreData updated
+                [self updateDataToCoreData];
+                
+                [self configureSaveBarButtonItemHidden:YES];
+
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = NSLocalizedString(@"Data Updated", nil);
+                [hud hide:YES];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            }
+           
+        }else{ [hud hide:YES]; }
+        
+    }];
+    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:editUserInfoTask delegate:nil];
+}
+
+#pragma mark - TextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.activeTextField = textField;
+    [self configureSaveBarButtonItemHidden:NO];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.activeTextField = textField;
+}
+
+- (void)configureSaveBarButtonItemHidden:(BOOL)hidden
+{
+    if (!self.navigationItem.rightBarButtonItem) {
+        if (!hidden) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(userInfoSave:)];
+        }
+        
+    }else{
+        if (hidden) {
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+    }
+        
+}
+
+#pragma mark - ActionSheet
+
+- (void)showsGenderPickerSheet
+{
+    self.sheet = [[UIActionSheet alloc] initWithTitle:@"选择性别" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:NSLocalizedString(@"male", nil),NSLocalizedString(@"female", nil),nil];
+    self.sheet.tag = 101;
+    [self.sheet showInView:self.view];
+}
+
+- (void)showsImagePickerSheet
+{
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.sheet = [[UIActionSheet alloc] initWithTitle:@"选择图片" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从图库选择",@"从相册选择",nil];
+    }
+    else
+    {
+        self.sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从图库选择",@"从相册选择", nil];
+    }
+    self.sheet.tag = 102;
+    [self.sheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // Show save button
+    if (buttonIndex != 0) {
+        [self configureSaveBarButtonItemHidden:NO];
+    }
+    
+    switch (actionSheet.tag) {
+        case 101:
+            if (buttonIndex == 0) {
+                return;
+            }
+            else {
+                self.genderField.text = [actionSheet buttonTitleAtIndex:buttonIndex];
+            }
+            break;
+        case 102:
+        {
+            NSUInteger soureType = 0;
+            
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+            {
+                switch (buttonIndex)
+                {
+                    case 0:
+                        //cancel
+                        return;
+                    case 1:
+                        soureType = UIImagePickerControllerSourceTypeCamera;
+                        break;
+                    case 2:
+                        soureType = UIImagePickerControllerSourceTypePhotoLibrary;
+                        break;
+                    case 3:
+                        soureType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                        break;
+                }
+            }
+            else
+            {
+                switch (buttonIndex) {
+                    case 0:
+                        return;
+                    case 1:
+                        soureType = UIImagePickerControllerSourceTypePhotoLibrary;
+                        break;
+                    case 2:
+                        soureType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                        break;
+                    default:
+                        break;
+                }
+    
+            }
+            
+            UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+            imagePickerVC.delegate = self;
+            imagePickerVC.allowsEditing = YES;
+            imagePickerVC.sourceType = soureType;
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+            break;
+        }
+    }
+ }
+
+#pragma mark - ImagePickerViewControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:@"public.image"]) {
+        self.thumbnailImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    }
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self uploadThumbnailToServer];
+
+}
+
+
+@end

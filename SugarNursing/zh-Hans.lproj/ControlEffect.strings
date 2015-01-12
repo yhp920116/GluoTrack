@@ -1,0 +1,36 @@
+
+/* Class = "IBUIBarButtonItem"; title = "菜单"; ObjectID = "2h3-ZQ-m4r"; */
+"2h3-ZQ-m4r.title" = "菜单";
+
+/* Class = "IBUILabel"; text = "平均值"; ObjectID = "8lX-zi-qRZ"; */
+"8lX-zi-qRZ.text" = "平均值";
+
+/* Class = "IBUILabel"; text = "空腹血糖"; ObjectID = "AVw-6I-Ezv"; */
+"AVw-6I-Ezv.text" = "空腹血糖";
+
+/* Class = "IBUILabel"; text = "Detail"; ObjectID = "CaH-Ma-Ald"; */
+"CaH-Ma-Ald.text" = "Detail";
+
+/* Class = "IBUILabel"; text = "综合疗效评估"; ObjectID = "KXh-xV-C8f"; */
+"KXh-xV-C8f.text" = "综合疗效评估";
+
+/* Class = "IBUILabel"; text = "超标次数"; ObjectID = "Lr9-Nb-mXX"; */
+"Lr9-Nb-mXX.text" = "超标次数";
+
+/* Class = "IBUILabel"; text = "最低值"; ObjectID = "MkZ-Ym-rE1"; */
+"MkZ-Ym-rE1.text" = "最低值";
+
+/* Class = "IBUILabel"; text = "选择周期"; ObjectID = "Qzc-3f-6A6"; */
+"Qzc-3f-6A6.text" = "选择周期";
+
+/* Class = "IBUINavigationItem"; title = "控糖成效"; ObjectID = "UNq-hE-XFk"; */
+"UNq-hE-XFk.title" = "控糖成效";
+
+/* Class = "IBUILabel"; text = "最高值"; ObjectID = "tm3-Tm-z7b"; */
+"tm3-Tm-z7b.text" = "最高值";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "u4a-mM-Qqr"; */
+"u4a-mM-Qqr.text" = "Label";
+
+/* Class = "IBUILabel"; text = "检测次数"; ObjectID = "zOt-Ca-LLg"; */
+"zOt-Ca-LLg.text" = "检测次数";

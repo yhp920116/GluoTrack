@@ -1,0 +1,36 @@
+
+/* Class = "IBUIBarButtonItem"; title = "菜单"; ObjectID = "0Zo-Xz-rUr"; */
+"0Zo-Xz-rUr.title" = "菜单";
+
+/* Class = "IBUIButton"; normalTitle = "确定"; ObjectID = "AQ8-MT-vu1"; */
+"AQ8-MT-vu1.normalTitle" = "确定";
+
+/* Class = "IBUITabBarItem"; title = "糖化血红蛋白"; ObjectID = "H2o-eR-BHR"; */
+"H2o-eR-BHR.title" = "糖化血红蛋白";
+
+/* Class = "IBUILabel"; text = "现用药"; ObjectID = "g9b-KW-dKy"; */
+"g9b-KW-dKy.text" = "现用药";
+
+/* Class = "IBUITabBarItem"; title = "血糖"; ObjectID = "gXS-Jg-o5b"; */
+"gXS-Jg-o5b.title" = "血糖";
+
+/* Class = "IBUILabel"; text = "用药改变"; ObjectID = "hLb-fc-fu0"; */
+"hLb-fc-fu0.text" = "用药改变";
+
+/* Class = "IBUILabel"; text = "2014-10-15 20:45"; ObjectID = "iZN-1E-UWv"; */
+"iZN-1E-UWv.text" = "2014-10-15 20:45";
+
+/* Class = "IBUINavigationItem"; title = "检测结果"; ObjectID = "jWc-XM-JnW"; */
+"jWc-XM-JnW.title" = "检测结果";
+
+/* Class = "IBUILabel"; text = "服药时间"; ObjectID = "jrY-yo-g8N"; */
+"jrY-yo-g8N.text" = "服药时间";
+
+/* Class = "IBUILabel"; text = "Hello world"; ObjectID = "qyj-PS-5tS"; */
+"qyj-PS-5tS.text" = "Hello world";
+
+/* Class = "IBUILabel"; text = "Hello world"; ObjectID = "teV-4E-yTY"; */
+"teV-4E-yTY.text" = "Hello world";
+
+/* Class = "IBUILabel"; text = "曾用药"; ObjectID = "u9b-ef-q6Q"; */
+"u9b-ef-q6Q.text" = "曾用药";

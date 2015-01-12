@@ -1,0 +1,126 @@
+/* 
+  Localizable.strings
+  SugarNursing
+
+  Created by Dan on 14-11-5.
+  Copyright (c) 2014年 Tisson. All rights reserved.
+*/
+
+"glucose" = "Glucose";
+"hemoglobin" = "Hemoglobin";
+
+/* Basic */
+"New Version" = "New Version";
+"Skip" = "Skip";
+"Go to Store" = "Go to Store";
+
+/* SSPullToRefreshView */
+"Pull down to refresh…" = "Pull down to refresh…";
+"Release to refresh…" = "Release to refresh…";
+"Loading…" = "Loading…";
+"Last Updated: %@" = "Last Updated: %@";
+
+/* HUD */
+"Login.." = "Login..";
+"Error" = "Error";
+"Dismiss" = "Dismiss";
+"Loading..." = "Loading...";
+"Server is busy" = "Server is busy";
+
+/* Left Menu */
+"Advise" = "Advise";
+"Test Result" = "Test Result";
+"Control Effect" = "Control Effect";
+"Recovery Log" = "Recovery Log";
+"My Tips" = "My Tips";
+"Member Center" = "Member Center";
+"Service Center" = "Service Center";
+"Log Out" = "Log Out";
+
+/* Login And Register*/
+"Register" = "Register";
+"Registering..." = "Registering...";
+"Register succeed" = "Register succeed";
+"Resetting..." = "Resetting...";
+"Reset succeed" = "Reset succeed";
+"Reset" = "Reset";
+"hongkong" = "HongKong";
+
+"notice"="Notice";
+"errorphonenumber"="Phone number is invalid";
+"sure"="Sure";
+
+"willsendthecodeto"="We will send the code to the phone";
+"surephonenumber"="Make sure the number";
+"cancel"="Cancel";
+"Sending code" = "Sending code";
+"Sending code succeed" = "Sending code succeed";
+
+
+"codesenderrormsg"="The code send fail try again later";
+"codesenderrtitle"="Send Fail";
+
+"maxcodemsg"="The code is up the max limit";
+"maxcode"="Up max limit";
+
+"codetoooftenmsg"="The request is too often";
+
+"countrychoose"="Choose the country";
+"choosegender"="Choose gender";
+"female"="Female";
+"male"="Male";
+"Format is not avaliable" = "Format is not avaliable";
+
+/* Test Tracker */
+"Cancel" = "Cancel";
+"30 days recently" = "30 days recently";
+"Select By Day" = "Select By Day";
+"No Data" = "No Data";
+
+/* Member Center */
+"Verify your account" = "Verify your account";
+"Verifying..." = "Verifying...";
+"Rebinding..." = "Rebinding...";
+"Rebind Your Mobile"="Rebind Your Mobile";
+"Rebind succeed" = "Rebind succeed";
+"Setting"="Setting";
+"Personal Information" = "Personal Information";
+"Please edit your info" = "Please edit your information.";
+"Please fill your info" = "Please fill your information";
+"Setting when purchase" = "Setting when purchase";
+"Binding your email in our Home" = "Binding your email in our Home";
+"You can change only once" = "You can change only once";
+"No avaliable" = "No avaliable";
+"Avaliable" = "Avaliable";
+"years old" = "years old";
+"Saving Data" = "Saving Data";
+"Data Updated" = "Data Updated";
+"Thumbnail uploading" = "Thumbnail uploading";
+"Upload succeed" = "Upload succeed";
+
+
+/* Medical History */
+"Medical Record" = "Medical Record";
+"Please describe your case" = "Please describe your case";
+"Medical Case" = "Medical Case";
+"Add Medical Record" = "Add Medical Record";
+"Edit Meical Record" = "Edit Meical Record";
+
+/* About Us */
+"About Us" = "About Us";
+
+"Terms of service" = "Terms of service";
+
+"FeedBack" = "FeedBack";
+
+/* Service center */
+"Send Message Succeed" = "Send Message Succeed";
+
+/* Add New Recovery Record */
+"detect" = "Detect";
+"diet" = "Diet";
+"exercise" = "Exercise";
+"drug" = "Drug";
+"Add New Recovery Record" = "Add New Recovery Record";
+"Edit Recovery Record" = "Edit Recovery Record";
+
