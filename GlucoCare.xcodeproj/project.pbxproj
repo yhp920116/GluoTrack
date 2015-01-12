@@ -246,13 +246,13 @@
 		3744EFD81A1C891700D5C204 /* TimelineTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableView.m; sourceTree = "<group>"; };
 		37453B4A1A426ECF006D2CD8 /* RebindMobileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RebindMobileViewController.h; sourceTree = "<group>"; };
 		37453B4B1A426ECF006D2CD8 /* RebindMobileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RebindMobileViewController.m; sourceTree = "<group>"; };
-		3749B5121A09C50D0031D00C /* SugarNursing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SugarNursing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3749B5121A09C50D0031D00C /* GlucoCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlucoCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3749B5161A09C50D0031D00C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3749B5171A09C50D0031D00C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3749B5191A09C50D0031D00C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3749B51A1A09C50D0031D00C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3749B5251A09C50D0031D00C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3749B52E1A09C50D0031D00C /* SugarNursingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SugarNursingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3749B52E1A09C50D0031D00C /* GlucoCareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlucoCareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3749B5331A09C50D0031D00C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3749B5341A09C50D0031D00C /* SugarNursingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SugarNursingTests.m; sourceTree = "<group>"; };
 		3749B5521A09CFD30031D00C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -598,8 +598,8 @@
 		3749B5131A09C50D0031D00C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3749B5121A09C50D0031D00C /* SugarNursing.app */,
-				3749B52E1A09C50D0031D00C /* SugarNursingTests.xctest */,
+				3749B5121A09C50D0031D00C /* GlucoCare.app */,
+				3749B52E1A09C50D0031D00C /* GlucoCareTests.xctest */,
 				3718DAF71A245CDD008B88D7 /* test.app */,
 				3718DB0F1A245CDE008B88D7 /* testTests.xctest */,
 			);
@@ -1085,9 +1085,9 @@
 			productReference = 3718DB0F1A245CDE008B88D7 /* testTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3749B5111A09C50D0031D00C /* SugarNursing */ = {
+		3749B5111A09C50D0031D00C /* GlucoCare */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3749B5381A09C50D0031D00C /* Build configuration list for PBXNativeTarget "SugarNursing" */;
+			buildConfigurationList = 3749B5381A09C50D0031D00C /* Build configuration list for PBXNativeTarget "GlucoCare" */;
 			buildPhases = (
 				D556FD5FAAC82CBA8CBC4AFB /* Check Pods Manifest.lock */,
 				3749B50E1A09C50D0031D00C /* Sources */,
@@ -1099,14 +1099,14 @@
 			);
 			dependencies = (
 			);
-			name = SugarNursing;
+			name = GlucoCare;
 			productName = SugarNursing;
-			productReference = 3749B5121A09C50D0031D00C /* SugarNursing.app */;
+			productReference = 3749B5121A09C50D0031D00C /* GlucoCare.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3749B52D1A09C50D0031D00C /* SugarNursingTests */ = {
+		3749B52D1A09C50D0031D00C /* GlucoCareTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3749B53B1A09C50D0031D00C /* Build configuration list for PBXNativeTarget "SugarNursingTests" */;
+			buildConfigurationList = 3749B53B1A09C50D0031D00C /* Build configuration list for PBXNativeTarget "GlucoCareTests" */;
 			buildPhases = (
 				3749B52A1A09C50D0031D00C /* Sources */,
 				3749B52B1A09C50D0031D00C /* Frameworks */,
@@ -1117,9 +1117,9 @@
 			dependencies = (
 				3749B5301A09C50D0031D00C /* PBXTargetDependency */,
 			);
-			name = SugarNursingTests;
+			name = GlucoCareTests;
 			productName = SugarNursingTests;
-			productReference = 3749B52E1A09C50D0031D00C /* SugarNursingTests.xctest */;
+			productReference = 3749B52E1A09C50D0031D00C /* GlucoCareTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1148,7 +1148,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3749B50D1A09C50D0031D00C /* Build configuration list for PBXProject "SugarNursing" */;
+			buildConfigurationList = 3749B50D1A09C50D0031D00C /* Build configuration list for PBXProject "GlucoCare" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1162,8 +1162,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3749B5111A09C50D0031D00C /* SugarNursing */,
-				3749B52D1A09C50D0031D00C /* SugarNursingTests */,
+				3749B5111A09C50D0031D00C /* GlucoCare */,
+				3749B52D1A09C50D0031D00C /* GlucoCareTests */,
 				3718DAF61A245CDD008B88D7 /* test */,
 				3718DB0E1A245CDE008B88D7 /* testTests */,
 			);
@@ -1408,7 +1408,7 @@
 		};
 		3749B5301A09C50D0031D00C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3749B5111A09C50D0031D00C /* SugarNursing */;
+			target = 3749B5111A09C50D0031D00C /* GlucoCare */;
 			targetProxy = 3749B52F1A09C50D0031D00C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1675,7 +1675,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SugarNursing/UMSocial_Sdk_4.2.1",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlucoCare;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1700,7 +1700,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SugarNursing/UMSocial_Sdk_4.2.1",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlucoCare;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1720,7 +1720,7 @@
 				);
 				INFOPLIST_FILE = SugarNursingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlucoCareTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SugarNursing.app/SugarNursing";
 			};
 			name = Debug;
@@ -1735,7 +1735,7 @@
 				);
 				INFOPLIST_FILE = SugarNursingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlucoCareTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SugarNursing.app/SugarNursing";
 			};
 			name = Release;
@@ -1761,7 +1761,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3749B50D1A09C50D0031D00C /* Build configuration list for PBXProject "SugarNursing" */ = {
+		3749B50D1A09C50D0031D00C /* Build configuration list for PBXProject "GlucoCare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3749B5361A09C50D0031D00C /* Debug */,
@@ -1770,7 +1770,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3749B5381A09C50D0031D00C /* Build configuration list for PBXNativeTarget "SugarNursing" */ = {
+		3749B5381A09C50D0031D00C /* Build configuration list for PBXNativeTarget "GlucoCare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3749B5391A09C50D0031D00C /* Debug */,
@@ -1779,7 +1779,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3749B53B1A09C50D0031D00C /* Build configuration list for PBXNativeTarget "SugarNursingTests" */ = {
+		3749B53B1A09C50D0031D00C /* Build configuration list for PBXNativeTarget "GlucoCareTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3749B53C1A09C50D0031D00C /* Debug */,
