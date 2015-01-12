@@ -1,15 +1,15 @@
 
 /* Class = "IBUIButton"; normalTitle = "发送留言"; ObjectID = "I0S-8f-CbO"; */
-"I0S-8f-CbO.normalTitle" = "发送留言";
+"I0S-8f-CbO.normalTitle" = "發送留言";
 
 /* Class = "IBUINavigationItem"; title = "My Service"; ObjectID = "OWC-oC-gZe"; */
-"OWC-oC-gZe.title" = "服务中心";
+"OWC-oC-gZe.title" = "服務中心";
 
 /* Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "Tgp-1e-1e3"; */
-"Tgp-1e-1e3.title" = "菜单";
+"Tgp-1e-1e3.title" = "菜單";
 
 /* Class = "IBUILabel"; text = "万能的客服将在看到留言后答复您，请耐心等候哦"; ObjectID = "VDk-QU-lHp"; */
-"VDk-QU-lHp.text" = "万能的客服将在看到留言后答复您，请耐心等候哦";
+"VDk-QU-lHp.text" = "萬能的客服將在看到留言后答復您，請耐心等候哦";
 
 /* Class = "IBUILabel"; text = "Message Record"; ObjectID = "dcO-X1-1UQ"; */
-"dcO-X1-1UQ.text" = "留言记录";
+"dcO-X1-1UQ.text" = "留言記錄";

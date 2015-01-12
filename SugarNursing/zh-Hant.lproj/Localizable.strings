@@ -1,0 +1,128 @@
+/*
+ Localizable.strings
+ SugarNursing
+ 
+ Created by Dan on 14-11-5.
+ Copyright (c) 2014年 Tisson. All rights reserved.
+ */
+
+"glucose" = "血糖";
+"hemoglobin" = "糖化血红蛋白";
+
+/* Basic */
+"New Version" = "發現新版本";
+"Skip" = "忽略";
+"Go to Store" = "下載更新";
+
+/* SSPullToRefreshView */
+"Pull down to refresh…" = "下拉刷新…";
+"Release to refresh…" = "釋放刷新…";
+"Loading…" = "加載中…";
+"Last Updated: %@" = "上次更新: %@";
+
+
+/* HUD */
+"Login.." = "登陸中..";
+"Error" = "錯誤";
+"Dismiss" = "取消";
+"Loading..." = "加載中...";
+"Server is busy" = "網絡繁忙";
+
+
+/* Left Menu */
+"Advise" = "醫生建議";
+"Test Result" = "檢測數據";
+"Control Effect" = "控糖成效";
+"Recovery Log" = "康復日誌";
+"My Tips" = "我的提醒";
+"Member Center" = "個人中心";
+"Service Center" = "服務中心";
+"Log Out" = "退出登陸";
+
+/* Login And Register */
+"Register" = "手機註冊";
+"Registering..." = "註冊中...";
+"Register succeed" = "註冊成功，请登陸";
+"Resetting..." = "重置密碼中...";
+"Reset" = "重設密碼";
+"Reset succeed" = "重設成功";
+"hongkong" = "香港";
+
+
+"notice"="提示";
+"errorphonenumber"="手機號碼非法，請重新填寫";
+"sure"="確定";
+
+"willsendthecodeto"="我們將發送驗證碼到這個號碼";
+"surephonenumber"="確認手機號碼";
+"cancel"="取消";
+"Sending code" = "發送驗證碼";
+"Sending code succeed" = "驗證碼發送成功";
+
+
+"codesenderrormsg"="驗證碼發送失敗 請稍後重試";
+"codesenderrtitle"="發送失敗";
+
+"maxcodemsg"="請求驗證碼上限 請稍後再試";
+"maxcode"="超過上限";
+
+"countrychoose"="選擇國家或地區";
+"choosegender"="選擇性別";
+"female"="女";
+"male"="男";
+"Format is not avaliable" = "格式填寫不正確";
+
+
+/* Test Tracker */
+"Cancel" = "取消";
+"30 days recently" = "近30天";
+"Select By Day" = "按日查詢";
+"No Data" = "沒有數據";
+
+
+/* Member Center */
+"Verify your account" = "驗證賬戶";
+"Verifying..." = "驗證中...";
+"Rebinding..." = "重新綁定中...";
+"Rebind Your Mobile"="重新綁定";
+"Rebind succeed" = "綁定成功";
+"Setting"="設置";
+"Personal Information" = "個人信息";
+"Please edit your info" = "請填寫您的資料";
+"Please fill your info" = "點擊查看詳情";
+"Setting when purchase" = "請購買糖博士由醫生設置";
+"Binding your email in our Home" = "請登陸官方網站綁定郵箱";
+"You can change only once" = "只能修改一次";
+"No avaliable" = "無";
+"Avaliable" = "開通";
+"years old" = "歲";
+"Saving Data" = "保存數據中";
+"Data Updated" = "數據更新成功";
+"Thumbnail uploading" = "正在上傳圖片";
+"Upload succeed" = "上傳成功";
+
+/* Medical History */
+"Medical Record" = "既往病史";
+"Please describe your case" = "請簡訴您的病例";
+"Medical Case" = "病例資料";
+"Add Medical Record" = "新增病史";
+"Edit Meical Record" = "編輯病史";
+
+/* About Us */
+"About Us" = "關於我們";
+
+"Terms of service" = "服務條款";
+
+"FeedBack" = "用戶反饋";
+
+/* Service center */
+"Send Message Succeed" = "消息發送成功";
+
+/* Add New Recovery Record */
+"detect" = "检测";
+"diet" = "飲食";
+"exercise" = "運動";
+"drug" = "用藥";
+"Add New Recovery Record" = "新增日誌";
+"Edit Recovery Record" = "編輯日誌";
+

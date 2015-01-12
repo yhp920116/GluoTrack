@@ -1,15 +1,15 @@
 
 /* Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "0Zo-Xz-rUr"; */
-"0Zo-Xz-rUr.title" = "菜单";
+"0Zo-Xz-rUr.title" = "菜單";
 
 /* Class = "IBUITabBarItem"; title = "GHBALC"; ObjectID = "H2o-eR-BHR"; */
-"H2o-eR-BHR.title" = "糖化血红蛋白";
+"H2o-eR-BHR.title" = "糖化血紅蛋白";
 
 /* Class = "IBUILabel"; text = "单位"; ObjectID = "Mxo-p3-pRZ"; */
-"Mxo-p3-pRZ.text" = "单位";
+"Mxo-p3-pRZ.text" = "單位";
 
 /* Class = "IBUITabBarItem"; title = "BloodSugar"; ObjectID = "gXS-Jg-o5b"; */
 "gXS-Jg-o5b.title" = "血糖";
 
 /* Class = "IBUINavigationItem"; title = "TestTracker"; ObjectID = "jWc-XM-JnW"; */
-"jWc-XM-JnW.title" = "监测数据";
+"jWc-XM-JnW.title" = "監測數據";

@@ -12,13 +12,14 @@
 #import "PatientDataViewController.h"
 #import "SectionHeaderView.h"
 #import "UtilsMacro.h"
+#import <SSPullToRefresh.h>
 
 
 static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 static NSString *TipsCellIdentifier = @"TipsCell";
 static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
 
-@interface MedicalRecordViewController ()<UITableViewDataSource, UITableViewDelegate,NSFetchedResultsControllerDelegate,SectionHeaderViewDelegate>{
+@interface MedicalRecordViewController ()<UITableViewDataSource, UITableViewDelegate,NSFetchedResultsControllerDelegate,SectionHeaderViewDelegate,SSPullToRefreshViewDelegate>{
     MBProgressHUD *hud;
 }
 
@@ -27,6 +28,7 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
 @property (strong, nonatomic) NSFetchedResultsController *fetchController;
 @property (strong, nonatomic) NSMutableArray *selectedArray;
 @property (strong, nonatomic) SectionHeaderView *openSectionHeaderView;
+@property (strong, nonatomic) SSPullToRefreshView *refreshView;
 
 
 @end
@@ -51,8 +53,20 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
     
     [self configureFetchController];
     [self configureTableView];
-    [self getMedicalRecord];
     
+}
+
+- (void)viewDidLayoutSubviews
+{
+    if (self.refreshView == nil) {
+        self.refreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
+        [self.refreshView startLoadingAndExpand:YES animated:YES];
+    }
+}
+
+- (void)pullToRefreshViewDidStartLoading:(SSPullToRefreshView *)view
+{
+    [self getMedicalRecord];
 }
 
 - (void)configureFetchController
@@ -120,6 +134,8 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }
+        
+        [self.refreshView finishLoading];
         
     }];
 }
