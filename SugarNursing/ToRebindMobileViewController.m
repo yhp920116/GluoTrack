@@ -43,15 +43,15 @@
     NSURLSessionDataTask *rebindTask = [GCRequest userRebindMobileWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
-            
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = NSLocalizedString(@"Rebind succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else{

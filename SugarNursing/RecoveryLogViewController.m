@@ -37,6 +37,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 {
     if ([segue.identifier isEqualToString:@"AddLog"]) {
         RecoveryLogDetailViewController *addVC = [segue destinationViewController];
+        addVC.recoveryLogStatus = RecoveryLogStatusAdd;
     }
     
     if ([segue.identifier isEqualToString:@"EditLog"]) {
@@ -103,7 +104,8 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     [GCRequest userGetRecoveryRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 for (RecordLog *recordLog in self.fetchController.fetchedObjects) {
                     [recordLog deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
@@ -142,7 +144,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                 
                 hud.labelText = NSLocalizedString(@"Data Updated", nil);
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
             }
             
         }else{

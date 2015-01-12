@@ -245,14 +245,16 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
                                  @"mediHistId":medicalRecord.mediHistId};
     [GCRequest userDeleteMedicalRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 [medicalRecord deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 [[CoreDataStack sharedCoreDataStack] saveContext];
                 hud.labelText = NSLocalizedString(@"Data Updated", nil);
                 
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
             }
         }else{
             hud.labelText = [error localizedDescription];

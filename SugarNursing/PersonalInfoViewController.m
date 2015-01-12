@@ -230,7 +230,8 @@
     } withBlock:^(NSDictionary *responseData, NSError *error){
 
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 // 保存用户图片URL
                 self.thumbnailURLString = [ParseData parseDictionary:responseData ForKeyPath:@"fileUrl"];
@@ -240,7 +241,7 @@
                 hud.labelText = NSLocalizedString(@"Upload succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else {
@@ -267,7 +268,8 @@
     NSURLSessionDataTask *editUserInfoTask = [GCRequest userEditUserInfoWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 // CoreData updated
                 [self updateDataToCoreData];
                 
@@ -279,7 +281,7 @@
                 
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
            

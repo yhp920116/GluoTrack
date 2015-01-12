@@ -58,8 +58,8 @@
                                      @"zone":self.areaCode};
         
         [GCRequest userGetCodeWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
-            
-            if (!error && [[responseData valueForKey:@"ret_code"] isEqualToString:@"-100"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if (!error && [ret_code isEqualToString:@"0"]) {
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = NSLocalizedString(@"Sending code succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
@@ -146,8 +146,8 @@
     NSURLSessionDataTask *registerTask = [GCRequest userRegisterWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
-            
-            if ([[responseData objectForKey:@"ret_code"] isEqualToString:@"0"]){
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]){
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = NSLocalizedString(@"Register succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
@@ -155,7 +155,7 @@
                 
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = [responseData objectForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
             

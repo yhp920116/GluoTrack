@@ -10,9 +10,15 @@
 
 @interface NSString (UserCommon)
 
+// User
 + (NSString *)userID;
 + (NSString *)linkmanID;
 + (NSString *)sessionID;
 + (NSString *)sessionToken;
+
+// UserInfo
++ (NSString *)centerID;
++ (NSString *)userThumbnail;
+
 
 @end

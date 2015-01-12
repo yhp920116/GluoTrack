@@ -130,7 +130,8 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
         
         
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 // 清除缓存
                 for (RecordLog *recordLog in self.fetchController.fetchedObjects) {
@@ -165,7 +166,7 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
                 [hud show:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else{

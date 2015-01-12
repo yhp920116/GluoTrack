@@ -100,7 +100,9 @@
         
         if (!error) {
             
-            if ([[responseData objectForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 // Save userInformation to CoreData
                 

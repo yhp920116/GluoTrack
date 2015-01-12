@@ -59,7 +59,8 @@
                                  @"mediHistId":self.medicalRecord.mediHistId};
     [GCRequest userGEtMedicalREcordImagesWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 // 清除缓存
                 self.medicalRecord.recordPhoto = nil;
@@ -85,7 +86,7 @@
                 [self.collectionView reloadData];
                 
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }
@@ -133,7 +134,8 @@
     
     NSURLSessionDataTask *editRecordTask = [GCRequest userEditMedicalRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 self.medicalRecord.mediRecord = self.textView.text;
                 [[CoreDataStack sharedCoreDataStack] saveContext];
@@ -143,7 +145,7 @@
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else {
@@ -366,7 +368,8 @@
     } withBlock:^(NSDictionary *responseData, NSError *error){
         
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 [self configureRightBarButton];
                 
@@ -390,7 +393,7 @@
                 [hud hide:YES];
 
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else {

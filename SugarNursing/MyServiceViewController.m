@@ -72,7 +72,8 @@
     [GCRequest userGetMessageListWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 for (Message *messageCache in self.fetchController.fetchedObjects) {
                     [messageCache deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
@@ -135,13 +136,14 @@
         [hud show:YES];
         
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 hud.labelText = NSLocalizedString(@"Send Message Succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 
                 [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else{

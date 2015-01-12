@@ -133,7 +133,8 @@
     NSURLSessionDataTask *loginTask = [GCRequest userLoginWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
-            if ([[responseData objectForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 // 这里对获取到的会话标识、会话标识Token和用户标识等进行数据持久化
                 
@@ -163,7 +164,7 @@
                 
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = [responseData objectForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
             

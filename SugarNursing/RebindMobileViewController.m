@@ -42,7 +42,8 @@
                                  @"password":self.passwordField.text};
     NSURLSessionDataTask *verifyTask = [GCRequest userLoginWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 // 重新验证成功后，更新账户信息
                 NSMutableDictionary *responseDic = [responseData mutableCopy];
                 [responseDic setValue:[self.passwordField.text md5] forKey:@"passWord"];
@@ -63,7 +64,7 @@
                 [hud hide:YES];
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else{

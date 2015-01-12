@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1847DA780B1F9C304A08AC6C /* libPods-SugarNursing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD6636C7BFC777050BC1B07 /* libPods-SugarNursing.a */; };
+		37014D9C1A63D4FB0048A2D8 /* NSString+Ret_msg.m in Sources */ = {isa = PBXBuildFile; fileRef = 37014D9B1A63D4FB0048A2D8 /* NSString+Ret_msg.m */; };
+		37014D9E1A63D5AE0048A2D8 /* ret_code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37014D9D1A63D5AE0048A2D8 /* ret_code.plist */; };
 		371628BC1A15DD4C0043EED2 /* UIViewController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 371628BB1A15DD4C0043EED2 /* UIViewController+Notifications.m */; };
 		3716F02A1A13448800BE3841 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3716F0291A13448800BE3841 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3718DAF21A2438DC008B88D7 /* MedicalHistoryDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3718DAF11A2438DC008B88D7 /* MedicalHistoryDetailCell.m */; };
@@ -25,7 +27,6 @@
 		3720AFA61A199ADF0011D930 /* ResetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3720AFA51A199ADF0011D930 /* ResetPwdViewController.m */; };
 		37278D731A5F7071008D21EE /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37278D721A5F7071008D21EE /* AboutUsViewController.m */; };
 		37278D761A5F7135008D21EE /* TermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37278D751A5F7135008D21EE /* TermsOfServiceViewController.m */; };
-		37278D7C1A5F80D0008D21EE /* NSString+UserInfoCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 37278D7B1A5F80D0008D21EE /* NSString+UserInfoCommon.m */; };
 		37278D7F1A5F814A008D21EE /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 37278D7E1A5F814A008D21EE /* UserInfo.m */; };
 		37278D821A5F85A7008D21EE /* Advise.m in Sources */ = {isa = PBXBuildFile; fileRef = 37278D811A5F85A7008D21EE /* Advise.m */; };
 		37278D851A5FBA4E008D21EE /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 37278D841A5FBA4E008D21EE /* Message.m */; };
@@ -170,6 +171,9 @@
 
 /* Begin PBXFileReference section */
 		1945A488E5BA9FC742F2D0A5 /* Pods-SugarNursing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SugarNursing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SugarNursing/Pods-SugarNursing.debug.xcconfig"; sourceTree = "<group>"; };
+		37014D9A1A63D4FB0048A2D8 /* NSString+Ret_msg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Ret_msg.h"; sourceTree = "<group>"; };
+		37014D9B1A63D4FB0048A2D8 /* NSString+Ret_msg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Ret_msg.m"; sourceTree = "<group>"; };
+		37014D9D1A63D5AE0048A2D8 /* ret_code.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ret_code.plist; sourceTree = "<group>"; };
 		371628BA1A15DD4C0043EED2 /* UIViewController+Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Notifications.h"; sourceTree = "<group>"; };
 		371628BB1A15DD4C0043EED2 /* UIViewController+Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Notifications.m"; sourceTree = "<group>"; };
 		3716F0291A13448800BE3841 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -205,8 +209,6 @@
 		37278D721A5F7071008D21EE /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		37278D741A5F7135008D21EE /* TermsOfServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsOfServiceViewController.h; sourceTree = "<group>"; };
 		37278D751A5F7135008D21EE /* TermsOfServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsOfServiceViewController.m; sourceTree = "<group>"; };
-		37278D7A1A5F80D0008D21EE /* NSString+UserInfoCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UserInfoCommon.h"; sourceTree = "<group>"; };
-		37278D7B1A5F80D0008D21EE /* NSString+UserInfoCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UserInfoCommon.m"; sourceTree = "<group>"; };
 		37278D7D1A5F814A008D21EE /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		37278D7E1A5F814A008D21EE /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		37278D801A5F85A7008D21EE /* Advise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Advise.h; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 			children = (
 				37FF58821A4096CA00F3564E /* country.plist */,
 				3749B5161A09C50D0031D00C /* Info.plist */,
+				37014D9D1A63D5AE0048A2D8 /* ret_code.plist */,
 				3749B5171A09C50D0031D00C /* main.m */,
 			);
 			name = "Supporting Files";
@@ -731,10 +734,10 @@
 				37B038871A41841B00AFEA2D /* NSString+MD5.m */,
 				379AE1271A4ECC5000478332 /* NSString+UserCommon.h */,
 				379AE1281A4ECC5000478332 /* NSString+UserCommon.m */,
-				37278D7A1A5F80D0008D21EE /* NSString+UserInfoCommon.h */,
-				37278D7B1A5F80D0008D21EE /* NSString+UserInfoCommon.m */,
 				37C26A6C1A62CFA50095EFC6 /* NSString+Formatting.h */,
 				37C26A6D1A62CFA50095EFC6 /* NSString+Formatting.m */,
+				37014D9A1A63D4FB0048A2D8 /* NSString+Ret_msg.h */,
+				37014D9B1A63D4FB0048A2D8 /* NSString+Ret_msg.m */,
 				37AEC7A01A52A8430011B53F /* NSDictionary+Formatting.h */,
 				37AEC7A11A52A8430011B53F /* NSDictionary+Formatting.m */,
 				373D77ED1A5A84BA008819B2 /* ParseData.h */,
@@ -1192,6 +1195,7 @@
 			files = (
 				3786359D1A47C8CF00922539 /* Main.storyboard in Resources */,
 				3786359E1A47C8CF00922539 /* MemberCenter.storyboard in Resources */,
+				37014D9E1A63D5AE0048A2D8 /* ret_code.plist in Resources */,
 				3786359F1A47C8CF00922539 /* TestTracker.storyboard in Resources */,
 				378635A01A47C8CF00922539 /* RecoveryLog.storyboard in Resources */,
 				378635A11A47C8CF00922539 /* ControlEffect.storyboard in Resources */,
@@ -1318,6 +1322,7 @@
 				373904A71A1F345900A7B30F /* ControlEffectViewController.m in Sources */,
 				37EA290F1A21C7B900B43CD0 /* RemindViewController.m in Sources */,
 				379C89EA1A2D76DA00F33BAE /* CommentCell.m in Sources */,
+				37014D9C1A63D4FB0048A2D8 /* NSString+Ret_msg.m in Sources */,
 				37EDEA141A0A79C7009EB54D /* UIStoryboard+Storyboards.m in Sources */,
 				37278D821A5F85A7008D21EE /* Advise.m in Sources */,
 				379C89F01A2D790F00F33BAE /* FieldCell.m in Sources */,
@@ -1333,7 +1338,6 @@
 				37B165701A31BC160015FE6D /* CustomLabel.m in Sources */,
 				3749B5571A09D0870031D00C /* LeftMenuController.m in Sources */,
 				377127971A1B26E8009008D3 /* TimelineCell.m in Sources */,
-				37278D7C1A5F80D0008D21EE /* NSString+UserInfoCommon.m in Sources */,
 				3718DAF21A2438DC008B88D7 /* MedicalHistoryDetailCell.m in Sources */,
 				37CA3B9D1A262F6F009A2403 /* MyTextView.m in Sources */,
 				371903A41A28584F00A9657B /* SwipeView.m in Sources */,

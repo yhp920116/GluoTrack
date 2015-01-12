@@ -73,7 +73,8 @@
     [GCRequest userGetDoctorSuggestionWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData valueForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 // 清除缓存
                 for (Advise *advise in self.fetchController.fetchedObjects) {
@@ -109,7 +110,7 @@
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                 [hud show:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }

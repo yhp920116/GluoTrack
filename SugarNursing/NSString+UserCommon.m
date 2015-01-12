@@ -23,6 +23,20 @@
 
 }
 
++ (UserInfo *)fetchUserInfo
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userid.userId = %@ && userid.linkManId = %@",[NSString userID],[NSString linkmanID]];
+    NSArray *userInfoObjects = [UserInfo findAllWithPredicate:predicate inContext:[CoreDataStack sharedCoreDataStack].context];
+    
+    if (userInfoObjects.count == 0) {
+        DDLogInfo(@"NO UserInfo Exists");
+        return nil;
+    }
+    
+    UserInfo *userInfo = userInfoObjects[0];
+    return userInfo;
+}
+
 + (NSString *)userID
 {
     User *user = [self fetchUser];
@@ -58,5 +72,24 @@
     }
     return user.sessionToken ? user.sessionToken :@"";
 }
+
++ (NSString *)centerID
+{
+    UserInfo *userInfo = [self fetchUserInfo];
+    if (!userInfo) {
+        return @"";
+    }
+    return userInfo.centerId ? userInfo.centerId : @"";
+}
+
++ (NSString *)userThumbnail
+{
+    UserInfo *userInfo = [self fetchUserInfo];
+    if (!userInfo) {
+        return @"";
+    }
+    return userInfo.headImageUrl ? userInfo.headImageUrl : @"";
+}
+
 
 @end
