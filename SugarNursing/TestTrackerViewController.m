@@ -287,21 +287,21 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
     return 6;
 }
 
-- (void)lineGraph:(BEMSimpleLineGraphView *)graph didTapPointAtIndex:(NSInteger)index
-{
-    hud = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:hud];
-    
-    hud.customView = self.detailView;
-    hud.margin = 0;
-    hud.cornerRadius = 0;
-    hud.mode = MBProgressHUDModeCustomView;
-    hud.delegate = self;
-    
-    [hud show:YES];
-    
-    return NSLog(@"Tap on the key point at index: %ld",(long)index);
-}
+//- (void)lineGraph:(BEMSimpleLineGraphView *)graph didTapPointAtIndex:(NSInteger)index
+//{
+//    hud = [[MBProgressHUD alloc] initWithView:self.view];
+//    [self.view addSubview:hud];
+//    
+//    hud.customView = self.detailView;
+//    hud.margin = 0;
+//    hud.cornerRadius = 0;
+//    hud.mode = MBProgressHUDModeCustomView;
+//    hud.delegate = self;
+//    
+//    [hud show:YES];
+//    
+//    return NSLog(@"Tap on the key point at index: %ld",(long)index);
+//}
 
 - (NSDate *)lineGraph:(BEMSimpleLineGraphView *)graph dateOnXAxisForIndex:(NSInteger)index
 {

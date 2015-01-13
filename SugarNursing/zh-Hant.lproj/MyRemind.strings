@@ -5,6 +5,9 @@
 /* Class = "IBUITabBarItem"; title = "Control Plan"; ObjectID = "3rW-pS-f30"; */
 "3rW-pS-f30.title" = "Control Plan";
 
+/* Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "4mE-cz-egY"; */
+"4mE-cz-egY.title" = "菜單";
+
 /* Class = "IBUILabel"; text = " "; ObjectID = "5ko-DJ-t8R"; */
 "5ko-DJ-t8R.text" = " ";
 
@@ -25,6 +28,9 @@
 
 /* Class = "IBUILabel"; text = "点击选择时间"; ObjectID = "PZn-O8-Lkt"; */
 "PZn-O8-Lkt.text" = "点击选择时间";
+
+/* Class = "IBUINavigationItem"; title = "Coming Soon"; ObjectID = "TSf-Kb-dNT"; */
+"TSf-Kb-dNT.title" = "敬請期待";
 
 /* Class = "IBUILabel"; text = "开始日期"; ObjectID = "XEE-e2-fes"; */
 "XEE-e2-fes.text" = "开始日期";

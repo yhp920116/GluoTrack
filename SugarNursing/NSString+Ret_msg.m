@@ -14,8 +14,14 @@
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"ret_code" ofType:@"plist"];
     NSDictionary *codeDic = [[NSDictionary alloc] initWithContentsOfFile:path];
+
+    NSString *localizedString = [codeDic valueForKey:ret_code];
     
-    return [codeDic valueForKey:@"ret_code"];
+    if (!localizedString) {
+        localizedString = NSLocalizedString(@"Request Error", nil);
+    }
+    
+    return localizedString;
 }
 
 

@@ -9,6 +9,9 @@
 "glucose" = "血糖";
 "hemoglobin" = "糖化血红蛋白";
 
+/* Network */
+"Request Error" = "請求出錯";
+
 /* Basic */
 "New Version" = "發現新版本";
 "Skip" = "忽略";
@@ -77,7 +80,7 @@
 "Cancel" = "取消";
 "30 days recently" = "近30天";
 "Select By Day" = "按日查詢";
-"No Data" = "沒有數據";
+"No Data" = "暫無數據";
 
 
 /* Member Center */
@@ -114,6 +117,8 @@
 "Terms of service" = "服務條款";
 
 "FeedBack" = "用戶反饋";
+"Sending FeedBack…" = "發送中…";
+"Send Message Succeed" = "發送成功，感謝您的配合";
 
 /* Service center */
 "Send Message Succeed" = "消息發送成功";

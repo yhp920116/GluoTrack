@@ -32,6 +32,7 @@
     [super viewDidLoad];
     [self fetchMessages];
     [self configureTableViewAndTextView];
+    [self configureTableViewFooterView];
 
 }
 
@@ -165,7 +166,17 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    [self configureTableViewFooterView];
     [self.tableView reloadData];
+}
+
+- (void)configureTableViewFooterView
+{
+    if (self.fetchController.fetchedObjects.count > 0) {
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    }else{
+        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataView" owner:self options:nil][0];
+    }
 }
 
 
@@ -178,6 +189,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+
     return self.fetchController.fetchedObjects.count;
 }
 

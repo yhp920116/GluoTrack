@@ -13,7 +13,7 @@
 #import "UtilsMacro.h"
 
 
-@interface ControlEffectViewController ()<UITableViewDataSource, UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate, SSPullToRefreshViewDelegate>{
+@interface ControlEffectViewController ()<UITableViewDataSource, UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate, SSPullToRefreshViewDelegate, NSFetchedResultsControllerDelegate>{
     MBProgressHUD *hud;
 }
 
@@ -27,6 +27,8 @@
 @property (strong, nonatomic) NSDictionary *countDayDic;
 @property (strong, nonatomic) NSString *countDay;
 
+@property (strong, nonatomic) NSFetchedResultsController *fetchController;
+
 @end
 
 @implementation ControlEffectViewController
@@ -35,25 +37,17 @@
 {
     self.countDay = @"7";
     self.dataArray = [NSMutableArray array];
-    self.countDayDic = @{@"近三天":@"3",
-                         @"近七天":@"7",
-                         @"近两星期":@"14",
-                         @"近一个月":@"30",
+    self.countDayDic = @{@"近3天":@"3",
+                         @"近7天":@"7",
+                         @"近2周":@"14",
+                         @"近1个月":@"30",
                          };
-    NSArray *data = @[
-                      @[@75,@"良好的血糖控制有利于身体各项机能的健康运行"],
-                      @[@"空腹血糖",@14,@2,@5.8,@4.4,@4.8],
-                      @[@"餐后血糖",@20,@4,@7.2,@6.3,@6.7],
-                      @[@"糖化血红蛋白",@15,@2,@"6.5%",@"5.5%",@"6.2%"],
-                      ];
-    
-    [self.dataArray addObjectsFromArray:data];
-    
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configureFetchController];
+    [self configureTableViewFooterView];
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
 }
 
@@ -65,6 +59,19 @@
     }
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self configureTableViewFooterView];
+    [self.tableView reloadData];
+}
+
+
+- (void)configureFetchController
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userid.userId = %@ && userid.linkManId = %@",[NSString userID],[NSString linkmanID]];
+    self.fetchController = [ControlEffect fetchAllGroupedBy:nil sortedBy:@"userid.userId" ascending:YES withPredicate:predicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
+}
+
 #pragma mark - SSPUllToRefreshViewDelegate
 - (void)pullToRefreshViewDidStartLoading:(SSPullToRefreshView *)view
 {
@@ -73,6 +80,9 @@
 
 - (void)getControlEffectData
 {
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    hud.mode = MBProgressHUDModeText;
     
     NSDictionary *parameters = @{@"method":@"queryConclusion",
                                  @"sign":@"sign",
@@ -81,20 +91,85 @@
                                  @"countDay":self.countDay};
     [GCRequest userGetControlEffectWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
+        if (!error) {
+            NSString *ret_code = [responseData valueForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
+                
+                for (ControlEffect *controlEffect in self.fetchController.fetchedObjects) {
+                    [controlEffect deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                }
+                
+                ControlEffect *controlEffect = [ControlEffect createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                userID.userId = [NSString userID];
+                userID.linkManId = [NSString linkmanID];
+                controlEffect.userid = userID;
+                
+                [controlEffect updateCoreDataForData:responseData withKeyPath:nil];
+                
+                NSMutableOrderedSet *lists = [[NSMutableOrderedSet alloc] initWithCapacity:10];
+                
+                EffectList *g3 = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                [g3 updateCoreDataForData:[responseData objectForKey:@"g3"] withKeyPath:nil];
+                g3.name = @"空腹血糖G3";
+                EffectList *g2 = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                [g2 updateCoreDataForData:[responseData objectForKey:@"g2"] withKeyPath:nil];
+                g2.name = @"餐后血糖G2";
+                EffectList *g1 = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                [g1 updateCoreDataForData:[responseData objectForKey:@"g1"] withKeyPath:nil];
+                g1.name = @"餐后血糖G1";
+                EffectList *hemoglobin = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                [hemoglobin updateCoreDataForData:[responseData objectForKey:@"hemoglobin"] withKeyPath:nil];
+                hemoglobin.name = @"糖化血糖蛋白";
+                
+                [lists addObject:g3];
+                [lists addObject:g2];
+                [lists addObject:g1];
+                [lists addObject:hemoglobin];
+                
+                controlEffect.effectList = lists;
+                
+                [[CoreDataStack sharedCoreDataStack] saveContext];
+                
+                hud.labelText = NSLocalizedString(@"Data Updated", nil);
+            }else{
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+            }
+        }else{
+            hud.labelText = [error localizedDescription];
+            
+        }
+        [hud show:YES];
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
         [self.refreshView finishLoading];
     }];
+}
+
+- (void)configureTableViewFooterView
+{
+    if (self.fetchController.fetchedObjects.count > 0) {
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    }else{
+        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataView" owner:self options:nil][0];
+    }
 }
 
 #pragma mark - tableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.fetchController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dataArray count]+1;
+    if (self.fetchController.fetchedObjects.count > 0) {
+        ControlEffect *controlEffect = self.fetchController.fetchedObjects[0];
+        return controlEffect.effectList.count+2;
+    }else{
+        return 0;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,9 +199,11 @@
 
 - (void)configureEvaluateCell:(EvaluateCell *)cell forIndexPath:(NSIndexPath *)indexPath
 {
+    ControlEffect *controlEffect = [self.fetchController objectAtIndexPath:indexPath];
+    
     cell.scoreLabel.text = @"综合疗效评估";
-    cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@",self.dataArray[indexPath.row][0]]];
-    cell.evaluateTextLabel.text = self.dataArray[indexPath.row][1];
+    cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@分",controlEffect.conclusionScore]];
+    cell.evaluateTextLabel.text = [NSString stringWithFormat:@"%@  %@",controlEffect.conclusion,controlEffect.conclusionDesc];
     
     [self setupConstraintsWithCell:cell];
 
@@ -134,6 +211,8 @@
 
 - (void)configureEffectCell:(EffectCell *)cell forIndexPath:(NSIndexPath *)indexPath
 {
+    ControlEffect *controlEffect = self.fetchController.fetchedObjects[0];
+    EffectList *effectList = [controlEffect.effectList objectAtIndex:indexPath.row-2];
     
     cell.testCount.text = @"检测次数";
     cell.overproofCount.text = @"超标次数";
@@ -142,23 +221,15 @@
     cell.averageValue.text = @"平均值";
     
     
-    cell.evaluateType.text = self.dataArray[indexPath.row-1][0];
+    cell.evaluateType.text = effectList.name;
     
     
     
-    cell.maximumValue.attributedText = [self configureLastLetter:[cell.maximumValue.text stringByAppendingFormat:@" %@",self.dataArray[indexPath.row-1][3]]];
-    cell.minimumValue.attributedText = [self configureLastLetter:[cell.minimumValue.text stringByAppendingFormat:@" %@",self.dataArray[indexPath.row-1][4]]];
-    cell.averageValue.attributedText = [self configureLastLetter:[cell.averageValue.text stringByAppendingFormat:@" %@",self.dataArray[indexPath.row-1][5]]];
-    
-    if (indexPath.row == self.dataArray.count) {
-        cell.testCount.text = @"";
-        cell.overproofCount.text = @"";
-        
-    }else
-    {
-        cell.testCount.attributedText = [self configureLastLetter:[cell.testCount.text stringByAppendingFormat:@" %@",self.dataArray[indexPath.row-1][1]]];
-        cell.overproofCount.attributedText = [self configureLastLetter:[cell.overproofCount.text stringByAppendingFormat:@" %@",self.dataArray[indexPath.row-1][2]]];
-    }
+    cell.maximumValue.attributedText = [self configureLastLetter:[cell.maximumValue.text stringByAppendingFormat:@" %@",effectList.max]];
+    cell.minimumValue.attributedText = [self configureLastLetter:[cell.minimumValue.text stringByAppendingFormat:@" %@",effectList.min]];
+    cell.averageValue.attributedText = [self configureLastLetter:[cell.averageValue.text stringByAppendingFormat:@" %@",effectList.avg]];
+    cell.testCount.attributedText = [self configureLastLetter:[cell.testCount.text stringByAppendingFormat:@" %@",effectList.detectCount]];
+    cell.overproofCount.attributedText = [self configureLastLetter:[cell.overproofCount.text stringByAppendingFormat:@" %@",effectList.overtopCount]];
     
     [self setupConstraintsWithCell:cell];
 
@@ -267,6 +338,8 @@
             NSString *key = [[self.countDayDic allKeys] objectAtIndex:[self.pickerView selectedRowInComponent:0]];
             cell.detailTextLabel.text  = key;
             self.countDay = [self.countDayDic valueForKey:key];
+            
+            [self.refreshView startLoadingAndExpand:YES animated:YES];
             break;
         }
     }

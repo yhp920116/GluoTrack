@@ -207,10 +207,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="pKR-3H-niO">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="gzS-G3-ncR">
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MedicalHistoryDetailCell" rowHeight="173" id="96A-5b-09U" customClass="MedicalHistoryDetailCell">
                                         <rect key="frame" x="0.0" y="214" width="600" height="173"/>
@@ -1049,47 +1045,6 @@
         <!--Medical Record Edit View Controller-->
         <scene sceneID="3dD-hY-cJx">
             <objects>
-                <view contentMode="scaleToFill" id="f7y-nd-pzt" userLabel="PickerView">
-                    <rect key="frame" x="0.0" y="0.0" width="280" height="262"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="bU3-eZ-NO4">
-                            <rect key="frame" x="0.0" y="0.0" width="280" height="216"/>
-                            <date key="date" timeIntervalSinceReferenceDate="441616371.73860699">
-                                <!--2014-12-30 07:12:51 +0000-->
-                            </date>
-                        </datePicker>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4q7-1f-tqW">
-                            <rect key="frame" x="0.0" y="217" width="280" height="0.5"/>
-                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
-                        </view>
-                        <button opaque="NO" tag="1001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSX-we-HH6">
-                            <rect key="frame" x="0.0" y="217" width="139" height="44"/>
-                            <state key="normal" title="取消">
-                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="pickerViewBtnTapped:" destination="Dqg-mC-DvW" eventType="touchUpInside" id="39N-B6-yrd"/>
-                            </connections>
-                        </button>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kry-To-3e4">
-                            <rect key="frame" x="139" y="218" width="0.5" height="44"/>
-                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
-                        </view>
-                        <button opaque="NO" tag="1002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyd-O4-pMR">
-                            <rect key="frame" x="140" y="218" width="140" height="44"/>
-                            <state key="normal" title="确定">
-                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="pickerViewBtnTapped:" destination="Dqg-mC-DvW" eventType="touchUpInside" id="5qg-7x-tuP"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                </view>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qpu-Bi-KZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Dqg-mC-DvW" customClass="MedicalRecordEditViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="2C0-B7-RYe">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -1279,6 +1234,47 @@
                         <outlet property="treatPlanField" destination="r3a-dP-mDt" id="hbi-bm-ljF"/>
                     </connections>
                 </tableViewController>
+                <view contentMode="scaleToFill" id="f7y-nd-pzt" userLabel="PickerView">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="262"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="bU3-eZ-NO4">
+                            <rect key="frame" x="0.0" y="0.0" width="280" height="216"/>
+                            <date key="date" timeIntervalSinceReferenceDate="441616371.73860699">
+                                <!--2014-12-30 07:12:51 +0000-->
+                            </date>
+                        </datePicker>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4q7-1f-tqW">
+                            <rect key="frame" x="0.0" y="217" width="280" height="0.5"/>
+                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
+                        <button opaque="NO" tag="1001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSX-we-HH6">
+                            <rect key="frame" x="0.0" y="217" width="139" height="44"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="pickerViewBtnTapped:" destination="Dqg-mC-DvW" eventType="touchUpInside" id="39N-B6-yrd"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kry-To-3e4">
+                            <rect key="frame" x="139" y="218" width="0.5" height="44"/>
+                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
+                        <button opaque="NO" tag="1002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyd-O4-pMR">
+                            <rect key="frame" x="140" y="218" width="140" height="44"/>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="pickerViewBtnTapped:" destination="Dqg-mC-DvW" eventType="touchUpInside" id="5qg-7x-tuP"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </view>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qpu-Bi-KZy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="27" y="-154"/>
         </scene>
@@ -1286,7 +1282,7 @@
         <scene sceneID="7iB-IY-n6v">
             <objects>
                 <tableViewController storyboardIdentifier="PersonalInfo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3am-vb-Ubd" customClass="PersonalInfoViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QrE-j4-k7J">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QrE-j4-k7J">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1421,10 +1417,18 @@
                                                         <outlet property="delegate" destination="3am-vb-Ubd" id="A6I-NP-wQs"/>
                                                     </connections>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LU0-yG-o2a">
+                                                    <rect key="frame" x="549" y="14" width="31" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="1" green="0.51260264600000005" blue="0.051294479929999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="dpN-vF-nzy" secondAttribute="trailing" constant="20" id="GUa-nh-y2C"/>
+                                                <constraint firstAttribute="trailing" secondItem="LU0-yG-o2a" secondAttribute="trailing" constant="20" id="Guk-l3-xGe"/>
                                                 <constraint firstItem="dpN-vF-nzy" firstAttribute="leading" secondItem="2dg-ka-HVM" secondAttribute="trailing" constant="20" id="ZdW-tV-bUP"/>
+                                                <constraint firstAttribute="centerY" secondItem="LU0-yG-o2a" secondAttribute="centerY" id="az4-sV-zpp"/>
                                                 <constraint firstAttribute="centerY" secondItem="dpN-vF-nzy" secondAttribute="centerY" id="d0i-Kd-YKu"/>
                                                 <constraint firstAttribute="centerY" secondItem="2dg-ka-HVM" secondAttribute="centerY" id="nvg-WK-TJU"/>
                                                 <constraint firstItem="2dg-ka-HVM" firstAttribute="leading" secondItem="Bc7-FN-khy" secondAttribute="leading" constant="20" id="xUk-fV-FhX"/>
@@ -1592,6 +1596,7 @@
                         <outlet property="emailField" destination="DKF-Te-W34" id="TJk-WK-Vyd"/>
                         <outlet property="emailTips" destination="S6j-WC-F8y" id="OPH-Ea-vuM"/>
                         <outlet property="genderField" destination="TP8-al-I7v" id="2RN-yx-y7g"/>
+                        <outlet property="idTips" destination="LU0-yG-o2a" id="7Oy-L3-a9k"/>
                         <outlet property="identityCardField" destination="dpN-vF-nzy" id="Kg4-xk-hmh"/>
                         <outlet property="realNameField" destination="AEb-w2-J9N" id="sBP-oj-TIE"/>
                         <outlet property="serverLabel" destination="SJu-Rb-eL9" id="QEc-d2-9UV"/>

@@ -7,6 +7,23 @@
         <attribute name="exptId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="userid" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserID" inverseName="advise" inverseEntity="UserID" syncable="YES"/>
     </entity>
+    <entity name="ControlEffect" representedClassName="ControlEffect" syncable="YES">
+        <attribute name="conclusion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="conclusionDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="conclusionScore" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countDay" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="effectList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EffectList" inverseName="controlEffect" inverseEntity="EffectList" syncable="YES"/>
+        <relationship name="userid" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserID" inverseName="controlEffect" inverseEntity="UserID" syncable="YES"/>
+    </entity>
+    <entity name="EffectList" representedClassName="EffectList" syncable="YES">
+        <attribute name="avg" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="detectCount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="max" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="min" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="overtopCount" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="controlEffect" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ControlEffect" inverseName="effectList" inverseEntity="ControlEffect" spotlightIndexingEnabled="YES" syncable="YES"/>
+    </entity>
     <entity name="MedicalRecord" representedClassName="MedicalRecord" syncable="YES">
         <attribute name="diagHosp" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="diagTime" optional="YES" attributeType="String" syncable="YES"/>
@@ -61,6 +78,7 @@
         <attribute name="linkManId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="advise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Advise" inverseName="userid" inverseEntity="Advise" syncable="YES"/>
+        <relationship name="controlEffect" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ControlEffect" inverseName="userid" inverseEntity="ControlEffect" syncable="YES"/>
         <relationship name="medicalRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MedicalRecord" inverseName="userid" inverseEntity="MedicalRecord" syncable="YES"/>
         <relationship name="message" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message" inverseName="userid" inverseEntity="Message" syncable="YES"/>
         <relationship name="recordLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecordLog" inverseName="userid" inverseEntity="RecordLog" syncable="YES"/>
@@ -103,8 +121,10 @@
         <element name="RecordLogList" positionX="9" positionY="207" width="128" height="148"/>
         <element name="RecordPhoto" positionX="-36" positionY="153" width="128" height="90"/>
         <element name="User" positionX="-9" positionY="144" width="128" height="135"/>
-        <element name="UserID" positionX="-18" positionY="135" width="128" height="163"/>
+        <element name="UserID" positionX="-18" positionY="135" width="128" height="180"/>
         <element name="UserInfo" positionX="-54" positionY="36" width="128" height="360"/>
         <element name="UserSetting" positionX="9" positionY="162" width="128" height="90"/>
+        <element name="ControlEffect" positionX="-18" positionY="189" width="128" height="133"/>
+        <element name="EffectList" positionX="-9" positionY="198" width="128" height="148"/>
     </elements>
 </model>

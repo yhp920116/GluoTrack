@@ -9,6 +9,9 @@
 "glucose" = "Glucose";
 "hemoglobin" = "Hemoglobin";
 
+/* Network */
+"Request Error" = "Request Error";
+
 /* Basic */
 "New Version" = "New Version";
 "Skip" = "Skip";
@@ -112,6 +115,8 @@
 "Terms of service" = "Terms of service";
 
 "FeedBack" = "FeedBack";
+"Sending FeedBack…" = "Sending FeedBack…";
+"Send Message Succeed" = "Send Message Succeed";
 
 /* Service center */
 "Send Message Succeed" = "Send Message Succeed";

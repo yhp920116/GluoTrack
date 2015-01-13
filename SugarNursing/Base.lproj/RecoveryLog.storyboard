@@ -43,7 +43,7 @@
                                     <action selector="topButtonTapped:" destination="3NX-aD-baJ" eventType="touchUpInside" id="6uX-QW-eg0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.84999999999999987" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWE-JX-4IZ">
+                            <button opaque="NO" alpha="0.84999999999999987" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWE-JX-4IZ">
                                 <rect key="frame" x="170" y="74" width="78" height="36"/>
                                 <color key="backgroundColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -56,7 +56,7 @@
                                     <action selector="topButtonTapped:" destination="3NX-aD-baJ" eventType="touchUpInside" id="z50-j9-HrY"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-mj-DkV" customClass="TimelineTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-mj-DkV" customClass="TimelineTableView">
                                 <rect key="frame" x="0.0" y="120" width="600" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -292,7 +292,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcQ-ea-ObA" userLabel="Swipe View" customClass="SwipeView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BcQ-ea-ObA" userLabel="Swipe View" customClass="SwipeView">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -438,16 +438,51 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="3NX-aD-baJ" kind="relationship" relationship="rootViewController" id="HwE-qq-fGw"/>
+                        <segue destination="t1f-E2-zWd" kind="relationship" relationship="rootViewController" id="nfS-fK-12J"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kh-ZM-sT5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="383" y="282"/>
         </scene>
+        <!--Coming Soon-->
+        <scene sceneID="tJs-kR-Los">
+            <objects>
+                <viewController id="t1f-E2-zWd" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zwv-Lk-DqZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="gd2-9s-cLm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RMf-jd-Zdb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ComingSoon" translatesAutoresizingMaskIntoConstraints="NO" id="k1R-7K-yUP">
+                                <rect key="frame" x="179" y="204" width="242" height="192"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="k1R-7K-yUP" secondAttribute="centerY" id="QIH-kR-SSu"/>
+                            <constraint firstAttribute="centerX" secondItem="k1R-7K-yUP" secondAttribute="centerX" id="ix8-YG-6GX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Coming Soon" id="Yzp-lr-zz6">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="Gqa-VI-OLM">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="t1f-E2-zWd" id="sta-4x-CB7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QRT-2f-5AH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="383" y="1034"/>
+        </scene>
     </scenes>
     <resources>
         <image name="CheckboxY" width="26" height="26"/>
+        <image name="ComingSoon" width="242" height="192"/>
         <image name="Diet" width="30" height="30"/>
         <image name="Exercise" width="30" height="30"/>
         <image name="Medication" width="30" height="30"/>

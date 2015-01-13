@@ -99,7 +99,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KVi-EH-LM9" id="oot-jW-Buw">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Starts" translatesAutoresizingMaskIntoConstraints="NO" id="Vlf-Ha-fCA" customClass="ThumbnailImageView">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vlf-Ha-fCA" customClass="ThumbnailImageView">
                                                     <rect key="frame" x="10" y="10" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="ibq-5L-qDt"/>
@@ -198,7 +198,4 @@
             <point key="canvasLocation" x="362" y="348"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Starts" width="320" height="568"/>
-    </resources>
 </document>

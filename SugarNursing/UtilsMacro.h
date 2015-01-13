@@ -44,6 +44,8 @@
 #import "RecordLogList.h"
 #import "Advise.h"
 #import "Message.h"
+#import "ControlEffect.h"
+#import "EffectList.h"
 
 #import <DDLog.h>
 #import <DDLegacy.h>

@@ -64,3 +64,9 @@
 
 /* Class = "IBUITabBarItem"; title = "用药"; ObjectID = "yLo-f1-6lN"; */
 "yLo-f1-6lN.title" = "用药";
+
+/* Class = "IBUIBarButtonItem"; title = "Menu"; ObjectID = "Gqa-VI-OLM"; */
+"Gqa-VI-OLM.title" = "菜单";
+
+/* Class = "IBUINavigationItem"; title = "Coming Soon"; ObjectID = "Yzp-lr-zz6"; */
+"Yzp-lr-zz6.title" = "敬请期待";

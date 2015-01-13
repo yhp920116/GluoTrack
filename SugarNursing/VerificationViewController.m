@@ -110,17 +110,11 @@
             if (!error) {
                 NSString *ret_code = [responseData objectForKey:@"ret_code"];
                 if ([ret_code isEqualToString:@"0"]) {
-                    
-                    if ([[responseData valueForKey:@"isMember"] isEqualToString:@"1"]) {
-                        hud.mode = MBProgressHUDModeText;
-                        hud.labelText = NSLocalizedString(@"User is registered", nil);
-                        [hud hide:YES afterDelay:HUD_TIME_DELAY];
-                    }else if ([[responseData valueForKey:@"isMember"] isEqualToString:@"0"]){
+                    if ([[responseData valueForKey:@"isMember"] isEqualToString:@"0"]){
                         [self userGetCode];
                     }
                     
                 }else{
-                    
                     hud.mode = MBProgressHUDModeText;
                     hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
                     [hud hide:YES afterDelay:HUD_TIME_DELAY];
@@ -140,30 +134,37 @@
                                  @"mobile":self.phoneField.text,
                                  @"zone":self.countryAndAreaCode.areaCode};
     
-    NSURLSessionDataTask *getCodeTask = [GCRequest userGetCodeWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+    [GCRequest userGetCodeWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
-        if (!error && [[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+        hud.mode = MBProgressHUDModeText;
+        
+        if (!error) {
             
-            [hud hide:YES afterDelay:HUD_TIME_DELAY];
-            switch (self.verifiedType) {
-                case 0:
-                    [self performSegueWithIdentifier:@"Register" sender:nil];
-                    break;
-                case 1:
-                    [self performSegueWithIdentifier:@"Reset" sender:nil];
-                    break;
+            NSString *ret_code = [responseData valueForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
+                
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                switch (self.verifiedType) {
+                    case 0:
+                        [self performSegueWithIdentifier:@"Register" sender:nil];
+                        break;
+                    case 1:
+                        [self performSegueWithIdentifier:@"Reset" sender:nil];
+                        break;
+                }
+            }
+            else{
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
             }
         }else{
-            [hud hide:YES];
-            //获取验证码失败
-            NSString* str=[NSString stringWithFormat:NSLocalizedString(@"codesenderrormsg", nil)];
-            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"codesenderrtitle", nil) message:str delegate:self cancelButtonTitle:NSLocalizedString(@"sure", nil) otherButtonTitles:nil, nil];
-            [alert show];
+            hud.labelText = [error localizedDescription];
         }
+        
+        [hud show:YES];
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
         
     }];
     
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:getCodeTask delegate:nil];
 }
 
 #pragma mark - Navigation

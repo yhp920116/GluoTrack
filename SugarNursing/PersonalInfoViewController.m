@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameTips;
 @property (weak, nonatomic) IBOutlet UITextField *realNameField;
 @property (weak, nonatomic) IBOutlet UITextField *identityCardField;
+@property (weak, nonatomic) IBOutlet UILabel *idTips;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UILabel *emailTips;
 @property (weak, nonatomic) IBOutlet CustomLabel *serverLabel;
@@ -90,7 +91,7 @@
     }
     
     if ([self.identityCardField.text isEqualToString:@""]) {
-        self.identityCardField.text = NSLocalizedString(@"Setting when purchase", nil);
+        self.idTips.text = NSLocalizedString(@"Setting when purchase", nil);
     }
     
     if ([self.emailField.text isEqualToString:@""]) {

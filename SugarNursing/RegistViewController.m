@@ -93,6 +93,8 @@
 
 - (IBAction)datePicker:(id)sender
 {
+    [self.view endEditing:YES];
+    
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.customView = self.datePicker;
     hud.mode = MBProgressHUDModeCustomView;
@@ -141,6 +143,7 @@
                                  @"userName":self.usernameField.text,
                                  @"sex":[self.genderBtn currentTitle],
                                  @"birthday":[self.dateBtn currentTitle],
+                                 @"zone":self.areaCode,
                                  };
     
     NSURLSessionDataTask *registerTask = [GCRequest userRegisterWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
