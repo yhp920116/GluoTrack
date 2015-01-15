@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SWTableViewCell.h>
 
-@interface ExerciseCell : SWTableViewCell
+@interface ExerciseCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *exerciseNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;

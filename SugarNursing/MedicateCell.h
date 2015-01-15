@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SWTableViewCell.h>
 
-@interface MedicateCell : SWTableViewCell
+@interface MedicateCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *medicateTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usageLabel;

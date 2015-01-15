@@ -1,14 +1,14 @@
 //
-//  FieldCell.m
-//  SugarNursing
+//  DetectCell.m
+//  GlucoCare
 //
-//  Created by Dan on 14-12-2.
-//  Copyright (c) 2014年 Tisson. All rights reserved.
+//  Created by Dan on 15-1-14.
+//  Copyright (c) 2015年 Tisson. All rights reserved.
 //
 
-#import "FieldCell.h"
+#import "DetectCell.h"
 
-@implementation FieldCell
+@implementation DetectCell
 
 - (void)awakeFromNib {
     // Initialization code

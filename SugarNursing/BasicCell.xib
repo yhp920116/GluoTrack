@@ -19,23 +19,23 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLC-b9-DaO" customClass="CustomLabel">
-                        <rect key="frame" x="76" y="13" width="36" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Text" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4lS-1N-npl">
+                        <rect key="frame" x="70" y="13" width="31" height="17"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="a8e-te-le7" secondAttribute="centerY" id="Isa-I8-onm"/>
-                    <constraint firstItem="RLC-b9-DaO" firstAttribute="leading" secondItem="a8e-te-le7" secondAttribute="trailing" constant="20" id="RFt-Ia-Hhy"/>
-                    <constraint firstAttribute="centerY" secondItem="RLC-b9-DaO" secondAttribute="centerY" id="VKz-Jh-L7b"/>
+                    <constraint firstAttribute="centerY" secondItem="4lS-1N-npl" secondAttribute="centerY" id="TYU-Ou-0bz"/>
+                    <constraint firstItem="4lS-1N-npl" firstAttribute="leading" secondItem="a8e-te-le7" secondAttribute="trailing" constant="14" id="fVg-sl-bIi"/>
                     <constraint firstItem="a8e-te-le7" firstAttribute="leading" secondItem="V9i-nx-wCh" secondAttribute="leading" constant="20" id="lJg-Kz-GGc"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="detailLabel" destination="RLC-b9-DaO" id="Iuj-Uy-9QM"/>
-                <outlet property="titleLabel" destination="a8e-te-le7" id="tgY-Qy-Dee"/>
+                <outlet property="detailText" destination="4lS-1N-npl" id="3qz-Qr-gYK"/>
+                <outlet property="title" destination="a8e-te-le7" id="ENv-WU-jMG"/>
             </connections>
             <point key="canvasLocation" x="164" y="207"/>
         </tableViewCell>

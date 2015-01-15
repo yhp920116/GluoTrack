@@ -12,7 +12,7 @@
 
 + (NSString *)formattingDateString:(NSString *)dateString From:(NSString *)format1 to:(NSString *)format2
 {
-    if (!dateString || !format1 || !format2) {
+    if (!dateString || [dateString isEqualToString:@""]|| !format1 || !format2) {
         return nil;
     }
     

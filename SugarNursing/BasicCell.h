@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomLabel.h"
 
 @interface BasicCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+@property (weak, nonatomic) IBOutlet CustomLabel *title;
+@property (weak, nonatomic) IBOutlet UITextField *detailText;
+
 
 @end

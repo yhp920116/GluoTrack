@@ -43,7 +43,7 @@
                                     <action selector="topButtonTapped:" destination="3NX-aD-baJ" eventType="touchUpInside" id="6uX-QW-eg0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.84999999999999987" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWE-JX-4IZ">
+                            <button opaque="NO" alpha="0.84999999999999987" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWE-JX-4IZ">
                                 <rect key="frame" x="170" y="74" width="78" height="36"/>
                                 <color key="backgroundColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -56,7 +56,7 @@
                                     <action selector="topButtonTapped:" destination="3NX-aD-baJ" eventType="touchUpInside" id="z50-j9-HrY"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-mj-DkV" customClass="TimelineTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-mj-DkV" customClass="TimelineTableView">
                                 <rect key="frame" x="0.0" y="120" width="600" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -292,7 +292,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BcQ-ea-ObA" userLabel="Swipe View" customClass="SwipeView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcQ-ea-ObA" userLabel="Swipe View" customClass="SwipeView">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -438,7 +438,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="t1f-E2-zWd" kind="relationship" relationship="rootViewController" id="nfS-fK-12J"/>
+                        <segue destination="3NX-aD-baJ" kind="relationship" relationship="rootViewController" id="8Xk-OP-Ar3"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kh-ZM-sT5" userLabel="First Responder" sceneMemberID="firstResponder"/>

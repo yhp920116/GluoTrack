@@ -8,23 +8,18 @@
 
 #import "RecoveryLogDetailViewController.h"
 #import "BasicCell.h"
-#import "CommentCell.h"
-#import "SensationCell.h"
-#import "FieldCell.h"
+#import "DetectCell.h"
 #import "MedicateCell.h"
 #import "DietCell.h"
 #import "ExerciseCell.h"
 #import "LogSectionHeaderView.h"
-#import <MBProgressHUD.h>
-#import "SWTableViewCell+RigthButtons.h"
 #import "SwipeView.h"
+#import "UtilsMacro.h"
 
 
 static NSString *BasicCellIdentifier = @"BasicCell";
-static NSString *CommentCellIdentifier = @"CommentCell";
-static NSString *SensationCellIdentifier = @"SensationCell";
-static NSString *FieldCellIdentifier = @"FieldCell";
 
+static NSString *DetectCellIdentifier = @"DetectCell";
 static NSString *MediacteCellIdentifier = @"MedicateCell";
 static NSString *DietCellIdentifier = @"DietCell";
 static NSString *ExerciseCellIndentifier = @"ExerciseCell";
@@ -36,7 +31,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 
 
-@interface RecoveryLogDetailViewController ()<SwipeViewDataSource, SwipeViewDelegate, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, LogSectionHeaderViewDelegate, SWTableViewCellDelegate, UIPickerViewDataSource, UIPickerViewDelegate>{
+@interface RecoveryLogDetailViewController ()<SwipeViewDataSource, SwipeViewDelegate, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, LogSectionHeaderViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>{
     MBProgressHUD *hud;
 }
 
@@ -56,6 +51,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 @property (strong, nonatomic) NSMutableArray *medicateArray;
 @property (strong, nonatomic) NSMutableArray *dietArray;
 @property (strong, nonatomic) NSMutableArray *exerciseArray;
+
+@property (strong, nonatomic) NSMutableArray *detectData;
 @property (strong, nonatomic) NSMutableArray *medicationData;
 @property (strong, nonatomic) NSMutableArray *dietData;
 @property (strong, nonatomic) NSMutableArray *exerciseData;
@@ -71,6 +68,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     self.medicateArray = [[NSMutableArray alloc] initWithCapacity:10];
     self.dietArray = [[NSMutableArray alloc] initWithCapacity:10];
     self.exerciseArray = [[NSMutableArray alloc] initWithCapacity:10];
+    self.detectData = [[NSMutableArray alloc] initWithCapacity:10];
     self.medicationData = [[NSMutableArray alloc] initWithCapacity:10];
     self.dietData = [[NSMutableArray alloc] initWithCapacity:10];
     self.exerciseData = [[NSMutableArray alloc] initWithCapacity:10];
@@ -85,7 +83,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     NSString *currentTimeString = [timeFormatter stringFromDate:currentDate];
     
     // Default Setting
-    NSArray *trackerDefault = @[@"血糖",@"其他",currentDateString,currentTimeString,@"",@""];
+    NSArray *trackerDefault = @[@"其他",currentDateString,currentTimeString,@"",[@[@[@"检测类型",@"检测值",@"单位"]] mutableCopy]];
     [self.trackerArray addObjectsFromArray:trackerDefault];
     
     NSArray *medicateDefault = @[currentDateString, currentTimeString, @"",[@[@[@"药品名称",@"用法",@"用量",@"单位"]] mutableCopy],[@[@[@"药品名称",@"用法",@"用量",@"单位"]] mutableCopy]];
@@ -98,6 +96,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     [self.exerciseArray addObjectsFromArray:exerciseDefault];
     
     // Medication data
+    
+    NSArray *detectDataDefault = @[
+                                   @[@"血糖",@"糖化血红蛋白"],
+                                   @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"],
+                                   @[@"mmol/L",@"%"]];
+    [self.detectData addObjectsFromArray:detectDataDefault];
+    
     NSArray *medicateDataDefault = @[
                                      @{@"胰岛素":@[@"格列齐特",@"格列齐特缓释片",@"格列美脲片",@"格列本脲片",@"阿卡波糖",@"罗格列酮"],
                                        @"降糖药":@[@"诺和锐30",@"诺和锐",@"诺和平",@"诺和灵",@"诺和灵30R",@"诺和灵50R"]
@@ -124,24 +129,24 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self dataSetup];
-    
     switch (self.recoveryLogStatus) {
         case RecoveryLogStatusAdd:
         {
             self.title = NSLocalizedString(@"Add New Recovery Record", nil);
-            self.tabBar.hidden = NO;
             self.tabBar.selectedItem = [self.tabBar.items objectAtIndex:0];
             break;
         }
         case RecoveryLogStatusEdit:
         {
             self.title = NSLocalizedString(@"Edit Recovery Record", nil);
-            self.tabBar.hidden = YES;
+            self.tabBar.alpha = 0;
             break;
         }
     }
     [self configureSaveBtn];
+    self.swipeView.scrollEnabled = NO;
+    
+    [self dataSetup];
     
 }
 
@@ -166,9 +171,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 {
     // Cell Registeration
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicCell" bundle:nil] forCellReuseIdentifier:BasicCellIdentifier];
-    [self.tableView registerNib:[UINib nibWithNibName:@"CommentCell" bundle:nil] forCellReuseIdentifier:CommentCellIdentifier];
-    [self.tableView registerNib:[UINib nibWithNibName:@"SensationCell" bundle:nil] forCellReuseIdentifier:SensationCellIdentifier];
-    [self.tableView registerNib:[UINib nibWithNibName:@"FieldCell" bundle:nil] forCellReuseIdentifier:FieldCellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"DetectCell" bundle:nil] forCellReuseIdentifier:DetectCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"MedicateCell" bundle:nil] forCellReuseIdentifier:MediacteCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"DietCell" bundle:nil] forCellReuseIdentifier:DietCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"ExerciseCell" bundle:nil] forCellReuseIdentifier:ExerciseCellIndentifier];
@@ -200,7 +203,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                 itemView = [[NSBundle mainBundle] loadNibNamed:@"detect" owner:self options:nil][0];
                 if ([itemView isKindOfClass:[UITableView class]]) {
                     self.tableView = (UITableView *)itemView;
-                    self.tableView.tag = 0;
+                    self.tableView.tag = RecoveryLogTypeDetect;
                     
                 }
                 break;
@@ -209,7 +212,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                 itemView = [[NSBundle mainBundle] loadNibNamed:@"drug" owner:self options:nil][0];
                 if ([itemView isKindOfClass:[UITableView class]]) {
                     self.tableView = (UITableView *)itemView;
-                    self.tableView.tag = 1;
+                    self.tableView.tag = RecoveryLogTypeDrug;
                     
                 }
                 break;
@@ -218,7 +221,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                 itemView = [[NSBundle mainBundle] loadNibNamed:@"diet" owner:self options:nil][0];
                 if ([itemView isKindOfClass:[UITableView class]]) {
                     self.tableView = (UITableView *)itemView;
-                    self.tableView.tag = 2;
+                    self.tableView.tag = RecoveryLogTypeDiet;
                     
                 }
                 break;
@@ -226,7 +229,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                 itemView = [[NSBundle mainBundle] loadNibNamed:@"exercise" owner:self options:nil][0];
                 if ([itemView isKindOfClass:[UITableView class]]) {
                     self.tableView = (UITableView *)itemView;
-                    self.tableView.tag = 3;
+                    self.tableView.tag = RecoveryLogTypeExercise;
                     
                 }
                 break;
@@ -265,13 +268,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     switch (tableView.tag) {
-        case 0:
-            return 1;
-        case 1:
-            return 3;
-        case 2:
+        case RecoveryLogTypeDetect:
             return 2;
-        case 3:
+        case RecoveryLogTypeDrug:
+            return 3;
+        case RecoveryLogTypeDiet:
+            return 2;
+        case RecoveryLogTypeExercise:
             return 2;
 
     }
@@ -282,10 +285,18 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 {
     NSInteger count = 0;
     switch (tableView.tag) {
-        case 0:
-            count = 7;
+        case RecoveryLogTypeDetect:
+            switch (section) {
+                case 0:
+                    count = 4;
+                    break;
+                case 1:
+                    count = self.recordLog.eventList.count+1;
+                default:
+                    break;
+            }
             break;
-        case 1:
+        case RecoveryLogTypeDrug:
             switch (section) {
                 case 0:
                     count = 3;
@@ -299,15 +310,19 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 2:
+        case RecoveryLogTypeDiet:
             if (section == 0) {
                 count =  4;
-            } else return count = [self.dietArray[4] count];
+            } else {
+                count = [self.dietArray[4] count];
+            };
             break;
         case 3:
             if (section == 0) {
                 count = 3;
-            } else return count = [self.exerciseArray[3] count];
+            } else {
+                count = [self.exerciseArray[3] count];
+            }
             break;
     }
     return count;
@@ -340,21 +355,26 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     headerView.delegate = self;
     headerView.section = section;
     switch (tableView.tag) {
-        case 1:
+        case RecoveryLogTypeDetect:
             if (section == 1) {
-                headerView.titleLabel.text = @"胰岛素";
+                headerView.titleLabel.text = NSLocalizedString(@"检测结果",nil);
+            }
+            break;
+        case RecoveryLogTypeDrug:
+            if (section == 1) {
+                headerView.titleLabel.text = NSLocalizedString(@"胰岛素", nil);
             } else if (section == 2) {
-                headerView.titleLabel.text = @"降糖药";
+                headerView.titleLabel.text = NSLocalizedString(@"降糖药", nil);
             }
             break;
-        case 2:
+        case RecoveryLogTypeDiet:
             if (section == 1) {
-                headerView.titleLabel.text = @"摄入食物";
+                headerView.titleLabel.text = NSLocalizedString(@"摄入食物", nil);
             }
             break;
-        case 3:
+        case RecoveryLogTypeExercise:
             if (section == 1) {
-                headerView.titleLabel.text = @"运动数据";
+                headerView.titleLabel.text = NSLocalizedString(@"运动数据", nil);
             }
             break;
         default:
@@ -365,16 +385,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat cellHeight;
-    switch (tableView.tag) {
-        case 0:
-            if (indexPath.row == 5) {
-                cellHeight = 85;
-            } else cellHeight = 44;
-            break;
-        default:
-            cellHeight = 44;
-            break;
-    }
+    cellHeight = 44;
     return cellHeight;
 }
 
@@ -383,38 +394,29 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     switch (tableView.tag) {
             
-        case 0:
-        {
-    
-            if (indexPath.row <= 3) {
-                BasicCell *cell = [tableView dequeueReusableCellWithIdentifier:BasicCellIdentifier forIndexPath:indexPath];
-                [self configureTableView:tableView withBasicCell:cell atIndexPath:indexPath];
-                return cell;
-            } else if (indexPath.row == 4) {
-                CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier forIndexPath:indexPath];
-                return cell;
-            } else if (indexPath.row == 5) {
-                SensationCell *cell = [tableView dequeueReusableCellWithIdentifier:SensationCellIdentifier forIndexPath:indexPath];
-                return cell;
-            } else {
-                FieldCell *cell = [tableView dequeueReusableCellWithIdentifier:FieldCellIdentifier forIndexPath:indexPath];
-                return cell;
-            }
-            break;
-        }
-
-        case 1:
+        case RecoveryLogTypeDetect:
         {
             if (indexPath.section == 0) {
-                
-                if (indexPath.row == 2) {
-                    CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier forIndexPath:indexPath];
-                    return cell;
-                } else {
                     BasicCell *cell = [tableView dequeueReusableCellWithIdentifier:BasicCellIdentifier forIndexPath:indexPath];
                     [self configureTableView:tableView withBasicCell:cell atIndexPath:indexPath];
                     return cell;
-                }
+
+            }
+            else{
+                DetectCell *cell = [tableView dequeueReusableCellWithIdentifier:DetectCellIdentifier forIndexPath:indexPath];
+                [self configureTableView:tableView withDetectCell:cell atIndexPath:indexPath];
+                return cell;
+            }
+            
+            break;
+        }
+
+        case RecoveryLogTypeDrug:
+        {
+            if (indexPath.section == 0) {
+                BasicCell *cell = [tableView dequeueReusableCellWithIdentifier:BasicCellIdentifier forIndexPath:indexPath];
+                [self configureTableView:tableView withBasicCell:cell atIndexPath:indexPath];
+                return cell;
             }
             else {
                 MedicateCell *cell = [tableView dequeueReusableCellWithIdentifier:MediacteCellIdentifier forIndexPath:indexPath];
@@ -427,19 +429,16 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             break;
         }
             
-        case 2:
+        case RecoveryLogTypeDiet:
         {
             switch (indexPath.section) {
                 case 0:
-                    if (indexPath.row == 3) {
-                        CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier forIndexPath:indexPath];
-                        return cell;
-                    } else {
-                        BasicCell *cell = [tableView dequeueReusableCellWithIdentifier:BasicCellIdentifier forIndexPath:indexPath];
-                        [self configureTableView:tableView withBasicCell:cell atIndexPath:indexPath];
-                        return cell;
-                    }
+                {
+                    BasicCell *cell = [tableView dequeueReusableCellWithIdentifier:BasicCellIdentifier forIndexPath:indexPath];
+                    [self configureTableView:tableView withBasicCell:cell atIndexPath:indexPath];
+                    return cell;
                     break;
+                }
                     
                 case 1:
                 {
@@ -453,23 +452,17 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             break;
         }
             
-        case 3:
+        case RecoveryLogTypeExercise:
         {
             switch (indexPath.section) {
                     
                 case 0:
-                    
-                    if (indexPath.row == 2) {
-                        CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CommentCellIdentifier forIndexPath:indexPath];
-                        return cell;
-                    } else {
-                        BasicCell *cell = [tableView dequeueReusableCellWithIdentifier:BasicCellIdentifier forIndexPath:indexPath];
-                        [self configureTableView:tableView withBasicCell:cell atIndexPath:indexPath];
-                        return cell;
-                    }
-                    
+                {
+                    BasicCell *cell = [tableView dequeueReusableCellWithIdentifier:BasicCellIdentifier forIndexPath:indexPath];
+                    [self configureTableView:tableView withBasicCell:cell atIndexPath:indexPath];
+                    return cell;
                     break;
-                    
+                }
                 case 1:
                 {
                     ExerciseCell *cell = [tableView dequeueReusableCellWithIdentifier:ExerciseCellIndentifier forIndexPath:indexPath];
@@ -486,11 +479,25 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 }
 
+- (void)configureTableView:(UITableView *)tableView withDetectCell:(DetectCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 1:
+            if (!indexPath.row == 0) {
+                cell.detectType.textColor = [UIColor lightGrayColor];
+                cell.detectValue.textColor = [UIColor lightGrayColor];
+                cell.detectUnit.textColor = [UIColor lightGrayColor];
+            }
+            cell.detectType.text = self.trackerArray[4][indexPath.row][0];
+            cell.detectValue.text = self.trackerArray[4][indexPath.row][1];
+            cell.detectUnit.text = self.trackerArray[4][indexPath.row][2];
+            break;
+            
+    }
+}
+
 - (void)configureTableView:(UITableView *)tableView withMedicateCell:(MedicateCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    [cell addRightButtons];
-    [cell addLeftButtons];
-    cell.delegate = self;
     
     switch (indexPath.section) {
         case 1:
@@ -527,9 +534,6 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 - (void)configureTableView:(UITableView *)tableView withDietCell:(DietCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    [cell addRightButtons];
-    [cell addLeftButtons];
-    cell.delegate = self;
     
     switch (indexPath.section) {
         case 1:
@@ -550,9 +554,6 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 - (void)configureTableView:(UITableView *)tableView withExerciseCell:(ExerciseCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    [cell addRightButtons];
-    [cell addLeftButtons];
-    cell.delegate = self;
     
     switch (indexPath.section) {
         case 1:
@@ -576,76 +577,126 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 - (void)configureTableView:(UITableView *)tableView withBasicCell:(BasicCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *dateString = [NSString formattingDateString:self.recordLog.time From:@"yyyyMMddHHmmss" to:@"yyyy-MM-dd"];
+    NSString *timeString = [NSString formattingDateString:self.recordLog.time From:@"yyyyMMddHHmmss" to:@"HH:mm"];
+    
     switch (tableView.tag) {
             
-        case 0:
+        case RecoveryLogTypeDetect:
             switch (indexPath.row) {
                 case 0:
-                    cell.titleLabel.text = @"检测结果";
-                    cell.detailLabel.text = self.trackerArray[0];
+                    cell.title.text = NSLocalizedString(@"检测设备",nil);
+                    cell.detailText.text = NSLocalizedString(@"其他", nil);
                     break;
                 case 1:
-                    cell.titleLabel.text = @"检测设备";
-                    cell.detailLabel.text = self.trackerArray[1];
+                {
+                    cell.title.text = NSLocalizedString(@"检测日期",nil);
+                    if (dateString) {
+                        cell.detailText.text = dateString;
+                    }else{
+                        cell.detailText.placeholder = NSLocalizedString(@"选择日期", nil);
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    cell.title.text = NSLocalizedString(@"检测时间", nil);
+                    if (timeString) {
+                        cell.detailText.text = timeString;
+                    }else{
+                        cell.detailText.placeholder = NSLocalizedString(@"选择时间",nil);
+                    }
+                    break;
+                }
+                case 3:
+                    cell.title.text = NSLocalizedString(@"增加备注", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"可选", nil);
+                    cell.detailText.enabled = YES;
+                default:
+                    break;
+            }
+            break;
+        case RecoveryLogTypeDrug:
+            switch (indexPath.row) {
+                case 0:
+                    cell.title.text = NSLocalizedString(@"用药日期",nil);
+                    if (dateString) {
+                        cell.detailText.text = dateString;
+                    }else{
+                        cell.detailText.placeholder = NSLocalizedString(@"选择日期", nil);
+                    }
+                    break;
+                case 1:
+                    cell.title.text = NSLocalizedString(@"用药时间", nil);
+                    if (timeString) {
+                        cell.detailText.text = timeString;
+                    }else{
+                        cell.detailText.placeholder = NSLocalizedString(@"选择时间",nil);
+                    }
                     break;
                 case 2:
-                    cell.titleLabel.text = @"检测日期";
-                    cell.detailLabel.text = self.trackerArray[2];
+                    cell.title.text = NSLocalizedString(@"增加备注", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"可选", nil);
+                    cell.detailText.enabled = YES;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case RecoveryLogTypeDiet:
+            switch (indexPath.row) {
+                case 0:
+                    cell.title.text = NSLocalizedString(@"用药日期",nil);
+                    if (dateString) {
+                        cell.detailText.text = dateString;
+                    }else{
+                        cell.detailText.placeholder = NSLocalizedString(@"选择日期", nil);
+                    }
+                    break;
+                case 1:
+                    cell.title.text = NSLocalizedString(@"用药时间", nil);
+                    if (timeString) {
+                        cell.detailText.text = timeString;
+                    }else{
+                        cell.detailText.placeholder = NSLocalizedString(@"选择时间",nil);
+                    }
+                    break;
+                case 2:
+                    cell.title.text = NSLocalizedString(@"三餐情况", nil);
+                    cell.detailText.text = @"早餐";
                     break;
                 case 3:
-                    cell.titleLabel.text = @"检测时间";
-                    cell.detailLabel.text = self.trackerArray[3];
+                    cell.title.text = NSLocalizedString(@"增加备注", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"可选", nil);
+                    cell.detailText.enabled = YES;
                     break;
                 default:
                     break;
             }
             break;
-        case 1:
+        case RecoveryLogTypeExercise:
             switch (indexPath.row) {
                 case 0:
-                    cell.titleLabel.text = @"用药日期";
-                    cell.detailLabel.text = self.medicateArray[0];
+                    cell.title.text = NSLocalizedString(@"运动日期",nil);
+                    if (dateString) {
+                        cell.detailText.text = dateString;
+                    }else{
+                        cell.detailText.placeholder = NSLocalizedString(@"选择日期", nil);
+                    }
                     break;
                 case 1:
-                    cell.titleLabel.text = @"用药时间";
-                    cell.detailLabel.text = self.medicateArray[1];
-                    break;
-
-                default:
-                    break;
-            }
-            break;
-        case 2:
-            switch (indexPath.row) {
-                case 0:
-                    cell.titleLabel.text = @"进餐日期";
-                    cell.detailLabel.text = self.dietArray[0];
-                    break;
-                case 1:
-                    cell.titleLabel.text = @"进餐时间";
-                    cell.detailLabel.text = self.dietArray[1];
+                    cell.title.text = NSLocalizedString(@"开始时间", nil);
+                    if (timeString) {
+                        cell.detailText.text = timeString;
+                    }else{
+                        cell.detailText.placeholder = NSLocalizedString(@"选择时间",nil);
+                    }
                     break;
                 case 2:
-                    cell.titleLabel.text = @"三餐情况";
-                    cell.detailLabel.text = self.dietArray[2];
+                    cell.title.text = NSLocalizedString(@"增加备注", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"可选", nil);
+                    cell.detailText.enabled = YES;
                     break;
-                    
-                default:
-                    break;
-            }
-            break;
-        case 3:
-            switch (indexPath.row) {
-                case 0:
-                    cell.titleLabel.text = @"运动日期";
-                    cell.detailLabel.text = self.exerciseArray[0];
-                    break;
-                case 1:
-                    cell.titleLabel.text = @"开始时间";
-                    cell.detailLabel.text = self.exerciseArray[1];
-                    break;
-
-                    
                 default:
                     break;
             }
@@ -662,27 +713,37 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     self.tableView = tableView;
     
     switch (tableView.tag) {
-        case 0:
-            switch (indexPath.row) {
+        case RecoveryLogTypeDetect:
+            switch (indexPath.section) {
                 case 0:
-                    self.sheet = [[UIActionSheet alloc] initWithTitle:@"选择检测类型" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"血糖",@"糖化血红蛋白",nil];
-                    [self.sheet showInView:self.view];
+                    switch (indexPath.row) {
+                        case 0:
+                            self.sheet = [[UIActionSheet alloc] initWithTitle:@"选择检测设备" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"设备一",@"设备二",@"其他", nil];
+                            [self.sheet showInView:self.view];
+                            break;
+                        case 1:
+                            [self showDatePickerHUDWithMode:UIDatePickerModeDate];
+                            break;
+                        case 2:
+                            [self showDatePickerHUDWithMode:UIDatePickerModeTime];
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case 1:
-                    self.sheet = [[UIActionSheet alloc] initWithTitle:@"选择检测设备" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"设备一",@"设备二",@"其他", nil];
-                    [self.sheet showInView:self.view];
-                    break;
-                case 2:
-                    [self showDatePickerHUDWithMode:UIDatePickerModeDate];
-                    break;
-                case 3:
-                    [self showDatePickerHUDWithMode:UIDatePickerModeTime];
-                    break;
+                    if (indexPath.row == 0) {
+                        return;
+                    }
+                    [self showPickerViewHUD];
+                    [self.pickerView reloadAllComponents];
+                    
                 default:
                     break;
             }
+            
             break;
-        case 1:
+        case RecoveryLogTypeDrug:
             switch (indexPath.section) {
                 case 0:
                     switch (indexPath.row) {
@@ -711,7 +772,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             }
             break;
             
-        case 2:
+        case RecoveryLogTypeDiet:
             switch (indexPath.section) {
                 case 0:
                     switch (indexPath.row) {
@@ -742,7 +803,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             }
             break;
         
-        case 3:
+        case RecoveryLogTypeExercise:
             switch (indexPath.section) {
                 case 0:
                     switch (indexPath.row) {
@@ -770,85 +831,62 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     }
 }
 
-#pragma mark - SWTableViewDelegate
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (index) {
-        case 0:
-        {
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath.section == 0 || indexPath.row == 0) {
+        return NO;
+    }
+    return YES;
+}
 
-            if ([cell isKindOfClass:[MedicateCell class]]) {
-                switch (cellIndexPath.section) {
-                    case 1:
-                        if (cellIndexPath.row == 0) {
-                            [cell hideUtilityButtonsAnimated:YES];
-                        }else{
-                            [self.medicateArray[3] removeObjectAtIndex:cellIndexPath.row];
-                            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                        }
-                        break;
-                    case 2:
-                        if (cellIndexPath.row == 0) {
-                            return;
-                        }else{
-                            [self.medicateArray[4] removeObjectAtIndex:cellIndexPath.row];
-                            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                        }
-                        
-                    default:
-                        break;
-                }
-            } else if ([cell isKindOfClass:[DietCell class]]) {
-                switch (cellIndexPath.section) {
-                    case 1:
-                        if (cellIndexPath.row == 0) {
-                            [cell hideUtilityButtonsAnimated:YES];
-                        }else {
-                            [self.dietArray[4] removeObjectAtIndex:cellIndexPath.row];
-                            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                        }
-                        break;
-                        
-                    default:
-                        break;
-                }
-            } else if ([cell isKindOfClass:[ExerciseCell class]]){
-                switch (cellIndexPath.section) {
-                    case 1:
-                        if (cellIndexPath.row == 0) {
-                            [cell hideUtilityButtonsAnimated:YES];
-                        }else{
-                            [self.exerciseArray[3] removeObjectAtIndex:cellIndexPath.row];
-                            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                        }
-                        break;
-                        
-                    default:
-                        break;
-                }
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        if ([cell isKindOfClass:[DetectCell class]]) {
+            switch (indexPath.section) {
+                case 1:
+                    [self.trackerArray[4] removeObjectAtIndex:indexPath.row];
+                    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    break;
             }
-            
-            
-           
-
-            break;
+        }else if ([cell isKindOfClass:[MedicateCell class]]){
+            switch (indexPath.section) {
+                case 1:
+                    [self.medicateArray[3] removeObjectAtIndex:indexPath.row];
+                    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    break;
+                case 2:
+                    [self.medicateArray[4] removeObjectAtIndex:indexPath.row];
+                    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                default:
+                    break;
+            }
+        }else if ([cell isKindOfClass:[DietCell class]]) {
+            switch (indexPath.section) {
+                case 1:
+                    [self.dietArray[4] removeObjectAtIndex:indexPath.row];
+                    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                    break;
+                    
+                default:
+                    break;
+            }
+        } else if ([cell isKindOfClass:[ExerciseCell class]]){
+            switch (indexPath.section) {
+                case 1:
+                [self.exerciseArray[3] removeObjectAtIndex:indexPath.row];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                break;
+                    
+                default:
+                    break;
+            }
         }
     }
 }
 
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index
-{
-    switch (index) {
-        case 0:
-            [cell hideUtilityButtonsAnimated:YES];
-            break;
-            
-        default:
-            break;
-    }
-}
 
 
 #pragma mark - LogSectionHeaderViewDelegate
@@ -858,7 +896,24 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     self.tableView = headerView.tableView;
     
     switch (self.tableView.tag) {
-        case 1:
+        case RecoveryLogTypeDetect:
+            
+            switch (headerView.section) {
+                case 1:
+                {
+                    NSInteger insertRow = [self.trackerArray[4] count];
+                    NSIndexPath *insertIndexPath = [NSIndexPath indexPathForRow:insertRow inSection:headerView.section];
+                    [self.trackerArray[4] addObject:[@[@"选择类型",@"选择检测值",@"选择单位"] mutableCopy]];
+                    [self.tableView insertRowsAtIndexPaths:@[insertIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            break;
+
+        case RecoveryLogTypeDrug:
             switch (headerView.section) {
                 case 1:
                 {
@@ -881,7 +936,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 2:
+        case RecoveryLogTypeDiet:
             switch (headerView.section) {
                 case 1:
                 {
@@ -896,7 +951,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 3:
+        case RecoveryLogTypeExercise:
             switch (headerView.section) {
                 case 1:
                 {
@@ -952,8 +1007,20 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     NSInteger components = 0;
+
     switch (self.tableView.tag) {
-        case 1:
+        case RecoveryLogTypeDetect:
+            switch (self.selectedIndexPath.section) {
+                case 1:
+                    components = self.detectData.count;
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            break;
+        case RecoveryLogTypeDrug:
             switch (self.selectedIndexPath.section) {
                 case 1:
                 case 2:
@@ -964,7 +1031,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 2:
+        case RecoveryLogTypeDiet:
             switch (self.selectedIndexPath.section) {
                 case 1:
                     components = self.dietData.count;
@@ -974,7 +1041,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 3:
+        case RecoveryLogTypeExercise:
             switch (self.selectedIndexPath.section) {
                 case 1:
                     components = self.exerciseData.count;
@@ -994,7 +1061,17 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 {
     NSInteger rows = 0;
     switch (self.tableView.tag) {
-        case 1:
+        case RecoveryLogTypeDetect:
+            switch (self.selectedIndexPath.section) {
+                case 1:
+                    rows = [self.detectData[component] count];
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+        case RecoveryLogTypeDrug:
             switch (self.selectedIndexPath.section) {
                 case 1:
                     if (component == 0) {
@@ -1009,7 +1086,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 2:
+        case RecoveryLogTypeDiet:
             switch (self.selectedIndexPath.section) {
                 case 1:
                     rows = [self.dietData[component] count];
@@ -1019,7 +1096,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 3:
+        case RecoveryLogTypeExercise:
             switch (self.selectedIndexPath.section) {
                 case 1:
                     rows = [self.exerciseData[component] count];
@@ -1043,7 +1120,19 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     titleLabel.textAlignment = NSTextAlignmentCenter;
     
     switch (self.tableView.tag) {
-        case 1:
+            
+        case RecoveryLogTypeDetect:
+            switch (self.selectedIndexPath.section) {
+                case 1:
+                {
+                    titleLabel.text = self.detectData[component][row];
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        case RecoveryLogTypeDrug:
             switch (self.selectedIndexPath.section) {
                 case 1:
                 {
@@ -1067,7 +1156,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 2:
+        case RecoveryLogTypeDiet:
             switch (self.selectedIndexPath.section) {
                 case 1:
                 {
@@ -1078,7 +1167,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 3:
+        case RecoveryLogTypeExercise:
             switch (self.selectedIndexPath.section) {
                 case 1:
                 {
@@ -1108,7 +1197,19 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     switch (self.tableView.tag) {
-        case 1:
+        case RecoveryLogTypeDetect:
+            switch (self.selectedIndexPath.section) {
+                case 1:
+                {
+                    [self.trackerArray[4][self.selectedIndexPath.row] replaceObjectAtIndex:component withObject:self.detectData[component][row]];
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+            
+        case RecoveryLogTypeDrug:
             switch (self.selectedIndexPath.section) {
                 case 1:
                 {
@@ -1130,7 +1231,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             }
             break;
             
-        case 2:
+        case RecoveryLogTypeDiet:
             switch (self.selectedIndexPath.section) {
                 case 1:
                 {
@@ -1141,7 +1242,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 3:
+        case RecoveryLogTypeExercise:
             switch (self.selectedIndexPath.section) {
                 case 1:
                 {
@@ -1165,7 +1266,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (self.tableView.tag) {
-        case 0:
+        case RecoveryLogTypeDetect:
             switch (self.selectedIndexPath.section) {
                 case 0:
                     switch (self.selectedIndexPath.row) {
@@ -1185,7 +1286,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     break;
             }
             break;
-        case 2:
+        case RecoveryLogTypeDrug:
             switch (self.selectedIndexPath.section) {
                 case 0:
                     switch (self.selectedIndexPath.row) {
@@ -1230,25 +1331,25 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     NSString *dateString = [dateFormatter stringFromDate:date];
     
     switch (self.tableView.tag) {
-        case 0:
+        case RecoveryLogTypeDetect:
             
             [self.trackerArray replaceObjectAtIndex:self.selectedIndexPath.row withObject:dateString];
             [self.tableView reloadRowsAtIndexPaths:@[self.selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             
             break;
-        case 1:
+        case RecoveryLogTypeDrug:
             
             [self.medicateArray replaceObjectAtIndex:self.selectedIndexPath.row withObject:dateString];
             [self.tableView reloadRowsAtIndexPaths:@[self.selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             
             break;
-        case 2:
+        case RecoveryLogTypeDiet:
             
             [self.dietArray replaceObjectAtIndex:self.selectedIndexPath.row withObject:dateString];
             [self.tableView reloadRowsAtIndexPaths:@[self.selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             
             break;
-        case 3:
+        case RecoveryLogTypeExercise:
             
             [self.exerciseArray replaceObjectAtIndex:self.selectedIndexPath.row withObject:dateString];
             [self.tableView reloadRowsAtIndexPaths:@[self.selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

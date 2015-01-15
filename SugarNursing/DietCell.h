@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SWTableViewCell.h>
 
-@interface DietCell : SWTableViewCell
+@interface DietCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *foodNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dosageLabel;

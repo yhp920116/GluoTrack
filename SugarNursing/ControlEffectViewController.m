@@ -47,7 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureFetchController];
-    [self configureTableViewFooterView];
+    [self configureNoDataView];
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
 }
 
@@ -61,7 +61,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self configureTableViewFooterView];
+    [self configureNoDataView];
     [self.tableView reloadData];
 }
 
@@ -145,12 +145,12 @@
     }];
 }
 
-- (void)configureTableViewFooterView
+- (void)configureNoDataView
 {
     if (self.fetchController.fetchedObjects.count > 0) {
         self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     }else{
-        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataView" owner:self options:nil][0];
+        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
     }
 }
 

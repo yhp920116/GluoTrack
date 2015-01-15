@@ -66,28 +66,62 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 
     self.selectedDate = [NSDate date];
     self.logTypeArray = [@[@"detect",@"exercise",@"drug",@"diet"] mutableCopy];
-    [self configureFetchController];
-    self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
-    self.refreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
-    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-    
+    [self configureFetchController:YES];
+    [self configureTableView];
+    [self configureNoDataView];
     [self.refreshView startLoadingAndExpand:YES animated:YES];
 }
 
-- (void)configureFetchController
+- (void)configureFetchController:(BOOL)refresh
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMdd"];
     NSString *dateString = [dateFormatter stringFromDate:self.selectedDate];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@ && logType in %@",[NSString userID],[NSString linkmanID],dateString,self.logTypeArray];
+    NSPredicate *predicate;
+    if (refresh) {
+        predicate = [NSPredicate predicateWithFormat:
+                                  @"userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@ && logType in %@",
+                                  [NSString userID],
+                                  [NSString linkmanID],
+                                  dateString,
+                                  @[@"detect",@"exercise",@"drug",@"diet"]];
+    }else{
+        predicate = [NSPredicate predicateWithFormat:
+                                @"userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@ && logType in %@",
+                                [NSString userID],
+                                [NSString linkmanID],
+                                dateString,
+                                self.logTypeArray];
+    }
+    
     self.fetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:NO withPredicate:predicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
+    
+    [self.tableView reloadData];
+}
+
+- (void)configureTableView
+{
+    self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
+    self.refreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+}
+
+- (void)configureNoDataView
+{
+    if (self.fetchController.fetchedObjects.count > 0) {
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    }else{
+        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
+    }
 }
 
 - (void)getRecoveryLog
 {
+    [self configureFetchController:YES];
+    
     hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:hud];
     hud.mode = MBProgressHUDModeText;
@@ -154,8 +188,12 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
         [hud show:YES];
         [hud hide:YES afterDelay:HUD_TIME_DELAY];
         
+        // 无论是请求成功或者失败，都要再重新fetch一次，以过滤用户对日期和选项的筛选
+        [self configureFetchController:NO];
+        [self configureNoDataView];
+
         [self.refreshView finishLoading];
-        
+
     }];
 }
 
@@ -163,7 +201,8 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView reloadData];
+//    [self configureNoDataView];
+//    [self.tableView reloadData];
 }
 
 #pragma mark - refreshViewDelegate
@@ -340,8 +379,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
         }
         case 101:
         {
-            [self configureFetchController];
-            [self.tableView reloadData];
+            [self configureFetchController:NO];
             break;
         }
         default:

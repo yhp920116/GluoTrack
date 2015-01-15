@@ -10,6 +10,9 @@
 		1847DA780B1F9C304A08AC6C /* libPods-SugarNursing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD6636C7BFC777050BC1B07 /* libPods-SugarNursing.a */; };
 		37014D9C1A63D4FB0048A2D8 /* NSString+Ret_msg.m in Sources */ = {isa = PBXBuildFile; fileRef = 37014D9B1A63D4FB0048A2D8 /* NSString+Ret_msg.m */; };
 		37014DCE1A6431CC0048A2D8 /* ret_code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37014DD01A6431CC0048A2D8 /* ret_code.plist */; };
+		37074C901A6614BE00D65EFF /* NoDataTips.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37074C921A6614BE00D65EFF /* NoDataTips.xib */; };
+		37074C9A1A662C7500D65EFF /* DetectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37074C991A662C7500D65EFF /* DetectCell.xib */; };
+		37074C9D1A662D7000D65EFF /* DetectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37074C9C1A662D7000D65EFF /* DetectCell.m */; };
 		371628BC1A15DD4C0043EED2 /* UIViewController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 371628BB1A15DD4C0043EED2 /* UIViewController+Notifications.m */; };
 		3716F02A1A13448800BE3841 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3716F0291A13448800BE3841 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3718DAF21A2438DC008B88D7 /* MedicalHistoryDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3718DAF11A2438DC008B88D7 /* MedicalHistoryDetailCell.m */; };
@@ -44,7 +47,6 @@
 		373904B01A1F652000A7B30F /* LinesLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 373904AF1A1F652000A7B30F /* LinesLabel.m */; };
 		373D77EF1A5A84BA008819B2 /* ParseData.m in Sources */ = {isa = PBXBuildFile; fileRef = 373D77EE1A5A84BA008819B2 /* ParseData.m */; };
 		373D77F21A5A8CC4008819B2 /* UserID.m in Sources */ = {isa = PBXBuildFile; fileRef = 373D77F11A5A8CC4008819B2 /* UserID.m */; };
-		373E90571A651369007A168B /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373E90591A651369007A168B /* NoDataView.xib */; };
 		3744EFD01A1C45E200D5C204 /* NSString+Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 3744EFCF1A1C45E200D5C204 /* NSString+Attribute.m */; };
 		3744EFD91A1C891700D5C204 /* TimelineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3744EFD81A1C891700D5C204 /* TimelineTableView.m */; };
 		37453B4C1A426ECF006D2CD8 /* RebindMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37453B4B1A426ECF006D2CD8 /* RebindMobileViewController.m */; };
@@ -83,12 +85,6 @@
 		379AE1291A4ECC5000478332 /* NSString+UserCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 379AE1281A4ECC5000478332 /* NSString+UserCommon.m */; };
 		379C89E11A2D709600F33BAE /* BasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379C89E01A2D709600F33BAE /* BasicCell.xib */; };
 		379C89E41A2D711D00F33BAE /* BasicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 379C89E31A2D711D00F33BAE /* BasicCell.m */; };
-		379C89EA1A2D76DA00F33BAE /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 379C89E91A2D76DA00F33BAE /* CommentCell.m */; };
-		379C89ED1A2D773900F33BAE /* SensationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 379C89EC1A2D773900F33BAE /* SensationCell.m */; };
-		379C89F01A2D790F00F33BAE /* FieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 379C89EF1A2D790F00F33BAE /* FieldCell.m */; };
-		379C89F21A2D8F1100F33BAE /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379C89F11A2D8F1100F33BAE /* CommentCell.xib */; };
-		379C89F41A2D8F3A00F33BAE /* SensationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379C89F31A2D8F3A00F33BAE /* SensationCell.xib */; };
-		379C89F61A2D8F7000F33BAE /* FieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379C89F51A2D8F7000F33BAE /* FieldCell.xib */; };
 		379C89F81A2D9BFA00F33BAE /* exercise.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379C89F71A2D9BFA00F33BAE /* exercise.xib */; };
 		379C89FA1A2DA60A00F33BAE /* LogSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379C89F91A2DA60A00F33BAE /* LogSectionHeaderView.xib */; };
 		379C89FF1A2DB0C600F33BAE /* MedicateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379C89FE1A2DB0C600F33BAE /* MedicateCell.xib */; };
@@ -109,7 +105,6 @@
 		37A945661A3845D800E78322 /* RecoveryLogHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A945651A3845D800E78322 /* RecoveryLogHeaderView.m */; };
 		37AC34C01A0B14AE0037029A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AC34BF1A0B14AE0037029A /* LoginViewController.m */; };
 		37AC34C31A0B52420037029A /* AppDelegate+UserLogInOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AC34C21A0B52420037029A /* AppDelegate+UserLogInOut.m */; };
-		37AD102C1A314E1400CF2E9C /* SWTableViewCell+RigthButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AD102B1A314E1400CF2E9C /* SWTableViewCell+RigthButtons.m */; };
 		37AEC7A21A52A8430011B53F /* NSDictionary+Formatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AEC7A11A52A8430011B53F /* NSDictionary+Formatting.m */; };
 		37B00B501A5CCDBA00147738 /* MedicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B00B4F1A5CCDBA00147738 /* MedicalRecord.m */; };
 		37B038881A41841B00AFEA2D /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B038871A41841B00AFEA2D /* NSString+MD5.m */; };
@@ -195,6 +190,12 @@
 		37014DCF1A6431CC0048A2D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/ret_code.plist; sourceTree = "<group>"; };
 		37014DD31A64320D0048A2D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/ret_code.plist"; sourceTree = "<group>"; };
 		37014DD41A64320E0048A2D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/ret_code.plist"; sourceTree = "<group>"; };
+		37074C911A6614BE00D65EFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NoDataTips.xib; sourceTree = "<group>"; };
+		37074C941A6614CB00D65EFF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NoDataTips.strings"; sourceTree = "<group>"; };
+		37074C961A6614CC00D65EFF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/NoDataTips.strings"; sourceTree = "<group>"; };
+		37074C991A662C7500D65EFF /* DetectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetectCell.xib; sourceTree = "<group>"; };
+		37074C9B1A662D7000D65EFF /* DetectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectCell.h; sourceTree = "<group>"; };
+		37074C9C1A662D7000D65EFF /* DetectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectCell.m; sourceTree = "<group>"; };
 		371628BA1A15DD4C0043EED2 /* UIViewController+Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Notifications.h"; sourceTree = "<group>"; };
 		371628BB1A15DD4C0043EED2 /* UIViewController+Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Notifications.m"; sourceTree = "<group>"; };
 		3716F0291A13448800BE3841 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -263,9 +264,6 @@
 		373D77EE1A5A84BA008819B2 /* ParseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseData.m; sourceTree = "<group>"; };
 		373D77F01A5A8CC4008819B2 /* UserID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserID.h; sourceTree = "<group>"; };
 		373D77F11A5A8CC4008819B2 /* UserID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserID.m; sourceTree = "<group>"; };
-		373E90581A651369007A168B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NoDataView.xib; sourceTree = "<group>"; };
-		373E90611A65143E007A168B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NoDataView.strings"; sourceTree = "<group>"; };
-		373E90631A65143F007A168B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/NoDataView.strings"; sourceTree = "<group>"; };
 		3744EFCE1A1C45E200D5C204 /* NSString+Attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Attribute.h"; sourceTree = "<group>"; };
 		3744EFCF1A1C45E200D5C204 /* NSString+Attribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Attribute.m"; sourceTree = "<group>"; };
 		3744EFD71A1C891700D5C204 /* TimelineTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableView.h; sourceTree = "<group>"; };
@@ -333,15 +331,6 @@
 		379C89E01A2D709600F33BAE /* BasicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCell.xib; sourceTree = "<group>"; };
 		379C89E21A2D711D00F33BAE /* BasicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicCell.h; sourceTree = "<group>"; };
 		379C89E31A2D711D00F33BAE /* BasicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicCell.m; sourceTree = "<group>"; };
-		379C89E81A2D76DA00F33BAE /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
-		379C89E91A2D76DA00F33BAE /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
-		379C89EB1A2D773900F33BAE /* SensationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensationCell.h; sourceTree = "<group>"; };
-		379C89EC1A2D773900F33BAE /* SensationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensationCell.m; sourceTree = "<group>"; };
-		379C89EE1A2D790F00F33BAE /* FieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldCell.h; sourceTree = "<group>"; };
-		379C89EF1A2D790F00F33BAE /* FieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldCell.m; sourceTree = "<group>"; };
-		379C89F11A2D8F1100F33BAE /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
-		379C89F31A2D8F3A00F33BAE /* SensationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SensationCell.xib; sourceTree = "<group>"; };
-		379C89F51A2D8F7000F33BAE /* FieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FieldCell.xib; sourceTree = "<group>"; };
 		379C89F71A2D9BFA00F33BAE /* exercise.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = exercise.xib; sourceTree = "<group>"; };
 		379C89F91A2DA60A00F33BAE /* LogSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogSectionHeaderView.xib; sourceTree = "<group>"; };
 		379C89FE1A2DB0C600F33BAE /* MedicateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MedicateCell.xib; sourceTree = "<group>"; };
@@ -376,8 +365,6 @@
 		37AC34BF1A0B14AE0037029A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		37AC34C11A0B52420037029A /* AppDelegate+UserLogInOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+UserLogInOut.h"; sourceTree = "<group>"; };
 		37AC34C21A0B52420037029A /* AppDelegate+UserLogInOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+UserLogInOut.m"; sourceTree = "<group>"; };
-		37AD102A1A314E1400CF2E9C /* SWTableViewCell+RigthButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SWTableViewCell+RigthButtons.h"; sourceTree = "<group>"; };
-		37AD102B1A314E1400CF2E9C /* SWTableViewCell+RigthButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SWTableViewCell+RigthButtons.m"; sourceTree = "<group>"; };
 		37AEC7A01A52A8430011B53F /* NSDictionary+Formatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Formatting.h"; sourceTree = "<group>"; };
 		37AEC7A11A52A8430011B53F /* NSDictionary+Formatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Formatting.m"; sourceTree = "<group>"; };
 		37B00B4E1A5CCDBA00147738 /* MedicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicalRecord.h; sourceTree = "<group>"; };
@@ -581,10 +568,8 @@
 				372B7D881A63BEED0006C67A /* drug.xib */,
 				379C89F71A2D9BFA00F33BAE /* exercise.xib */,
 				379C89E01A2D709600F33BAE /* BasicCell.xib */,
-				379C89F11A2D8F1100F33BAE /* CommentCell.xib */,
-				379C89F31A2D8F3A00F33BAE /* SensationCell.xib */,
-				379C89F51A2D8F7000F33BAE /* FieldCell.xib */,
 				379C89F91A2DA60A00F33BAE /* LogSectionHeaderView.xib */,
+				37074C991A662C7500D65EFF /* DetectCell.xib */,
 				379C89FE1A2DB0C600F33BAE /* MedicateCell.xib */,
 				379C8A061A2DC39100F33BAE /* DietCell.xib */,
 				379C8A0B1A2DC5B000F33BAE /* ExerciseCell.xib */,
@@ -594,7 +579,7 @@
 				379F202A1A354C260026BF95 /* ControlSectionHeaderView.xib */,
 				379F202F1A3555FC0026BF95 /* ControlPlanCell.xib */,
 				37C6472C1A612D4600BC2E78 /* TipsCell.xib */,
-				373E90591A651369007A168B /* NoDataView.xib */,
+				37074C921A6614BE00D65EFF /* NoDataTips.xib */,
 			);
 			name = Xib;
 			sourceTree = "<group>";
@@ -951,12 +936,8 @@
 				37CA3BA41A263C54009A2403 /* ServiceCell.m */,
 				379C89E21A2D711D00F33BAE /* BasicCell.h */,
 				379C89E31A2D711D00F33BAE /* BasicCell.m */,
-				379C89E81A2D76DA00F33BAE /* CommentCell.h */,
-				379C89E91A2D76DA00F33BAE /* CommentCell.m */,
-				379C89EB1A2D773900F33BAE /* SensationCell.h */,
-				379C89EC1A2D773900F33BAE /* SensationCell.m */,
-				379C89EE1A2D790F00F33BAE /* FieldCell.h */,
-				379C89EF1A2D790F00F33BAE /* FieldCell.m */,
+				37074C9B1A662D7000D65EFF /* DetectCell.h */,
+				37074C9C1A662D7000D65EFF /* DetectCell.m */,
 				379C8A001A2DB1E300F33BAE /* MedicateCell.h */,
 				379C8A011A2DB1E300F33BAE /* MedicateCell.m */,
 				379C8A081A2DC47D00F33BAE /* DietCell.h */,
@@ -965,8 +946,6 @@
 				379C8A0E1A2DC63F00F33BAE /* ExerciseCell.m */,
 				379F20311A355A750026BF95 /* ControlPlanCell.h */,
 				379F20321A355A750026BF95 /* ControlPlanCell.m */,
-				37AD102A1A314E1400CF2E9C /* SWTableViewCell+RigthButtons.h */,
-				37AD102B1A314E1400CF2E9C /* SWTableViewCell+RigthButtons.m */,
 				37C6472E1A612DAE00BC2E78 /* TipsCell.h */,
 				37C6472F1A612DAE00BC2E78 /* TipsCell.m */,
 			);
@@ -1224,25 +1203,25 @@
 			files = (
 				3786359D1A47C8CF00922539 /* Main.storyboard in Resources */,
 				3786359E1A47C8CF00922539 /* MemberCenter.storyboard in Resources */,
+				37074C901A6614BE00D65EFF /* NoDataTips.xib in Resources */,
 				37014DCE1A6431CC0048A2D8 /* ret_code.plist in Resources */,
 				3786359F1A47C8CF00922539 /* TestTracker.storyboard in Resources */,
 				378635A01A47C8CF00922539 /* RecoveryLog.storyboard in Resources */,
 				378635A11A47C8CF00922539 /* ControlEffect.storyboard in Resources */,
 				378635A21A47C8CF00922539 /* MyRemind.storyboard in Resources */,
 				378635A31A47C8CF00922539 /* Advise.storyboard in Resources */,
-				373E90571A651369007A168B /* NoDataView.xib in Resources */,
 				378635A41A47C8CF00922539 /* MyService.storyboard in Resources */,
 				378635A51A47C8CF00922539 /* Login.storyboard in Resources */,
 				379C89E11A2D709600F33BAE /* BasicCell.xib in Resources */,
 				379F20271A353C470026BF95 /* Remind.xib in Resources */,
 				372B7D891A63BEED0006C67A /* drug.xib in Resources */,
 				379F20301A3555FC0026BF95 /* ControlPlanCell.xib in Resources */,
+				37074C9A1A662C7500D65EFF /* DetectCell.xib in Resources */,
 				379C89F81A2D9BFA00F33BAE /* exercise.xib in Resources */,
 				37B187BF1A2C431F00A2D63F /* detect.xib in Resources */,
 				379C8A071A2DC39100F33BAE /* DietCell.xib in Resources */,
 				379F202B1A354C260026BF95 /* ControlSectionHeaderView.xib in Resources */,
 				379C89FF1A2DB0C600F33BAE /* MedicateCell.xib in Resources */,
-				379C89F41A2D8F3A00F33BAE /* SensationCell.xib in Resources */,
 				37C6472D1A612D4600BC2E78 /* TipsCell.xib in Resources */,
 				37E4AC6E1A2EF0FB00779807 /* LaunchScreen.xib in Resources */,
 				3749B57F1A0A11700031D00C /* Localizable.strings in Resources */,
@@ -1252,8 +1231,6 @@
 				37FF58801A4096CA00F3564E /* country.plist in Resources */,
 				379C89FA1A2DA60A00F33BAE /* LogSectionHeaderView.xib in Resources */,
 				379C8A0C1A2DC5B000F33BAE /* ExerciseCell.xib in Resources */,
-				379C89F61A2D8F7000F33BAE /* FieldCell.xib in Resources */,
-				379C89F21A2D8F1100F33BAE /* CommentCell.xib in Resources */,
 				3749B5261A09C50D0031D00C /* Images.xcassets in Resources */,
 				37B187C31A2C74C300A2D63F /* diet.xib in Resources */,
 			);
@@ -1328,14 +1305,13 @@
 				3719039D1A28236800A9657B /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				3737B1781A25F01B00F0D97B /* AdviseCell.m in Sources */,
 				37F508131A34A4A300879605 /* ThumbnailImageView.m in Sources */,
+				37074C9D1A662D7000D65EFF /* DetectCell.m in Sources */,
 				37EA29141A21E9B600B43CD0 /* RemindCell.m in Sources */,
 				3734E98C1A59360A003DD247 /* RecordPhoto.m in Sources */,
 				37B183AD1A4BC128001932AE /* CoreDataStack.m in Sources */,
 				37FC6BD71A57E83E00F4A9AB /* UserSetting.m in Sources */,
-				379C89ED1A2D773900F33BAE /* SensationCell.m in Sources */,
 				373904AA1A1F40EC00A7B30F /* EvaluateCell.m in Sources */,
 				37FC6BC21A57E63800F4A9AB /* User.m in Sources */,
-				37AD102C1A314E1400CF2E9C /* SWTableViewCell+RigthButtons.m in Sources */,
 				3756DC551A1D92A200879398 /* RecoveryLogDetailViewController.m in Sources */,
 				3737B16F1A25C7B600F0D97B /* PatientDataViewController.m in Sources */,
 				37278D7F1A5F814A008D21EE /* UserInfo.m in Sources */,
@@ -1352,11 +1328,9 @@
 				37EEB6A71A64C532008B0892 /* ControlEffect.m in Sources */,
 				373904A71A1F345900A7B30F /* ControlEffectViewController.m in Sources */,
 				37EA290F1A21C7B900B43CD0 /* RemindViewController.m in Sources */,
-				379C89EA1A2D76DA00F33BAE /* CommentCell.m in Sources */,
 				37014D9C1A63D4FB0048A2D8 /* NSString+Ret_msg.m in Sources */,
 				37EDEA141A0A79C7009EB54D /* UIStoryboard+Storyboards.m in Sources */,
 				37278D821A5F85A7008D21EE /* Advise.m in Sources */,
-				379C89F01A2D790F00F33BAE /* FieldCell.m in Sources */,
 				3737B1751A25EDAA00F0D97B /* AdviseViewController.m in Sources */,
 				37EA29171A21F5E600B43CD0 /* RemindDetailViewController.m in Sources */,
 				37EEB6A41A64C531008B0892 /* EffectList.m in Sources */,
@@ -1460,14 +1434,14 @@
 			name = ret_code.plist;
 			sourceTree = "<group>";
 		};
-		373E90591A651369007A168B /* NoDataView.xib */ = {
+		37074C921A6614BE00D65EFF /* NoDataTips.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				373E90581A651369007A168B /* Base */,
-				373E90611A65143E007A168B /* zh-Hans */,
-				373E90631A65143F007A168B /* zh-Hant */,
+				37074C911A6614BE00D65EFF /* Base */,
+				37074C941A6614CB00D65EFF /* zh-Hans */,
+				37074C961A6614CC00D65EFF /* zh-Hant */,
 			);
-			name = NoDataView.xib;
+			name = NoDataTips.xib;
 			sourceTree = "<group>";
 		};
 		3749B5811A0A11700031D00C /* Localizable.strings */ = {
