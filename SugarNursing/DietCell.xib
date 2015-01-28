@@ -14,57 +14,68 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HIw-rp-wCb" id="xsY-8Q-G1Q">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiY-Jd-Jxe">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MI1-Yr-z9n">
                         <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGd-kv-HUz" customClass="CustomLabel">
-                                <rect key="frame" x="8" y="0.0" width="96" height="43"/>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="KuN-X8-jqb" customClass="LogTextField">
+                                <rect key="frame" x="0.0" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQC-ao-XfT" customClass="CustomLabel">
-                                <rect key="frame" x="104" y="0.0" width="96" height="43"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Po6-Pg-ZwG" customClass="LogTextField">
+                                <rect key="frame" x="73" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x5L-hU-lGE" customClass="CustomLabel">
-                                <rect key="frame" x="200" y="0.0" width="96" height="43"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fmg-ij-97z" customClass="LogTextField">
+                                <rect key="frame" x="146" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="8yD-aR-fa1" customClass="LogTextField">
+                                <rect key="frame" x="219" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="iGd-kv-HUz" firstAttribute="width" secondItem="hiY-Jd-Jxe" secondAttribute="width" multiplier="0.33" id="0NM-ZD-a7x"/>
-                            <constraint firstItem="x5L-hU-lGE" firstAttribute="leading" secondItem="OQC-ao-XfT" secondAttribute="trailing" id="3Sd-fj-MWK"/>
-                            <constraint firstItem="OQC-ao-XfT" firstAttribute="width" secondItem="x5L-hU-lGE" secondAttribute="width" id="63j-GP-oQj"/>
-                            <constraint firstItem="iGd-kv-HUz" firstAttribute="leading" secondItem="hiY-Jd-Jxe" secondAttribute="leading" constant="8" id="9GS-Jk-FBU"/>
-                            <constraint firstItem="OQC-ao-XfT" firstAttribute="height" secondItem="iGd-kv-HUz" secondAttribute="height" id="H3r-RS-rt8"/>
-                            <constraint firstItem="OQC-ao-XfT" firstAttribute="height" secondItem="x5L-hU-lGE" secondAttribute="height" id="NSu-2m-eVp"/>
-                            <constraint firstItem="iGd-kv-HUz" firstAttribute="height" secondItem="hiY-Jd-Jxe" secondAttribute="height" id="OOV-e0-Gxl"/>
-                            <constraint firstItem="OQC-ao-XfT" firstAttribute="leading" secondItem="iGd-kv-HUz" secondAttribute="trailing" id="cJa-uz-Czc"/>
-                            <constraint firstAttribute="centerY" secondItem="iGd-kv-HUz" secondAttribute="centerY" id="g1k-Cf-2bC"/>
-                            <constraint firstAttribute="centerY" secondItem="x5L-hU-lGE" secondAttribute="centerY" id="rox-d3-j3i"/>
-                            <constraint firstAttribute="centerY" secondItem="OQC-ao-XfT" secondAttribute="centerY" id="wF0-RI-IoV"/>
-                            <constraint firstItem="OQC-ao-XfT" firstAttribute="width" secondItem="iGd-kv-HUz" secondAttribute="width" id="xPg-sJ-56y"/>
+                            <constraint firstItem="8yD-aR-fa1" firstAttribute="top" secondItem="MI1-Yr-z9n" secondAttribute="top" id="0Jh-2j-VQ8"/>
+                            <constraint firstItem="fmg-ij-97z" firstAttribute="top" secondItem="MI1-Yr-z9n" secondAttribute="top" id="12a-zZ-Mzg"/>
+                            <constraint firstAttribute="bottom" secondItem="Po6-Pg-ZwG" secondAttribute="bottom" id="88c-2A-6VF"/>
+                            <constraint firstItem="Po6-Pg-ZwG" firstAttribute="top" secondItem="MI1-Yr-z9n" secondAttribute="top" id="8iz-Wg-ecN"/>
+                            <constraint firstItem="Po6-Pg-ZwG" firstAttribute="width" secondItem="KuN-X8-jqb" secondAttribute="width" id="9sV-D1-ihq"/>
+                            <constraint firstItem="Po6-Pg-ZwG" firstAttribute="width" secondItem="fmg-ij-97z" secondAttribute="width" id="Dha-fl-jBs"/>
+                            <constraint firstAttribute="bottom" secondItem="fmg-ij-97z" secondAttribute="bottom" id="HPN-UQ-Gyo"/>
+                            <constraint firstAttribute="bottom" secondItem="8yD-aR-fa1" secondAttribute="bottom" id="HXC-KI-85P"/>
+                            <constraint firstItem="fmg-ij-97z" firstAttribute="leading" secondItem="Po6-Pg-ZwG" secondAttribute="trailing" id="IvF-bF-MJT"/>
+                            <constraint firstItem="8yD-aR-fa1" firstAttribute="leading" secondItem="fmg-ij-97z" secondAttribute="trailing" id="KYz-N2-kX2"/>
+                            <constraint firstItem="8yD-aR-fa1" firstAttribute="width" secondItem="fmg-ij-97z" secondAttribute="width" id="WKl-lG-gj3"/>
+                            <constraint firstItem="Po6-Pg-ZwG" firstAttribute="leading" secondItem="KuN-X8-jqb" secondAttribute="trailing" id="dw8-XQ-Wva"/>
+                            <constraint firstItem="KuN-X8-jqb" firstAttribute="top" secondItem="MI1-Yr-z9n" secondAttribute="top" id="mUJ-RP-hYs"/>
+                            <constraint firstAttribute="bottom" secondItem="KuN-X8-jqb" secondAttribute="bottom" id="v7Y-1A-VmT"/>
+                            <constraint firstItem="KuN-X8-jqb" firstAttribute="width" secondItem="MI1-Yr-z9n" secondAttribute="width" multiplier="0.25" id="z3m-aM-ttf"/>
+                            <constraint firstItem="KuN-X8-jqb" firstAttribute="leading" secondItem="MI1-Yr-z9n" secondAttribute="leading" id="zp0-nB-Vb6"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="hiY-Jd-Jxe" secondAttribute="bottom" id="5QB-9D-RN8"/>
-                    <constraint firstItem="hiY-Jd-Jxe" firstAttribute="leading" secondItem="xsY-8Q-G1Q" secondAttribute="leading" constant="15" id="Kg7-xr-yHe"/>
-                    <constraint firstItem="hiY-Jd-Jxe" firstAttribute="top" secondItem="xsY-8Q-G1Q" secondAttribute="top" id="TKm-1D-hxm"/>
-                    <constraint firstAttribute="trailing" secondItem="hiY-Jd-Jxe" secondAttribute="trailing" constant="15" id="vkC-OI-Ojd"/>
+                    <constraint firstItem="MI1-Yr-z9n" firstAttribute="leading" secondItem="xsY-8Q-G1Q" secondAttribute="leading" constant="15" id="2gs-j2-y5f"/>
+                    <constraint firstItem="MI1-Yr-z9n" firstAttribute="top" secondItem="xsY-8Q-G1Q" secondAttribute="top" id="CPs-u2-J2y"/>
+                    <constraint firstAttribute="bottom" secondItem="MI1-Yr-z9n" secondAttribute="bottom" id="b1Y-x1-kiJ"/>
+                    <constraint firstAttribute="trailing" secondItem="MI1-Yr-z9n" secondAttribute="trailing" constant="15" id="zqo-0E-ShF"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
             <connections>
-                <outlet property="dosageLabel" destination="OQC-ao-XfT" id="Eo3-K6-V00"/>
-                <outlet property="foodNameLabel" destination="iGd-kv-HUz" id="yo8-oV-eNX"/>
-                <outlet property="unitsLabel" destination="x5L-hU-lGE" id="kmZ-Vr-cZF"/>
+                <outlet property="calorie" destination="8yD-aR-fa1" id="FJt-ht-fFw"/>
+                <outlet property="food" destination="KuN-X8-jqb" id="79m-ra-auI"/>
+                <outlet property="unit" destination="fmg-ij-97z" id="3qm-YR-Kfa"/>
+                <outlet property="weight" destination="Po6-Pg-ZwG" id="0ig-vI-fWD"/>
             </connections>
             <point key="canvasLocation" x="261" y="265"/>
         </tableViewCell>

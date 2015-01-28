@@ -14,7 +14,7 @@
 {
     self.opacity = 1.0;
     self.color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-    self.cornerRadius = 10.0;
+    self.cornerRadius = 5.0;
     self.dimBackground = YES;
     self.margin = 20;
     self.activityIndicatorColor = [UIColor darkGrayColor];

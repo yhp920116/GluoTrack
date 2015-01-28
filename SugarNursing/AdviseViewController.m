@@ -12,7 +12,6 @@
 #import "UtilsMacro.h"
 
 @interface AdviseViewController ()<UITableViewDataSource,UITableViewDelegate,SSPullToRefreshViewDelegate,NSFetchedResultsControllerDelegate>{
-    MBProgressHUD *hud;
 }
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchController;
@@ -62,10 +61,6 @@
 
 - (void)getDoctorSuggestions
 {
-    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:hud];
-    hud.mode = MBProgressHUDModeText;
-    
     NSDictionary *parameters = @{@"method":@"getDoctorSuggests",
                                  @"sign":@"sign",
                                  @"sessionId":[NSString sessionID],
@@ -106,23 +101,8 @@
                 
                 [[CoreDataStack sharedCoreDataStack] saveContext];
                 
-                hud.labelText = NSLocalizedString(@"Data Updated", nil);
-                [hud show:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
-                
-            }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
-                [hud show:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
-            
         }
-        else{
-            hud.labelText = [error localizedDescription];
-            [hud show:YES];
-            [hud hide:YES afterDelay:HUD_TIME_DELAY];
-        }
-        
         [self.pullToRefreshView finishLoading];
     }];
 }

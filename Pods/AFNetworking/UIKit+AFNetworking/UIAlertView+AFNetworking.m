@@ -40,10 +40,10 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
             *message = error.localizedFailureReason;
         }
     } else if (error.localizedDescription) {
-        *title = NSLocalizedStringFromTable(@"Error", @"AFNetworking", @"Fallback Error Description");
+        *title = NSLocalizedStringFromTable(@"Error", @"Localizable", @"Fallback Error Description");
         *message = error.localizedDescription;
     } else {
-        *title = NSLocalizedStringFromTable(@"Error", @"AFNetworking", @"Fallback Error Description");
+        *title = NSLocalizedStringFromTable(@"Error", @"Localizable", @"Fallback Error Description");
         *message = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%@ Error: %ld", @"AFNetworking", @"Fallback Error Failure Reason Format"), error.domain, (long)error.code];
     }
 }
@@ -54,7 +54,7 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
 + (void)showAlertViewForTaskWithErrorOnCompletion:(NSURLSessionTask *)task
                                          delegate:(id)delegate
 {
-    [self showAlertViewForTaskWithErrorOnCompletion:task delegate:delegate cancelButtonTitle:NSLocalizedStringFromTable(@"Dismiss", @"AFNetworking", @"UIAlertView Cancel Button Title") otherButtonTitles:nil, nil];
+    [self showAlertViewForTaskWithErrorOnCompletion:task delegate:delegate cancelButtonTitle:NSLocalizedStringFromTable(@"Dismiss", @"Localizable", @"UIAlertView Cancel Button Title") otherButtonTitles:nil, nil];
 }
 
 + (void)showAlertViewForTaskWithErrorOnCompletion:(NSURLSessionTask *)task
@@ -82,7 +82,7 @@ static void AFGetAlertViewTitleAndMessageFromError(NSError *error, NSString * __
 + (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFURLConnectionOperation *)operation
                                                      delegate:(id)delegate
 {
-    [self showAlertViewForRequestOperationWithErrorOnCompletion:operation delegate:delegate cancelButtonTitle:NSLocalizedStringFromTable(@"Dismiss", @"AFNetworking", @"UIAlert View Cancel Button Title") otherButtonTitles:nil, nil];
+    [self showAlertViewForRequestOperationWithErrorOnCompletion:operation delegate:delegate cancelButtonTitle:NSLocalizedStringFromTable(@"Dismiss", @"Localizable", @"UIAlert View Cancel Button Title") otherButtonTitles:nil, nil];
 }
 
 + (void)showAlertViewForRequestOperationWithErrorOnCompletion:(AFURLConnectionOperation *)operation

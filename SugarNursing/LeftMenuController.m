@@ -115,6 +115,8 @@
                 
                 [userInfo updateCoreDataForData:responseData withKeyPath:nil];
                 
+            }else{
+                [NSString localizedMsgFromRet_code:ret_code withHUD:NO];
             }
                 
         }

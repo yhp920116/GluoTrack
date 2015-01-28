@@ -17,45 +17,49 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzj-JI-XtA">
                         <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zv2-Rn-xmF" customClass="CustomLabel">
-                                <rect key="frame" x="0.0" y="11" width="73" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxI-hk-2F4" customClass="CustomLabel">
-                                <rect key="frame" x="81" y="11" width="73" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyy-tj-UG1" customClass="CustomLabel">
-                                <rect key="frame" x="162" y="11" width="73" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zM-Xq-VXy" customClass="CustomLabel">
-                                <rect key="frame" x="225" y="11" width="73" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="liK-M1-UL0" customClass="LogTextField">
+                                <rect key="frame" x="0.0" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vxB-ZZ-tM4" customClass="LogTextField">
+                                <rect key="frame" x="73" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="qgK-JK-WMa" customClass="LogTextField">
+                                <rect key="frame" x="146" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="bJc-fC-PoI" customClass="LogTextField">
+                                <rect key="frame" x="219" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Gyy-tj-UG1" firstAttribute="width" secondItem="5zM-Xq-VXy" secondAttribute="width" id="3Qp-9J-rXq"/>
-                            <constraint firstAttribute="centerY" secondItem="zv2-Rn-xmF" secondAttribute="centerY" id="HDU-bA-bin"/>
-                            <constraint firstAttribute="centerY" secondItem="bxI-hk-2F4" secondAttribute="centerY" id="P8R-mg-etK"/>
-                            <constraint firstItem="bxI-hk-2F4" firstAttribute="leading" secondItem="zv2-Rn-xmF" secondAttribute="trailing" constant="8" id="SHG-U0-ujk"/>
-                            <constraint firstItem="5zM-Xq-VXy" firstAttribute="leading" secondItem="Gyy-tj-UG1" secondAttribute="trailing" constant="-10" id="Sxd-yT-D01"/>
-                            <constraint firstItem="bxI-hk-2F4" firstAttribute="width" secondItem="zv2-Rn-xmF" secondAttribute="width" id="YqE-hg-5hh"/>
-                            <constraint firstItem="zv2-Rn-xmF" firstAttribute="width" secondItem="zzj-JI-XtA" secondAttribute="width" multiplier="0.25" id="gTq-26-bX0"/>
-                            <constraint firstAttribute="centerY" secondItem="Gyy-tj-UG1" secondAttribute="centerY" id="h7y-60-iAg"/>
-                            <constraint firstItem="bxI-hk-2F4" firstAttribute="width" secondItem="Gyy-tj-UG1" secondAttribute="width" id="jaO-tv-tpR"/>
-                            <constraint firstItem="zv2-Rn-xmF" firstAttribute="leading" secondItem="zzj-JI-XtA" secondAttribute="leading" id="q6x-cl-HJe"/>
-                            <constraint firstAttribute="centerY" secondItem="5zM-Xq-VXy" secondAttribute="centerY" id="rtw-NO-o9r"/>
-                            <constraint firstItem="Gyy-tj-UG1" firstAttribute="leading" secondItem="bxI-hk-2F4" secondAttribute="trailing" constant="8" id="tRA-jx-4r7"/>
+                            <constraint firstItem="liK-M1-UL0" firstAttribute="top" secondItem="zzj-JI-XtA" secondAttribute="top" id="1w4-D5-V81"/>
+                            <constraint firstItem="vxB-ZZ-tM4" firstAttribute="leading" secondItem="liK-M1-UL0" secondAttribute="trailing" id="6cN-SH-eo3"/>
+                            <constraint firstItem="qgK-JK-WMa" firstAttribute="leading" secondItem="vxB-ZZ-tM4" secondAttribute="trailing" id="E2o-Gj-34V"/>
+                            <constraint firstAttribute="bottom" secondItem="liK-M1-UL0" secondAttribute="bottom" id="KLf-Y4-gaC"/>
+                            <constraint firstItem="bJc-fC-PoI" firstAttribute="leading" secondItem="qgK-JK-WMa" secondAttribute="trailing" id="ObI-V6-99n"/>
+                            <constraint firstItem="vxB-ZZ-tM4" firstAttribute="width" secondItem="qgK-JK-WMa" secondAttribute="width" id="PwX-wl-2jA"/>
+                            <constraint firstItem="bJc-fC-PoI" firstAttribute="top" secondItem="zzj-JI-XtA" secondAttribute="top" id="Qz1-NX-dra"/>
+                            <constraint firstItem="bJc-fC-PoI" firstAttribute="width" secondItem="qgK-JK-WMa" secondAttribute="width" id="S4s-Z9-PU2"/>
+                            <constraint firstItem="vxB-ZZ-tM4" firstAttribute="width" secondItem="liK-M1-UL0" secondAttribute="width" id="WvW-wY-CkW"/>
+                            <constraint firstItem="liK-M1-UL0" firstAttribute="leading" secondItem="zzj-JI-XtA" secondAttribute="leading" id="bgW-SO-yHe"/>
+                            <constraint firstItem="qgK-JK-WMa" firstAttribute="top" secondItem="zzj-JI-XtA" secondAttribute="top" id="dtw-EH-WY6"/>
+                            <constraint firstItem="liK-M1-UL0" firstAttribute="width" secondItem="zzj-JI-XtA" secondAttribute="width" multiplier="0.25" id="g5X-ey-jdZ"/>
+                            <constraint firstAttribute="bottom" secondItem="bJc-fC-PoI" secondAttribute="bottom" id="oMA-1K-H2H"/>
+                            <constraint firstAttribute="bottom" secondItem="qgK-JK-WMa" secondAttribute="bottom" id="p2E-Hb-fAN"/>
+                            <constraint firstItem="vxB-ZZ-tM4" firstAttribute="top" secondItem="zzj-JI-XtA" secondAttribute="top" id="vNk-xi-Nxh"/>
+                            <constraint firstAttribute="bottom" secondItem="vxB-ZZ-tM4" secondAttribute="bottom" id="zCk-Nj-jhu"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -68,10 +72,10 @@
             </tableViewCellContentView>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
             <connections>
-                <outlet property="dosageLabel" destination="Gyy-tj-UG1" id="inz-wQ-iaU"/>
-                <outlet property="medicateTypeLabel" destination="zv2-Rn-xmF" id="bne-Xi-8Lp"/>
-                <outlet property="unitsLabel" destination="5zM-Xq-VXy" id="WbX-Ez-WQi"/>
-                <outlet property="usageLabel" destination="bxI-hk-2F4" id="HZ7-7m-CD7"/>
+                <outlet property="dosageField" destination="qgK-JK-WMa" id="bIy-fr-Yud"/>
+                <outlet property="drugField" destination="liK-M1-UL0" id="uwh-7a-egk"/>
+                <outlet property="unitField" destination="bJc-fC-PoI" id="wVm-Df-Wei"/>
+                <outlet property="usageField" destination="vxB-ZZ-tM4" id="fgq-jp-wIj"/>
             </connections>
             <point key="canvasLocation" x="261" y="265"/>
         </tableViewCell>

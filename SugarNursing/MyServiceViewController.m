@@ -102,6 +102,8 @@
                 }
                 
                 [[CoreDataStack sharedCoreDataStack] saveContext];
+            }else{
+                [NSString localizedMsgFromRet_code:ret_code withHUD:NO];
             }
             
         }
@@ -144,7 +146,7 @@
                 
                 [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
             }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else{

@@ -30,7 +30,7 @@
 "PH7-lg-8jv.text" = "监测";
 
 /* Class = "IBUIButton"; normalTitle = "Dated"; ObjectID = "SGo-7I-B7G"; */
-"SGo-7I-B7G.normalTitle" = "按日期";
+"SGo-7I-B7G.normalTitle" = "选择日期";
 
 /* Class = "IBUITabBarItem"; title = "运动"; ObjectID = "W1r-Lf-nrH"; */
 "W1r-Lf-nrH.title" = "运动";

@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, RecoveryLogStatus){
 @property (assign) RecoveryLogType recoveryLogType;
 @property (assign) RecoveryLogStatus recoveryLogStatus;
 
+// recordLog 只在编辑模式下使用，在新增模式下不能使用！
 @property (strong, nonatomic) RecordLog *recordLog;
 
 

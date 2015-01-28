@@ -12,6 +12,17 @@
 
 @implementation GCRequest
 
++ (BOOL)handleRetCodeInRespnoseObject:(id)responseObject
+{
+    NSString *ret_code = [ParseData parseDictionary:responseObject ForKeyPath:@"ret_code"];
+    if ([ret_code isEqualToString:@"0"]) {
+        return YES;
+    }else{
+        [NSString localizedMsgFromRet_code:ret_code withHUD:NO];
+        return NO;
+    }
+}
+
 + (NSURLSessionDataTask *)userLoginWithParameters:(id)parameters withBlock:(void (^)(NSDictionary *, NSError *))block
 {
     DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
@@ -24,8 +35,7 @@
     return [[GCHttpClient sharedClient] POST:GC_LOGIN_URL parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         DDLogDebug(@"Login resoponseData:%@",responseObject);
-//        responseObject = [(NSDictionary *)responseObject keysLowercased];
-  
+        
         if (block) {
             block(responseObject, nil);
         }
@@ -129,9 +139,8 @@
         DDLogDebug(@"Get UserInfo resoponseData:%@",responseObject);
 //        responseObject = [(NSDictionary *)responseObject keysLowercased];
         
-        
         if (block) {
-            block(responseObject,nil);
+            block(responseObject, nil);
         }
         
         
@@ -494,6 +503,48 @@
     
 }
 
++ (NSURLSessionDataTask *)userEditDetectLogWithParameters:(id)parameters withBlock:(void (^)(NSDictionary *, NSError *))block
+{
+    DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
+    DDLogInfo(@"Requesting for URL: %@", [NSURL URLWithString:GC_USER_EDIT_DETECTLOG_URL relativeToURL:[GCHttpClient sharedClient].baseURL]);
+    
+    parameters = [parameters mutableCopy];
+    [self signValueFor:parameters];
+    
+    return [[GCHttpClient sharedClient] POST:GC_USER_EDIT_DETECTLOG_URL parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        DDLogDebug(@"Edit detectLog resonseData: %@", responseObject);
+        if (block) {
+            block(responseObject, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        DDLogDebug(@"Request Error: %@ %@",[error localizedDescription], NSStringFromSelector(_cmd));
+        if (block) {
+            block(nil, error);
+        }
+    }];
+}
+
++ (NSURLSessionDataTask *)userEditDrugLogWithParameters:(id)parameters withBlock:(void(^)(NSDictionary *, NSError *))block
+{
+    DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
+    DDLogInfo(@"Requesting for URL: %@", [NSURL URLWithString:GC_USER_EDIT_DRUGLOG_URL relativeToURL:[GCHttpClient sharedClient].baseURL]);
+    
+    parameters = [parameters mutableCopy];
+    [self signValueFor:parameters];
+    
+    return [[GCHttpClient sharedClient] POST:GC_USER_EDIT_DRUGLOG_URL parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        DDLogDebug(@"Edit drugLog resonseData: %@", responseObject);
+        if (block) {
+            block(responseObject, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        DDLogDebug(@"Request Error: %@ %@",[error localizedDescription], NSStringFromSelector(_cmd));
+        if (block) {
+            block(nil, error);
+        }
+    }];
+}
+
 + (NSURLSessionDataTask *)userEditDietLogWithParameters:(id)parameters withBlock:(void (^)(NSDictionary *, NSError *))block
 {
     DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
@@ -511,6 +562,123 @@
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
+        DDLogDebug(@"Request Error: %@ %@",[error localizedDescription], NSStringFromSelector(_cmd));
+        if (block) {
+            block(nil, error);
+        }
+        
+    }];
+}
+
++ (NSURLSessionDataTask *)userEditExerciseLogWithParameters:(id)parameters withBlock:(void (^)(NSDictionary *, NSError *))block
+{
+    DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
+    DDLogInfo(@"Requesting for URL: %@", [NSURL URLWithString:GC_USER_EDIT_EXERCISELOG_URL relativeToURL:[GCHttpClient sharedClient].baseURL]);
+    
+    parameters = [parameters mutableCopy];
+
+    [self signValueFor:parameters];
+    
+    return [[GCHttpClient sharedClient] POST:GC_USER_EDIT_EXERCISELOG_URL parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        DDLogDebug(@"Edit exerciseLog resonseData: %@", responseObject);
+        if (block) {
+            block(responseObject, nil);
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        DDLogDebug(@"Request Error: %@ %@",[error localizedDescription], NSStringFromSelector(_cmd));
+        if (block) {
+            block(nil, error);
+        }
+        
+    }];
+}
+
++ (NSURLSessionDataTask *)userDeleteDetectLogWithParameters:(id)parameters withBlock:(void (^)(NSDictionary *, NSError *))block
+{
+    DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
+    DDLogInfo(@"Requesting for URL: %@", [NSURL URLWithString:GC_USER_DELETE_DETECTLOG_URL relativeToURL:[GCHttpClient sharedClient].baseURL]);
+    parameters = [parameters mutableCopy];
+    [self signValueFor:parameters];
+    
+    return [[GCHttpClient sharedClient] POST:GC_USER_DELETE_DETECTLOG_URL parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        DDLogDebug(@"Delete detectLog resonseData: %@", responseObject);
+        if (block) {
+            block(responseObject, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        DDLogDebug(@"Request Error: %@ %@",[error localizedDescription], NSStringFromSelector(_cmd));
+        if (block) {
+            block(nil, error);
+        }
+        
+    }];
+}
+
++ (NSURLSessionDataTask *)userDeleteDrugLogWithParameters:(id)parameters withBlock:(void (^)(NSDictionary *, NSError *))block
+{
+    DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
+    DDLogInfo(@"Requesting for URL: %@", [NSURL URLWithString:GC_USER_DELETE_DRUGLOG_URL relativeToURL:[GCHttpClient sharedClient].baseURL]);
+    
+    parameters = [parameters mutableCopy];
+    [self signValueFor:parameters];
+    
+    return [[GCHttpClient sharedClient] POST:GC_USER_DELETE_DRUGLOG_URL parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        DDLogDebug(@"Delete drugLog resonseData: %@", responseObject);
+        if (block) {
+            block(responseObject, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        DDLogDebug(@"Request Error: %@ %@",[error localizedDescription], NSStringFromSelector(_cmd));
+        if (block) {
+            block(nil, error);
+        }
+        
+    }];
+}
+
++ (NSURLSessionDataTask *)userDeleteDietLogWithParameters:(id)parameters withBlock:(void (^)(NSDictionary *, NSError *))block
+{
+    DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
+    DDLogInfo(@"Requesting for URL: %@", [NSURL URLWithString:GC_USER_DELETE_DIETLOG_URL relativeToURL:[GCHttpClient sharedClient].baseURL]);
+    
+    parameters = [parameters mutableCopy];
+    [self signValueFor:parameters];
+    
+    return [[GCHttpClient sharedClient] POST:GC_USER_DELETE_DIETLOG_URL parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        DDLogDebug(@"Delete dietLog resonseData: %@", responseObject);
+        if (block) {
+            block(responseObject, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        DDLogDebug(@"Request Error: %@ %@",[error localizedDescription], NSStringFromSelector(_cmd));
+        if (block) {
+            block(nil, error);
+        }
+        
+    }];
+}
+
++ (NSURLSessionDataTask *)userDeleteExerciseLogWithParameters:(id)parameters withBlock:(void (^)(NSDictionary *, NSError *))block
+{
+    DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
+    DDLogInfo(@"Requesting for URL: %@", [NSURL URLWithString:GC_USER_DELETE_EXERCISELOG_URL relativeToURL:[GCHttpClient sharedClient].baseURL]);
+    
+    parameters = [parameters mutableCopy];
+    [self signValueFor:parameters];
+    
+    return [[GCHttpClient sharedClient] POST:GC_USER_DELETE_EXERCISELOG_URL parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        DDLogDebug(@"Delete exerciseLog resonseData: %@", responseObject);
+        if (block) {
+            block(responseObject, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         DDLogDebug(@"Request Error: %@ %@",[error localizedDescription], NSStringFromSelector(_cmd));
         if (block) {
             block(nil, error);

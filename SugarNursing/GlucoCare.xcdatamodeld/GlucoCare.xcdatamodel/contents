@@ -15,6 +15,38 @@
         <relationship name="effectList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EffectList" inverseName="controlEffect" inverseEntity="EffectList" syncable="YES"/>
         <relationship name="userid" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserID" inverseName="controlEffect" inverseEntity="UserID" syncable="YES"/>
     </entity>
+    <entity name="DetectLog" representedClassName="DetectLog" syncable="YES">
+        <attribute name="dataSource" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="detectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="detectTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="glucose" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hemoglobinef" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="insertSource" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mealFlag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="remar" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="selfSense" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serialNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recordLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecordLog" inverseName="detectLog" inverseEntity="RecordLog" syncable="YES"/>
+    </entity>
+    <entity name="DietLog" representedClassName="DietLog" syncable="YES">
+        <attribute name="calorie" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eatId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eatPeriod" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eatTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="foodList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Food" inverseName="dietLog" inverseEntity="Food" syncable="YES"/>
+        <relationship name="recordLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecordLog" inverseName="dietLog" inverseEntity="RecordLog" syncable="YES"/>
+    </entity>
+    <entity name="DrugLog" representedClassName="DrugLog" syncable="YES">
+        <attribute name="medicineId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medicinePeriod" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medicineTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="medicineList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Medicine" inverseName="drugLog" inverseEntity="Medicine" syncable="YES"/>
+        <relationship name="recordLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecordLog" inverseName="drugLog" inverseEntity="RecordLog" syncable="YES"/>
+    </entity>
     <entity name="EffectList" representedClassName="EffectList" syncable="YES">
         <attribute name="avg" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="detectCount" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,6 +55,24 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="overtopCount" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="controlEffect" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ControlEffect" inverseName="effectList" inverseEntity="ControlEffect" spotlightIndexingEnabled="YES" syncable="YES"/>
+    </entity>
+    <entity name="ExerciseLog" representedClassName="ExerciseLog" syncable="YES">
+        <attribute name="calorie" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sportId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sportName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sportPeriod" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sportTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recordLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecordLog" inverseName="exerciseLog" inverseEntity="RecordLog" syncable="YES"/>
+    </entity>
+    <entity name="Food" representedClassName="Food" syncable="YES">
+        <attribute name="calorie" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="food" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sort" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="dietLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DietLog" inverseName="foodList" inverseEntity="DietLog" syncable="YES"/>
     </entity>
     <entity name="MedicalRecord" representedClassName="MedicalRecord" syncable="YES">
         <attribute name="diagHosp" optional="YES" attributeType="String" syncable="YES"/>
@@ -34,6 +84,14 @@
         <attribute name="treatPlan" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="recordPhoto" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="RecordPhoto" inverseName="medicalRecord" inverseEntity="RecordPhoto" syncable="YES"/>
         <relationship name="userid" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserID" inverseName="medicalRecord" inverseEntity="UserID" syncable="YES"/>
+    </entity>
+    <entity name="Medicine" representedClassName="Medicine" syncable="YES">
+        <attribute name="dose" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="drug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sort" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="usage" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="drugLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DrugLog" inverseName="medicineList" inverseEntity="DrugLog" syncable="YES"/>
     </entity>
     <entity name="Message" representedClassName="Message" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
@@ -49,17 +107,11 @@
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="logType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="eventList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="RecordLogList" inverseName="recordLog" inverseEntity="RecordLogList" syncable="YES"/>
+        <relationship name="detectLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DetectLog" inverseName="recordLog" inverseEntity="DetectLog" syncable="YES"/>
+        <relationship name="dietLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DietLog" inverseName="recordLog" inverseEntity="DietLog" syncable="YES"/>
+        <relationship name="drugLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DrugLog" inverseName="recordLog" inverseEntity="DrugLog" syncable="YES"/>
+        <relationship name="exerciseLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExerciseLog" inverseName="recordLog" inverseEntity="ExerciseLog" syncable="YES"/>
         <relationship name="userid" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserID" inverseName="recordLog" inverseEntity="UserID" syncable="YES"/>
-    </entity>
-    <entity name="RecordLogList" representedClassName="RecordLogList" syncable="YES">
-        <attribute name="eventAmount" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventMode" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventObject" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventUnit" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventValue" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="recordLog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecordLog" inverseName="eventList" inverseEntity="RecordLog" syncable="YES"/>
     </entity>
     <entity name="RecordPhoto" representedClassName="RecordPhoto" syncable="YES">
         <attribute name="attachName" optional="YES" attributeType="String" syncable="YES"/>
@@ -115,16 +167,21 @@
     </entity>
     <elements>
         <element name="Advise" positionX="-9" positionY="144" width="128" height="120"/>
+        <element name="ControlEffect" positionX="-18" positionY="189" width="128" height="133"/>
+        <element name="DetectLog" positionX="-18" positionY="189" width="128" height="238"/>
+        <element name="DietLog" positionX="18" positionY="225" width="128" height="150"/>
+        <element name="DrugLog" positionX="0" positionY="207" width="128" height="133"/>
+        <element name="EffectList" positionX="-9" positionY="198" width="128" height="148"/>
+        <element name="ExerciseLog" positionX="-9" positionY="198" width="128" height="163"/>
+        <element name="Food" positionX="27" positionY="234" width="128" height="133"/>
         <element name="MedicalRecord" positionX="-54" positionY="135" width="128" height="180"/>
+        <element name="Medicine" positionX="9" positionY="216" width="128" height="133"/>
         <element name="Message" positionX="0" positionY="153" width="128" height="165"/>
-        <element name="RecordLog" positionX="0" positionY="198" width="128" height="118"/>
-        <element name="RecordLogList" positionX="9" positionY="207" width="128" height="148"/>
+        <element name="RecordLog" positionX="0" positionY="198" width="128" height="165"/>
         <element name="RecordPhoto" positionX="-36" positionY="153" width="128" height="90"/>
         <element name="User" positionX="-9" positionY="144" width="128" height="135"/>
         <element name="UserID" positionX="-18" positionY="135" width="128" height="180"/>
         <element name="UserInfo" positionX="-54" positionY="36" width="128" height="360"/>
         <element name="UserSetting" positionX="9" positionY="162" width="128" height="90"/>
-        <element name="ControlEffect" positionX="-18" positionY="189" width="128" height="133"/>
-        <element name="EffectList" positionX="-9" positionY="198" width="128" height="148"/>
     </elements>
 </model>

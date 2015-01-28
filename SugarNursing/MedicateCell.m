@@ -12,6 +12,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.drugField.adjustsFontSizeToFitWidth = YES;
+    self.drugField.minimumFontSize = 12.f;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

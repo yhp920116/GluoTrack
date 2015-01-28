@@ -57,6 +57,7 @@
 "surephonenumber"="Make sure the number";
 "cancel"="Cancel";
 "Sending code" = "Sending code";
+"User Exists" = "User Exists";
 "Sending code succeed" = "Sending code succeed";
 
 
@@ -73,12 +74,16 @@
 "female"="Female";
 "male"="Male";
 "Format is not avaliable" = "Format is not avaliable";
+"Date Format is not avaliable" = "Date Format is not avaliable";
+"Password Format is not avaliable" = "Password Format is not avaliable";
+"Not your mobile phone" = "Not your mobile phone";
 
 /* Test Tracker */
 "Cancel" = "Cancel";
 "30 days recently" = "30 days recently";
 "Select By Day" = "Select By Day";
 "No Data" = "No Data";
+"A month earlier" = "A month earlier";
 
 /* Member Center */
 "Verify your account" = "Verify your account";
@@ -101,6 +106,8 @@
 "Thumbnail uploading" = "Thumbnail uploading";
 "Upload succeed" = "Upload succeed";
 
+/* Recovery Log */
+"Custom" = "Custom";
 
 /* Medical History */
 "Medical Record" = "Medical Record";
@@ -118,9 +125,6 @@
 "Sending FeedBack…" = "Sending FeedBack…";
 "Send Message Succeed" = "Send Message Succeed";
 
-/* Service center */
-"Send Message Succeed" = "Send Message Succeed";
-
 /* Add New Recovery Record */
 "detect" = "Detect";
 "diet" = "Diet";
@@ -128,4 +132,26 @@
 "drug" = "Drug";
 "Add New Recovery Record" = "Add New Recovery Record";
 "Edit Recovery Record" = "Edit Recovery Record";
+"calorie" = "calorie";
+"minutes" = "minutes";
+"Input Detect Value" = "Input Detect Value";
+"breakfast" = "breakfast";
+"lunch" = "lunch";
+"dinner" = "dinner";
+"snack" = "snack";
+"Not to Add More" = "Not to Add More";
 
+"Value cannot be empty" = "Value cannot be empty";
+
+"g" = "g";
+"kg" = "kg";
+"mg" = "mg";
+"grain" = "grain";
+"slice" = "slice";
+"unit" = "unit";
+"ml" = "ml";
+"piece" = "piece";
+"bottle" = "bottle";
+"Oral" = "Oral";
+"Insulin" = "Insulin";
+"Injection" = "Injection";

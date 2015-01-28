@@ -53,7 +53,7 @@
     static NSDateFormatter *dateFormatter;
     if (!dateFormatter) {
         dateFormatter = [NSDateFormatter new];
-        dateFormatter.dateFormat = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"EEE MMM d" : @"EEEE MMMM d, YYYY");
+        dateFormatter.dateFormat = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"EEE MMM d" : @"YYYY MMMM d, EEEE");
     }
     self.title.text = [dateFormatter stringFromDate:day];
     [self setNeedsLayout];
@@ -66,7 +66,7 @@
     if (currentDay) {
         self.title.textColor = [UIColor whiteColor];
         self.title.font = [UIFont boldSystemFontOfSize:16.0];
-        self.titleBackground.backgroundColor = [UIColor redColor];
+        self.titleBackground.backgroundColor = [UIColor colorWithRed:231/255.0 green:76/255.0 blue:60/255.0 alpha:1];
     } else {
         self.title.font = [UIFont systemFontOfSize:16.0];
         self.title.textColor = [UIColor blackColor];

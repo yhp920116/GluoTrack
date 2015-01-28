@@ -19,7 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UILabel *userNameTips;
-@property (weak, nonatomic) IBOutlet UITextField *realNameField;
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumberField;
 @property (weak, nonatomic) IBOutlet UITextField *identityCardField;
 @property (weak, nonatomic) IBOutlet UILabel *idTips;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -74,7 +74,8 @@
 {
     [self.thumbnail sd_setImageWithURL:[NSURL URLWithString:self.userInfo.headImageUrl] placeholderImage:[UIImage imageNamed:@"thumbDefault"]];
     self.userNameField.text = self.userInfo.userName;
-    self.realNameField.text = self.userInfo.realName;
+    self.phoneNumberField.text = self.userInfo.mobilePhone;
+    self.phoneNumberField.userInteractionEnabled = NO;
     self.identityCardField.text = self.userInfo.identifyCard;
     self.identityCardField.userInteractionEnabled = NO;
     self.emailField.text = self.userInfo.email;
@@ -169,6 +170,10 @@
         case 1002:
         {
             [self configureSaveBarButtonItemHidden:NO];
+            if (![ParseData parseDateIsAvaliable:self.datePicker.date]) {
+                [hud hide:YES];
+                return;
+            }
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy-MM-dd"];
             self.birthDateField.text = [dateFormatter stringFromDate:self.datePicker.date];
@@ -191,7 +196,7 @@
     // Check the format
     if (![ParseData parseDateStringIsAvaliable:self.birthDateField.text format:@"yyyy-MM-dd"]) {
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = NSLocalizedString(@"Format is not avaliable", nil);
+        hud.labelText = NSLocalizedString(@"Date Format is not avaliable", nil);
         [hud hide:YES afterDelay:HUD_TIME_DELAY];
         return;
     }
@@ -206,7 +211,6 @@
                                @"email": self.emailField.text,
                                @"identifyCard": self.identityCardField.text,
                                @"sex":self.genderField.text,
-                               @"realName": self.realNameField.text,
                                @"userName": self.userNameField.text,
                                @"headImageUrl": !self.thumbnailURLString ? self.userInfo.headImageUrl : self.thumbnailURLString} mutableCopy];
   
@@ -242,8 +246,7 @@
                 hud.labelText = NSLocalizedString(@"Upload succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
             }
         }else {
             [hud hide:YES];
@@ -262,7 +265,6 @@
                                  @"email": self.emailField.text,
                                  @"identifyCard": self.identityCardField.text,
                                  @"sex":self.genderField.text,
-                                 @"realName": self.realNameField.text,
                                  @"userName": self.userNameField.text,
                                  @"headImageUrl": !self.thumbnailURLString ? self.userInfo.headImageUrl : self.thumbnailURLString,
                                  };
@@ -282,7 +284,7 @@
                 
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
            

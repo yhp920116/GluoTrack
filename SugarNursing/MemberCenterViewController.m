@@ -31,7 +31,6 @@
     [super viewDidLoad];
     [self configureFetchController];
     [self configureUserInfo];
-
 }
 
 #pragma mark - PrepareForSegue

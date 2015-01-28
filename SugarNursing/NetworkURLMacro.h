@@ -15,6 +15,7 @@
 
 static NSString * const GCHttpBaseURLString = @"http://192.168.1.4:8080/lcp-laop/";
 static NSString * const GCHttpTestURLString = @"http://172.16.24.72:8083/lcp-laop/";
+static NSString * const GCUserURLString = @"http://120.24.60.25:8081/lcp-laop";
 
 // Login URL
 #define GC_LOGIN_URL @"rest/laop/linkMan/account"
@@ -37,6 +38,14 @@ static NSString * const GCHttpTestURLString = @"http://172.16.24.72:8083/lcp-lao
 #define GC_USER_SEND_FEEDBACK_URL @"rest/laop/common/feedBack"
 #define GC_USER_GET_RECOVERYRECORD_URL @"rest/laop/linkMan/cureLog"
 #define GC_USER_GET_CONTROLEFFECT_URL @"rest/laop/linkMan/cureLog"
+#define GC_USER_EDIT_DETECTLOG_URL @"rest/laop/linkMan/cureLog"
 #define GC_USER_EDIT_DIETLOG_URL @"rest/laop/linkMan/cureLog"
+#define GC_USER_EDIT_DRUGLOG_URL @"rest/laop/linkMan/cureLog"
+#define GC_USER_EDIT_EXERCISELOG_URL @"rest/laop/linkMan/cureLog"
+#define GC_USER_DELETE_DETECTLOG_URL @"rest/laop/linkMan/cureLog"
+#define GC_USER_DELETE_DRUGLOG_URL @"rest/laop/linkMan/cureLog"
+#define GC_USER_DELETE_DIETLOG_URL @"rest/laop/linkMan/cureLog"
+#define GC_USER_DELETE_EXERCISELOG_URL @"rest/laop/linkMan/cureLog"
+
 
 #endif

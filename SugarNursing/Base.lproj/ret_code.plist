@@ -170,5 +170,11 @@
 	<string>发送反馈记录失败</string>
 	<key>-81</key>
 	<string>服务中心信息查询失败</string>
+	<key>-82</key>
+	<string>格式错误</string>
+	<key>-83</key>
+	<string>饮食格式错误</string>
+	<key>-84</key>
+	<string>用药格式错误</string>
 </dict>
 </plist>

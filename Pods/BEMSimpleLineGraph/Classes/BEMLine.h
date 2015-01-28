@@ -51,7 +51,10 @@ typedef NS_ENUM(NSInteger, BEMLineAnimation) {
 @property (assign, nonatomic) CGPoint P3;
 
 /// All of the Y-axis values for the points
-@property (nonatomic, strong) NSArray *arrayOfPoints;
+@property (nonatomic, strong) NSArray *arrayOfYPoints;
+
+/// All of the X-axis value for the points
+@property (nonatomic, strong) NSArray *arrayOfXPoints;
 
 /// All of the X-Axis coordinates used to draw vertical lines through
 @property (nonatomic, strong) NSArray *arrayOfVerticalRefrenceLinePoints;

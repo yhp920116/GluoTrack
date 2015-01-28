@@ -67,6 +67,15 @@
     NSDate *now = [NSDate date];
     NSTimeInterval timeInterval = [now timeIntervalSinceDate:date];
     if (timeInterval < 0) {
+        
+        UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:windowView];
+        [windowView addSubview:hud];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"Date Format is not avaliable", nil);
+        [hud show:YES];
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        
         return NO;
     }else{
         return YES;
@@ -88,13 +97,18 @@
 
 + (BOOL)parsePasswordIsAvaliable:(NSString *)password
 {
-    if (!password) {
+    if (!password || [password length] < 6) {
+        
+        UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:windowView];
+        [windowView addSubview:hud];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"Password Format is not avaliable", nil);
+        [hud show:YES];
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        
         return NO;
     }
-    if ([password length] < 6) {
-        return NO;
-    }
-
     return YES;
 }
 

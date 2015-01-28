@@ -538,6 +538,7 @@
     
     NSArray *hiddenViews = [self prepareUnderlyingViewForSnapshot];
     [underlyingLayer renderInContext:context];
+    underlyingLayer.contents = nil;
     [self restoreSuperviewAfterSnapshot:hiddenViews];
     UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

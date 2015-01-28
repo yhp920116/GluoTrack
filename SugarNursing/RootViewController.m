@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.blurView.blurRadius = 30;
+//    self.blurView.blurRadius = 30;
     [self performSelector:@selector(showMenu:) withObject:nil afterDelay:1.25];
 }
 

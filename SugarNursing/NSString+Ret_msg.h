@@ -10,6 +10,6 @@
 
 @interface NSString (Ret_msg)
 
-+ (NSString *)localizedMsgFromRet_code:(NSString *)ret_code;
++ (NSString *)localizedMsgFromRet_code:(NSString *)ret_code withHUD:(BOOL)hasHud;
 
 @end

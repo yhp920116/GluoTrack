@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomLabel.h"
+#import "LogTextField.h"
 
 @interface BasicCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet CustomLabel *title;
-@property (weak, nonatomic) IBOutlet UITextField *detailText;
+@property (weak, nonatomic) IBOutlet LogTextField *detailText;
 
 
 @end

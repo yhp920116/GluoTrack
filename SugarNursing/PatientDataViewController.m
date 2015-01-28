@@ -86,7 +86,7 @@
                 [self.collectionView reloadData];
                 
             }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }
@@ -143,9 +143,14 @@
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = NSLocalizedString(@"Data Updated", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+                
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else {
@@ -393,7 +398,7 @@
                 [hud hide:YES];
 
             }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else {

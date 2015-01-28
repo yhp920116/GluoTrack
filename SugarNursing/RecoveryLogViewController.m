@@ -66,9 +66,8 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 
     self.selectedDate = [NSDate date];
     self.logTypeArray = [@[@"detect",@"exercise",@"drug",@"diet"] mutableCopy];
-    [self configureFetchController:YES];
     [self configureTableView];
-    [self configureNoDataView];
+    [self configureFetchController:YES];
     [self.refreshView startLoadingAndExpand:YES animated:YES];
 }
 
@@ -98,11 +97,14 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     self.fetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:NO withPredicate:predicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
     
     [self.tableView reloadData];
+    [self configureNoDataView];
+
 }
 
 - (void)configureTableView
 {
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
+    self.tableView.panGestureRecognizer.delaysTouchesBegan = YES;
     self.refreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -122,15 +124,11 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 {
     [self configureFetchController:YES];
     
-    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:hud];
-    hud.mode = MBProgressHUDModeText;
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMdd"];
     NSString *queryDay = [dateFormatter stringFromDate:self.selectedDate];
     
-    NSDictionary *parameters = @{@"method":@"queryCureLogTimeLine",
+    NSDictionary *parameters = @{@"method":@"queryCureLogTimeLine2",
                                  @"sign":@"sign",
                                  @"sessionId":[NSString sessionID],
                                  @"linkManId":[NSString linkmanID],
@@ -145,53 +143,115 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                     [recordLog deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 }
             
-                NSArray *recordLogArray;
-                if ([[responseData objectForKey:@"cureLogList"] isKindOfClass:[NSArray class]]) {
-                    recordLogArray = [responseData objectForKey:@"cureLogList"];
-                }else{
-                    recordLogArray = @[];
-                }
+                NSArray *detectLogArr = [responseData objectForKey:@"detectLogList"];
+                NSArray *dietLogArr = [responseData objectForKey:@"dietLogList"];
+                NSArray *drugLogArr = [responseData objectForKey:@"drugLogList"];
+                NSArray *exerciseLogArr = [responseData objectForKey:@"exerciseLogList"];
+            
                 
-                for (NSDictionary *recordLogDic in recordLogArray) {
-                    
-                    NSMutableDictionary *recordLogDic_ = [recordLogDic mutableCopy];
-                    NSMutableOrderedSet *evenList = [[NSMutableOrderedSet alloc] initWithCapacity:5];
-                    
+                for (NSDictionary *detectLogDic in detectLogArr) {
+                
                     RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [recordLog updateCoreDataForData:recordLogDic_ withKeyPath:nil];
+                    [recordLog updateCoreDataForData:detectLogDic withKeyPath:nil];
+                    
+                    DetectLog *detect = [DetectLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    NSMutableDictionary *detectDic = [[detectLogDic objectForKey:@"detectLog"] mutableCopy];
+                    [detectDic feelingFormattingToUserForKey:@"selfSense"];
+                    [detect updateCoreDataForData:detectDic withKeyPath:nil];
                     
                     UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                     userID.userId = [NSString userID];
                     userID.linkManId = [NSString linkmanID];
-                    recordLog.userid = userID;
                     
-                    for (NSDictionary *logListDic in [recordLogDic_ objectForKey:@"eventList"]) {
-                         RecordLogList *recordLogList = [RecordLogList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                        [recordLogList updateCoreDataForData:logListDic withKeyPath:nil];
-                        [evenList addObject:recordLogList];
+                    recordLog.detectLog = detect;
+                    recordLog.userid = userID;
+                }
+                
+                for (NSDictionary *dietLogDic in dietLogArr) {
+                    RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    [recordLog updateCoreDataForData:dietLogDic withKeyPath:nil];
+                    
+                    UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    userID.userId = [NSString userID];
+                    userID.linkManId = [NSString linkmanID];
+                    
+                    DietLog *diet = [DietLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    NSMutableDictionary *dietDic = [[dietLogDic objectForKey:@"dietLog"] mutableCopy];
+                    [dietDic eatPeriodFormattingToUserForKey:@"eatPeriod"];
+                    [diet updateCoreDataForData:dietDic withKeyPath:nil];
+                    
+                    NSMutableOrderedSet *foodList = [[NSMutableOrderedSet alloc] initWithCapacity:10];
+                    for (NSDictionary *foodDic in [dietDic objectForKey:@"foodList"]) {
+                        
+                        NSMutableDictionary *fooDic_ = [foodDic mutableCopy];
+//                        [fooDic_ unitFormattingToUserForKey:@"unit"];
+                        
+                        Food *food = [Food createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                        [food updateCoreDataForData:fooDic_ withKeyPath:nil];
+                        [foodList addObject:food];
                     }
                     
-                    recordLog.eventList = evenList;
+                    recordLog.userid = userID;
+                    recordLog.dietLog = diet;
+                    diet.foodList = foodList;
+
+                }
+                
+                for (NSDictionary *drugLogDic in drugLogArr) {
+                    RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    [recordLog updateCoreDataForData:drugLogDic withKeyPath:nil];
+                    
+                    UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    userID.userId = [NSString userID];
+                    userID.linkManId = [NSString linkmanID];
+                    
+                    DrugLog *drug = [DrugLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    [drug updateCoreDataForData:[drugLogDic objectForKey:@"drugLog"] withKeyPath:nil];
+                    
+                    NSMutableOrderedSet *medicineList = [[NSMutableOrderedSet alloc] initWithCapacity:10];
+                    
+                    for (NSDictionary *medicineDic in [[drugLogDic objectForKey:@"drugLog"] objectForKey:@"medicineList"]) {
+                        
+                        NSMutableDictionary *medicineDic_ = [medicineDic mutableCopy];
+                        [medicineDic_ medicineUnitsFormattingToUserForKey:@"unit"];
+                        [medicineDic_ medicineUsageFormattingToUserForKey:@"usage"];
+                        
+                        Medicine *medicine = [Medicine createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                        [medicine updateCoreDataForData:medicineDic_ withKeyPath:nil];
+                        [medicineList addObject:medicine];
+                    }
+                    
+                    recordLog.userid = userID;
+                    drug.medicineList = medicineList;
+                    recordLog.drugLog = drug;
+
+                }
+                
+                for (NSDictionary *exerciseLogDic in exerciseLogArr) {
+                    RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    [recordLog updateCoreDataForData:exerciseLogDic withKeyPath:nil];
+                    
+                    ExerciseLog *exercise = [ExerciseLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    [exercise updateCoreDataForData:[exerciseLogDic objectForKey:@"exerciseLog"] withKeyPath:nil];
+                    
+                    UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    userID.userId = [NSString userID];
+                    userID.linkManId = [NSString linkmanID];
+                    
+                    recordLog.exerciseLog = exercise;
+                    recordLog.userid = userID;
+
                 }
                 
                 [[CoreDataStack sharedCoreDataStack] saveContext];
                 
-                hud.labelText = NSLocalizedString(@"Data Updated", nil);
             }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                [NSString localizedMsgFromRet_code:ret_code withHUD:NO];
             }
-            
-        }else{
-            hud.labelText = [error localizedDescription];
         }
-        
-        [hud show:YES];
-        [hud hide:YES afterDelay:HUD_TIME_DELAY];
         
         // 无论是请求成功或者失败，都要再重新fetch一次，以过滤用户对日期和选项的筛选
         [self configureFetchController:NO];
-        [self configureNoDataView];
-
         [self.refreshView finishLoading];
 
     }];
@@ -199,10 +259,46 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 
 #pragma mark - NSFectchedResultController
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
+//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+//{
 //    [self configureNoDataView];
 //    [self.tableView reloadData];
+//}
+//
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case NSFetchedResultsChangeUpdate:
+        {
+            TimelineCell *cell = (TimelineCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+            [self configureTimelineCell:cell atIndexPath:indexPath];
+            
+            break;
+        }
+        default:
+            break;
+    }
+    [self configureNoDataView];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
 }
 
 #pragma mark - refreshViewDelegate
@@ -282,15 +378,8 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     cell.titleLabel.text = NSLocalizedString(key, nil);
     
     // Configure Detail content
-    NSMutableArray *detailArray = [[NSMutableArray alloc] initWithCapacity:10];
-    for (RecordLogList *logList in recordLog.eventList) {
-        NSString *key = logList.eventObject;
-        NSString *aLog = [NSString stringWithFormat:@"%@  %@%@",NSLocalizedString(key, nil),logList.eventValue,logList.eventUnit];
-        [detailArray addObject:aLog];
-    }
-    NSString *detailContent = [detailArray componentsJoinedByString:@"\n"];
-    detailContent = [detailContent stringByReplacingOccurrencesOfString:@"  " withString:@"  "];
-    cell.detailLabel.text = detailContent;
+    cell.detailLabel.text = [self configureDetailInfoForRecordLog:recordLog];
+    
     
 //    NSAttributedString *detailContentAttr = [[NSAttributedString alloc] initWithString:detailContent attributes:[NSString attributeCommonInit]];
 //    cell.detailLabel.attributedText = detailContentAttr;
@@ -304,6 +393,43 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 {
     UIImage *iconImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@",type]];
     return iconImage;
+}
+
+- (NSString *)configureDetailInfoForRecordLog:(RecordLog *)recordLog
+{
+    NSString *detailContent;
+    if ([recordLog.logType isEqualToString:@"detect"]) {
+        DetectLog *detect = recordLog.detectLog;
+        detailContent = [NSString stringWithFormat:@"%@  %@mmol/L \n%@  %@%%",NSLocalizedString(@"glucose", nil), detect.glucose, NSLocalizedString(@"hemoglobin", nil), detect.hemoglobinef];
+    }
+    
+    
+    if ([recordLog.logType isEqualToString:@"diet"]) {
+        DietLog *diet = recordLog.dietLog;
+        NSMutableArray *foodArr = [NSMutableArray arrayWithCapacity:10];
+        for (Food *food in diet.foodList) {
+            NSString *aFood = [NSString stringWithFormat:@"%@  %@  %@%@  %@%@",food.sort,food.food,food.weight,food.unit,food.calorie,NSLocalizedString(@"calorie", nil)];
+            [foodArr addObject:aFood];
+        }
+        detailContent = [foodArr componentsJoinedByString:@"\n"];
+    }
+    
+    if ([recordLog.logType isEqualToString:@"drug"]) {
+        DrugLog *drug = recordLog.drugLog;
+        NSMutableArray *medicineArr = [NSMutableArray arrayWithCapacity:10];
+        for (Medicine *medicine in drug.medicineList) {
+            NSString *aMedicine = [NSString stringWithFormat:@"%@  %@  %@  %@%@",medicine.sort,medicine.usage,medicine.drug,medicine.dose,medicine.unit];
+            [medicineArr addObject:aMedicine];
+        }
+        detailContent = [medicineArr componentsJoinedByString:@"\n"];
+    }
+    
+    if ([recordLog.logType isEqualToString:@"exercise"]) {
+        ExerciseLog *exercise = recordLog.exerciseLog;
+        detailContent = [NSString stringWithFormat:@"%@  %@%@  %@%@",exercise.sportName,exercise.duration,NSLocalizedString(@"minutes", nil),exercise.calorie,NSLocalizedString(@"calorie", nil)];
+    }
+    
+    return detailContent;
 }
 
 #pragma mark - TableViewDelegate
@@ -335,6 +461,123 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     return size.height;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        MBProgressHUD *aHud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        [self.navigationController.view addSubview:aHud];
+        aHud.labelText = NSLocalizedString(@"Saving Data", nil);
+        [aHud show:YES];
+    
+        RecordLog *deleteLog = [self.fetchController objectAtIndexPath:indexPath];
+        
+        if ([deleteLog.logType isEqualToString:@"detect"]) {
+            
+            NSDictionary *parameters = @{@"method":@"detectLogDelete",
+                                         @"sign":@"sign",
+                                         @"sessionId":[NSString sessionID],
+                                         @"linkManId":[NSString linkmanID],
+                                         @"detectId":deleteLog.id};
+            [GCRequest userDeleteDetectLogWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+                aHud.mode = MBProgressHUDModeText;
+                if (!error) {
+                    NSString *ret_code = [responseData valueForKey:@"ret_code"];
+                    if ([ret_code isEqualToString:@"0"]) {
+                        [deleteLog deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                        aHud.labelText = NSLocalizedString(@"Data Updated", nil);
+                    }else{
+                        aHud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
+                    }
+                }else{
+                    aHud.labelText = NSLocalizedString(@"Server is busy", nil);
+                }
+                
+                [aHud hide:YES afterDelay:HUD_TIME_DELAY];
+            }];
+        }
+        
+        if ([deleteLog.logType isEqualToString:@"drug"]) {
+            
+            NSDictionary *parameters = @{@"method":@"drugLogDelete",
+                                         @"sign":@"sign",
+                                         @"sessionId":[NSString sessionID],
+                                         @"linkManId":[NSString linkmanID],
+                                         @"medicineId":deleteLog.id};
+            [GCRequest userDeleteDrugLogWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+                aHud.mode = MBProgressHUDModeText;
+                if (!error) {
+                    NSString *ret_code = [responseData valueForKey:@"ret_code"];
+                    if ([ret_code isEqualToString:@"0"]) {
+                        [deleteLog deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                        aHud.labelText = NSLocalizedString(@"Data Updated", nil);
+                    }else{
+                        aHud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
+                    }
+                }else{
+                    aHud.labelText = NSLocalizedString(@"Server is busy", nil);
+                }
+                [aHud hide:YES afterDelay:HUD_TIME_DELAY];
+
+            }];
+        }
+        
+        if ([deleteLog.logType isEqualToString:@"diet"]) {
+            NSDictionary *parameters = @{@"method":@"dietLogDelete",
+                                         @"sign":@"sign",
+                                         @"sessionId":[NSString sessionID],
+                                         @"linkManId":[NSString linkmanID],
+                                         @"eatId":deleteLog.id};
+            [GCRequest userDeleteDietLogWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+                aHud.mode = MBProgressHUDModeText;
+                if (!error) {
+                    NSString *ret_code = [responseData valueForKey:@"ret_code"];
+                    if ([ret_code isEqualToString:@"0"]) {
+                        [deleteLog deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                        aHud.labelText = NSLocalizedString(@"Data Updated", nil);
+                    }else{
+                        aHud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
+                    }
+                }else{
+                    aHud.labelText = NSLocalizedString(@"Server is busy", nil);
+                }
+                [aHud hide:YES afterDelay:HUD_TIME_DELAY];
+
+            }];
+        }
+        
+        if ([deleteLog.logType isEqualToString:@"exercise"]) {
+            NSDictionary *parameters = @{@"method":@"exerciseLogDelete",
+                                         @"sign":@"sign",
+                                         @"sessionId":[NSString sessionID],
+                                         @"linkManId":[NSString linkmanID],
+                                         @"sportId":deleteLog.id};
+            [GCRequest userDeleteExerciseLogWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+                aHud.mode = MBProgressHUDModeText;
+                if (!error) {
+                    NSString *ret_code = [responseData valueForKey:@"ret_code"];
+                    if ([ret_code isEqualToString:@"0"]) {
+                        [deleteLog deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                        aHud.labelText = NSLocalizedString(@"Data Updated", nil);
+                    }else{
+                        aHud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
+                    }
+                }else{
+                    aHud.labelText = NSLocalizedString(@"Server is busy", nil);
+                }
+                [aHud hide:YES afterDelay:HUD_TIME_DELAY];
+
+            }];
+        }
+    }
+}
+
+
 #pragma mark - userAction
 
 - (IBAction)topButtonTapped:(id)sender
@@ -350,6 +593,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
         
         RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
         dateSelectionVC.delegate = self;
+        dateSelectionVC.hideNowButton = YES;
         dateSelectionVC.disableBlurEffects = NO;
         dateSelectionVC.disableBouncingWhenShowing = NO;
         dateSelectionVC.disableMotionEffects = NO;

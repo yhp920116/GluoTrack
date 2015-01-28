@@ -125,9 +125,9 @@
     [fillTop moveToPoint:CGPointMake(self.frame.size.width, 0)];
     [fillTop addLineToPoint:CGPointMake(0, 0)];
     
-    for (int i = 0; i<[self.arrayOfPoints count]-1; i++) {
-        p1 = CGPointMake([[self.arrayOfVerticalRefrenceLinePoints objectAtIndex:i] floatValue], [[self.arrayOfPoints objectAtIndex:i] floatValue]);
-        p2 = CGPointMake([[self.arrayOfVerticalRefrenceLinePoints objectAtIndex:(i+1)] floatValue], [[self.arrayOfPoints objectAtIndex:i+1] floatValue]);
+    for (int i = 0; i<[self.arrayOfYPoints count]-1; i++) {
+        p1 = CGPointMake([[self.arrayOfXPoints objectAtIndex:i] floatValue], [[self.arrayOfYPoints objectAtIndex:i] floatValue]);
+        p2 = CGPointMake([[self.arrayOfXPoints objectAtIndex:(i+1)] floatValue], [[self.arrayOfYPoints objectAtIndex:i+1] floatValue]);
         
         [line moveToPoint:p1];
         [fillBottom addLineToPoint:p1];
@@ -138,7 +138,7 @@
             tensionBezier2 = 0.3;
             
             if (i > 0) { // Exception for first line because there is no previous point
-                p0 = CGPointMake([[self.arrayOfVerticalRefrenceLinePoints objectAtIndex:i-1] floatValue], [[self.arrayOfPoints objectAtIndex:i-1] floatValue]);
+                p0 = CGPointMake([[self.arrayOfXPoints objectAtIndex:i-1] floatValue], [[self.arrayOfYPoints objectAtIndex:i-1] floatValue]);
                 
                 if ([[self.arrayOfValues objectAtIndexedSubscript:i+1] floatValue] - [[self.arrayOfValues objectAtIndexedSubscript:i] floatValue] == [[self.arrayOfValues objectAtIndexedSubscript:i] floatValue] - [[self.arrayOfValues objectAtIndexedSubscript:i-1] floatValue]) {
                     tensionBezier1 = 0;
@@ -149,8 +149,8 @@
                 p0 = p1;
             }
             
-            if (i<[self.arrayOfPoints count] - 2) { // Exception for last line because there is no next point
-                p3 = CGPointMake([[self.arrayOfVerticalRefrenceLinePoints objectAtIndex:i+2] floatValue], [[self.arrayOfPoints objectAtIndex:i+2] floatValue]);
+            if (i<[self.arrayOfYPoints count] - 2) { // Exception for last line because there is no next point
+                p3 = CGPointMake([[self.arrayOfXPoints objectAtIndex:i+2] floatValue], [[self.arrayOfYPoints objectAtIndex:i+2] floatValue]);
                 
                 if ([[self.arrayOfValues objectAtIndexedSubscript:i+2] floatValue] - [[self.arrayOfValues objectAtIndexedSubscript:i+1] floatValue] == [[self.arrayOfValues objectAtIndexedSubscript:i+1] floatValue] - [[self.arrayOfValues objectAtIndexedSubscript:i] floatValue]) {
                     tensionBezier2 = 0;

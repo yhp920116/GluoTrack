@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LogTextField.h"
 
 @interface ExerciseCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet LogTextField *exerciseName;
+@property (weak, nonatomic) IBOutlet LogTextField *time;
+@property (weak, nonatomic) IBOutlet LogTextField *unit;
+@property (weak, nonatomic) IBOutlet LogTextField *calorie;
 
-@property (weak, nonatomic) IBOutlet UILabel *exerciseNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *unitsLabel;
 @end

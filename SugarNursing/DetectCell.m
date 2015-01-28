@@ -1,8 +1,8 @@
 //
 //  DetectCell.m
-//  GlucoCare
+//  GlucoTrack
 //
-//  Created by Dan on 15-1-14.
+//  Created by Dan on 15-1-26.
 //  Copyright (c) 2015年 Tisson. All rights reserved.
 //
 

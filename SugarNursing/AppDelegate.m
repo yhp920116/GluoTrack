@@ -25,7 +25,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    sleep(2);
+    
     [self configureCustomizing];
     [self configureCocoaLumberjackFramework];
     [self configureUMAnalytics];

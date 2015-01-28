@@ -30,4 +30,9 @@
     [linePath stroke];
 }
 
+- (BOOL)touchesShouldCancelInContentView:(UIView *)view
+{
+    return YES;
+}
+
 @end

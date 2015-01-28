@@ -99,6 +99,10 @@
             break;
         case 1002:
         {
+            if (![ParseData parseDateIsAvaliable:self.datePicker.date]) {
+                [hud hide:YES];
+                return;
+            }
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy-MM-dd"];
             NSString *dateString = [dateFormatter stringFromDate:self.datePicker.date];
@@ -163,7 +167,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText  = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText  = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
             

@@ -51,7 +51,7 @@
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else{

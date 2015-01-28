@@ -91,5 +91,14 @@
     return userInfo.headImageUrl ? userInfo.headImageUrl : @"";
 }
 
++ (NSString *)phoneNumber
+{
+    UserInfo *userInfo = [self fetchUserInfo];
+    if (!userInfo) {
+        return @"";
+    }
+    return userInfo.mobilePhone ? userInfo.mobilePhone : @"";
+}
+
 
 @end

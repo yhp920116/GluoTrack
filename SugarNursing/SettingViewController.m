@@ -31,12 +31,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
-//            [self showsUnitsSheet];
-            break;
-        case 1:
             [self showVerificationVC];
             break;
-        case 2:
+        case 1:
             break;
 //        case 3:
 //            [self showsFontSizeSheet];
@@ -48,7 +45,7 @@
 {
     VerificationViewController *verificationVC = [[UIStoryboard loginStoryboard] instantiateViewControllerWithIdentifier:@"Verification"];
     verificationVC.title = @"重设密码";
-    verificationVC.verifiedType = 1;
+    verificationVC.verifiedType = VerifiedTypeInReset;
     
     if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)]) {
         // conditionly check for any version >= iOS 8

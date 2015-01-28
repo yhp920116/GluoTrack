@@ -37,10 +37,10 @@
 {
     self.countDay = @"7";
     self.dataArray = [NSMutableArray array];
-    self.countDayDic = @{@"近3天":@"3",
-                         @"近7天":@"7",
-                         @"近2周":@"14",
-                         @"近1个月":@"30",
+    self.countDayDic = @{@"7":@"近7天",
+                         @"14":@"近14天",
+                         @"30":@"近30天",
+                         @"60":@"近60天",
                          };
 }
 
@@ -80,10 +80,6 @@
 
 - (void)getControlEffectData
 {
-    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:hud];
-    hud.mode = MBProgressHUDModeText;
-    
     NSDictionary *parameters = @{@"method":@"queryConclusion",
                                  @"sign":@"sign",
                                  @"sessionId":[NSString sessionID],
@@ -111,16 +107,16 @@
                 
                 EffectList *g3 = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 [g3 updateCoreDataForData:[responseData objectForKey:@"g3"] withKeyPath:nil];
-                g3.name = @"空腹血糖G3";
+                g3.name = NSLocalizedString(@"空腹血糖G3", nil);
                 EffectList *g2 = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 [g2 updateCoreDataForData:[responseData objectForKey:@"g2"] withKeyPath:nil];
-                g2.name = @"餐后血糖G2";
+                g2.name = NSLocalizedString(@"餐后血糖G2", nil);
                 EffectList *g1 = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 [g1 updateCoreDataForData:[responseData objectForKey:@"g1"] withKeyPath:nil];
-                g1.name = @"餐后血糖G1";
+                g1.name = NSLocalizedString(@"餐后血糖G1", nil);
                 EffectList *hemoglobin = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 [hemoglobin updateCoreDataForData:[responseData objectForKey:@"hemoglobin"] withKeyPath:nil];
-                hemoglobin.name = @"糖化血糖蛋白";
+                hemoglobin.name = NSLocalizedString(@"糖化血糖蛋白", nil);
                 
                 [lists addObject:g3];
                 [lists addObject:g2];
@@ -131,16 +127,10 @@
                 
                 [[CoreDataStack sharedCoreDataStack] saveContext];
                 
-                hud.labelText = NSLocalizedString(@"Data Updated", nil);
             }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                [NSString localizedMsgFromRet_code:ret_code withHUD:NO];
             }
-        }else{
-            hud.labelText = [error localizedDescription];
-            
         }
-        [hud show:YES];
-        [hud hide:YES afterDelay:HUD_TIME_DELAY];
         [self.refreshView finishLoading];
     }];
 }
@@ -180,8 +170,8 @@
         return cell;
     } else if (indexPath.row == 1) {
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
-        cell.textLabel.text = @"选择周期";
-        cell.detailTextLabel.text = @"近7天";
+        cell.textLabel.text = NSLocalizedString(@"选择周期",nil);
+        cell.detailTextLabel.text = [self.countDayDic valueForKey:self.countDay];
         return cell;
     } else {
         EffectCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"EffectCell" forIndexPath:indexPath];
@@ -201,7 +191,7 @@
 {
     ControlEffect *controlEffect = [self.fetchController objectAtIndexPath:indexPath];
     
-    cell.scoreLabel.text = @"综合疗效评估";
+    cell.scoreLabel.text = NSLocalizedString(@"综合疗效评估",nil);
     cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@分",controlEffect.conclusionScore]];
     cell.evaluateTextLabel.text = [NSString stringWithFormat:@"%@  %@",controlEffect.conclusion,controlEffect.conclusionDesc];
     
@@ -214,11 +204,11 @@
     ControlEffect *controlEffect = self.fetchController.fetchedObjects[0];
     EffectList *effectList = [controlEffect.effectList objectAtIndex:indexPath.row-2];
     
-    cell.testCount.text = @"检测次数";
-    cell.overproofCount.text = @"超标次数";
-    cell.maximumValue.text = @"最高值";
-    cell.minimumValue.text = @"最低值";
-    cell.averageValue.text = @"平均值";
+    cell.testCount.text = NSLocalizedString(@"检测次数",nil);
+    cell.overproofCount.text = NSLocalizedString(@"超标次数",nil);
+    cell.maximumValue.text = NSLocalizedString(@"最高值",nil);
+    cell.minimumValue.text = NSLocalizedString(@"最低值",nil);
+    cell.averageValue.text = NSLocalizedString(@"平均值",nil);
     
     
     cell.evaluateType.text = effectList.name;
@@ -321,7 +311,8 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [[self.countDayDic allKeys] objectAtIndex:row] ;
+    NSArray *arr = [[self.countDayDic allValues] sortedArrayUsingSelector:@selector(compare:)];
+    return [arr objectAtIndex:row] ;
 }
 
 - (IBAction)cancelAndConfirm:(id)sender
@@ -335,9 +326,8 @@
         case 1002:
         {
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-            NSString *key = [[self.countDayDic allKeys] objectAtIndex:[self.pickerView selectedRowInComponent:0]];
-            cell.detailTextLabel.text  = key;
-            self.countDay = [self.countDayDic valueForKey:key];
+            self.countDay = [[self.countDayDic allKeys] objectAtIndex:[self.pickerView selectedRowInComponent:0]];
+            cell.detailTextLabel.text  = [self.countDayDic valueForKey:self.countDay];
             
             [self.refreshView startLoadingAndExpand:YES animated:YES];
             break;

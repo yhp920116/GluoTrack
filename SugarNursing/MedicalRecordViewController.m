@@ -89,10 +89,6 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
 
 - (void)getMedicalRecord
 {
-    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:hud];
-    hud.mode = MBProgressHUDModeText;
-    
     NSDictionary *parameters = @{@"method":@"getMediRecordList",
                                  @"sign":@"sign",
                                  @"sessionId":[NSString sessionID],
@@ -101,7 +97,8 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
     [GCRequest userGetMedicalRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
-            if ([[responseData valueForKey:@"ret_code"] isEqualToString:@"0"]) {
+            NSString *ret_code = [responseData valueForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
                 
                 // 先清除缓存
                 for (MedicalRecord *record in self.fetchController.fetchedObjects) {
@@ -125,14 +122,8 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
                     medicalRecord.userid = userID;
                 }
                 [[CoreDataStack sharedCoreDataStack] saveContext];
-                
-                hud.labelText = NSLocalizedString(@"Data Updated", nil);
-                [hud show:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }else{
-                hud.labelText = [responseData valueForKey:@"ret_msg"];
-                [hud show:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                [NSString localizedMsgFromRet_code:ret_code withHUD:NO];
             }
         }
         
@@ -170,11 +161,60 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
 }
 
 #pragma mark - NSFetchedResultController
+//
+//- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+//{
+//    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:sectionIndex];
+//    
+//    switch (type) {
+//        case NSFetchedResultsChangeInsert:
+//            [self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+//            break;
+//        case NSFetchedResultsChangeDelete:
+//            [self.tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+//            break;
+//        case NSFetchedResultsChangeUpdate:
+//        {
+//            SectionHeaderView *header = (SectionHeaderView *)[self.tableView headerViewForSection:sectionIndex];
+//            [self configureHeaderView:header inSection:sectionIndex];
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+//    
+//}
+//
+//- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+//{
+//    switch (type) {
+//        case NSFetchedResultsChangeInsert:
+//            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            break;
+//        case NSFetchedResultsChangeDelete:
+//            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            break;
+//        case NSFetchedResultsChangeMove:
+//            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            break;
+//        case NSFetchedResultsChangeUpdate:
+//        {
+//            MedicalHistoryDetailCell *cell = (MedicalHistoryDetailCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+//            [self configureMedicalHistoryDetailCell:cell indexPath:indexPath];
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+//    
+//    [self configureNoDataView];
+//}
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self configureNoDataView];
-    [self.tableView reloadData];
+        [self configureNoDataView];
+        [self.tableView reloadData];
 }
 
 - (void)configureNoDataView
@@ -282,7 +322,7 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
                 hud.labelText = NSLocalizedString(@"Data Updated", nil);
                 
             }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
             }
         }else{
             hud.labelText = [error localizedDescription];

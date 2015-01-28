@@ -121,6 +121,12 @@
 
 - (void)login
 {
+    [self.view endEditing:YES];
+    
+    if (![ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
+        return;
+    }
+    
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:hud];
     hud.labelText = NSLocalizedString(@"Login..", nil);
@@ -164,7 +170,7 @@
                 
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
             

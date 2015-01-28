@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LogTextField.h"
 
 @interface DietCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *foodNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dosageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *unitsLabel;
 
+@property (weak, nonatomic) IBOutlet LogTextField *food;
+@property (weak, nonatomic) IBOutlet LogTextField *weight;
+@property (weak, nonatomic) IBOutlet LogTextField *calorie;
+@property (weak, nonatomic) IBOutlet LogTextField *unit;
 
 @end

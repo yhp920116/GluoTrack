@@ -19,6 +19,7 @@
 // UserInfo
 + (NSString *)centerID;
 + (NSString *)userThumbnail;
++ (NSString *)phoneNumber;
 
 
 @end

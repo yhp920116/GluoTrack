@@ -11,17 +11,20 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XV4-JL-sKO">
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XV4-JL-sKO">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="30"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gn-kq-MhF" customClass="CustomLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gn-kq-MhF" customClass="CustomLabel">
                             <rect key="frame" x="20" y="7" width="36" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td5-Ex-Lkr">
-                            <rect key="frame" x="554" y="2" width="26" height="26"/>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td5-Ex-Lkr">
+                            <rect key="frame" x="540" y="2" width="60" height="26"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="ore-gT-IzU"/>
+                            </constraints>
                             <state key="normal" image="Add">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -34,7 +37,7 @@
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="8gn-kq-MhF" secondAttribute="centerY" id="66d-OD-frL"/>
                         <constraint firstItem="Td5-Ex-Lkr" firstAttribute="top" secondItem="XV4-JL-sKO" secondAttribute="top" constant="2" id="7pX-OL-Rv3"/>
-                        <constraint firstAttribute="trailing" secondItem="Td5-Ex-Lkr" secondAttribute="trailing" constant="20" id="BpB-5Z-ADQ"/>
+                        <constraint firstAttribute="trailing" secondItem="Td5-Ex-Lkr" secondAttribute="trailing" id="BpB-5Z-ADQ"/>
                         <constraint firstAttribute="bottom" secondItem="8gn-kq-MhF" secondAttribute="bottom" constant="6" id="E47-Ar-WH6"/>
                         <constraint firstAttribute="centerY" secondItem="Td5-Ex-Lkr" secondAttribute="centerY" id="HDh-nH-56M"/>
                         <constraint firstItem="8gn-kq-MhF" firstAttribute="top" secondItem="XV4-JL-sKO" secondAttribute="top" constant="7" id="IXm-n4-wLT"/>
@@ -45,7 +48,6 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="XV4-JL-sKO" secondAttribute="bottom" id="QEu-rp-Ktq"/>
                 <constraint firstAttribute="trailing" secondItem="XV4-JL-sKO" secondAttribute="trailing" id="eeZ-aK-ZxC"/>
                 <constraint firstItem="XV4-JL-sKO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oxd-Xn-ZIi"/>
                 <constraint firstItem="XV4-JL-sKO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="q29-Yw-67W"/>
@@ -53,6 +55,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addBtn" destination="Td5-Ex-Lkr" id="Whb-0D-iwb"/>
                 <outlet property="titleLabel" destination="8gn-kq-MhF" id="5SU-sh-RF6"/>
             </connections>
         </view>

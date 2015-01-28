@@ -8,10 +8,21 @@
 
 #import "TestTrackerViewController.h"
 #import "UtilsMacro.h"
+#import "DetectDataCell.h"
+
+typedef NS_ENUM(NSInteger, GCType) {
+    GCTypeTable = 0,
+    GCTypeLine
+};
 
 typedef NS_ENUM(NSInteger, GCSearchMode) {
     GCSearchModeByDay = 0,
     GCSearchModeByMonth
+};
+
+typedef NS_ENUM(NSInteger, GCLineType) {
+    GCLineTypeGlucose = 0,
+    GCLineTypeHemo
 };
 
 @interface TestTrackerViewController ()<MBProgressHUDDelegate, NSFetchedResultsControllerDelegate, RMDateSelectionViewControllerDelegate>{
@@ -19,10 +30,12 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 }
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchController;
-@property (strong, nonatomic) NSString *lineType;
-@property (strong, nonatomic) NSDate *selectedDate;
+@property (assign) GCLineType lineType;
 @property (assign) GCSearchMode searchMode;
+@property (assign) GCType viewType;
+@property (strong, nonatomic) NSDate *selectedDate;
 @property (weak, nonatomic) IBOutlet UILabel *unitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end
 
@@ -34,11 +47,13 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 {
     [super viewDidLoad];
     
-    // lineType  1:glucose 2:hemoglobin
-    self.lineType = @"1";
+    // lineType
+    self.lineType = GCLineTypeGlucose;
+    self.viewType = GCTypeLine;
+    self.searchMode = GCSearchModeByDay;
     self.unitLabel.text = @"mmol/L";
     self.selectedDate = [NSDate date];
-    self.searchMode = GCSearchModeByDay;
+    self.dateLabel.text = [NSString formattingDate:self.selectedDate to:@"yyyy-MM-dd"];
     
     [self setBarRightItems];
     [self.tabBar setSelectedItem:[self.tabBar items][0]];
@@ -47,7 +62,22 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
     }
     
     [self configureGraph];
+    [self configureTableView];
+    [self configureGraphAndTableView];
     [self getDetectionData];
+}
+
+- (void)configureGraphAndTableView
+{
+    switch (self.viewType) {
+        case GCTypeLine:
+            self.trackerChart.hidden = NO;
+            self.tableView.hidden = YES;
+            break;
+        case GCTypeTable:
+            self.trackerChart.hidden = YES;
+            self.tableView.hidden = NO;
+    }
 }
 
 #pragma mark - FetchController Delegate
@@ -60,35 +90,32 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 - (void)configureFetchController
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSString *eventObject;
+    BOOL timeAscending;
     
     switch (self.searchMode) {
         case GCSearchModeByDay:
         {
             [dateFormatter setDateFormat:@"yyyyMMdd"];
+            timeAscending = NO;
             break;
         }
         case GCSearchModeByMonth:
         {
             [dateFormatter setDateFormat:@"yyyyMM"];
-
+            timeAscending = YES;
+            break;
         }
         default:
             break;
     }
-    
-    if ([self.lineType isEqualToString:@"1"]){
-        eventObject = @"glucose";
-    }else{
-        eventObject = @"hemoglobin";
-    }
 
     NSString *dateString = [dateFormatter stringFromDate:self.selectedDate];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"logType = %@ && ANY eventList.eventObject = [cd] %@ && userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@" ,@"detect",eventObject,[NSString userID],[NSString linkmanID],dateString];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@" ,@"detect",[NSString userID],[NSString linkmanID],dateString];
     
-    self.fetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:YES withPredicate:predicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
-    
+    self.fetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:timeAscending withPredicate:predicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
+    [self.tableView reloadData];
+    [self configureNoDataView];
     [self.trackerChart reloadGraph];
 }
 
@@ -96,15 +123,20 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 {
     [self configureFetchController];
     
-    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:hud];
-    hud.mode = MBProgressHUDModeText;
+    NSString *lineType;
+    switch (self.lineType) {
+        case GCLineTypeGlucose:
+            lineType = @"1";
+            break;
+        case GCLineTypeHemo:
+            lineType= @"2";
+            break;
+    }
     
-    NSMutableDictionary *parameters = [@{@"method":@"queryDetectLine",
+    NSMutableDictionary *parameters = [@{@"method":@"queryDetectDetailLine2",
                                          @"sign":@"sign",
                                          @"sessionId":[NSString sessionID],
                                          @"linkManId":[NSString linkmanID],
-                                         @"lineType":self.lineType,
                                          } mutableCopy];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -128,7 +160,6 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 
     [GCRequest userGetDetectionDataWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
-        
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
             if ([ret_code isEqualToString:@"0"]) {
@@ -138,41 +169,28 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
                     [recordLog deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 }
                 
-                NSArray *recordLogArray = [responseData objectForKey:@"pointList"];
+                NSArray *detectLogArr = [responseData objectForKey:@"detectLogList"];
                 
-                for (NSDictionary *recordLogDic in recordLogArray) {
+                for (NSDictionary *detectLogDic in detectLogArr) {
                     
                     RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [recordLog updateCoreDataForData:recordLogDic withKeyPath:nil];
-
-                    UserID *userId = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    userId.userId = [NSString userID];
-                    userId.linkManId = [NSString linkmanID];
-                    recordLog.userid = userId;
+                    [recordLog updateCoreDataForData:detectLogDic withKeyPath:nil];
                     
-                    NSMutableOrderedSet *evenLists = [[NSMutableOrderedSet alloc] initWithCapacity:1];
-
-                    for (NSDictionary *evenListDic in [recordLogDic objectForKey:@"eventList"]) {
-                        RecordLogList *eventList = [RecordLogList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                        [eventList updateCoreDataForData:evenListDic withKeyPath:nil];
-                        [evenLists addObject:eventList];
-                    }
-    
-                    recordLog.eventList = evenLists;
+                    DetectLog *detect = [DetectLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    [detect updateCoreDataForData:[detectLogDic objectForKey:@"detectLog"] withKeyPath:nil];
+                    
+                    UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                    userID.userId = [NSString userID];
+                    userID.linkManId = [NSString linkmanID];
+                    
+                    recordLog.detectLog = detect;
+                    recordLog.userid = userID;
                 }
                 
                 [[CoreDataStack sharedCoreDataStack] saveContext];
-                hud.labelText = NSLocalizedString(@"Data Updated", nil);
-                [hud show:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                [NSString localizedMsgFromRet_code:ret_code withHUD:NO];
             }
-        }else{
-            hud.labelText = [error localizedDescription];
-            [hud show:YES];
-            [hud hide:YES afterDelay:HUD_TIME_DELAY];
         }
         
     }];
@@ -183,31 +201,38 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 
 - (void )setBarRightItems
 {
-//    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    shareBtn.frame = CGRectMake(0, 0, 26, 26);
-//    shareBtn.tag = 11;
-//    [shareBtn setImage:[UIImage imageNamed:@"Share.png"] forState:UIControlStateNormal];
-//    [shareBtn addTarget:self action:@selector(leftBarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
-    
-
+    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareBtn.frame = CGRectMake(0, 0, 26, 26);
+    shareBtn.tag = 11;
+    [shareBtn setImage:[UIImage imageNamed:@"table.png"] forState:UIControlStateNormal];
+    [shareBtn addTarget:self action:@selector(rightBarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
     
     UIButton *calenderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     calenderBtn.frame = CGRectMake(0, 0, 26, 26);
     calenderBtn.tag = 12;
-    [calenderBtn setImage:[UIImage imageNamed:@"Calender.png"] forState:UIControlStateNormal];
-    [calenderBtn addTarget:self action:@selector(leftBarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [calenderBtn setImage:[UIImage imageNamed:@"date.png"] forState:UIControlStateNormal];
+    [calenderBtn addTarget:self action:@selector(rightBarButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *calender = [[UIBarButtonItem alloc] initWithCustomView:calenderBtn];
     
-    self.navigationItem.rightBarButtonItems = @[calender];
+    self.navigationItem.rightBarButtonItems = @[calender,share];
 }
 
-- (void)leftBarButtonAction:(id)sender
+- (void)rightBarButtonAction:(id)sender
 {
     UIButton *btn = (UIButton *)sender;
     switch (btn.tag) {
         case 11:
         {
+            if ([btn.currentImage isEqual:[UIImage imageNamed:@"line.png"]]) {
+                [btn setImage:[UIImage imageNamed:@"table.png"] forState:UIControlStateNormal];
+                self.viewType = GCTypeLine;
+            }else{
+                [btn setImage:[UIImage imageNamed:@"line.png"] forState:UIControlStateNormal];
+                self.viewType = GCTypeTable;
+            }
+            [self configureGraphAndTableView];
+            [self configureFetchController];
             break;
         }
         case 12:
@@ -239,11 +264,26 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
     self.trackerChart.enableXAxisLabel = YES;
     self.trackerChart.autoScaleYAxis = YES;
     self.trackerChart.alwaysDisplayDots = YES;
+    self.trackerChart.sizePoint = 10;
 //    self.trackerChart.alwaysDisplayPopUpLabels = YES;
     self.trackerChart.enableReferenceXAxisLines = YES;
     self.trackerChart.enableReferenceYAxisLines = YES;
     self.trackerChart.enableReferenceAxisFrame = YES;
     self.trackerChart.animationGraphStyle = BEMLineAnimationDraw;
+}
+
+- (void)configureTableView
+{
+    
+}
+
+- (void)configureNoDataView
+{
+    if (self.fetchController.fetchedObjects.count > 0) {
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    }else{
+        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
+    }
 }
 
 #pragma mark - trackerChart Data Source
@@ -256,11 +296,39 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index
 {
     RecordLog *recordLog = [self.fetchController.fetchedObjects objectAtIndex:index];
-    RecordLogList *logList = recordLog.eventList[0];
-    return [logList.eventValue floatValue];
+    CGFloat pointValue;
+    switch (self.lineType) {
+        case GCLineTypeGlucose:
+            pointValue = recordLog.detectLog.glucose.floatValue;
+            break;
+        case GCLineTypeHemo:
+            pointValue = recordLog.detectLog.hemoglobinef.floatValue;
+
+    }
+    return pointValue;
 }
 
-- (CGFloat)intervalForAnHourInLineGraph:(BEMSimpleLineGraphView *)graph
+- (GraphSearchMode)searchModeInLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    switch (self.searchMode) {
+        case GCSearchModeByDay:
+            return GraphSearchModeByDay;
+        case GCSearchModeByMonth:
+            return GraphSearchModeByMonth;
+    }
+}
+
+- (CGFloat)intervalForSecondInLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    switch (self.searchMode) {
+        case GCSearchModeByDay:
+            return 1.0/60;
+        case GCSearchModeByMonth:
+            return 0.0005;
+    }
+}
+
+- (CGFloat)intervalForDayInLineGraph:(BEMSimpleLineGraphView *)graph
 {
     return 30;
 }
@@ -303,6 +371,11 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 //    return NSLog(@"Tap on the key point at index: %ld",(long)index);
 //}
 
+- (NSDate *)currentDateInLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    return self.selectedDate;
+}
+
 - (NSDate *)lineGraph:(BEMSimpleLineGraphView *)graph dateOnXAxisForIndex:(NSInteger)index
 {
     if (self.fetchController.fetchedObjects.count == 0) {
@@ -315,26 +388,54 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
     return [dateFormatter dateFromString:recordLog.time];
 }
 
-- (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index
-{
-    if (self.fetchController.fetchedObjects.count == 0) {
-        return @"";
-    }
-    
-    RecordLog *recordLog = [self.fetchController.fetchedObjects objectAtIndex:index];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
-    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-    NSDate *date = [dateFormatter dateFromString:recordLog.time];
-    [dateFormatter setDateFormat:@"MM/dd HH:mm"];
-    NSString *dateString = [dateFormatter stringFromDate:date] ? [dateFormatter stringFromDate:date] : @"";
-    
-    return [dateString stringByReplacingOccurrencesOfString:@" " withString:@"\n"];
-}
+//- (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index
+//{
+//    if (self.fetchController.fetchedObjects.count == 0) {
+//        return @"";
+//    }
+//    
+//    RecordLog *recordLog = [self.fetchController.fetchedObjects objectAtIndex:index];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+////    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+//    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+//    NSDate *date = [dateFormatter dateFromString:recordLog.time];
+//    [dateFormatter setDateFormat:@"MM/dd HH:mm"];
+//    NSString *dateString = [dateFormatter stringFromDate:date] ? [dateFormatter stringFromDate:date] : @"";
+//    
+//    return [dateString stringByReplacingOccurrencesOfString:@" " withString:@"\n"];
+//}
 
 - (BOOL)noDataLabelEnableForLineGraph:(BEMSimpleLineGraphView *)graph
 {
     return YES;
+}
+
+#pragma mark - TableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.fetchController.fetchedObjects.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"DetectCell";
+    DetectDataCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    [self configureTableView:tableView withCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (void)configureTableView:(UITableView *)tableView withCell:(DetectDataCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    RecordLog *recordLog = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
+
+    cell.detectDate.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"YYYY MMMM d, EEEE"];
+    cell.detectTime.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"HH:mm"];
+    if (self.lineType == GCLineTypeGlucose) {
+        cell.detectValue.text = recordLog.detectLog.glucose;
+    }else{
+        cell.detectValue.text = recordLog.detectLog.hemoglobinef;
+    }
 }
 
 #pragma mark - Others
@@ -347,7 +448,6 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 
 - (void)showDateSelectionVC
 {
-    
     [RMDateSelectionViewController setLocalizedTitleForCancelButton:NSLocalizedString(@"Cancel", nil)];
     [RMDateSelectionViewController setLocalizedTitleForNowButton:NSLocalizedString(@"30 days recently", nil)];
     [RMDateSelectionViewController setLocalizedTitleForSelectButton:NSLocalizedString(@"Select By Day", nil)];
@@ -369,6 +469,8 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
     self.searchMode = GCSearchModeByMonth;
     NSDate *date = vc.datePicker.date;
     self.selectedDate = date;
+    self.dateLabel.text = NSLocalizedString(@"A month earlier", nil);
+    self.trackerChart.sizePoint = 4;
     [self configureFetchController];
     [self getDetectionData];
 }
@@ -377,25 +479,23 @@ typedef NS_ENUM(NSInteger, GCSearchMode) {
 {
     self.searchMode = GCSearchModeByDay;
     self.selectedDate = aDate;
+    self.dateLabel.text = [NSString formattingDate:self.selectedDate to:@"yyyy-MM-dd"];
+    self.trackerChart.sizePoint = 10;
     [self configureFetchController];
     [self getDetectionData];
 }
-
-
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
 
     if ([item isEqual:[tabBar.items objectAtIndex:0]] ) {
-        self.lineType = @"1";
+        self.lineType = GCLineTypeGlucose;
         self.unitLabel.text = @"mmol/L";
-        [self getDetectionData];
     }else{
-        self.lineType = @"2";
+        self.lineType = GCLineTypeHemo;
         self.unitLabel.text = @"%";
-        [self getDetectionData];
-        
     }
+    [self configureFetchController];
 
 }
 

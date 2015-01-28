@@ -15,7 +15,10 @@
 - (void)sexFormattingToUserForKey:(NSString *)key;
 - (void)sexFormattingToServerForKey:(NSString *)key;
 - (void)serverLevelFormattingToUserForKey:(NSString *)key;
-
+- (void)medicineUnitsFormattingToUserForKey:(NSString *)key;
+- (void)medicineUsageFormattingToUserForKey:(NSString *)key;
+- (void)eatPeriodFormattingToUserForKey:(NSString *)key;
+- (void)feelingFormattingToUserForKey:(NSString *)key;
 
 
 @end

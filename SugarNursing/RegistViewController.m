@@ -96,34 +96,30 @@
     [self.view endEditing:YES];
     
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.customView = self.datePicker;
+    hud.customView = self.pickerView;
+    hud.margin = 0;
     hud.mode = MBProgressHUDModeCustomView;
     [hud show:YES];
 }
 
-- (IBAction)didSelectDatePicker:(id)sender
+- (IBAction)dateCancelAndConfirm:(id)sender
 {
-    UIDatePicker *datePicker = (UIDatePicker *)sender;
-    NSDate *date = [datePicker date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
-    NSString *dateString = [dateFormatter stringFromDate:date];
-    
-    
-    [self.dateBtn setTitle:dateString forState:UIControlStateNormal];
-    
-    [hud hide:YES afterDelay:0.25];
+    UIButton *btn = (UIButton *)sender;
+
+    if (btn.tag == 1001) {
+        if ([ParseData parseDateIsAvaliable:self.datePicker.date]) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+            NSString *dateString = [dateFormatter stringFromDate:self.datePicker.date];
+            [self.dateBtn setTitle:dateString forState:UIControlStateNormal];
+        }else [hud hide:YES];
+    }
+    [hud hide:YES];
 }
-
-
 
 - (IBAction)regist:(id)sender
 {
-    if (![ParseData parseDateStringIsAvaliable:[self.dateBtn currentTitle] format:@"yyyy-MM-dd"] || ![ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
-        
-        [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Format is not avaliable", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil] show];
-        
-    }else{
+    if ([ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
         [self userRegister];
     }
 }
@@ -154,11 +150,13 @@
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = NSLocalizedString(@"Register succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
-                [self performSelector:@selector(toLogin:) withObject:nil afterDelay:HUD_TIME_DELAY];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [AppDelegate userLogOut];
+                });
                 
             }else{
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
             
@@ -166,12 +164,6 @@
         
     }];
     [UIAlertView showAlertViewForTaskWithErrorOnCompletion:registerTask delegate:nil];
-}
-
-- (void)toLogin:(id)sender
-{
-    [AppDelegate userLogOut];
-
 }
 
 @end

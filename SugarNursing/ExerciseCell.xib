@@ -14,57 +14,68 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OiE-wi-REc" id="weo-Hn-Tio">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXa-a2-vRs">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7B-7w-lX1">
                         <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aaN-I9-OYw" customClass="CustomLabel">
-                                <rect key="frame" x="8" y="0.0" width="96" height="43"/>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="eWX-hK-5jj" customClass="LogTextField">
+                                <rect key="frame" x="0.0" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HfK-Rj-snO" customClass="CustomLabel">
-                                <rect key="frame" x="104" y="0.0" width="96" height="43"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Qd1-no-xP5" customClass="LogTextField">
+                                <rect key="frame" x="73" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oPq-c0-Nd4" customClass="CustomLabel">
-                                <rect key="frame" x="200" y="0.0" width="96" height="43"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="uKq-bX-eVT" customClass="LogTextField">
+                                <rect key="frame" x="146" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9QU-NF-T1W" customClass="LogTextField">
+                                <rect key="frame" x="219" y="0.0" width="73" height="43"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oPq-c0-Nd4" firstAttribute="leading" secondItem="HfK-Rj-snO" secondAttribute="trailing" id="4bT-M7-P0i"/>
-                            <constraint firstItem="HfK-Rj-snO" firstAttribute="height" secondItem="aaN-I9-OYw" secondAttribute="height" id="8Zp-1n-kJj"/>
-                            <constraint firstItem="HfK-Rj-snO" firstAttribute="width" secondItem="aaN-I9-OYw" secondAttribute="width" id="Amh-uY-LJc"/>
-                            <constraint firstItem="HfK-Rj-snO" firstAttribute="leading" secondItem="aaN-I9-OYw" secondAttribute="trailing" id="Lq5-OM-eyg"/>
-                            <constraint firstItem="HfK-Rj-snO" firstAttribute="height" secondItem="oPq-c0-Nd4" secondAttribute="height" id="OmS-cV-lfT"/>
-                            <constraint firstItem="HfK-Rj-snO" firstAttribute="width" secondItem="oPq-c0-Nd4" secondAttribute="width" id="Qdo-fL-inD"/>
-                            <constraint firstItem="aaN-I9-OYw" firstAttribute="leading" secondItem="rXa-a2-vRs" secondAttribute="leading" constant="8" id="VCh-LR-RiO"/>
-                            <constraint firstItem="aaN-I9-OYw" firstAttribute="height" secondItem="rXa-a2-vRs" secondAttribute="height" id="XmP-he-ENP"/>
-                            <constraint firstAttribute="centerY" secondItem="oPq-c0-Nd4" secondAttribute="centerY" id="eeH-Ch-oC3"/>
-                            <constraint firstAttribute="centerY" secondItem="aaN-I9-OYw" secondAttribute="centerY" id="huI-s9-Vww"/>
-                            <constraint firstItem="aaN-I9-OYw" firstAttribute="width" secondItem="rXa-a2-vRs" secondAttribute="width" multiplier="0.33" id="md6-RJ-HdE"/>
-                            <constraint firstAttribute="centerY" secondItem="HfK-Rj-snO" secondAttribute="centerY" id="pEA-3W-F1k"/>
+                            <constraint firstAttribute="bottom" secondItem="Qd1-no-xP5" secondAttribute="bottom" id="5n3-F2-k77"/>
+                            <constraint firstItem="eWX-hK-5jj" firstAttribute="leading" secondItem="I7B-7w-lX1" secondAttribute="leading" id="FKK-TO-hPx"/>
+                            <constraint firstAttribute="bottom" secondItem="9QU-NF-T1W" secondAttribute="bottom" id="GZW-HR-JZB"/>
+                            <constraint firstAttribute="bottom" secondItem="uKq-bX-eVT" secondAttribute="bottom" id="I0Z-b5-bQb"/>
+                            <constraint firstItem="9QU-NF-T1W" firstAttribute="leading" secondItem="uKq-bX-eVT" secondAttribute="trailing" id="Ipy-OZ-Mrj"/>
+                            <constraint firstItem="eWX-hK-5jj" firstAttribute="top" secondItem="I7B-7w-lX1" secondAttribute="top" id="IxG-Op-u1c"/>
+                            <constraint firstItem="uKq-bX-eVT" firstAttribute="leading" secondItem="Qd1-no-xP5" secondAttribute="trailing" id="JAX-O0-p2n"/>
+                            <constraint firstItem="uKq-bX-eVT" firstAttribute="top" secondItem="I7B-7w-lX1" secondAttribute="top" id="JNy-FI-Wkq"/>
+                            <constraint firstItem="9QU-NF-T1W" firstAttribute="top" secondItem="I7B-7w-lX1" secondAttribute="top" id="O43-BC-m5j"/>
+                            <constraint firstItem="Qd1-no-xP5" firstAttribute="width" secondItem="eWX-hK-5jj" secondAttribute="width" id="OMZ-ep-gYe"/>
+                            <constraint firstItem="Qd1-no-xP5" firstAttribute="leading" secondItem="eWX-hK-5jj" secondAttribute="trailing" id="PcA-g4-Xuh"/>
+                            <constraint firstAttribute="bottom" secondItem="eWX-hK-5jj" secondAttribute="bottom" id="WPj-tl-nBL"/>
+                            <constraint firstItem="Qd1-no-xP5" firstAttribute="width" secondItem="uKq-bX-eVT" secondAttribute="width" id="aMV-li-UL6"/>
+                            <constraint firstItem="Qd1-no-xP5" firstAttribute="top" secondItem="I7B-7w-lX1" secondAttribute="top" id="axe-ZL-vkf"/>
+                            <constraint firstItem="9QU-NF-T1W" firstAttribute="width" secondItem="uKq-bX-eVT" secondAttribute="width" id="f26-NZ-J9O"/>
+                            <constraint firstItem="eWX-hK-5jj" firstAttribute="width" secondItem="I7B-7w-lX1" secondAttribute="width" multiplier="0.25" id="f5u-D4-srX"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="rXa-a2-vRs" secondAttribute="trailing" constant="15" id="2mj-wJ-yHy"/>
-                    <constraint firstAttribute="bottom" secondItem="rXa-a2-vRs" secondAttribute="bottom" id="Twz-SO-auC"/>
-                    <constraint firstItem="rXa-a2-vRs" firstAttribute="top" secondItem="weo-Hn-Tio" secondAttribute="top" id="iKH-B4-sxn"/>
-                    <constraint firstItem="rXa-a2-vRs" firstAttribute="leading" secondItem="weo-Hn-Tio" secondAttribute="leading" constant="15" id="kr0-PL-fFQ"/>
+                    <constraint firstItem="I7B-7w-lX1" firstAttribute="top" secondItem="weo-Hn-Tio" secondAttribute="top" id="2zL-lv-AKg"/>
+                    <constraint firstItem="I7B-7w-lX1" firstAttribute="leading" secondItem="weo-Hn-Tio" secondAttribute="leading" constant="15" id="84B-wE-WiQ"/>
+                    <constraint firstAttribute="bottom" secondItem="I7B-7w-lX1" secondAttribute="bottom" id="M7p-Ge-WrQ"/>
+                    <constraint firstAttribute="trailing" secondItem="I7B-7w-lX1" secondAttribute="trailing" constant="15" id="QQa-h0-7Um"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
             <connections>
-                <outlet property="exerciseNameLabel" destination="aaN-I9-OYw" id="mIa-R8-kYX"/>
-                <outlet property="timeLabel" destination="HfK-Rj-snO" id="waK-Xy-0bj"/>
-                <outlet property="unitsLabel" destination="oPq-c0-Nd4" id="hVr-52-nyt"/>
+                <outlet property="calorie" destination="9QU-NF-T1W" id="YWs-og-CG5"/>
+                <outlet property="exerciseName" destination="eWX-hK-5jj" id="aDd-kG-LA8"/>
+                <outlet property="time" destination="Qd1-no-xP5" id="59c-bD-mO9"/>
+                <outlet property="unit" destination="uKq-bX-eVT" id="16p-fQ-Nnb"/>
             </connections>
             <point key="canvasLocation" x="261" y="265"/>
         </tableViewCell>

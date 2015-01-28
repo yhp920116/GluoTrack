@@ -60,6 +60,7 @@
 "surephonenumber"="確認手機號碼";
 "cancel"="取消";
 "Sending code" = "發送驗證碼";
+"User Exists" = "用戶已註冊";
 "Sending code succeed" = "驗證碼發送成功";
 
 
@@ -74,13 +75,31 @@
 "female"="女";
 "male"="男";
 "Format is not avaliable" = "格式填寫不正確";
+"Date Format is not avaliable" = "日期格式填寫不正確";
+"Password Format is not avaliable" = "密碼不能少於6位數";
+"Not your mobile phone" = "這不是您的手機號碼";
+
 
 
 /* Test Tracker */
 "Cancel" = "取消";
-"30 days recently" = "近30天";
+"30 days recently" = "近一個月";
 "Select By Day" = "按日查詢";
 "No Data" = "暫無數據";
+"A month earlier" = "近一個月";
+
+/* Control Effect */
+"空腹血糖G3" = "空腹血糖G3";
+"餐后血糖G2" = "餐後血糖G2";
+"餐后血糖G1" = "餐後血糖G1";
+"选择周期" = "選擇週期";
+"综合疗效评估" = "綜合療效評估";
+"检测次数" = "檢測次數";
+"超标次数" = "超標次數";
+"最高值" = "最高值";
+"最低值" = "最低值";
+"平均值" = "平均值";
+
 
 
 /* Member Center */
@@ -104,6 +123,9 @@
 "Thumbnail uploading" = "正在上傳圖片";
 "Upload succeed" = "上傳成功";
 
+/* Recovery Log */
+"Custom" = "自定義";
+
 /* Medical History */
 "Medical Record" = "既往病史";
 "Please describe your case" = "請簡訴您的病例";
@@ -120,9 +142,6 @@
 "Sending FeedBack…" = "發送中…";
 "Send Message Succeed" = "發送成功，感謝您的配合";
 
-/* Service center */
-"Send Message Succeed" = "消息發送成功";
-
 /* Add New Recovery Record */
 "detect" = "检测";
 "diet" = "飲食";
@@ -130,4 +149,69 @@
 "drug" = "用藥";
 "Add New Recovery Record" = "新增日誌";
 "Edit Recovery Record" = "編輯日誌";
+"calorie" = "卡路里";
+"minutes" = "分鐘";
+"Input Detect Value" = "輸入檢測值";
+"breakfast" = "早餐";
+"lunch" = "午餐";
+"dinner" = "晚餐";
+"snack" = "加餐";
+"Not to Add More" = "最多只能添加十條";
 
+"检测设备" = "檢測設備";
+"检测日期" = "檢測日期";
+"检测时间" = "檢測時間";
+"选择日期" = "選擇日期";
+"选择时间" = "選擇時間";
+"增加备注" = "增加備註";
+"用药日期" = "用藥日期";
+"用药时间" = "用藥時間";
+"饮食日期" = "飲食日期";
+"饮食时间" = "飲食時間";
+"三餐情况" = "三餐情况";
+"运动日期" = "運動日期";
+"开始时间" = "開始時間";
+"选择用餐类型" = "選擇用餐類型";
+"请输入药物名称" = "請輸入藥物名稱";
+"请输入食物名称" = "請輸入食物名稱";
+"请输入运动名称" = "請輸入運動名稱";
+"可选" = "可選";
+"Value cannot be empty" = "檢測值不能為空";
+"检测值超过最大或最小值" = "檢測值超過最大或最小值";
+"用药不能为空" = "用藥不能為空";
+"检测结果" = "檢測結果";
+"胰岛素" = "胰島素";
+"降糖药" = "降糖藥";
+"其他" = "其他";
+"摄入食物" = "攝入食物";
+"运动数据" = "運動數據";
+"自我感觉" = "自我感覺";
+"检测类型" = "檢測類型";
+"检测值" = "檢測值";
+"单位" = "單位";
+"药品名称" = "藥品名稱";
+"用法" = "用法";
+"用量" = "用量";
+"食物名称" = "食物名稱";
+"摄入量" = "攝入量";
+"摄入卡路里" = "攝入卡路里";
+"输入名称" = "輸入名稱";
+"输入时长" = "輸入時長";
+"消耗卡路里" = "消耗卡路里";
+"运动项目" = "運動項目";
+"时长" = "時長";
+"消耗卡路里" = "消耗卡路里";
+
+
+"g" = "克";
+"kg" = "千克";
+"mg" = "毫克";
+"grain" = "粒";
+"slice" = "片";
+"unit" = "單位";
+"ml" = "毫升";
+"piece" = "支";
+"bottle" = "瓶";
+"Oral" = "口服/不服藥";
+"Insulin" = "胰島素汞";
+"Injection" = "注射";

@@ -1,13 +1,16 @@
 //
 //  RecordLog.m
-//  SugarNursing
+//  GlucoTrack
 //
-//  Created by Dan on 15-1-8.
+//  Created by Dan on 15-1-22.
 //  Copyright (c) 2015年 Tisson. All rights reserved.
 //
 
 #import "RecordLog.h"
-#import "RecordLogList.h"
+#import "DetectLog.h"
+#import "DietLog.h"
+#import "DrugLog.h"
+#import "ExerciseLog.h"
 #import "UserID.h"
 
 
@@ -16,7 +19,10 @@
 @dynamic id;
 @dynamic logType;
 @dynamic time;
-@dynamic eventList;
+@dynamic detectLog;
+@dynamic dietLog;
+@dynamic drugLog;
+@dynamic exerciseLog;
 @dynamic userid;
 
 @end

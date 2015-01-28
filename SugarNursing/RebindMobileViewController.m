@@ -32,9 +32,13 @@
 
 - (IBAction)verified:(id)sender
 {
+    if (![ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
+        return;
+    }
+    
     hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:hud];
-    hud.labelText = @"Verifying...";
+    hud.labelText = NSLocalizedString(@"Verifying...",nil);
     [hud show:YES];
     
     NSDictionary *parameters = @{@"method":@"verify",
@@ -63,13 +67,13 @@
                 [self performSegueWithIdentifier:@"ToRebind" sender:nil];
                 [hud hide:YES];
             }else{
-                hud.mode = MBProgressHUDModeText;
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
             }
         }else{
-            [hud hide:YES];
+            hud.labelText = [error localizedDescription];
         }
+        
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
     }];
     [UIAlertView showAlertViewForTaskWithErrorOnCompletion:verifyTask delegate:nil];
 }

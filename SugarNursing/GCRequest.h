@@ -72,7 +72,33 @@
 // get Control Effect
 + (NSURLSessionDataTask *)userGetControlEffectWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
 
+// edit Detect Log
++ (NSURLSessionDataTask *)userEditDetectLogWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
+
+// edit drug Log
++ (NSURLSessionDataTask *)userEditDrugLogWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
+
 // edit Diet Log
 + (NSURLSessionDataTask *)userEditDietLogWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
+
+// edit exercise Log
++ (NSURLSessionDataTask *)userEditExerciseLogWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
+
+// delete Detect Log
++ (NSURLSessionDataTask *)userDeleteDetectLogWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
+
+// delete Drug Log
++ (NSURLSessionDataTask *)userDeleteDrugLogWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
+
+// delete Diet Log
++ (NSURLSessionDataTask *)userDeleteDietLogWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
+
+// delete Exercise Log
++ (NSURLSessionDataTask *)userDeleteExerciseLogWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
+
+
+
+//
+
 
 @end

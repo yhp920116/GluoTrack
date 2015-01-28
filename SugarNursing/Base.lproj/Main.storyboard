@@ -38,16 +38,14 @@
                                                         <constraint firstAttribute="height" constant="80" id="OT7-bF-Yda"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ge5-bl-ON0">
-                                                    <rect key="frame" x="115" y="89" width="73" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ge5-bl-ON0">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBS-eD-Ig1">
-                                                    <rect key="frame" x="115" y="49" width="78" height="32"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBS-eD-Ig1">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -57,8 +55,8 @@
                                                 <constraint firstAttribute="centerY" secondItem="Ymm-oF-2ub" secondAttribute="centerY" id="E5f-s0-aKM"/>
                                                 <constraint firstItem="DBS-eD-Ig1" firstAttribute="leading" secondItem="Ymm-oF-2ub" secondAttribute="trailing" constant="15" id="GVL-IO-wG4"/>
                                                 <constraint firstItem="ge5-bl-ON0" firstAttribute="leading" secondItem="Ymm-oF-2ub" secondAttribute="trailing" constant="15" id="btZ-S1-1zZ"/>
-                                                <constraint firstItem="DBS-eD-Ig1" firstAttribute="top" secondItem="Ymm-oF-2ub" secondAttribute="top" constant="19" id="haO-g9-8Bb"/>
-                                                <constraint firstItem="Ymm-oF-2ub" firstAttribute="bottom" secondItem="ge5-bl-ON0" secondAttribute="bottom" id="hgt-Ki-Jay"/>
+                                                <constraint firstItem="DBS-eD-Ig1" firstAttribute="top" secondItem="Ymm-oF-2ub" secondAttribute="top" constant="15" id="haO-g9-8Bb"/>
+                                                <constraint firstItem="ge5-bl-ON0" firstAttribute="top" secondItem="DBS-eD-Ig1" secondAttribute="bottom" constant="10" id="iDk-aZ-4LI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -145,26 +143,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Stars" translatesAutoresizingMaskIntoConstraints="NO" id="8jF-V9-X8O">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfd-zy-VKl" customClass="FXBlurView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="tintColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="8jF-V9-X8O" firstAttribute="top" secondItem="6yR-TO-boB" secondAttribute="top" id="1Pk-ha-0n4"/>
                             <constraint firstItem="8jF-V9-X8O" firstAttribute="leading" secondItem="6yR-TO-boB" secondAttribute="leading" id="2w8-ka-G55"/>
-                            <constraint firstItem="Vfd-zy-VKl" firstAttribute="top" secondItem="6yR-TO-boB" secondAttribute="top" id="Nuh-2W-NR4"/>
-                            <constraint firstItem="Vfd-zy-VKl" firstAttribute="leading" secondItem="6yR-TO-boB" secondAttribute="leading" id="X64-Wu-LCI"/>
-                            <constraint firstAttribute="bottom" secondItem="Vfd-zy-VKl" secondAttribute="bottom" id="lUd-1G-Xe7"/>
                             <constraint firstItem="4fE-GM-aLJ" firstAttribute="top" secondItem="8jF-V9-X8O" secondAttribute="bottom" id="ofU-JX-4ph"/>
                             <constraint firstAttribute="trailing" secondItem="8jF-V9-X8O" secondAttribute="trailing" id="q8W-DO-lU9"/>
-                            <constraint firstAttribute="trailing" secondItem="Vfd-zy-VKl" secondAttribute="trailing" id="qWZ-Ea-0cm"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="blurView" destination="Vfd-zy-VKl" id="FCe-0x-rZa"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RUU-EW-jwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -27,7 +27,7 @@
 "7sL-r0-N1D.title" = "用户注册";
 
 /* Class = "IBUITextField"; placeholder = "username"; ObjectID = "CJ8-AL-bcw"; */
-"CJ8-AL-bcw.placeholder" = "手机号/邮箱/用户名/身份证";
+"CJ8-AL-bcw.placeholder" = "手机号/身份证号/邮箱";
 
 /* Class = "IBUIButton"; normalTitle = "Forget?"; ObjectID = "DvX-ci-ntZ"; */
 "DvX-ci-ntZ.normalTitle" = "忘记密码?";

@@ -1,6 +1,6 @@
 
 /* Class = "IBUITextField"; placeholder = "Input your new mobile number"; ObjectID = "1pP-vd-R0x"; */
-"1pP-vd-R0x.placeholder" = "輸入你的手機號碼";
+"1pP-vd-R0x.placeholder" = "請輸入您的手機號/身份證號/郵箱";
 
 /* Class = "IBUILabel"; text = "ID Number"; ObjectID = "2dg-ka-HVM"; */
 "2dg-ka-HVM.text" = "身份證";
@@ -20,8 +20,8 @@
 /* Class = "IBUILabel"; text = "治疗方案"; ObjectID = "7QS-b4-Xoc"; */
 "7QS-b4-Xoc.text" = "治療方案";
 
-/* Class = "IBUITextField"; placeholder = "Your ture name"; ObjectID = "AEb-w2-J9N"; */
-"AEb-w2-J9N.placeholder" = "真實姓名";
+/* Class = "IBUITextField"; placeholder = "Your phone number"; ObjectID = "AEb-w2-J9N"; */
+"AEb-w2-J9N.placeholder" = "您的手機號碼";
 
 /* Class = "IBUILabel"; text = "Date of birth"; ObjectID = "B9t-nr-jgC"; */
 "B9t-nr-jgC.text" = "出生日期";
@@ -126,7 +126,7 @@
 "gLT-dX-EMK.placeholder" = "確診疾病的名稱";
 
 /* Class = "IBUITextField"; placeholder = "Input your mobile number"; ObjectID = "gMW-wr-vs9"; */
-"gMW-wr-vs9.placeholder" = "輸入您的手機號碼";
+"gMW-wr-vs9.placeholder" = "請輸入您的手機號/身份證號/郵箱";
 
 /* Class = "IBUILabel"; text = "确诊的医院"; ObjectID = "hCf-cT-fmw"; */
 "hCf-cT-fmw.text" = "確診的醫院";
@@ -161,8 +161,8 @@
 /* Class = "IBUILabel"; text = "Thumbnail"; ObjectID = "rzz-N6-W8e"; */
 "rzz-N6-W8e.text" = "頭像";
 
-/* Class = "IBUILabel"; text = "TureName"; ObjectID = "srU-Qm-nes"; */
-"srU-Qm-nes.text" = "真實名字";
+/* Class = "IBUILabel"; text = "Phone Number"; ObjectID = "srU-Qm-nes"; */
+"srU-Qm-nes.text" = "手機號碼";
 
 /* Class = "IBUIButton"; normalTitle = "提交反馈"; ObjectID = "vJs-H3-IhK"; */
 "vJs-H3-IhK.normalTitle" = "提交反饋";

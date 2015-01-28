@@ -70,6 +70,18 @@
 
 - (IBAction)GetVerificationCode:(id)sender
 {
+    if (self.verifiedType == VerifiedTypeInReset) {
+        if (![self.phoneField.text isEqualToString:[NSString phoneNumber]]) {
+            hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:hud];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = NSLocalizedString(@"Not your mobile phone", nil);
+            [hud show:YES];
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            return;
+        }
+    }
+    
     if (!(self.phoneField.text.length == 11 || self.phoneField.text.length == 8)) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"notice", nil) message:NSLocalizedString(@"errorphonenumber", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"sure", nil) otherButtonTitles:nil, nil];
         [alert show];
@@ -91,7 +103,7 @@
 {
     if (buttonIndex == 1) {
         
-        if (self.verifiedType == VerifiedTypeReset) {
+        if (self.verifiedType == VerifiedTypeReset || self.verifiedType == VerifiedTypeInReset) {
             [self userGetCode];
             return;
         }
@@ -112,11 +124,15 @@
                 if ([ret_code isEqualToString:@"0"]) {
                     if ([[responseData valueForKey:@"isMember"] isEqualToString:@"0"]){
                         [self userGetCode];
+                    }else{
+                        hud.mode = MBProgressHUDModeText;
+                        hud.labelText = NSLocalizedString(@"User Exists", nil);
+                        [hud hide:YES afterDelay:HUD_TIME_DELAY];
                     }
                     
                 }else{
                     hud.mode = MBProgressHUDModeText;
-                    hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                    hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                     [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 }
             }else{
@@ -149,12 +165,13 @@
                         [self performSegueWithIdentifier:@"Register" sender:nil];
                         break;
                     case 1:
+                    case 2:
                         [self performSegueWithIdentifier:@"Reset" sender:nil];
                         break;
                 }
             }
             else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
             }
         }else{
             hud.labelText = [error localizedDescription];

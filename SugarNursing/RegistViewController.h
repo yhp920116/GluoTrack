@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *genderBtn;
 @property (weak, nonatomic) IBOutlet UIButton *dateBtn;
 
+@property (strong, nonatomic) IBOutlet UIView *pickerView;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;

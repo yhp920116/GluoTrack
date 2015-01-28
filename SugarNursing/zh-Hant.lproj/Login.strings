@@ -6,7 +6,7 @@
 "7bF-zV-wsi.text" = "登陸密碼";
 
 /* Class = "IBUITextField"; placeholder = "username"; ObjectID = "CJ8-AL-bcw"; */
-"CJ8-AL-bcw.placeholder" = "手機號/郵箱/用戶名/身份證";
+"CJ8-AL-bcw.placeholder" = "手機號/身份證號/郵箱";
 
 /* Class = "IBUIButton"; normalTitle = "Forget?"; ObjectID = "DvX-ci-ntZ"; */
 "DvX-ci-ntZ.normalTitle" = "忘記密碼?";

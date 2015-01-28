@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7pd-7E-Z9W" customClass="SwipeView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pd-7E-Z9W" customClass="SwipeView">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -56,7 +56,7 @@
                             <constraint firstItem="qLJ-6L-cvL" firstAttribute="top" secondItem="7pd-7E-Z9W" secondAttribute="bottom" id="yJJ-W8-mss"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="我的提醒" id="dVT-Pf-XUr">
+                    <navigationItem key="navigationItem" title="MyRemind" id="dVT-Pf-XUr">
                         <barButtonItem key="leftBarButtonItem" title="菜单" id="8BL-DO-HiO">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="18e-gM-LEq" id="VOC-4d-r8d"/>
@@ -74,40 +74,6 @@
                 <exit id="Q9O-a9-smN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1152" y="439"/>
-        </scene>
-        <!--Coming Soon-->
-        <scene sceneID="nWK-dN-TfY">
-            <objects>
-                <viewController id="eMJ-rB-v1D" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="UmK-xv-jYg"/>
-                        <viewControllerLayoutGuide type="bottom" id="dqO-AW-SmM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fEZ-Rc-IRM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ComingSoon" translatesAutoresizingMaskIntoConstraints="NO" id="7e3-8A-jpx">
-                                <rect key="frame" x="179" y="204" width="242" height="192"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="7e3-8A-jpx" secondAttribute="centerX" id="7Bf-vl-rVv"/>
-                            <constraint firstAttribute="centerY" secondItem="7e3-8A-jpx" secondAttribute="centerY" id="NY2-q2-Uov"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Coming Soon" id="TSf-Kb-dNT">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="4mE-cz-egY">
-                            <connections>
-                                <action selector="presentLeftMenuViewController:" destination="eMJ-rB-v1D" id="ybA-fZ-Vgw"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yZo-36-gg9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="340" y="1141"/>
         </scene>
         <!--Remind Detail-->
         <scene sceneID="arZ-B2-cCt">
@@ -442,7 +408,6 @@
     </scenes>
     <resources>
         <image name="005" width="12" height="11"/>
-        <image name="ComingSoon" width="242" height="192"/>
         <image name="MyRemind" width="30" height="30"/>
         <image name="Myplan" width="30" height="30"/>
     </resources>

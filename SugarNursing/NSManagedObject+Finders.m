@@ -25,7 +25,10 @@
     if (error) {
         DDLogDebug(@"Unable to Delete %@ entity. Error: %@",inContext, [error localizedDescription]);
     }
-    [context deleteObject:inContext];
+    
+    if (context) {
+        [context deleteObject:inContext];
+    }
     return YES;
     
 }
@@ -94,7 +97,9 @@
         
         NSError *error = nil;
         
-        results = [context executeFetchRequest:request error:&error];
+        if (context) {
+            results = [context executeFetchRequest:request error:&error];
+        }
         
         if (results == nil) {
             DDLogDebug(@"Execute FetchRequest Error: %@",[error localizedDescription]);

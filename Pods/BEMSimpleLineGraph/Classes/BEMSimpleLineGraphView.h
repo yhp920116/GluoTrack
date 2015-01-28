@@ -22,6 +22,11 @@
 #import "BEMLine.h"
 
 
+typedef NS_ENUM(NSInteger, GraphSearchMode){
+    GraphSearchModeByDay = 0,
+    GraphSearchModeByMonth,
+};
+
 @protocol BEMSimpleLineGraphDelegate;
 @protocol BEMSimpleLineGraphDataSource;
 
@@ -305,14 +310,17 @@
 
 @optional
 
-- (CGFloat)intervalForAnHourInLineGraph:(BEMSimpleLineGraphView *)graph;
+- (GraphSearchMode)searchModeInLineGraph:(BEMSimpleLineGraphView *)graph;
+
+- (CGFloat)intervalForSecondInLineGraph:(BEMSimpleLineGraphView *)graph;
+
+- (NSDate *)currentDateInLineGraph:(BEMSimpleLineGraphView *)graph;
 
 - (NSInteger)numberOfPagesInLineGraph:(BEMSimpleLineGraphView *)graph;
 
 - (CGFloat)hyperValueForLineGraph:(BEMSimpleLineGraphView *)graph;
 
 - (CGFloat)hypoValueForLineGraph:(BEMSimpleLineGraphView *)graph;
-
 
 
 //------- X AXIS -------//

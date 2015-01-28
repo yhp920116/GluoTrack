@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LogTextField.h"
 
 @interface MedicateCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet UILabel *medicateTypeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *usageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dosageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *unitsLabel;
-
+@property (weak, nonatomic) IBOutlet LogTextField *drugField;
+@property (weak, nonatomic) IBOutlet LogTextField *usageField;
+@property (weak, nonatomic) IBOutlet LogTextField *dosageField;
+@property (weak, nonatomic) IBOutlet LogTextField *unitField;
 
 @end

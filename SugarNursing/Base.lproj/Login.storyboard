@@ -21,19 +21,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tu7-L0-jpK" userLabel="Login View">
                                 <rect key="frame" x="60" y="200" width="480" height="200"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="004" translatesAutoresizingMaskIntoConstraints="NO" id="HBF-6o-gah" userLabel="userFieldBG">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="004" translatesAutoresizingMaskIntoConstraints="NO" id="HBF-6o-gah" userLabel="userFieldBG">
                                         <rect key="frame" x="127" y="20" width="227" height="7"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="004" translatesAutoresizingMaskIntoConstraints="NO" id="AOd-ut-FWE" userLabel="pwdFieldBG">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="004" translatesAutoresizingMaskIntoConstraints="NO" id="AOd-ut-FWE" userLabel="pwdFieldBG">
                                         <rect key="frame" x="126" y="67" width="227" height="7"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="001" translatesAutoresizingMaskIntoConstraints="NO" id="mf3-MQ-8XU" userLabel="userThumbnail">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="001" translatesAutoresizingMaskIntoConstraints="NO" id="mf3-MQ-8XU" userLabel="userThumbnail">
                                         <rect key="frame" x="132" y="3" width="19" height="21"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="002" translatesAutoresizingMaskIntoConstraints="NO" id="bj8-8K-cia" userLabel="pwdThumbnail">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="002" translatesAutoresizingMaskIntoConstraints="NO" id="bj8-8K-cia" userLabel="pwdThumbnail">
                                         <rect key="frame" x="131" y="50" width="19" height="21"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CJ8-AL-bcw">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CJ8-AL-bcw">
                                         <rect key="frame" x="156" y="5" width="198" height="19"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.28000000000000003" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,18 +43,17 @@
                                             <outlet property="delegate" destination="l63-ht-JH0" id="hWU-04-V1e"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vep-dG-PZ9">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vep-dG-PZ9">
                                         <rect key="frame" x="127" y="114" width="227" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.51260264600000005" blue="0.051294479929999998" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="userLogin:" destination="l63-ht-JH0" eventType="touchUpInside" id="QLk-tR-I45"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2g-7z-LEQ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2g-7z-LEQ">
                                         <rect key="frame" x="127" y="154" width="227" height="30"/>
                                         <color key="backgroundColor" red="0.180392161" green="0.52941179279999995" blue="0.83921575550000005" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Regist">
@@ -65,7 +64,7 @@
                                             <segue destination="TGt-5G-WUi" kind="show" identifier="Regist" id="OvG-kK-Ekq"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vzZ-lf-xNE">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vzZ-lf-xNE">
                                         <rect key="frame" x="155" y="52" width="198" height="19"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,7 +78,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="bj8-8K-cia" firstAttribute="leading" secondItem="AOd-ut-FWE" secondAttribute="leading" constant="5" id="29s-2R-cwj"/>
-                                    <constraint firstItem="HBF-6o-gah" firstAttribute="width" relation="lessThanOrEqual" secondItem="CJ8-AL-bcw" secondAttribute="width" priority="750" id="2TJ-2C-XPF"/>
+                                    <constraint firstItem="HBF-6o-gah" firstAttribute="width" relation="lessThanOrEqual" secondItem="CJ8-AL-bcw" secondAttribute="width" priority="750" constant="29" id="2TJ-2C-XPF"/>
                                     <constraint firstItem="vzZ-lf-xNE" firstAttribute="bottom" secondItem="AOd-ut-FWE" secondAttribute="bottom" constant="-3" id="3Nz-hD-BnX"/>
                                     <constraint firstItem="CJ8-AL-bcw" firstAttribute="bottom" secondItem="HBF-6o-gah" secondAttribute="bottom" constant="-3" id="E9u-LK-8UH"/>
                                     <constraint firstItem="g2g-7z-LEQ" firstAttribute="top" secondItem="vep-dG-PZ9" secondAttribute="bottom" constant="10" id="EAA-hC-LBY"/>
@@ -102,7 +101,7 @@
                                     <constraint firstItem="vep-dG-PZ9" firstAttribute="width" secondItem="HBF-6o-gah" secondAttribute="width" id="vYP-vp-yXw"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvX-ci-ntZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvX-ci-ntZ">
                                 <rect key="frame" x="371" y="410" width="43" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Forget?">
@@ -114,7 +113,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="aUJ-Af-onx">
-                                <rect key="frame" x="271" y="65" width="58" height="75"/>
+                                <rect key="frame" x="271" y="95" width="58" height="75"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,7 +121,7 @@
                         <constraints>
                             <constraint firstItem="DvX-ci-ntZ" firstAttribute="trailing" secondItem="g2g-7z-LEQ" secondAttribute="trailing" id="7gJ-w5-wfA"/>
                             <constraint firstItem="aUJ-Af-onx" firstAttribute="centerX" secondItem="w23-oH-cTL" secondAttribute="centerX" id="A4h-L8-bgN"/>
-                            <constraint firstItem="tu7-L0-jpK" firstAttribute="top" secondItem="aUJ-Af-onx" secondAttribute="bottom" constant="60" id="WSi-s8-pru"/>
+                            <constraint firstItem="tu7-L0-jpK" firstAttribute="top" secondItem="aUJ-Af-onx" secondAttribute="bottom" constant="30" id="WSi-s8-pru"/>
                             <constraint firstItem="tu7-L0-jpK" firstAttribute="centerY" secondItem="w23-oH-cTL" secondAttribute="centerY" id="jGx-gO-gxj"/>
                             <constraint firstItem="tu7-L0-jpK" firstAttribute="centerX" secondItem="w23-oH-cTL" secondAttribute="centerX" id="kSt-Ul-m1z"/>
                             <constraint firstItem="tu7-L0-jpK" firstAttribute="width" secondItem="w23-oH-cTL" secondAttribute="width" multiplier="0.8" id="n14-BC-l9y"/>
@@ -740,26 +739,57 @@
                     <connections>
                         <outlet property="codeField" destination="6eo-Pd-Vtl" id="IRs-eU-r1a"/>
                         <outlet property="dateBtn" destination="Hlw-O5-Mo1" id="huC-4d-F4H"/>
-                        <outlet property="datePicker" destination="hkf-Lx-IRK" id="BJc-yO-Ri7"/>
+                        <outlet property="datePicker" destination="hXH-b6-IdM" id="n1w-Ew-guC"/>
                         <outlet property="genderBtn" destination="yN6-sG-iSK" id="rw0-YP-pTX"/>
                         <outlet property="getCodeAginBtn" destination="OCg-Rs-f1f" id="SvA-c1-FW9"/>
                         <outlet property="passwordField" destination="mek-69-q17" id="CAc-9J-rjQ"/>
+                        <outlet property="pickerView" destination="gMk-9s-ndL" id="Bym-W0-Qri"/>
                         <outlet property="scrollHeight" destination="2UY-UG-zfW" id="AYo-aC-1Qf"/>
                         <outlet property="scrollView" destination="Zes-wD-QH5" id="Hzr-aY-Tlr"/>
                         <outlet property="usernameField" destination="INx-6B-tHt" id="d9e-BC-veA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znd-BH-bBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="hkf-Lx-IRK">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <date key="date" timeIntervalSinceReferenceDate="439291284.232656">
-                        <!--2014-12-03 09:21:24 +0000-->
-                    </date>
-                    <connections>
-                        <action selector="didSelectDatePicker:" destination="gUK-xJ-mbo" eventType="valueChanged" id="7d7-at-5RT"/>
-                    </connections>
-                </datePicker>
+                <view contentMode="scaleToFill" id="gMk-9s-ndL" userLabel="DatePicker">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="207"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="hXH-b6-IdM">
+                            <rect key="frame" x="0.0" y="0.0" width="280" height="162"/>
+                            <date key="date" timeIntervalSinceReferenceDate="439351510.82392901">
+                                <!--2014-12-04 02:05:10 +0000-->
+                            </date>
+                        </datePicker>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4EO-UR-R4b">
+                            <rect key="frame" x="139" y="163" width="0.5" height="44"/>
+                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="igp-Sn-uWM">
+                            <rect key="frame" x="0.0" y="163" width="280" height="0.5"/>
+                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
+                        <button opaque="NO" tag="1000" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="swB-fU-J5K">
+                            <rect key="frame" x="0.0" y="163" width="139" height="44"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="dateCancelAndConfirm:" destination="gUK-xJ-mbo" eventType="touchUpInside" id="xfQ-X2-4VM"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="1001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zwH-ra-JuD">
+                            <rect key="frame" x="140" y="163" width="140" height="44"/>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="dateCancelAndConfirm:" destination="gUK-xJ-mbo" eventType="touchUpInside" id="sz9-5d-oeV"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </view>
             </objects>
             <point key="canvasLocation" x="4833" y="0.0"/>
         </scene>

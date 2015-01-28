@@ -76,7 +76,7 @@
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rfM-i6-hMP">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                     </imageView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKp-2f-dhq">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKp-2f-dhq">
                                                                         <rect key="frame" x="23" y="0.0" width="27" height="27"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="CaB-s8-d3s"/>
@@ -765,7 +765,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Input your password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-9z-G4R">
                                                     <rect key="frame" x="177" y="10" width="268" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="K6Z-n2-y3G" id="yMN-2i-d4U"/>
                                                     </connections>
@@ -842,32 +842,6 @@
                         <sections>
                             <tableViewSection id="CGE-AT-PW9">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="K1J-7s-KEh">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K1J-7s-KEh" id="fcp-an-3VM">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glucose Units" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQ3-Mp-TT7" customClass="CustomLabel">
-                                                    <rect key="frame" x="20" y="13" width="91" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mmol/L" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ig-QG-5th">
-                                                    <rect key="frame" x="498" y="13" width="49" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="HQ3-Mp-TT7" secondAttribute="centerY" id="8Pm-UO-h0w"/>
-                                                <constraint firstAttribute="trailing" secondItem="4ig-QG-5th" secondAttribute="trailing" constant="20" id="9gr-jR-X6e"/>
-                                                <constraint firstItem="HQ3-Mp-TT7" firstAttribute="leading" secondItem="fcp-an-3VM" secondAttribute="leading" constant="20" id="cXj-KT-Y0S"/>
-                                                <constraint firstAttribute="centerY" secondItem="4ig-QG-5th" secondAttribute="centerY" id="cts-J3-HWQ"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Uci-kZ-bzf">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uci-kZ-bzf" id="3nU-TC-GpT">
@@ -915,9 +889,6 @@
                             <outlet property="delegate" destination="IlG-hv-cTD" id="o4T-dI-oLX"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="unitLabel" destination="4ig-QG-5th" id="gcH-TU-LQA"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eht-QW-yDr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1366,7 +1337,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tyn-Vc-ndk" id="R4O-yf-NPv">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TureName" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srU-Qm-nes" customClass="CustomLabel">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone  Number" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="srU-Qm-nes" customClass="CustomLabel">
                                                     <rect key="frame" x="20" y="13" width="80" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="jSz-FO-uXm"/>
@@ -1375,7 +1346,7 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your ture name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AEb-w2-J9N">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your phone number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AEb-w2-J9N">
                                                     <rect key="frame" x="120" y="13" width="460" height="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1598,7 +1569,7 @@
                         <outlet property="genderField" destination="TP8-al-I7v" id="2RN-yx-y7g"/>
                         <outlet property="idTips" destination="LU0-yG-o2a" id="7Oy-L3-a9k"/>
                         <outlet property="identityCardField" destination="dpN-vF-nzy" id="Kg4-xk-hmh"/>
-                        <outlet property="realNameField" destination="AEb-w2-J9N" id="sBP-oj-TIE"/>
+                        <outlet property="phoneNumberField" destination="AEb-w2-J9N" id="L49-XO-PRe"/>
                         <outlet property="serverLabel" destination="SJu-Rb-eL9" id="QEc-d2-9UV"/>
                         <outlet property="thumbnail" destination="rHB-rE-DKd" id="oRp-xI-F3Q"/>
                         <outlet property="userNameField" destination="FqJ-iW-sLH" id="wOF-U6-ER2"/>

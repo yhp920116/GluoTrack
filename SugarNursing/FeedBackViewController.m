@@ -48,17 +48,18 @@
     
     hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:hud];
-    hud.labelText = NSLocalizedString(@"Sending FeedBack", nil);
+    hud.labelText = NSLocalizedString(@"Sending FeedBack…", nil);
     [hud show:YES];
     
     if (![ParseData parseStringIsAvaliable:self.textView.text]) {
+        hud.mode = MBProgressHUDModeText;
         hud.labelText = NSLocalizedString(@"Format is not avaliable", nil);
         [hud show:YES];
         [hud hide:YES afterDelay:HUD_TIME_DELAY];
         return;
     }
     
-    NSDictionary *parameters = @{@"method":@"sendfeedBack",
+    NSDictionary *parameters = @{@"method":@"sendFeedBack",
                                  @"sign":@"sign",
                                  @"sessionId":[NSString sessionID],
                                  @"content":self.textView.text,
@@ -71,9 +72,11 @@
         if (!error) {
             if ([ret_code isEqualToString:@"0"]) {
                 hud.labelText = NSLocalizedString(@"Send Message Succeed", nil);
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(HUD_TIME_DELAY * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
             }else{
-                
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code];
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
             }
         }else{
             hud.labelText = [error localizedDescription];
