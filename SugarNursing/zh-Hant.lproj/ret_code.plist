@@ -176,5 +176,7 @@
 	<string>飲食格式錯誤</string>
 	<key>-84</key>
 	<string>用藥格式錯誤</string>
+	<key>-85</key>
+	<string>同一時間不能增加多條日誌</string>
 </dict>
 </plist>

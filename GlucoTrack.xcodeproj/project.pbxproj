@@ -17,7 +17,6 @@
 		3715D9291A787A2500A7E26F /* Drugs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D92B1A787A2500A7E26F /* Drugs.plist */; };
 		3715D92E1A787AAC00A7E26F /* Insulin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D9301A787AAC00A7E26F /* Insulin.plist */; };
 		3715D9331A787C6A00A7E26F /* food.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D9351A787C6A00A7E26F /* food.plist */; };
-		3715D9381A787E4200A7E26F /* foodRate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D93A1A787E4200A7E26F /* foodRate.plist */; };
 		3715D93D1A787EF100A7E26F /* exercise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D93F1A787EF100A7E26F /* exercise.plist */; };
 		3715D9421A787F6900A7E26F /* exerciseRate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D9441A787F6900A7E26F /* exerciseRate.plist */; };
 		371628BC1A15DD4C0043EED2 /* UIViewController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 371628BB1A15DD4C0043EED2 /* UIViewController+Notifications.m */; };
@@ -52,6 +51,8 @@
 		373904AA1A1F40EC00A7B30F /* EvaluateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 373904A91A1F40EC00A7B30F /* EvaluateCell.m */; };
 		373904AD1A1F410100A7B30F /* EffectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 373904AC1A1F410100A7B30F /* EffectCell.m */; };
 		373904B01A1F652000A7B30F /* LinesLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 373904AF1A1F652000A7B30F /* LinesLabel.m */; };
+		373A86FB1A79D0C100CCCE83 /* UserSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 373A86FA1A79D0C100CCCE83 /* UserSetting.m */; };
+		373A87001A7A1AB600CCCE83 /* foodRate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 373A86FE1A7A1AB600CCCE83 /* foodRate.plist */; };
 		373D77EF1A5A84BA008819B2 /* ParseData.m in Sources */ = {isa = PBXBuildFile; fileRef = 373D77EE1A5A84BA008819B2 /* ParseData.m */; };
 		373D77F21A5A8CC4008819B2 /* UserID.m in Sources */ = {isa = PBXBuildFile; fileRef = 373D77F11A5A8CC4008819B2 /* UserID.m */; };
 		3744EFD01A1C45E200D5C204 /* NSString+Attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 3744EFCF1A1C45E200D5C204 /* NSString+Attribute.m */; };
@@ -76,7 +77,7 @@
 		377127911A1AF320009008D3 /* RecoveryLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377127901A1AF320009008D3 /* RecoveryLogViewController.m */; };
 		377127971A1B26E8009008D3 /* TimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 377127961A1B26E8009008D3 /* TimelineCell.m */; };
 		3783A6091A5E5A2D00AC2B9F /* CountryAndAreaCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3783A6081A5E5A2D00AC2B9F /* CountryAndAreaCode.m */; };
-		378631CC1A7891A200882784 /* FeelingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 378631CB1A7891A200882784 /* FeelingCell.xib */; };
+		378631D11A789AEE00882784 /* FeelingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 378631D31A789AEE00882784 /* FeelingCell.xib */; };
 		3786359D1A47C8CF00922539 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E4AC781A2EFD6900779807 /* Main.storyboard */; };
 		3786359E1A47C8CF00922539 /* MemberCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E4AC7B1A2EFDCF00779807 /* MemberCenter.storyboard */; };
 		3786359F1A47C8CF00922539 /* TestTracker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 376D95701A2EFE6E00734113 /* TestTracker.storyboard */; };
@@ -153,7 +154,6 @@
 		37F5080D1A34917400879605 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F5080C1A34917400879605 /* FXBlurView.m */; };
 		37F508131A34A4A300879605 /* ThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F508121A34A4A300879605 /* ThumbnailImageView.m */; };
 		37FC6BC21A57E63800F4A9AB /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FC6BC11A57E63800F4A9AB /* User.m */; };
-		37FC6BD71A57E83E00F4A9AB /* UserSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FC6BD61A57E83E00F4A9AB /* UserSetting.m */; };
 		37FF58651A40157B00F3564E /* GCHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FF58641A40157B00F3564E /* GCHttpClient.m */; };
 		37FF586C1A401E5700F3564E /* GCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FF586B1A401E5700F3564E /* GCRequest.m */; };
 		37FF586F1A407EA500F3564E /* VerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37FF586E1A407EA500F3564E /* VerificationViewController.m */; };
@@ -223,9 +223,6 @@
 		3715D9341A787C6A00A7E26F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/food.plist; sourceTree = "<group>"; };
 		3715D9361A787C7800A7E26F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/food.plist"; sourceTree = "<group>"; };
 		3715D9371A787C7900A7E26F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/food.plist"; sourceTree = "<group>"; };
-		3715D9391A787E4200A7E26F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/foodRate.plist; sourceTree = "<group>"; };
-		3715D93B1A787E4400A7E26F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/foodRate.plist"; sourceTree = "<group>"; };
-		3715D93C1A787E4500A7E26F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/foodRate.plist"; sourceTree = "<group>"; };
 		3715D93E1A787EF100A7E26F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/exercise.plist; sourceTree = "<group>"; };
 		3715D9401A787EF700A7E26F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/exercise.plist"; sourceTree = "<group>"; };
 		3715D9411A787EF800A7E26F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/exercise.plist"; sourceTree = "<group>"; };
@@ -296,6 +293,11 @@
 		373904AC1A1F410100A7B30F /* EffectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectCell.m; sourceTree = "<group>"; };
 		373904AE1A1F652000A7B30F /* LinesLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinesLabel.h; sourceTree = "<group>"; };
 		373904AF1A1F652000A7B30F /* LinesLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinesLabel.m; sourceTree = "<group>"; };
+		373A86F91A79D0C100CCCE83 /* UserSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSetting.h; sourceTree = "<group>"; };
+		373A86FA1A79D0C100CCCE83 /* UserSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSetting.m; sourceTree = "<group>"; };
+		373A86FF1A7A1AB600CCCE83 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/foodRate.plist; sourceTree = "<group>"; };
+		373A87011A7A1AC800CCCE83 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/foodRate.plist"; sourceTree = "<group>"; };
+		373A87021A7A1ACC00CCCE83 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/foodRate.plist"; sourceTree = "<group>"; };
 		373D77ED1A5A84BA008819B2 /* ParseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseData.h; sourceTree = "<group>"; };
 		373D77EE1A5A84BA008819B2 /* ParseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseData.m; sourceTree = "<group>"; };
 		373D77F01A5A8CC4008819B2 /* UserID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserID.h; sourceTree = "<group>"; };
@@ -353,11 +355,13 @@
 		377127961A1B26E8009008D3 /* TimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineCell.m; sourceTree = "<group>"; };
 		3783A6071A5E5A2D00AC2B9F /* CountryAndAreaCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryAndAreaCode.h; sourceTree = "<group>"; };
 		3783A6081A5E5A2D00AC2B9F /* CountryAndAreaCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryAndAreaCode.m; sourceTree = "<group>"; };
-		378631CB1A7891A200882784 /* FeelingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeelingCell.xib; sourceTree = "<group>"; };
 		378631CD1A78990300882784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Insulin.plist; sourceTree = "<group>"; };
 		378631CE1A7899AE00882784 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Insulin.plist; sourceTree = "<group>"; };
 		378631CF1A7899B300882784 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Insulin.plist"; sourceTree = "<group>"; };
 		378631D01A7899B400882784 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/Insulin.plist"; sourceTree = "<group>"; };
+		378631D21A789AEE00882784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FeelingCell.xib; sourceTree = "<group>"; };
+		378631D51A789AF100882784 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FeelingCell.strings"; sourceTree = "<group>"; };
+		378631D71A789AF200882784 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FeelingCell.strings"; sourceTree = "<group>"; };
 		378F906F1A16698000201353 /* UIViewController+Gestures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Gestures.h"; sourceTree = "<group>"; };
 		378F90701A16698000201353 /* UIViewController+Gestures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Gestures.m"; sourceTree = "<group>"; };
 		379211201A233AA1000413D4 /* MemberCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberCenterViewController.h; sourceTree = "<group>"; };
@@ -481,8 +485,6 @@
 		37F508121A34A4A300879605 /* ThumbnailImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailImageView.m; sourceTree = "<group>"; };
 		37FC6BC01A57E63800F4A9AB /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		37FC6BC11A57E63800F4A9AB /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		37FC6BD51A57E83E00F4A9AB /* UserSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSetting.h; sourceTree = "<group>"; };
-		37FC6BD61A57E83E00F4A9AB /* UserSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSetting.m; sourceTree = "<group>"; };
 		37FF58631A40157B00F3564E /* GCHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCHttpClient.h; sourceTree = "<group>"; };
 		37FF58641A40157B00F3564E /* GCHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCHttpClient.m; sourceTree = "<group>"; };
 		37FF586A1A401E5700F3564E /* GCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCRequest.h; sourceTree = "<group>"; };
@@ -624,7 +626,7 @@
 				372B7D881A63BEED0006C67A /* drug.xib */,
 				379C89F71A2D9BFA00F33BAE /* exercise.xib */,
 				379C89E01A2D709600F33BAE /* BasicCell.xib */,
-				378631CB1A7891A200882784 /* FeelingCell.xib */,
+				378631D31A789AEE00882784 /* FeelingCell.xib */,
 				379C89F91A2DA60A00F33BAE /* LogSectionHeaderView.xib */,
 				37074C991A662C7500D65EFF /* DetectCell.xib */,
 				379C89FE1A2DB0C600F33BAE /* MedicateCell.xib */,
@@ -701,7 +703,7 @@
 				3715D9301A787AAC00A7E26F /* Insulin.plist */,
 				3715D92B1A787A2500A7E26F /* Drugs.plist */,
 				3715D9351A787C6A00A7E26F /* food.plist */,
-				3715D93A1A787E4200A7E26F /* foodRate.plist */,
+				373A86FE1A7A1AB600CCCE83 /* foodRate.plist */,
 				3715D93F1A787EF100A7E26F /* exercise.plist */,
 				3715D9441A787F6900A7E26F /* exerciseRate.plist */,
 			);
@@ -768,10 +770,10 @@
 				373D77F11A5A8CC4008819B2 /* UserID.m */,
 				3734E98A1A59360A003DD247 /* RecordPhoto.h */,
 				3734E98B1A59360A003DD247 /* RecordPhoto.m */,
-				37FC6BD51A57E83E00F4A9AB /* UserSetting.h */,
-				37FC6BD61A57E83E00F4A9AB /* UserSetting.m */,
 				37FC6BC01A57E63800F4A9AB /* User.h */,
 				37FC6BC11A57E63800F4A9AB /* User.m */,
+				373A86F91A79D0C100CCCE83 /* UserSetting.h */,
+				373A86FA1A79D0C100CCCE83 /* UserSetting.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1285,13 +1287,13 @@
 				3786359E1A47C8CF00922539 /* MemberCenter.storyboard in Resources */,
 				37074C901A6614BE00D65EFF /* NoDataTips.xib in Resources */,
 				37014DCE1A6431CC0048A2D8 /* ret_code.plist in Resources */,
-				3715D9381A787E4200A7E26F /* foodRate.plist in Resources */,
 				3786359F1A47C8CF00922539 /* TestTracker.storyboard in Resources */,
 				378635A01A47C8CF00922539 /* RecoveryLog.storyboard in Resources */,
 				378635A11A47C8CF00922539 /* ControlEffect.storyboard in Resources */,
 				378635A21A47C8CF00922539 /* MyRemind.storyboard in Resources */,
 				378635A31A47C8CF00922539 /* Advise.storyboard in Resources */,
 				378635A41A47C8CF00922539 /* MyService.storyboard in Resources */,
+				373A87001A7A1AB600CCCE83 /* foodRate.plist in Resources */,
 				3715D9291A787A2500A7E26F /* Drugs.plist in Resources */,
 				378635A51A47C8CF00922539 /* Login.storyboard in Resources */,
 				3715D9421A787F6900A7E26F /* exerciseRate.plist in Resources */,
@@ -1306,7 +1308,7 @@
 				3715D9331A787C6A00A7E26F /* food.plist in Resources */,
 				379C8A071A2DC39100F33BAE /* DietCell.xib in Resources */,
 				379F202B1A354C260026BF95 /* ControlSectionHeaderView.xib in Resources */,
-				378631CC1A7891A200882784 /* FeelingCell.xib in Resources */,
+				378631D11A789AEE00882784 /* FeelingCell.xib in Resources */,
 				379C89FF1A2DB0C600F33BAE /* MedicateCell.xib in Resources */,
 				37C6472D1A612D4600BC2E78 /* TipsCell.xib in Resources */,
 				37E4AC6E1A2EF0FB00779807 /* LaunchScreen.xib in Resources */,
@@ -1398,7 +1400,6 @@
 				37EA29141A21E9B600B43CD0 /* RemindCell.m in Sources */,
 				3734E98C1A59360A003DD247 /* RecordPhoto.m in Sources */,
 				37B183AD1A4BC128001932AE /* CoreDataStack.m in Sources */,
-				37FC6BD71A57E83E00F4A9AB /* UserSetting.m in Sources */,
 				373904AA1A1F40EC00A7B30F /* EvaluateCell.m in Sources */,
 				37FC6BC21A57E63800F4A9AB /* User.m in Sources */,
 				3756DC551A1D92A200879398 /* RecoveryLogDetailViewController.m in Sources */,
@@ -1428,6 +1429,7 @@
 				37AA24451A6CA1E900439A33 /* Medicine.m in Sources */,
 				371628BC1A15DD4C0043EED2 /* UIViewController+Notifications.m in Sources */,
 				37DE6A821A271B73000533BB /* SectionHeaderView.m in Sources */,
+				373A86FB1A79D0C100CCCE83 /* UserSetting.m in Sources */,
 				37AA24421A6CA1E900439A33 /* DrugLog.m in Sources */,
 				37C647301A612DAE00BC2E78 /* TipsCell.m in Sources */,
 				3749B55A1A09D0950031D00C /* RightMenuController.m in Sources */,
@@ -1572,17 +1574,6 @@
 			name = food.plist;
 			sourceTree = "<group>";
 		};
-		3715D93A1A787E4200A7E26F /* foodRate.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3715D9391A787E4200A7E26F /* en */,
-				3715D93B1A787E4400A7E26F /* zh-Hans */,
-				3715D93C1A787E4500A7E26F /* zh-Hant */,
-			);
-			name = foodRate.plist;
-			path = ../..;
-			sourceTree = "<group>";
-		};
 		3715D93F1A787EF100A7E26F /* exercise.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1601,6 +1592,16 @@
 				3715D9461A787F6C00A7E26F /* zh-Hant */,
 			);
 			name = exerciseRate.plist;
+			sourceTree = "<group>";
+		};
+		373A86FE1A7A1AB600CCCE83 /* foodRate.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				373A86FF1A7A1AB600CCCE83 /* en */,
+				373A87011A7A1AC800CCCE83 /* zh-Hans */,
+				373A87021A7A1ACC00CCCE83 /* zh-Hant */,
+			);
+			name = foodRate.plist;
 			sourceTree = "<group>";
 		};
 		3749B5811A0A11700031D00C /* Localizable.strings */ = {
@@ -1691,6 +1692,16 @@
 				37014DCB1A63F0670048A2D8 /* zh-Hant */,
 			);
 			name = MyService.storyboard;
+			sourceTree = "<group>";
+		};
+		378631D31A789AEE00882784 /* FeelingCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				378631D21A789AEE00882784 /* Base */,
+				378631D51A789AF100882784 /* zh-Hans */,
+				378631D71A789AF200882784 /* zh-Hant */,
+			);
+			name = FeelingCell.xib;
 			sourceTree = "<group>";
 		};
 		37E4AC781A2EFD6900779807 /* Main.storyboard */ = {

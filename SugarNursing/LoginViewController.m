@@ -108,14 +108,6 @@
 
 - (IBAction)userLogin:(id)sender
 {
-//    if (![ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
-//        
-//        [[[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"密码要大于6位数", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil] show];
-//        
-//    }else{
-//        
-//        [self login];
-//    }
     [self login];
 }
 
@@ -123,7 +115,7 @@
 {
     [self.view endEditing:YES];
     
-    if (![ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
+    if (![ParseData parseUserNameIsAvaliable:self.usernameField.text]) {
         return;
     }
     
@@ -136,8 +128,8 @@
                                  @"accountName":self.usernameField.text,
                                  @"password":self.passwordField.text};
     
-    NSURLSessionDataTask *loginTask = [GCRequest userLoginWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
-        
+    [GCRequest userLoginWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        hud.mode = MBProgressHUDModeText;
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
             if ([ret_code isEqualToString:@"0"]) {
@@ -169,17 +161,17 @@
                 [hud hide:YES];
                 
             }else{
-                hud.mode = MBProgressHUDModeText;
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
             
         }else{
-            [hud hide:YES];
+            hud.labelText = [error localizedDescription];
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
         }
         
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:loginTask delegate:nil];
+
 }
 
 #pragma mark - textfieldDelegate

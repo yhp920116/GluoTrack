@@ -161,6 +161,10 @@
         <relationship name="userid" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserID" inverseName="userInfo" inverseEntity="UserID" syncable="YES"/>
     </entity>
     <entity name="UserSetting" representedClassName="UserSetting" syncable="YES">
+        <attribute name="detect" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="diet" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="drug" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="exercise" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="fontSize" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="userid" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserID" inverseName="userSetting" inverseEntity="UserID" syncable="YES"/>
@@ -182,6 +186,6 @@
         <element name="User" positionX="-9" positionY="144" width="128" height="135"/>
         <element name="UserID" positionX="-18" positionY="135" width="128" height="180"/>
         <element name="UserInfo" positionX="-54" positionY="36" width="128" height="360"/>
-        <element name="UserSetting" positionX="9" positionY="162" width="128" height="90"/>
+        <element name="UserSetting" positionX="9" positionY="162" width="128" height="150"/>
     </elements>
 </model>

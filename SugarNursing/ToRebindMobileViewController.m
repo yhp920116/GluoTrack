@@ -40,7 +40,7 @@
                                  @"mobile":self.mobileField.text,
                                  };
     
-    NSURLSessionDataTask *rebindTask = [GCRequest userRebindMobileWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+    [GCRequest userRebindMobileWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
@@ -55,11 +55,12 @@
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else{
-            [hud hide:YES];
+            hud.labelText = [error localizedDescription];
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
         }
         
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:rebindTask delegate:nil];
+
     
 }
 

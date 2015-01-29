@@ -11,6 +11,7 @@
 @interface NSString (UserCommon)
 
 // User
++ (NSString *)userName;
 + (NSString *)userID;
 + (NSString *)linkmanID;
 + (NSString *)sessionID;
@@ -20,6 +21,8 @@
 + (NSString *)centerID;
 + (NSString *)userThumbnail;
 + (NSString *)phoneNumber;
++ (NSString *)indentityCard;
++ (NSString *)email;
 
 
 @end

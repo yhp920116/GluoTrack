@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *medicalNameField;
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
 @property (weak, nonatomic) IBOutlet UITextField *hospitalField;
-@property (weak, nonatomic) IBOutlet UITextField *treatMentField;
+@property (weak, nonatomic) IBOutlet MyTextView *treatMentField;
 @property (weak, nonatomic) IBOutlet MyTextView *treatPlanField;
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
@@ -49,8 +49,11 @@
     self.medicalNameField.text = self.medicalRecord.mediName;
     self.dateField.text = self.medicalRecord.diagTime;
     self.hospitalField.text = self.medicalRecord.diagHosp;
+    self.hospitalField.placeholder = NSLocalizedString(@"确诊医院的名称", nil);
     self.treatMentField.text = self.medicalRecord.treatMent;
+    self.treatMentField.placeholder = NSLocalizedString(@"治疗状况", nil);
     self.treatPlanField.text = self.medicalRecord.treatPlan;
+    self.treatPlanField.placeholder = NSLocalizedString(@"治疗方案", nil);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,6 +118,8 @@
 
 - (void)save:(id)sender
 {
+    [self.view endEditing:YES];
+    
     hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:hud];
     
@@ -142,7 +147,7 @@
             break;
     }
     
-    NSURLSessionDataTask *editRecordTask = [GCRequest userEditMedicalRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+    [GCRequest userEditMedicalRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
             if ([ret_code isEqualToString:@"0"]) {
@@ -163,19 +168,18 @@
                 
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = NSLocalizedString(@"Data Updated", nil);
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText  = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
             
         }else{
-            [hud hide:YES];
+            hud.labelText = [error localizedDescription];
         }
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:editRecordTask delegate:nil];
 }
 
 - (void)updateMedicalRecord

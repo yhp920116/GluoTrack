@@ -48,7 +48,7 @@
 "Register succeed" = "注册成功，请登录";
 "Resetting..." = "重置密码中...";
 "Reset" = "重设密码";
-"Reset succeed" = "重设成功";
+"Reset succeed" = "重设成功，请重新登录";
 "hongkong" = "香港";
 
 
@@ -77,9 +77,12 @@
 "female"="女";
 "male"="男";
 "Format is not avaliable" = "格式填写不正确";
-"Date Format is not avaliable" = "日期格式填写不正确";
+"Date Format is not avaliable" = "不能选择今天之后的日期";
 "Password Format is not avaliable" = "密码不能少于6位数";
+"UserName Format is not avaliable" = "用户名不能包含中文字符";
 "Not your mobile phone" = "这不是您的手机号码";
+"You are not the current user" = "这不是您的账号";
+"Phone number is not valid" = "手机号码无效";
 
 
 
@@ -111,7 +114,8 @@
 "Setting"="设置";
 "Personal Information" = "个人信息";
 "Please edit your info" = "请填写你的资料";
-"Please fill your info" = "点击查看详情";
+"Please fill your info" = "您的病例资料";
+"To see more" = "点击查看详情";
 "Setting when purchase" = "请购买糖博士由医生设置";
 "Binding your email in our Home" = "请登录官方网站绑定邮箱";
 "You can change only once" = "只能修改一次";
@@ -122,6 +126,9 @@
 "Data Updated" = "数据更新成功";
 "Thumbnail uploading" = "正在上传图片";
 "Upload succeed" = "上传成功";
+"确诊医院的名称" = "确诊医院的名称";
+"治疗状况" = "治疗状况";
+"治疗方案" = "治疗方案";
 
 /* Recovery Log */
 "Custom" = "自定义";
@@ -157,6 +164,7 @@
 "dinner" = "晚餐";
 "snack" = "加餐";
 "Not to Add More" = "最多只能添加十条";
+
 
 "检测设备" = "检测设备";
 "检测日期" = "检测日期";

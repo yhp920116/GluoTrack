@@ -26,8 +26,14 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 @property (weak, nonatomic) IBOutlet UIView *popOverView;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchController;
+@property (strong, nonatomic) UserSetting *setting;
 @property (strong, nonatomic) NSDate *selectedDate;
 @property (strong, nonatomic) NSMutableArray *logTypeArray;
+
+@property (weak, nonatomic) IBOutlet UIButton *detectCheckbox;
+@property (weak, nonatomic) IBOutlet UIButton *drugCheckBox;
+@property (weak, nonatomic) IBOutlet UIButton *dietCheckBox;
+@property (weak, nonatomic) IBOutlet UIButton *exerciseCheckBox;
 
 @end
 
@@ -65,10 +71,50 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     [super viewDidLoad];
 
     self.selectedDate = [NSDate date];
-    self.logTypeArray = [@[@"detect",@"exercise",@"drug",@"diet"] mutableCopy];
+    [self configureUserSetting];
     [self configureTableView];
-    [self configureFetchController:YES];
+    [self configureFetchController:NO];
     [self.refreshView startLoadingAndExpand:YES animated:YES];
+}
+
+- (void)configureUserSetting
+{
+    self.logTypeArray = [@[] mutableCopy];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userid.userId = %@ && userid.linkManId = %@",[NSString userID],[NSString linkmanID]];
+    NSArray *userSetting = [UserSetting findAllWithPredicate:predicate inContext:[CoreDataStack sharedCoreDataStack].context];
+
+    if (userSetting.count == 0) {
+        self.setting = [UserSetting createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+        UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+        userID.userId = [NSString userID];
+        userID.linkManId = [NSString linkmanID];
+        self.setting.userid = userID;
+        [[CoreDataStack sharedCoreDataStack] saveContext];
+    }else{
+        self.setting = [UserSetting findAllWithPredicate:predicate inContext:[CoreDataStack sharedCoreDataStack].context][0];
+    }
+    
+    if ([self.setting.detect boolValue] == YES) {
+        [self.detectCheckbox setImage:[UIImage imageNamed:@"CheckboxY"] forState:UIControlStateNormal];
+        [self.logTypeArray addObject:@"detect"];
+    }else [self.detectCheckbox setImage:[UIImage imageNamed:@"CheckboxN"] forState:UIControlStateNormal];
+    
+    if ([self.setting.drug boolValue] == YES) {
+        [self.drugCheckBox setImage:[UIImage imageNamed:@"CheckboxY"] forState:UIControlStateNormal];
+        [self.logTypeArray addObject:@"drug"];
+    }else [self.drugCheckBox setImage:[UIImage imageNamed:@"CheckboxN"] forState:UIControlStateNormal];
+    
+    if ([self.setting.diet boolValue] == YES) {
+        [self.dietCheckBox setImage:[UIImage imageNamed:@"CheckboxY"] forState:UIControlStateNormal];
+        [self.logTypeArray addObject:@"diet"];
+    }else [self.dietCheckBox setImage:[UIImage imageNamed:@"CheckboxN"] forState:UIControlStateNormal];
+    
+    if ([self.setting.exercise boolValue] == YES) {
+        [self.exerciseCheckBox setImage:[UIImage imageNamed:@"CheckboxY"] forState:UIControlStateNormal];
+        [self.logTypeArray addObject:@"exercise"];
+    }else [self.exerciseCheckBox setImage:[UIImage imageNamed:@"CheckboxN"] forState:UIControlStateNormal];
+    
 }
 
 - (void)configureFetchController:(BOOL)refresh
@@ -242,15 +288,16 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                     recordLog.userid = userID;
 
                 }
-                
                 [[CoreDataStack sharedCoreDataStack] saveContext];
                 
             }else{
                 [NSString localizedMsgFromRet_code:ret_code withHUD:NO];
             }
         }
+
         
         // 无论是请求成功或者失败，都要再重新fetch一次，以过滤用户对日期和选项的筛选
+        
         [self configureFetchController:NO];
         [self.refreshView finishLoading];
 
@@ -259,47 +306,42 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 
 #pragma mark - NSFectchedResultController
 
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+
+//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 //{
-//    [self configureNoDataView];
-//    [self.tableView reloadData];
+//    [self.tableView beginUpdates];
 //}
 //
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case NSFetchedResultsChangeMove:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case NSFetchedResultsChangeUpdate:
-        {
-            TimelineCell *cell = (TimelineCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-            [self configureTimelineCell:cell atIndexPath:indexPath];
-            
-            break;
-        }
-        default:
-            break;
-    }
-    [self configureNoDataView];
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView endUpdates];
-}
+//- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+//{
+//    switch (type) {
+//        case NSFetchedResultsChangeInsert:
+//            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            break;
+//        case NSFetchedResultsChangeDelete:
+//            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            break;
+//        case NSFetchedResultsChangeMove:
+//            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            break;
+//        case NSFetchedResultsChangeUpdate:
+//        {
+//            TimelineCell *cell = (TimelineCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+//            [self configureTimelineCell:cell atIndexPath:indexPath];
+//            
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+//    [self configureNoDataView];
+//}
+//
+//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+//{
+//    [self.tableView endUpdates];
+//}
 
 #pragma mark - refreshViewDelegate
 
@@ -397,12 +439,22 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 
 - (NSString *)configureDetailInfoForRecordLog:(RecordLog *)recordLog
 {
-    NSString *detailContent;
+    NSString *detailContent = @"";
     if ([recordLog.logType isEqualToString:@"detect"]) {
         DetectLog *detect = recordLog.detectLog;
-        detailContent = [NSString stringWithFormat:@"%@  %@mmol/L \n%@  %@%%",NSLocalizedString(@"glucose", nil), detect.glucose, NSLocalizedString(@"hemoglobin", nil), detect.hemoglobinef];
+
+        if (detect.glucose && ![detect.glucose isEqualToString:@""]) {
+            detailContent = [NSString stringWithFormat:@"%@  %@mmol/L",NSLocalizedString(@"glucose", nil), detect.glucose];
+        }
+        if (detect.hemoglobinef && ![detect.hemoglobinef isEqualToString:@""]) {
+            detailContent = [detailContent stringByAppendingFormat:@"\n%@  %@%%",NSLocalizedString(@"hemoglobin", nil), detect.hemoglobinef];
+        }
+        
+        if ([detailContent hasPrefix:@"\n"]) {
+            detailContent = [detailContent substringFromIndex:1];
+        }
+        
     }
-    
     
     if ([recordLog.logType isEqualToString:@"diet"]) {
         DietLog *diet = recordLog.dietLog;
@@ -604,7 +656,6 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     } else if (btn.tag == 2) {
         hud = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:hud];
-        hud.cornerRadius = 0;
         hud.margin = 0;
         hud.customView = self.popOverView;
         hud.mode = MBProgressHUDModeCustomView;
@@ -629,40 +680,46 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
         default:
             break;
     }
-    
+
     [hud hide:YES afterDelay:0.2];
 }
 
 - (IBAction)checkboxSelected:(id)sender
 {
     UIButton *selectBtn = (UIButton *)sender;
-    NSString *type ;
-    switch (selectBtn.tag) {
-        case 1:
-        {
-            type = @"detect";
-            break;
-        }
-        case 2:
-        {
-            type = @"drug";
-            break;
-        }
-        case 3:
-        {
-            type = @"diet";
-            break;
-        }
-        case 4:
-        {
-            type = @"exercise";
-            break;
-        }
-        default:
-            break;
-    }
+
     if ([selectBtn.currentImage isEqual:[UIImage imageNamed:@"CheckboxN"]]) {
         [selectBtn setImage:[UIImage imageNamed:@"CheckboxY"] forState:UIControlStateNormal];
+        
+        NSString *type ;
+        switch (selectBtn.tag) {
+            case 1:
+            {
+                type = @"detect";
+                self.setting.detect = @1;
+                break;
+            }
+            case 2:
+            {
+                type = @"drug";
+                self.setting.drug = @1;
+                break;
+            }
+            case 3:
+            {
+                type = @"diet";
+                self.setting.diet = @1;
+                break;
+            }
+            case 4:
+            {
+                type = @"exercise";
+                self.setting.exercise = @1;
+                break;
+            }
+            default:
+                break;
+        }
         
         if (![self.logTypeArray containsObject:type]) {
             [self.logTypeArray addObject:type];
@@ -671,11 +728,42 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     } else {
         [selectBtn setImage:[UIImage imageNamed:@"CheckboxN"] forState:UIControlStateNormal];
         
+        NSString *type ;
+        switch (selectBtn.tag) {
+            case 1:
+            {
+                type = @"detect";
+                self.setting.detect = @0;
+                break;
+            }
+            case 2:
+            {
+                type = @"drug";
+                self.setting.drug = @0;
+                break;
+            }
+            case 3:
+            {
+                type = @"diet";
+                self.setting.diet = @0;
+                break;
+            }
+            case 4:
+            {
+                type = @"exercise";
+                self.setting.exercise = @0;
+                break;
+            }
+            default:
+                break;
+        }
+        
         if ([self.logTypeArray containsObject:type]) {
             [self.logTypeArray removeObject:type];
         }
     }
     
+    [[CoreDataStack sharedCoreDataStack] saveContext];
     
 }
 

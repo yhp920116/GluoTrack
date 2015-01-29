@@ -37,6 +37,15 @@
     return userInfo;
 }
 
++ (NSString *)userName
+{
+    User *user = [self fetchUser];
+    if (!user) {
+        return @"";
+    }
+    return user.userName ? user.userName : @"";
+}
+
 + (NSString *)userID
 {
     User *user = [self fetchUser];
@@ -98,6 +107,24 @@
         return @"";
     }
     return userInfo.mobilePhone ? userInfo.mobilePhone : @"";
+}
+
++ (NSString *)indentityCard
+{
+    UserInfo *userInfo = [self fetchUserInfo];
+    if (!userInfo) {
+        return @"";
+    }
+    return userInfo.identifyCard ? userInfo.identifyCard : @"";
+}
+
++ (NSString *)email
+{
+    UserInfo *userInfo = [self fetchUserInfo];
+    if (!userInfo) {
+        return @"";
+    }
+    return userInfo.email ? userInfo.email : @"";
 }
 
 

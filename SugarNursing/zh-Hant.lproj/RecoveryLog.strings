@@ -21,7 +21,7 @@
 "Jog-1I-Pq7.title" = "飲食";
 
 /* Class = "IBUIButton"; normalTitle = "Options"; ObjectID = "MWE-JX-4IZ"; */
-"MWE-JX-4IZ.normalTitle" = "選項";
+"MWE-JX-4IZ.normalTitle" = "篩選";
 
 /* Class = "IBUILabel"; text = "Diet"; ObjectID = "Oqk-VX-YRe"; */
 "Oqk-VX-YRe.text" = "飲食";

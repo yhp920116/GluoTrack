@@ -1,8 +1,8 @@
 //
 //  UserSetting.m
-//  SugarNursing
+//  GlucoTrack
 //
-//  Created by Dan on 15-1-3.
+//  Created by Dan on 15-1-29.
 //  Copyright (c) 2015年 Tisson. All rights reserved.
 //
 
@@ -14,6 +14,10 @@
 
 @dynamic fontSize;
 @dynamic unit;
+@dynamic detect;
+@dynamic drug;
+@dynamic diet;
+@dynamic exercise;
 @dynamic userid;
 
 @end

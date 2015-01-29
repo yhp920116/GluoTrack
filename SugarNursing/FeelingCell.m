@@ -78,6 +78,7 @@
     btn.layer.borderWidth = 0.5;
     btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     btn.backgroundColor = [UIColor whiteColor];
+    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     if ([self.selectedArray containsObject:btn.currentTitle]) {
         [self.selectedArray removeObject:btn.currentTitle];
@@ -91,6 +92,7 @@
     btn.layer.borderWidth = 0;
     btn.layer.borderColor = [UIColor whiteColor].CGColor;
     btn.backgroundColor = [UIColor colorWithRed:52/255.0 green:152/255.0 blue:219/255.0 alpha:1];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     
     if (![self.selectedArray containsObject:btn.currentTitle]) {
         [self.selectedArray addObject:btn.currentTitle];

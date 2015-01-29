@@ -96,13 +96,13 @@ typedef NS_ENUM(NSInteger, GCLineType) {
         case GCSearchModeByDay:
         {
             [dateFormatter setDateFormat:@"yyyyMMdd"];
-            timeAscending = NO;
+            timeAscending = YES;
             break;
         }
         case GCSearchModeByMonth:
         {
             [dateFormatter setDateFormat:@"yyyyMM"];
-            timeAscending = YES;
+            timeAscending = NO;
             break;
         }
         default:
@@ -335,12 +335,12 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 
 - (CGFloat)maxValueForLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return 12.0;
+    return 30.0;
 }
 
 - (CGFloat)minValueForLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return 2;
+    return 3.5;
 }
 
 #pragma mark - trackerChart Delegate
@@ -352,7 +352,7 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 
 - (NSInteger)numberOfYAxisLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return 6;
+    return 12;
 }
 
 //- (void)lineGraph:(BEMSimpleLineGraphView *)graph didTapPointAtIndex:(NSInteger)index
@@ -428,14 +428,24 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 - (void)configureTableView:(UITableView *)tableView withCell:(DetectDataCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     RecordLog *recordLog = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
-
-    cell.detectDate.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"YYYY MMMM d, EEEE"];
-    cell.detectTime.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"HH:mm"];
+    
     if (self.lineType == GCLineTypeGlucose) {
-        cell.detectValue.text = recordLog.detectLog.glucose;
+        if (!recordLog.detectLog.glucose || [recordLog.detectLog.glucose isEqualToString:@""]) {
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }else  cell.detectValue.text = recordLog.detectLog.glucose;
     }else{
         cell.detectValue.text = recordLog.detectLog.hemoglobinef;
     }
+    
+    cell.detectDate.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"yyyy-MM-dd, EEEE"];
+    cell.detectTime.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"HH:mm"];
+
+
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Others

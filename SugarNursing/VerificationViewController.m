@@ -70,6 +70,33 @@
 
 - (IBAction)GetVerificationCode:(id)sender
 {
+    
+    if ([self.countryAndAreaCode.areaCode isEqualToString:@"852"]) {
+        if (self.phoneField.text.length != 8) {
+            hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:hud];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = NSLocalizedString(@"Phone number is not valid", nil);
+            [hud show:YES];
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            return;
+            return;
+        }
+    }
+    
+    if ([self.countryAndAreaCode.areaCode isEqualToString:@"86"]) {
+        if (self.phoneField.text.length != 11) {
+            hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:hud];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = NSLocalizedString(@"Phone number is not valid", nil);
+            [hud show:YES];
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            return;
+            return;
+        }
+    }
+    
     if (self.verifiedType == VerifiedTypeInReset) {
         if (![self.phoneField.text isEqualToString:[NSString phoneNumber]]) {
             hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
@@ -80,12 +107,6 @@
             [hud hide:YES afterDelay:HUD_TIME_DELAY];
             return;
         }
-    }
-    
-    if (!(self.phoneField.text.length == 11 || self.phoneField.text.length == 8)) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"notice", nil) message:NSLocalizedString(@"errorphonenumber", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"sure", nil) otherButtonTitles:nil, nil];
-        [alert show];
-        return;
     }
     
     NSString *confirmInfo = [NSString stringWithFormat:@"%@:%@ %@",NSLocalizedString(@"willsendthecodeto", nil),self.countryAndAreaCode.areaCode, self.phoneField.text];
@@ -103,44 +124,44 @@
 {
     if (buttonIndex == 1) {
         
-        if (self.verifiedType == VerifiedTypeReset || self.verifiedType == VerifiedTypeInReset) {
-            [self userGetCode];
-            return;
-        }
-        
         hud = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:hud];
         
         hud.labelText = NSLocalizedString(@"Sending code", nil);
         [hud show:YES];
         
+        if (self.verifiedType == VerifiedTypeReset || self.verifiedType == VerifiedTypeInReset) {
+            [self userGetCode];
+            return;
+        }
+        
+        
         NSDictionary *parameters = @{@"method":@"isMember",
                                      @"mobile":self.phoneField.text,
                                      @"memberType":@"2"};
         
-        NSURLSessionDataTask *isRegisteredTask = [GCRequest userIsRegisteredWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        [GCRequest userIsRegisteredWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+            hud.mode = MBProgressHUDModeText;
             if (!error) {
                 NSString *ret_code = [responseData objectForKey:@"ret_code"];
                 if ([ret_code isEqualToString:@"0"]) {
                     if ([[responseData valueForKey:@"isMember"] isEqualToString:@"0"]){
                         [self userGetCode];
                     }else{
-                        hud.mode = MBProgressHUDModeText;
                         hud.labelText = NSLocalizedString(@"User Exists", nil);
                         [hud hide:YES afterDelay:HUD_TIME_DELAY];
                     }
                     
                 }else{
-                    hud.mode = MBProgressHUDModeText;
                     hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                     [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 }
             }else{
-                [hud hide:YES];
+                hud.labelText = [error localizedDescription];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }];
-        
-        [UIAlertView showAlertViewForTaskWithErrorOnCompletion:isRegisteredTask delegate:nil];
+
     }
 }
 

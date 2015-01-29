@@ -95,6 +95,24 @@
     return [self parseDateIsAvaliable:date];
 }
 
++ (BOOL)parseUserNameIsAvaliable:(NSString *)userName
+{
+    NSString *match = @"(^[A-Za-z0-9_@.]{1,24}$)";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",match];
+    if (![predicate evaluateWithObject:userName]) {
+        UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:windowView];
+        [windowView addSubview:hud];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"UserName Format is not avaliable", nil);
+        [hud show:YES];
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        return NO;
+    }
+    
+    return YES;
+}
+
 + (BOOL)parsePasswordIsAvaliable:(NSString *)password
 {
     if (!password || [password length] < 6) {
@@ -119,6 +137,31 @@
     }
     if ([string isEqualToString:@""] || [string isEqualToString:@" "]) {
         return NO;
+    }
+    return YES;
+}
+
++ (BOOL)parseIsCurrentUser:(NSString *)userName
+{
+    if (![[NSString userName] isEqualToString:userName]) {
+        
+        if (![[NSString email] isEqualToString:userName]) {
+            
+            if (![[NSString indentityCard] isEqualToString:userName]) {
+                
+                UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;
+                MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:windowView];
+                [windowView addSubview:hud];
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = NSLocalizedString(@"You are not the current user", nil);
+                [hud show:YES];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                
+                return NO;
+            }
+        }
+        
+       
     }
     return YES;
 }

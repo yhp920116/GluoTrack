@@ -142,12 +142,11 @@
                                  @"zone":self.areaCode,
                                  };
     
-    NSURLSessionDataTask *registerTask = [GCRequest userRegisterWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
-        
+    [GCRequest userRegisterWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        hud.mode = MBProgressHUDModeText;
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
             if ([ret_code isEqualToString:@"0"]){
-                hud.mode = MBProgressHUDModeText;
                 hud.labelText = NSLocalizedString(@"Register succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -155,15 +154,17 @@
                 });
                 
             }else{
-                hud.mode = MBProgressHUDModeText;
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
             
-        }else [hud hide:YES];
+        }else{
+            hud.labelText = [error localizedDescription];
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        }
         
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:registerTask delegate:nil];
+
 }
 
 @end

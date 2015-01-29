@@ -51,6 +51,7 @@
 #import "Message.h"
 #import "ControlEffect.h"
 #import "EffectList.h"
+#import "UserSetting.h"
 
 #import <DDLog.h>
 #import <DDLegacy.h>

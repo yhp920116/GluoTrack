@@ -52,14 +52,17 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="Ymm-oF-2ub" firstAttribute="leading" secondItem="o8e-dm-lrB" secondAttribute="leading" constant="20" id="2Qa-pY-iQO"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ge5-bl-ON0" secondAttribute="trailing" constant="100" id="Cm1-zk-iMF"/>
                                                 <constraint firstAttribute="centerY" secondItem="Ymm-oF-2ub" secondAttribute="centerY" id="E5f-s0-aKM"/>
                                                 <constraint firstItem="DBS-eD-Ig1" firstAttribute="leading" secondItem="Ymm-oF-2ub" secondAttribute="trailing" constant="15" id="GVL-IO-wG4"/>
                                                 <constraint firstItem="ge5-bl-ON0" firstAttribute="leading" secondItem="Ymm-oF-2ub" secondAttribute="trailing" constant="15" id="btZ-S1-1zZ"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DBS-eD-Ig1" secondAttribute="trailing" constant="100" id="g6b-ae-eVO"/>
                                                 <constraint firstItem="DBS-eD-Ig1" firstAttribute="top" secondItem="Ymm-oF-2ub" secondAttribute="top" constant="15" id="haO-g9-8Bb"/>
                                                 <constraint firstItem="ge5-bl-ON0" firstAttribute="top" secondItem="DBS-eD-Ig1" secondAttribute="bottom" constant="10" id="iDk-aZ-4LI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="100" maxY="0.0"/>
                                         <connections>
                                             <outlet property="sexAndAgeLabel" destination="ge5-bl-ON0" id="NnR-Ur-Qby"/>
                                             <outlet property="thumbnailView" destination="Ymm-oF-2ub" id="5qR-lc-mNO"/>

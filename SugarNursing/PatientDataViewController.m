@@ -40,7 +40,10 @@
 
 - (void)configureTextView
 {
-    self.textView.text = self.medicalRecord.mediRecord;
+    if ([self.medicalRecord.mediRecord isEqualToString:NSLocalizedString(@"Please fill your info", nil)]) {
+        self.textView.text = nil;
+    }else self.textView.text = self.medicalRecord.mediRecord;
+    
     self.textView.placeholder = NSLocalizedString(@"Please describe your case", nil);
     self.textView.placeholderColor = [UIColor lightGrayColor];
     [[self.textView layer] setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.5] CGColor]];
@@ -77,10 +80,6 @@
                 
                 self.medicalRecord.recordPhoto = recordPhotos;
                 [[CoreDataStack sharedCoreDataStack] saveContext];
-            
-                hud.labelText = NSLocalizedString(@"Data Updated", nil);
-                [hud show:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 
                 // 刷新页面
                 [self.collectionView reloadData];
@@ -90,6 +89,8 @@
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }
+        
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
     }];
  
 }
@@ -118,7 +119,12 @@
                                    @"attachPath":photo.attachPath};
         [uploadImages addObject:photoDic];
     }
-    NSString *uploadJsonString = [uploadImages JSONString];
+    
+    NSString *uploadJsonString;
+    if (uploadImages.count > 0 ) {
+        uploadJsonString = [uploadImages JSONString];
+    }else uploadJsonString = @"";
+    
     
     NSDictionary *parameters = @{@"method":@"mediRecordEdit",
                                  @"sign":@"sign",
@@ -132,7 +138,7 @@
                                  };
     
     
-    NSURLSessionDataTask *editRecordTask = [GCRequest userEditMedicalRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+    [GCRequest userEditMedicalRecordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
             if ([ret_code isEqualToString:@"0"]) {
@@ -151,17 +157,19 @@
             }else{
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else {
-            [hud hide:YES];
+            hud.labelText = [error localizedDescription];
         }
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:editRecordTask delegate:nil];
+
 }
 
 - (void)save:(id)sender
 {
+    [self.view endEditing:YES];
     [self updateDataToServer];
 }
 

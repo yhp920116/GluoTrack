@@ -32,7 +32,11 @@
 
 - (IBAction)verified:(id)sender
 {
-    if (![ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
+    if (![ParseData parseUserNameIsAvaliable:self.mobileField.text]) {
+        return;
+    }
+    
+    if (![ParseData parseIsCurrentUser:self.mobileField.text]) {
         return;
     }
     
@@ -44,7 +48,8 @@
     NSDictionary *parameters = @{@"method":@"verify",
                                  @"accountName":self.mobileField.text,
                                  @"password":self.passwordField.text};
-    NSURLSessionDataTask *verifyTask = [GCRequest userLoginWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+    [GCRequest userLoginWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        hud.mode = MBProgressHUDModeText;
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
             if ([ret_code isEqualToString:@"0"]) {
@@ -75,7 +80,7 @@
         
         [hud hide:YES afterDelay:HUD_TIME_DELAY];
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:verifyTask delegate:nil];
+
 }
 
 #pragma mark - TextFieldDelegate

@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) NSDictionary *countDayDic;
+@property (strong, nonatomic) NSArray *countDayArr;
 @property (strong, nonatomic) NSString *countDay;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchController;
@@ -42,13 +43,16 @@
                          @"30":@"近30天",
                          @"60":@"近60天",
                          };
+    self.countDayArr = @[@"7",@"14",@"30",@"60"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureFetchController];
-    [self configureNoDataView];
+//    [self configureNoDataView];
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
 }
 
 - (void)viewDidLayoutSubviews
@@ -61,7 +65,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self configureNoDataView];
+//    [self configureNoDataView];
     [self.tableView reloadData];
 }
 
@@ -148,7 +152,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.fetchController.sections.count;
+    NSInteger sections = 1;
+    if (self.fetchController.sections.count > 0) {
+        sections = self.fetchController.sections.count;
+    }
+    return sections;
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -157,7 +166,7 @@
         ControlEffect *controlEffect = self.fetchController.fetchedObjects[0];
         return controlEffect.effectList.count+2;
     }else{
-        return 0;
+        return 6;
     }
     
 }
@@ -189,11 +198,15 @@
 
 - (void)configureEvaluateCell:(EvaluateCell *)cell forIndexPath:(NSIndexPath *)indexPath
 {
-    ControlEffect *controlEffect = [self.fetchController objectAtIndexPath:indexPath];
+    ControlEffect *controlEffect;
+    if (self.fetchController.fetchedObjects.count > 0) {
+        controlEffect = [self.fetchController objectAtIndexPath:indexPath];
+    }
+    
     
     cell.scoreLabel.text = NSLocalizedString(@"综合疗效评估",nil);
-    cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@分",controlEffect.conclusionScore]];
-    cell.evaluateTextLabel.text = [NSString stringWithFormat:@"%@  %@",controlEffect.conclusion,controlEffect.conclusionDesc];
+    cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@分",controlEffect.conclusionScore?controlEffect.conclusionScore : @"0"]];
+    cell.evaluateTextLabel.text = [NSString stringWithFormat:@"%@  %@",controlEffect.conclusion?controlEffect.conclusion:@"",controlEffect.conclusionDesc?controlEffect.conclusionDesc:@""];
     
     [self setupConstraintsWithCell:cell];
 
@@ -201,8 +214,13 @@
 
 - (void)configureEffectCell:(EffectCell *)cell forIndexPath:(NSIndexPath *)indexPath
 {
-    ControlEffect *controlEffect = self.fetchController.fetchedObjects[0];
-    EffectList *effectList = [controlEffect.effectList objectAtIndex:indexPath.row-2];
+    ControlEffect *controlEffect;
+    EffectList *effectList;
+    if (self.fetchController.fetchedObjects.count > 0) {
+        controlEffect = self.fetchController.fetchedObjects[0];
+        effectList = [controlEffect.effectList objectAtIndex:indexPath.row-2];
+    }
+    
     
     cell.testCount.text = NSLocalizedString(@"检测次数",nil);
     cell.overproofCount.text = NSLocalizedString(@"超标次数",nil);
@@ -215,11 +233,11 @@
     
     
     
-    cell.maximumValue.attributedText = [self configureLastLetter:[cell.maximumValue.text stringByAppendingFormat:@" %@",effectList.max]];
-    cell.minimumValue.attributedText = [self configureLastLetter:[cell.minimumValue.text stringByAppendingFormat:@" %@",effectList.min]];
-    cell.averageValue.attributedText = [self configureLastLetter:[cell.averageValue.text stringByAppendingFormat:@" %@",effectList.avg]];
-    cell.testCount.attributedText = [self configureLastLetter:[cell.testCount.text stringByAppendingFormat:@" %@",effectList.detectCount]];
-    cell.overproofCount.attributedText = [self configureLastLetter:[cell.overproofCount.text stringByAppendingFormat:@" %@",effectList.overtopCount]];
+    cell.maximumValue.attributedText = [self configureLastLetter:[cell.maximumValue.text stringByAppendingFormat:@" %@",effectList.max?effectList.max:@"--"]];
+    cell.minimumValue.attributedText = [self configureLastLetter:[cell.minimumValue.text stringByAppendingFormat:@" %@",effectList.min?effectList.min:@"--"]];
+    cell.averageValue.attributedText = [self configureLastLetter:[cell.averageValue.text stringByAppendingFormat:@" %@",effectList.avg?effectList.avg:@"--"]];
+    cell.testCount.attributedText = [self configureLastLetter:[cell.testCount.text stringByAppendingFormat:@" %@",effectList.detectCount?effectList.detectCount:@"--"]];
+    cell.overproofCount.attributedText = [self configureLastLetter:[cell.overproofCount.text stringByAppendingFormat:@" %@",effectList.overtopCount?effectList.overtopCount:@"--"]];
     
     [self setupConstraintsWithCell:cell];
 
@@ -311,8 +329,8 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSArray *arr = [[self.countDayDic allValues] sortedArrayUsingSelector:@selector(compare:)];
-    return [arr objectAtIndex:row] ;
+    
+    return [self.countDayDic valueForKey:[self.countDayArr objectAtIndex:row]] ;
 }
 
 - (IBAction)cancelAndConfirm:(id)sender
@@ -326,7 +344,8 @@
         case 1002:
         {
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-            self.countDay = [[self.countDayDic allKeys] objectAtIndex:[self.pickerView selectedRowInComponent:0]];
+            self.countDay = [self.countDayArr objectAtIndex:[self.pickerView selectedRowInComponent:0]];
+
             cell.detailTextLabel.text  = [self.countDayDic valueForKey:self.countDay];
             
             [self.refreshView startLoadingAndExpand:YES animated:YES];

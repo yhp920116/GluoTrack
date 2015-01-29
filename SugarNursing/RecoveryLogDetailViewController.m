@@ -17,7 +17,7 @@
 #import "SwipeView.h"
 #import "UtilsMacro.h"
 
-#define NUMBERS @"0123456789."
+#define NUMBERS @"123456789."
 #define DIET_PATH [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"diet.plist"]
 #define DIET_RATE_PATH [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"diet_rate.plist"]
 #define EXERCISE_PATH [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"exercise.plist"]
@@ -45,6 +45,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 @property (weak, nonatomic) IBOutlet SwipeView *swipeView;
 @property (weak, nonatomic) IBOutlet UITabBar *tabBar;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabBarVerticalSpace;
 
 @property (strong, nonatomic) UITableView *detectView;
 @property (strong, nonatomic) UITableView *drugView;
@@ -248,11 +249,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         case RecoveryLogStatusEdit:
         {
             self.title = NSLocalizedString(@"Edit Recovery Record", nil);
-            self.tabBar.alpha = 0;
+            self.tabBarVerticalSpace.constant = -49;
             break;
         }
     }
     [self configureSaveBtn];
+
     self.swipeView.scrollEnabled = NO;
     
 }
@@ -326,11 +328,16 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                                  @"sessionId":[NSString sessionID],
                                  @"linkManId":[NSString linkmanID],
                                  @"detectTime":dateTime ? dateTime : @"",
-                                 @"glucose":self.gluco,
-                                 @"hemoglobinef":self.hemo,
                                  @"selfSense":feeling ? feeling :@"",
                                  @"remar":self.remark ? self.remark :@"",
                                  } mutableCopy];
+    
+    if (![self.gluco isEqualToString:@""]) {
+        [parameters setValue:self.gluco forKey:@"glucose"];
+    }
+    if (![self.hemo isEqualToString:@""]) {
+        [parameters setValue:self.hemo forKey:@"hemoglobinef"];
+    }
     
     switch (self.recoveryLogStatus) {
         case RecoveryLogStatusAdd:
@@ -428,21 +435,26 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     [self.insulinArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         Medicine *medicine = (Medicine *)obj;
-        if (!medicine.dose || !medicine.drug || !medicine.unit || !medicine.usage || !medicine.sort) {
+        if ((!medicine.dose || !medicine.drug || !medicine.unit || !medicine.usage) || !medicine.sort) {
             return;
         }
         NSString *unit = [NSString formattingUnit:medicine.unit];
         NSString *usage = [NSString formattingUsage:medicine.usage];
         NSNumber *dose = [NSNumber numberWithFloat:medicine.dose.floatValue];
-        NSDictionary *medicineDic = @{@"dose":dose?dose:0,
-                                      @"drug":medicine.drug?medicine.drug:@"",
-                                      @"sort":medicine.sort?medicine.sort:@"",
-                                      @"unit":unit?unit:@"",
-                                      @"usage":usage?usage:@""};
+        NSDictionary *medicineDic = @{@"dose":dose,
+                                      @"drug":medicine.drug,
+                                      @"sort":medicine.sort,
+                                      @"unit":unit,
+                                      @"usage":usage};
         
-        [medicineSet addObject:medicine];
-        [medicineList addObject:medicineDic];
+
+        if (![medicineList containsObject:medicineDic]) {
+            [medicineList addObject:medicineDic];
+            [medicineSet addObject:medicine];
+        }
     }];
+    
+    
     
     
     [self.drugsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -453,13 +465,15 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         NSString *unit = [NSString formattingUnit:medicine.unit];
         NSString *usage = [NSString formattingUsage:medicine.usage];
         NSNumber *dose = [NSNumber numberWithFloat:medicine.dose.floatValue];
-        NSDictionary *medicineDic = @{@"dose":dose?dose:0,
-                                      @"drug":medicine.drug?medicine.drug:@"",
-                                      @"sort":medicine.sort?medicine.sort:@"",
-                                      @"unit":unit?unit:@"",
-                                      @"usage":usage?usage:@""};
-        [medicineSet addObject:medicine];
-        [medicineList addObject:medicineDic];
+        NSDictionary *medicineDic = @{@"dose":dose,
+                                      @"drug":medicine.drug,
+                                      @"sort":medicine.sort,
+                                      @"unit":unit,
+                                      @"usage":usage};
+        if (![medicineList containsObject:medicineDic]) {
+            [medicineList addObject:medicineDic];
+            [medicineSet addObject:medicine];
+        }
     }];
     
     [self.othersArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -470,14 +484,25 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         NSString *unit = [NSString formattingUnit:medicine.unit];
         NSString *usage = [NSString formattingUsage:medicine.usage];
         NSNumber *dose = [NSNumber numberWithFloat:medicine.dose.floatValue];
-        NSDictionary *medicineDic = @{@"dose":dose?dose:0,
-                                      @"drug":medicine.drug?medicine.drug:@"",
-                                      @"sort":medicine.sort?medicine.sort:@"",
-                                      @"unit":unit?unit:@"",
-                                      @"usage":usage?usage:@""};
-        [medicineSet addObject:medicine];
-        [medicineList addObject:medicineDic];
+        NSDictionary *medicineDic = @{@"dose":dose,
+                                      @"drug":medicine.drug,
+                                      @"sort":medicine.sort,
+                                      @"unit":unit,
+                                      @"usage":usage};
+        
+        if ([medicineList containsObject:medicineDic]) {
+            [medicineList addObject:medicineDic];
+            [medicineSet addObject:medicine];
+        }
     }];
+    
+    if (medicineList.count == 0) {
+        aHud.mode = MBProgressHUDModeText;
+        aHud.labelText = NSLocalizedString(@"请至少输入一条完整的用药记录", nil);
+        [aHud show:YES];
+        [aHud hide:YES afterDelay:HUD_TIME_DELAY];
+        return;
+    }
     
     NSString *jsonString = [medicineList JSONString];
     
@@ -575,17 +600,18 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             return ;
         }
  
-        if (food.weight) {
-            NSDictionary *foodDic = @{@"calorie":[NSNumber numberWithFloat:food.calorie.floatValue],
-                                      @"food":food.food,
-                                      @"sort":food.sort,
-                                      @"unit":food.unit,
-                                      @"weight":food.weight};
-            
-            calorie += food.calorie.floatValue;
+        NSDictionary *foodDic = @{@"calorie":[NSNumber numberWithFloat:food.calorie.floatValue],
+                                  @"food":food.food,
+                                  @"sort":food.sort,
+                                  @"unit":food.unit,
+                                  @"weight":food.weight};
+        
+        calorie += food.calorie.floatValue;
+        if (![foodList containsObject:foodDic]) {
             [foodList addObject:foodDic];
             [foodSet addObject:food];
         }
+      
         
     }];
     NSString *sumCalorie = [NSString stringWithFormat:@"%.f",calorie];
@@ -2194,15 +2220,16 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             NSString *text = [[textField.text stringByAppendingString:string] substringWithRange:NSMakeRange(0, range.location+1-range.length)];
             
             if ([logField.logFieldIdentify isEqualToString:@"glucose"]) {
-                fieldInput = [self filterDetectValue:text];
+                fieldInput = [self filterTextField:textField withDetectValue:text];
                
             }
             if ([logField.logFieldIdentify isEqualToString:@"hemoglobinef"]) {
-                fieldInput = [self filterDetectValue:text];
+                fieldInput = [self filterTextField:textField withDetectValue:text];
             }
             break;
         }
         case RecoveryLogTypeDrug:
+        {
             if ([logField.logFieldIdentify isEqualToString:@"drug"]) {
                 if ([self numberPredicateString:string]) {
                     if ([string isEqualToString:@""]) {
@@ -2217,10 +2244,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                 }else fieldInput = NO;
             }
             break;
+        }
         case RecoveryLogTypeDiet:
         case RecoveryLogTypeExercise:
         {
             if ([self numberPredicateString:string]) {
+                string = [self filterZeroNumber:string];
                 NSString *text = [[textField.text stringByAppendingString:string] substringWithRange:NSMakeRange(0, range.location+1-range.length)];
 
                 if ([logField.logFieldIdentify isEqualToString:@"weight"]) {
@@ -2281,16 +2310,43 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     return fieldInput;
 }
 
-- (BOOL)filterDetectValue:(NSString *)text
+- (NSString *)filterZeroNumber:(NSString *)text
 {
-    if (text.floatValue < 0.0f || text.floatValue > 12.0f) {
-        MBProgressHUD *aHud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-        [self.navigationController.view addSubview:aHud];
-        aHud.mode = MBProgressHUDModeText;
-        aHud.labelText = NSLocalizedString(@"检测值超过最大或最小值", nil);
-        [aHud show:YES];
-        [aHud hide:YES afterDelay:HUD_TIME_DELAY];
-        return NO;
+    while ([text hasPrefix:@"0"]) {
+        text = [text substringFromIndex:1];
+    }
+    return text;
+}
+
+- (BOOL)filterTextField:(LogTextField *)logField withDetectValue:(NSString *)text
+{
+    if ([text isEqualToString:@""]) {
+        return YES;
+    }
+    
+    if ([logField.logFieldIdentify isEqualToString:@"glucose"]) {
+        
+        if (text.floatValue < 3.5f || text.floatValue > 40.0f) {
+            MBProgressHUD *aHud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:aHud];
+            aHud.mode = MBProgressHUDModeText;
+            aHud.labelText = NSLocalizedString(@"血糖的值只能在3.5~40", nil);
+            [aHud show:YES];
+            [aHud hide:YES afterDelay:HUD_TIME_DELAY];
+            return NO;
+        }
+    }
+    
+    if ([logField.logFieldIdentify isEqualToString:@"hemoglobinef"]) {
+        if (text.floatValue < 4.0f || text.floatValue > 30.0f) {
+            MBProgressHUD *aHud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:aHud];
+            aHud.mode = MBProgressHUDModeText;
+            aHud.labelText = NSLocalizedString(@"糖化血红蛋白的值只能在4~30", nil);
+            [aHud show:YES];
+            [aHud hide:YES afterDelay:HUD_TIME_DELAY];
+            return NO;
+        }
     }
     
     NSRange range = [text rangeOfString:@"."];
@@ -2313,6 +2369,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 - (BOOL)numberPredicateString:(NSString *)string
 {
+
     NSCharacterSet *nonNumberSet = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS] invertedSet];
     NSString *filter = [[string componentsSeparatedByCharactersInSet:nonNumberSet] componentsJoinedByString:@""];
     if ([string isEqualToString:filter] ) {

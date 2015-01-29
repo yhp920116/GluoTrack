@@ -15,10 +15,14 @@
 + (BOOL)parseDateIsAvaliable:(NSDate *)date;
 
 + (BOOL)parseDateStringIsAvaliable:(NSString *)dateString format:(NSString *)format;
++ (BOOL)parseUserNameIsAvaliable:(NSString *)userName;
 
 + (BOOL)parsePasswordIsAvaliable:(NSString *)password;
 
 + (BOOL)parseStringIsAvaliable:(NSString *)string;
+
++ (BOOL)parseIsCurrentUser:(NSString *)userName;
+
 
 
 @end

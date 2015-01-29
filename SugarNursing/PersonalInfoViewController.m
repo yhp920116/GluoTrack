@@ -21,9 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameTips;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberField;
 @property (weak, nonatomic) IBOutlet UITextField *identityCardField;
-@property (weak, nonatomic) IBOutlet UILabel *idTips;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
-@property (weak, nonatomic) IBOutlet UILabel *emailTips;
 @property (weak, nonatomic) IBOutlet CustomLabel *serverLabel;
 @property (weak, nonatomic) IBOutlet UITextField *genderField;
 @property (weak, nonatomic) IBOutlet UITextField *birthDateField;
@@ -92,11 +90,11 @@
     }
     
     if ([self.identityCardField.text isEqualToString:@""]) {
-        self.idTips.text = NSLocalizedString(@"Setting when purchase", nil);
+        self.identityCardField.placeholder = NSLocalizedString(@"Setting when purchase", nil);
     }
     
     if ([self.emailField.text isEqualToString:@""]) {
-        self.emailTips.text = NSLocalizedString(@"Binding your email in our Home", nil);
+        self.emailField.placeholder = NSLocalizedString(@"Binding your email in our Home", nil);
     }
 }
 
@@ -108,6 +106,11 @@
 }
 
 #pragma mark - TableViewDelegate/DataSource
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -295,7 +295,11 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
     cell.diseaseNameLabel.text = medicalRecord.mediName;
     cell.comfirmedDateLabel.text = medicalRecord.diagTime;
     cell.comfirmedHospitalLabel.text = medicalRecord.diagHosp;
-    cell.patientDataLabel.text = medicalRecord.mediRecord;
+//    if ([medicalRecord.mediRecord isEqualToString:NSLocalizedString(@"Please fill your info", nil)] || !medicalRecord.mediRecord) {
+//        cell.patientDataLabel.text = NSLocalizedString(@"To see more", nil);
+//    }else cell.patientDataLabel.text = medicalRecord.mediRecord;
+    
+    cell.patientDataLabel.text = NSLocalizedString(@"To see more", nil);
     cell.treatmentConditionLabel.text = medicalRecord.treatMent;
     cell.treatmentScheduleLabel.text = medicalRecord.treatPlan;
     [self setupConstraintsForCell:cell];

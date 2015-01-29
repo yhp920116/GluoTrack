@@ -42,7 +42,7 @@
                             @[NSLocalizedString(@"Test Result",),@"Test"],
                             @[NSLocalizedString(@"Control Effect",),@"Effect"],
                             @[NSLocalizedString(@"Recovery Log",),@"Recovery"],
-                            @[NSLocalizedString(@"My Tips",),@"Remind"],
+//                            @[NSLocalizedString(@"My Tips",),@"Remind"],
                             @[NSLocalizedString(@"Service Center",),@"Service"],
                             @[NSLocalizedString(@"Advise",),@"Advise"],
                             @[NSLocalizedString(@"Member Center",),@"Center"],
@@ -188,7 +188,7 @@
     NSTimeInterval dateDiff = [birthDate timeIntervalSinceNow];
     age = abs(trunc(dateDiff/(60*60*24))/365);
     
-    cell.sexAndAgeLabel.text = [NSString stringWithFormat:@"%@   %d岁",userInfo.sex,age];
+    cell.sexAndAgeLabel.text = [NSString stringWithFormat:@"%@   %d%@",userInfo.sex,age,NSLocalizedString(@"years old", nil)];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -210,11 +210,13 @@
     switch (index) {
         case 0:
         {
-            PersonalInfoViewController *personalInfo = [[UIStoryboard memberCenterStoryboard] instantiateViewControllerWithIdentifier:@"PersonalInfo"];
-            [personalInfo.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"菜单" style:UIBarButtonItemStyleDone target:self action:@selector(menu:)]];
-            UINavigationController *personalInfoNav = [[UINavigationController alloc] initWithRootViewController:personalInfo];
-            [self.sideMenuViewController setContentViewController:personalInfoNav animated:YES];
+            [self.sideMenuViewController setContentViewController:[[UIStoryboard memberCenterStoryboard] instantiateInitialViewController] animated:YES];
             [self.sideMenuViewController hideMenuViewController];
+//            PersonalInfoViewController *personalInfo = [[UIStoryboard memberCenterStoryboard] instantiateViewControllerWithIdentifier:@"PersonalInfo"];
+//            [personalInfo.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"菜单" style:UIBarButtonItemStyleDone target:self action:@selector(menu:)]];
+//            UINavigationController *personalInfoNav = [[UINavigationController alloc] initWithRootViewController:personalInfo];
+//            [self.sideMenuViewController setContentViewController:personalInfoNav animated:YES];
+//            [self.sideMenuViewController hideMenuViewController];
             break;
         }
         case 1:
@@ -229,23 +231,23 @@
             [self.sideMenuViewController setContentViewController:[[UIStoryboard recoveryLog] instantiateInitialViewController]];
             [self.sideMenuViewController hideMenuViewController];
             break;
+//        case 4:
+//            [self.sideMenuViewController setContentViewController:[[UIStoryboard myRemind] instantiateInitialViewController]];
+//            [self.sideMenuViewController hideMenuViewController];
+//            break;
         case 4:
-            [self.sideMenuViewController setContentViewController:[[UIStoryboard myRemind] instantiateInitialViewController]];
-            [self.sideMenuViewController hideMenuViewController];
-            break;
-        case 5:
             [self.sideMenuViewController setContentViewController:[[UIStoryboard myService] instantiateInitialViewController]];
             [self.sideMenuViewController hideMenuViewController];
             break;
-        case 6:
+        case 5:
             [self.sideMenuViewController setContentViewController:[[UIStoryboard advise] instantiateInitialViewController]];
             [self.sideMenuViewController hideMenuViewController];
             break;
-        case 7:
+        case 6:
             [self.sideMenuViewController setContentViewController:[[UIStoryboard memberCenterStoryboard] instantiateInitialViewController] animated:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
-        case 8:
+        case 7:
             [AppDelegate userLogOut];
             break;
         default:

@@ -155,6 +155,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="detectCheckbox" destination="LRP-IS-unz" id="Lz0-Lg-4Aa"/>
+                        <outlet property="dietCheckBox" destination="1YZ-Lg-saC" id="yof-Vg-lsE"/>
+                        <outlet property="drugCheckBox" destination="Lu7-sJ-l0e" id="Dtc-db-zWT"/>
+                        <outlet property="exerciseCheckBox" destination="BvN-CG-CXz" id="Npt-9e-70O"/>
                         <outlet property="popOverView" destination="saF-0N-cz1" id="zEg-og-IW9"/>
                         <outlet property="tableView" destination="hWe-mj-DkV" id="Gb7-dz-zci"/>
                     </connections>
@@ -165,17 +169,16 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.89999999999999991" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose the option to show" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFG-WW-v30">
-                            <rect key="frame" x="0.0" y="0.0" width="280" height="34"/>
-                            <color key="backgroundColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" alpha="0.89999999999999991" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6w-k4-iBG">
                             <rect key="frame" x="0.0" y="266" width="139" height="34"/>
-                            <color key="backgroundColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
                             <state key="normal" title="Cancel">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -184,36 +187,47 @@
                         </button>
                         <button opaque="NO" alpha="0.89999999999999991" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0P-TF-eyz">
                             <rect key="frame" x="140" y="266" width="140" height="34"/>
-                            <color key="backgroundColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
                             <color key="tintColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
                             <state key="normal" title="Confirm">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="optionTapped:" destination="3NX-aD-baJ" eventType="touchUpInside" id="CeK-nN-VZg"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0o7-ev-zr9">
+                            <rect key="frame" x="0.0" y="44" width="280" height="1"/>
+                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahR-Wb-UUB">
+                            <rect key="frame" x="0.0" y="265" width="280" height="1"/>
+                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9sO-zg-xq3">
+                            <rect key="frame" x="139" y="265" width="1" height="34"/>
+                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detect" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PH7-lg-8jv">
-                            <rect key="frame" x="12" y="87" width="100" height="21"/>
+                            <rect key="frame" x="11" y="77" width="100" height="21"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="textColor" red="0.35854812959999999" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Medications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCz-xZ-N3S">
-                            <rect key="frame" x="12" y="123" width="100" height="21"/>
+                            <rect key="frame" x="11" y="117" width="100" height="21"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="textColor" red="0.35854812959999999" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Diet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqk-VX-YRe">
-                            <rect key="frame" x="12" y="157" width="100" height="21"/>
+                            <rect key="frame" x="11" y="157" width="100" height="21"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="textColor" red="0.35854812959999999" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" alpha="0.89999999999999991" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRP-IS-unz">
-                            <rect key="frame" x="242" y="85" width="26" height="26"/>
+                            <rect key="frame" x="241" y="77" width="26" height="26"/>
                             <state key="normal" image="CheckboxY">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -223,7 +237,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" alpha="0.89999999999999991" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lu7-sJ-l0e">
-                            <rect key="frame" x="242" y="121" width="26" height="26"/>
+                            <rect key="frame" x="241" y="117" width="26" height="26"/>
                             <state key="normal" image="CheckboxY">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -233,7 +247,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" alpha="0.89999999999999991" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YZ-Lg-saC">
-                            <rect key="frame" x="242" y="155" width="26" height="26"/>
+                            <rect key="frame" x="241" y="157" width="26" height="26"/>
                             <state key="normal" image="CheckboxY">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -243,13 +257,13 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Exercise" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-yU-RK2">
-                            <rect key="frame" x="12" y="191" width="100" height="21"/>
+                            <rect key="frame" x="11" y="197" width="100" height="21"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <color key="textColor" red="0.35854812959999999" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" alpha="0.89999999999999991" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BvN-CG-CXz">
-                            <rect key="frame" x="242" y="189" width="26" height="26"/>
+                            <rect key="frame" x="241" y="197" width="26" height="26"/>
                             <state key="normal" image="CheckboxY">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -259,7 +273,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="1195" y="282"/>
@@ -317,9 +330,51 @@
                         <outlet property="pickerViewWrapper" destination="0Wh-kX-iSN" id="ZhL-Me-PYh"/>
                         <outlet property="swipeView" destination="BcQ-ea-ObA" id="84M-3h-AdR"/>
                         <outlet property="tabBar" destination="U4k-j1-dhv" id="FeE-0V-nF3"/>
+                        <outlet property="tabBarVerticalSpace" destination="Qyy-XF-Yoc" id="Igu-15-xAa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yXI-9H-FdE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="0Wh-kX-iSN" userLabel="PickerView">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="286"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DBH-fI-DPk">
+                            <rect key="frame" x="0.0" y="8" width="280" height="216"/>
+                            <connections>
+                                <outlet property="dataSource" destination="Q3d-5l-TtO" id="k0p-X2-UJk"/>
+                                <outlet property="delegate" destination="Q3d-5l-TtO" id="G0n-3J-HPs"/>
+                            </connections>
+                        </pickerView>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I5F-FS-6Ry">
+                            <rect key="frame" x="0.0" y="241" width="280" height="1"/>
+                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
+                        <button opaque="NO" tag="1000" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Tb-hg-wHv">
+                            <rect key="frame" x="0.0" y="241" width="139" height="44"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="pickerViewAction:" destination="Q3d-5l-TtO" eventType="touchUpInside" id="h4X-3p-XFU"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vUc-Ie-cdz">
+                            <rect key="frame" x="139" y="242" width="1" height="44"/>
+                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
+                        </view>
+                        <button opaque="NO" tag="1001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1v5-OI-dkS">
+                            <rect key="frame" x="140" y="242" width="140" height="44"/>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="pickerViewAction:" destination="Q3d-5l-TtO" eventType="touchUpInside" id="VYR-fU-CVq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </view>
                 <view contentMode="scaleToFill" id="c41-K1-6In" userLabel="DatePicker">
                     <rect key="frame" x="0.0" y="0.0" width="280" height="207"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -356,47 +411,6 @@
                             </state>
                             <connections>
                                 <action selector="datePickerBtnAction:" destination="Q3d-5l-TtO" eventType="touchUpInside" id="XmK-yg-aga"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                </view>
-                <view contentMode="scaleToFill" id="0Wh-kX-iSN" userLabel="PickerView">
-                    <rect key="frame" x="0.0" y="0.0" width="280" height="286"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DBH-fI-DPk">
-                            <rect key="frame" x="0.0" y="8" width="280" height="216"/>
-                            <connections>
-                                <outlet property="dataSource" destination="Q3d-5l-TtO" id="k0p-X2-UJk"/>
-                                <outlet property="delegate" destination="Q3d-5l-TtO" id="G0n-3J-HPs"/>
-                            </connections>
-                        </pickerView>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I5F-FS-6Ry">
-                            <rect key="frame" x="0.0" y="241" width="280" height="0.5"/>
-                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
-                        </view>
-                        <button opaque="NO" tag="1000" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Tb-hg-wHv">
-                            <rect key="frame" x="0.0" y="241" width="139" height="44"/>
-                            <state key="normal" title="取消">
-                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="pickerViewAction:" destination="Q3d-5l-TtO" eventType="touchUpInside" id="h4X-3p-XFU"/>
-                            </connections>
-                        </button>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vUc-Ie-cdz">
-                            <rect key="frame" x="139" y="242" width="0.5" height="44"/>
-                            <color key="backgroundColor" red="0.78415830289999999" green="0.78578353099999998" blue="0.78395871350000002" alpha="1" colorSpace="deviceRGB"/>
-                        </view>
-                        <button opaque="NO" tag="1001" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1v5-OI-dkS">
-                            <rect key="frame" x="140" y="242" width="140" height="44"/>
-                            <state key="normal" title="确定">
-                                <color key="titleColor" red="0.17254901959999999" green="0.49019607840000001" blue="0.77647058820000003" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="pickerViewAction:" destination="Q3d-5l-TtO" eventType="touchUpInside" id="VYR-fU-CVq"/>
                             </connections>
                         </button>
                     </subviews>

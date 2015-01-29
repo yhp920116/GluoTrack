@@ -78,7 +78,7 @@
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:hud];
     
-    hud.labelText = @"Resetting...";
+    hud.labelText = NSLocalizedString(@"Resetting...",nil);
     [hud show:YES];
     
     NSDictionary *parameters = @{@"method":@"reSetPassword",
@@ -88,22 +88,25 @@
                                  @"appType":@"1",
                                  @"password":self.passwordField.text};
     
-    NSURLSessionDataTask *resetTask = [GCRequest userResetPasswordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+    [GCRequest userResetPasswordWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        hud.mode = MBProgressHUDModeText;
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
             if ([ret_code isEqualToString:@"0"]) {
                 hud.labelText = NSLocalizedString(@"Reset succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [AppDelegate userLogOut];
                 });
             }else{
-                hud.mode = MBProgressHUDModeText;
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
-        }else [hud hide:YES];
+        }else{
+            hud.labelText = [error localizedDescription];
+            [hud hide:YES];
+        }
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:resetTask delegate:nil];
+
 }
 @end

@@ -76,7 +76,10 @@
 "Format is not avaliable" = "Format is not avaliable";
 "Date Format is not avaliable" = "Date Format is not avaliable";
 "Password Format is not avaliable" = "Password Format is not avaliable";
+"UserName Format is not avaliable" = "UserName Format is not avaliable";
 "Not your mobile phone" = "Not your mobile phone";
+"You are not the current user" = "You are not the current user";
+"Phone number is not valid" = "Phone number is not valid";
 
 /* Test Tracker */
 "Cancel" = "Cancel";
@@ -95,6 +98,7 @@
 "Personal Information" = "Personal Information";
 "Please edit your info" = "Please edit your information.";
 "Please fill your info" = "Please fill your information";
+"To see more" = "To see more";
 "Setting when purchase" = "Setting when purchase";
 "Binding your email in our Home" = "Binding your email in our Home";
 "You can change only once" = "You can change only once";

@@ -44,7 +44,7 @@
 - (void)showVerificationVC
 {
     VerificationViewController *verificationVC = [[UIStoryboard loginStoryboard] instantiateViewControllerWithIdentifier:@"Verification"];
-    verificationVC.title = @"重设密码";
+    verificationVC.title = NSLocalizedString(@"Reset", nil);
     verificationVC.verifiedType = VerifiedTypeInReset;
     
     if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)]) {
