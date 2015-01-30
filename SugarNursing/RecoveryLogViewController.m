@@ -203,6 +203,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                     DetectLog *detect = [DetectLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                     NSMutableDictionary *detectDic = [[detectLogDic objectForKey:@"detectLog"] mutableCopy];
                     [detectDic feelingFormattingToUserForKey:@"selfSense"];
+                    [detectDic dataSourceFormattingToUserForKey:@"dataSource"];
                     [detect updateCoreDataForData:detectDic withKeyPath:nil];
                     
                     UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
@@ -305,6 +306,12 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 }
 
 #pragma mark - NSFectchedResultController
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView reloadData];
+    [self configureNoDataView];
+}
 
 
 //- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
@@ -444,10 +451,10 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
         DetectLog *detect = recordLog.detectLog;
 
         if (detect.glucose && ![detect.glucose isEqualToString:@""]) {
-            detailContent = [NSString stringWithFormat:@"%@  %@mmol/L",NSLocalizedString(@"glucose", nil), detect.glucose];
+            detailContent = [NSString stringWithFormat:@"%@  %@mmol/L  %@",NSLocalizedString(@"glucose", nil), detect.glucose, detect.dataSource ];
         }
         if (detect.hemoglobinef && ![detect.hemoglobinef isEqualToString:@""]) {
-            detailContent = [detailContent stringByAppendingFormat:@"\n%@  %@%%",NSLocalizedString(@"hemoglobin", nil), detect.hemoglobinef];
+            detailContent = [detailContent stringByAppendingFormat:@"\n%@  %@%%  %@",NSLocalizedString(@"hemoglobin", nil), detect.hemoglobinef, detect.dataSource];
         }
         
         if ([detailContent hasPrefix:@"\n"]) {
@@ -460,10 +467,15 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
         DietLog *diet = recordLog.dietLog;
         NSMutableArray *foodArr = [NSMutableArray arrayWithCapacity:10];
         for (Food *food in diet.foodList) {
-            NSString *aFood = [NSString stringWithFormat:@"%@  %@  %@%@  %@%@",food.sort,food.food,food.weight,food.unit,food.calorie,NSLocalizedString(@"calorie", nil)];
+            NSString *aFood = [NSString stringWithFormat:@"%@  %@  %@%@  %.f%@",food.sort,food.food,food.weight,food.unit,food.calorie.floatValue,NSLocalizedString(@"calorie", nil)];
             [foodArr addObject:aFood];
         }
+        
         detailContent = [foodArr componentsJoinedByString:@"\n"];
+        
+        if (diet.calorie.floatValue != 0) {
+             detailContent = [detailContent stringByAppendingFormat:@"\n%@ %.f%@",NSLocalizedString(@"共摄入", nil),diet.calorie.floatValue,NSLocalizedString(@"calorie", nil)];
+        }
     }
     
     if ([recordLog.logType isEqualToString:@"drug"]) {
@@ -478,7 +490,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     
     if ([recordLog.logType isEqualToString:@"exercise"]) {
         ExerciseLog *exercise = recordLog.exerciseLog;
-        detailContent = [NSString stringWithFormat:@"%@  %@%@  %@%@",exercise.sportName,exercise.duration,NSLocalizedString(@"minutes", nil),exercise.calorie,NSLocalizedString(@"calorie", nil)];
+        detailContent = [NSString stringWithFormat:@"%@  %@%@  %.f%@",exercise.sportName,exercise.duration,NSLocalizedString(@"minutes", nil),exercise.calorie.floatValue,NSLocalizedString(@"calorie", nil)];
     }
     
     return detailContent;

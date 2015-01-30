@@ -95,7 +95,7 @@
 	<key>-43</key>
 	<string>用户状态无效</string>
 	<key>-44</key>
-	<string>用户密码错误</string>
+	<string>用户名或密码不匹配</string>
 	<key>-45</key>
 	<string>删除用户编好错误</string>
 	<key>-46</key>
@@ -125,7 +125,7 @@
 	<key>-58</key>
 	<string>手机号没有找到验证码</string>
 	<key>-59</key>
-	<string>手机号发送验证码次数超过限制</string>
+	<string>今天已接受五次验证码，明天再来吧</string>
 	<key>-60</key>
 	<string>查找检测日志错误</string>
 	<key>-61</key>
@@ -178,5 +178,17 @@
 	<string>用药格式错误</string>
 	<key>-85</key>
 	<string>同一时间不能增加多条日志</string>
+	<key>-86</key>
+	<string>同一时间不能增加多条日志</string>
+	<key>-87</key>
+	<string>同一时间不能增加多条日志</string>
+	<key>-88</key>
+	<string>同一时间不能增加多条日志</string>
+	<key>-89</key>
+	<string>手机号格式错误</string>
+	<key>-90</key>
+	<string>短信发送太频繁</string>
+	<key>-91</key>
+	<string>短信发送同一分钟不能超过1次</string>
 </dict>
 </plist>

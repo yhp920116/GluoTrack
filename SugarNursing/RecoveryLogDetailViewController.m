@@ -324,13 +324,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     NSString *feeling = [feelingArray_ componentsJoinedByString:@","];
     
     __block NSMutableDictionary *parameters = [@{@"method":@"detectLogEdit",
-                                 @"sign":@"sign",
-                                 @"sessionId":[NSString sessionID],
-                                 @"linkManId":[NSString linkmanID],
-                                 @"detectTime":dateTime ? dateTime : @"",
-                                 @"selfSense":feeling ? feeling :@"",
-                                 @"remar":self.remark ? self.remark :@"",
-                                 } mutableCopy];
+                                                 @"sign":@"sign",
+                                                 @"sessionId":[NSString sessionID],
+                                                 @"linkManId":[NSString linkmanID],
+                                                 @"detectTime":dateTime ? dateTime : @"",
+                                                 @"selfSense":feeling ? feeling :@"",
+                                                 @"remar":self.remark ? self.remark :@"",
+                                                 } mutableCopy];
     
     if (![self.gluco isEqualToString:@""]) {
         [parameters setValue:self.gluco forKey:@"glucose"];
@@ -347,6 +347,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         case RecoveryLogStatusEdit:
         {
             [parameters setValue:self.recordLog.detectLog.detectId forKey:@"detectId"];
+//            [parameters setValue:[NSString formattingDataSource:self.recordLog.detectLog.dataSource] forKey:@"dataSource"];
             break;
         }
     }
@@ -388,6 +389,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                         [detectLog updateCoreDataForData:parameters withKeyPath:nil];
                         detectLog.selfSense = [self.feelingArray componentsJoinedByString:@","];
                         detectLog.detectId = recordLog.id;
+                        detectLog.dataSource = NSLocalizedString(@"others", nil);
 
                         
                         recordLog.userid = userId;
@@ -1369,11 +1371,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                 case 0:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.title.text = NSLocalizedString(@"检测设备",nil);
-                    if ([self.recordLog.detectLog.dataSource isEqualToString:@"01"]) {
-                        cell.detailText.text = NSLocalizedString(@"GlucoTrack", nil);
-                    }else{
-                        cell.detailText.text = NSLocalizedString(@"其他", nil);
-                    }
+                    cell.detailText.text = self.recordLog.detectLog.dataSource?self.recordLog.detectLog.dataSource:NSLocalizedString(@"others", nil);
                     break;
                 case 1:
                 {
@@ -2220,11 +2218,11 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             NSString *text = [[textField.text stringByAppendingString:string] substringWithRange:NSMakeRange(0, range.location+1-range.length)];
             
             if ([logField.logFieldIdentify isEqualToString:@"glucose"]) {
-                fieldInput = [self filterTextField:textField withDetectValue:text];
+                fieldInput = [self filterTextField:logField withDetectValue:text];
                
             }
             if ([logField.logFieldIdentify isEqualToString:@"hemoglobinef"]) {
-                fieldInput = [self filterTextField:textField withDetectValue:text];
+                fieldInput = [self filterTextField:logField withDetectValue:text];
             }
             break;
         }
@@ -2318,6 +2316,14 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     return text;
 }
 
+- (NSString *)filterDot:(NSString *)text
+{
+    while ([text hasSuffix:@"."]) {
+        text = [text substringToIndex:text.length-1];
+    }
+    return text;
+}
+
 - (BOOL)filterTextField:(LogTextField *)logField withDetectValue:(NSString *)text
 {
     if ([text isEqualToString:@""]) {
@@ -2330,7 +2336,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             MBProgressHUD *aHud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
             [self.navigationController.view addSubview:aHud];
             aHud.mode = MBProgressHUDModeText;
-            aHud.labelText = NSLocalizedString(@"血糖的值只能在3.5~40", nil);
+            aHud.labelText = NSLocalizedString(@"血糖的值只能在3.5~30", nil);
             [aHud show:YES];
             [aHud hide:YES afterDelay:HUD_TIME_DELAY];
             return NO;
@@ -2390,9 +2396,12 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             }
             if ([logField.logFieldIdentify isEqualToString:@"glucose"]) {
                 self.gluco = logField.text ? logField.text : @"";
+                self.gluco = [self filterDot:self.gluco];
+                
             }
             if ([logField.logFieldIdentify isEqualToString:@"hemoglobinef"]) {
                 self.hemo = logField.text ? logField.text : @"";
+                self.hemo = [self filterDot:self.hemo];
             }
             break;
         }

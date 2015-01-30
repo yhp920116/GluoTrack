@@ -95,7 +95,7 @@
 	<key>-43</key>
 	<string>用戶狀態無效</string>
 	<key>-44</key>
-	<string>用戶密碼錯誤</string>
+	<string>用戶名或密碼不匹配</string>
 	<key>-45</key>
 	<string>刪除用戶偏好錯誤</string>
 	<key>-46</key>
@@ -125,7 +125,7 @@
 	<key>-58</key>
 	<string>手機號沒有找到驗證碼</string>
 	<key>-59</key>
-	<string>手機號發送驗證碼次數超過限制</string>
+	<string>今天已接受五次驗證碼，明天再來吧</string>
 	<key>-60</key>
 	<string>查找檢測日誌錯誤</string>
 	<key>-61</key>
@@ -178,5 +178,17 @@
 	<string>用藥格式錯誤</string>
 	<key>-85</key>
 	<string>同一時間不能增加多條日誌</string>
+	<key>-86</key>
+	<string>同一時間不能增加多條日誌</string>
+	<key>-87</key>
+	<string>同一時間不能增加多條日誌</string>
+	<key>-88</key>
+	<string>同一時間不能增加多條日誌</string>
+	<key>-89</key>
+	<string>手機號格式錯誤</string>
+	<key>-90</key>
+	<string>短信發送太頻繁</string>
+	<key>-91</key>
+	<string>短信發送同一分鐘不能超過一次</string>
 </dict>
 </plist>

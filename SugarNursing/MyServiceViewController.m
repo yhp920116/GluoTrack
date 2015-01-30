@@ -33,16 +33,10 @@
     [self fetchMessages];
     [self configureTableViewAndTextView];
     [self configureNoDataView];
+    
+    self.pullToRefreshView  = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
+    [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
 
-}
-
-- (void)viewDidLayoutSubviews
-{
-    if (self.pullToRefreshView == nil) {
-        self.pullToRefreshView  = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
-        [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
-        
-    }
 }
 
 - (void)fetchMessages

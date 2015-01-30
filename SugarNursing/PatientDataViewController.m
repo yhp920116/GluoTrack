@@ -402,6 +402,11 @@
                 // 刷新
                 [self.collectionView reloadData];
                 
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.medicalRecord.recordPhoto.count-1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+                });
+                
+                
                 hud.labelText = NSLocalizedString(@"Upload succeed", nil);
                 [hud hide:YES];
 

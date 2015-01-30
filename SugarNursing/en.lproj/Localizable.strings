@@ -58,6 +58,7 @@
 "cancel"="Cancel";
 "Sending code" = "Sending code";
 "User Exists" = "User Exists";
+"User No Exists" = "User No Exists";
 "Sending code succeed" = "Sending code succeed";
 
 
@@ -77,9 +78,16 @@
 "Date Format is not avaliable" = "Date Format is not avaliable";
 "Password Format is not avaliable" = "Password Format is not avaliable";
 "UserName Format is not avaliable" = "UserName Format is not avaliable";
+"UserName cannot be empty" = "UserName cannot be empty";
 "Not your mobile phone" = "Not your mobile phone";
 "You are not the current user" = "You are not the current user";
 "Phone number is not valid" = "Phone number is not valid";
+"Mobile phone is rebinded" = "Mobile phone is rebinded";
+"Input the code you received" = "Input the code you received";
+"s" = "s";
+"Code cannot be empty" = "Code cannot be empty";
+
+
 
 /* Test Tracker */
 "Cancel" = "Cancel";
@@ -109,6 +117,7 @@
 "Data Updated" = "Data Updated";
 "Thumbnail uploading" = "Thumbnail uploading";
 "Upload succeed" = "Upload succeed";
+"Version" = "Version";
 
 /* Recovery Log */
 "Custom" = "Custom";
@@ -130,6 +139,7 @@
 "Send Message Succeed" = "Send Message Succeed";
 
 /* Add New Recovery Record */
+"others" = "others";
 "detect" = "Detect";
 "diet" = "Diet";
 "exercise" = "Exercise";
@@ -144,7 +154,6 @@
 "dinner" = "dinner";
 "snack" = "snack";
 "Not to Add More" = "Not to Add More";
-
 "Value cannot be empty" = "Value cannot be empty";
 
 "g" = "g";

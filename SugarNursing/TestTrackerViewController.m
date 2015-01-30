@@ -29,7 +29,8 @@ typedef NS_ENUM(NSInteger, GCLineType) {
     MBProgressHUD *hud;
 }
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchController;
+@property (strong, nonatomic) NSFetchedResultsController *GfetchController;
+@property (strong, nonatomic) NSFetchedResultsController *HfetchController;
 @property (assign) GCLineType lineType;
 @property (assign) GCSearchMode searchMode;
 @property (assign) GCType viewType;
@@ -111,9 +112,14 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 
     NSString *dateString = [dateFormatter stringFromDate:self.selectedDate];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@" ,@"detect",[NSString userID],[NSString linkmanID],dateString];
+    NSPredicate *Gpredicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@ && detectLog.glucose != %@ && detectLog.glucose != %@" ,@"detect",[NSString userID],[NSString linkmanID],dateString,@"",nil];
     
-    self.fetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:timeAscending withPredicate:predicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
+    self.GfetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:timeAscending withPredicate:Gpredicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
+    
+    NSPredicate *Hpredicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@ && detectLog.hemoglobinef != %@ && detectLog.hemoglobinef != %@" ,@"detect",[NSString userID],[NSString linkmanID],dateString,@"",nil];
+    
+    self.HfetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:timeAscending withPredicate:Hpredicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
+    
     [self.tableView reloadData];
     [self configureNoDataView];
     [self.trackerChart reloadGraph];
@@ -165,7 +171,10 @@ typedef NS_ENUM(NSInteger, GCLineType) {
             if ([ret_code isEqualToString:@"0"]) {
                 
                 // 清除缓存
-                for (RecordLog *recordLog in self.fetchController.fetchedObjects) {
+                for (RecordLog *recordLog in self.GfetchController.fetchedObjects) {
+                    [recordLog deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
+                }
+                for (RecordLog *recordLog in self.HfetchController.fetchedObjects) {
                     [recordLog deleteEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 }
                 
@@ -279,30 +288,56 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 
 - (void)configureNoDataView
 {
-    if (self.fetchController.fetchedObjects.count > 0) {
-        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    }else{
-        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
+    switch (self.lineType) {
+        case GCLineTypeGlucose:
+            if (self.GfetchController.fetchedObjects.count > 0 ) {
+                self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+            }else{
+                self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
+            }
+            break;
+            
+        case GCLineTypeHemo:
+            if (self.HfetchController.fetchedObjects.count > 0 ) {
+                self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+            }else{
+                self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
+            }
+            break;
     }
+    
 }
 
 #pragma mark - trackerChart Data Source
 
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return self.fetchController.fetchedObjects.count;
+    NSInteger count;
+    switch (self.lineType) {
+        case GCLineTypeGlucose:
+            count = self.GfetchController.fetchedObjects.count;
+            break;
+        case GCLineTypeHemo:
+            count = self.HfetchController.fetchedObjects.count;
+            break;
+    }
+    return count;
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index
 {
-    RecordLog *recordLog = [self.fetchController.fetchedObjects objectAtIndex:index];
+    RecordLog *recordLog;
     CGFloat pointValue;
+
     switch (self.lineType) {
         case GCLineTypeGlucose:
+            recordLog = [self.GfetchController.fetchedObjects objectAtIndex:index];
             pointValue = recordLog.detectLog.glucose.floatValue;
             break;
         case GCLineTypeHemo:
+            recordLog = [self.HfetchController.fetchedObjects objectAtIndex:index];
             pointValue = recordLog.detectLog.hemoglobinef.floatValue;
+            break;
 
     }
     return pointValue;
@@ -378,11 +413,23 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 
 - (NSDate *)lineGraph:(BEMSimpleLineGraphView *)graph dateOnXAxisForIndex:(NSInteger)index
 {
-    if (self.fetchController.fetchedObjects.count == 0) {
-        return nil;
+    RecordLog *recordLog;
+    switch (self.lineType) {
+        case GCLineTypeGlucose:
+            if (self.GfetchController.fetchedObjects.count == 0) {
+                return nil;
+            }
+            recordLog = [self.GfetchController.fetchedObjects objectAtIndex:index];
+            break;
+        case GCLineTypeHemo:
+            if (self.HfetchController.fetchedObjects.count == 0) {
+                return nil;
+            }
+            recordLog = [self.HfetchController.fetchedObjects objectAtIndex:index];
+            break;
+
     }
     
-    RecordLog *recordLog = [self.fetchController.fetchedObjects objectAtIndex:index];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
     return [dateFormatter dateFromString:recordLog.time];
@@ -414,7 +461,17 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.fetchController.fetchedObjects.count;
+    NSInteger rows;
+    switch (self.lineType) {
+        case GCLineTypeGlucose:
+            rows = self.GfetchController.fetchedObjects.count;
+            break;
+        case GCLineTypeHemo:
+            rows = self.HfetchController.fetchedObjects.count;
+            break;
+
+    }
+    return rows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -427,14 +484,17 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 
 - (void)configureTableView:(UITableView *)tableView withCell:(DetectDataCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    RecordLog *recordLog = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
+    RecordLog *recordLog;
     
-    if (self.lineType == GCLineTypeGlucose) {
-        if (!recordLog.detectLog.glucose || [recordLog.detectLog.glucose isEqualToString:@""]) {
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }else  cell.detectValue.text = recordLog.detectLog.glucose;
-    }else{
-        cell.detectValue.text = recordLog.detectLog.hemoglobinef;
+    switch (self.lineType) {
+        case GCLineTypeGlucose:
+            recordLog = [self.GfetchController.fetchedObjects objectAtIndex:indexPath.row];
+            cell.detectValue.text = recordLog.detectLog.glucose;
+            break;
+        case GCLineTypeHemo:
+            recordLog = [self.HfetchController.fetchedObjects objectAtIndex:indexPath.row];
+            cell.detectValue.text = recordLog.detectLog.hemoglobinef;
+            break;
     }
     
     cell.detectDate.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"yyyy-MM-dd, EEEE"];
@@ -480,7 +540,7 @@ typedef NS_ENUM(NSInteger, GCLineType) {
     NSDate *date = vc.datePicker.date;
     self.selectedDate = date;
     self.dateLabel.text = NSLocalizedString(@"A month earlier", nil);
-    self.trackerChart.sizePoint = 4;
+    self.trackerChart.sizePoint = 1;
     [self configureFetchController];
     [self getDetectionData];
 }

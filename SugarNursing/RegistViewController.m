@@ -13,6 +13,9 @@
 @interface RegistViewController ()<UIAlertViewDelegate,UIActionSheetDelegate>{
     MBProgressHUD *hud;
 }
+@property (strong, nonatomic) NSTimer *countDownTimer;
+@property (nonatomic) NSInteger secondsCountDown;
+
 
 
 @end
@@ -32,6 +35,26 @@
     self.title = NSLocalizedString(@"Register", nil);
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    [self configureCountDownTimer];
+}
+
+- (void)configureCountDownTimer
+{
+    self.secondsCountDown = 60;
+    self.countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
+}
+
+- (void)timeFireMethod
+{
+    self.secondsCountDown--;
+    [self.getCodeAginBtn setTitle:[NSString stringWithFormat:@"%d%@",self.secondsCountDown,NSLocalizedString(@"s", nil)] forState:UIControlStateNormal];
+    self.getCodeAginBtn.userInteractionEnabled = NO;
+    if (self.secondsCountDown==0) {
+        [self.countDownTimer invalidate];
+        [self.getCodeAginBtn setTitle:NSLocalizedString(@"重新获取", nil) forState:UIControlStateNormal];
+        self.getCodeAginBtn.userInteractionEnabled = YES;
     }
 }
 
@@ -59,18 +82,18 @@
         
         [GCRequest userGetCodeWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
-            if (!error && [ret_code isEqualToString:@"0"]) {
-                hud.mode = MBProgressHUDModeText;
-                hud.labelText = NSLocalizedString(@"Sending code succeed", nil);
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            if (!error) {
+                if ([ret_code isEqualToString:@"0"]) {
+                    hud.mode = MBProgressHUDModeText;
+                    hud.labelText = NSLocalizedString(@"Sending code succeed", nil);
+                    [self configureCountDownTimer];
+                }else{
+                    hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
+                }
+            }else{
+                hud.labelText = [error localizedDescription];
             }
-            else{
-                [hud hide:YES];
-                //获取验证码失败
-                NSString* str=[NSString stringWithFormat:NSLocalizedString(@"codesenderrormsg", nil)];
-                UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"codesenderrtitle", nil) message:str delegate:self cancelButtonTitle:NSLocalizedString(@"sure", nil) otherButtonTitles:nil, nil];
-                [alert show];
-            }
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
         }];
     }
 }
@@ -119,9 +142,18 @@
 
 - (IBAction)regist:(id)sender
 {
-    if ([ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
-        [self userRegister];
+    [self.view endEditing:YES];
+    if (![ParseData parseCodeIsAvaliable:self.codeField.text]) {
+        return;
     }
+    if (![ParseData parseUserNameIsAvaliable:self.usernameField.text]) {
+        return;
+    }
+    if (![ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
+        return;
+    }
+    [self userRegister];
+
 }
 
 - (void)userRegister

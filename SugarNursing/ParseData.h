@@ -23,6 +23,8 @@
 
 + (BOOL)parseIsCurrentUser:(NSString *)userName;
 
++ (BOOL)parseCodeIsAvaliable:(NSString *)codeString;
+
 
 
 @end

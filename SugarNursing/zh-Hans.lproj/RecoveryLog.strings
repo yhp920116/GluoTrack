@@ -27,7 +27,7 @@
 "Oqk-VX-YRe.text" = "饮食";
 
 /* Class = "IBUILabel"; text = "Detect"; ObjectID = "PH7-lg-8jv"; */
-"PH7-lg-8jv.text" = "监测";
+"PH7-lg-8jv.text" = "检测";
 
 /* Class = "IBUIButton"; normalTitle = "Dated"; ObjectID = "SGo-7I-B7G"; */
 "SGo-7I-B7G.normalTitle" = "选择日期";

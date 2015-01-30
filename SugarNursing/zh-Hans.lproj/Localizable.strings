@@ -39,7 +39,7 @@
 "Recovery Log" = "康复日志";
 "My Tips" = "我的提醒";
 "Member Center" = "个人中心";
-"Service Center" = "服务中心";
+"Service Center" = "我的客服";
 "Log Out" = "退出登录";
 
 /* Login And Register */
@@ -61,6 +61,7 @@
 "cancel"="取消";
 "Sending code" = "发送验证码";
 "User Exists" = "用户已注册";
+"User No Exists" = "用户不存在";
 "Sending code succeed" = "验证码发送成功";
 
 
@@ -78,11 +79,17 @@
 "male"="男";
 "Format is not avaliable" = "格式填写不正确";
 "Date Format is not avaliable" = "不能选择今天之后的日期";
-"Password Format is not avaliable" = "密码不能少于6位数";
+"Password Format is not avaliable" = "密码不能少于6位数或大于16位数";
 "UserName Format is not avaliable" = "用户名不能包含中文字符";
+"UserName cannot be empty" = "用户名不能为空";
 "Not your mobile phone" = "这不是您的手机号码";
 "You are not the current user" = "这不是您的账号";
 "Phone number is not valid" = "手机号码无效";
+"Mobile phone is rebinded" = "手机号码已被绑定，请重新输入";
+"Input the code you received" = "输入获取到验证码";
+"s" = "秒";
+"Code cannot be empty" = "验证码不能为空";
+
 
 
 
@@ -94,9 +101,9 @@
 "A month earlier" = "近1个月";
 
 /* Control Effect */
-"空腹血糖G3" = "空腹血糖G3";
-"餐后血糖G2" = "餐后血糖G2";
-"餐后血糖G1" = "餐后血糖G1";
+"空腹血糖G3" = "空腹血糖";
+"餐后血糖G2" = "餐后2小时血糖";
+"餐后血糖G1" = "餐后1小时血糖";
 "选择周期" = "选择周期";
 "综合疗效评估" = "综合疗效评估";
 "检测次数" = "检测次数";
@@ -104,13 +111,15 @@
 "最高值" = "最高值";
 "最低值" = "最低值";
 "平均值" = "平均值";
+"暂时无法获取控糖成效" = "暂时无法获取控糖成效";
 
 /* Member Center */
 "Verify your account" = "验证账户";
 "Verifying..." = "验证中...";
 "Rebinding..." = "重新绑定中...";
 "Rebind Your Mobile"="重新绑定";
-"Rebind succeed" = "绑定成功";
+"To Rebind Your Mobile" = "完成绑定";
+"Rebind succeed" = "绑定成功，请重新登录";
 "Setting"="设置";
 "Personal Information" = "个人信息";
 "Please edit your info" = "请填写你的资料";
@@ -129,6 +138,8 @@
 "确诊医院的名称" = "确诊医院的名称";
 "治疗状况" = "治疗状况";
 "治疗方案" = "治疗方案";
+"Version" = "版本";
+
 
 /* Recovery Log */
 "Custom" = "自定义";
@@ -150,13 +161,14 @@
 "Send Message Succeed" = "反馈成功，感谢您的配合";
 
 /* Add New Recovery Record */
+"others" = "其他设备";
 "detect" = "检测";
 "diet" = "饮食";
 "exercise" = "运动";
 "drug" = "用药";
 "Add New Recovery Record" = "新增日志";
 "Edit Recovery Record" = "编辑日志";
-"calorie" = "卡路里";
+"calorie" = "大卡";
 "minutes" = "分钟";
 "Input Detect Value" = "输入检测值";
 "breakfast" = "早餐";

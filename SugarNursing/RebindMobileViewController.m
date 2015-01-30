@@ -8,6 +8,7 @@
 
 #import "RebindMobileViewController.h"
 #import "UIStoryboard+Storyboards.h"
+#import "VerificationViewController.h"
 #import "UtilsMacro.h"
 
 @interface RebindMobileViewController ()<UITextFieldDelegate>{
@@ -69,7 +70,7 @@
                 [user updateCoreDataForData:responseDic withKeyPath:nil];
                 [[CoreDataStack sharedCoreDataStack] saveContext];
                 
-                [self performSegueWithIdentifier:@"ToRebind" sender:nil];
+                [self showVerificationVC];
                 [hud hide:YES];
             }else{
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
@@ -81,6 +82,25 @@
         [hud hide:YES afterDelay:HUD_TIME_DELAY];
     }];
 
+}
+
+- (void)showVerificationVC
+{
+    VerificationViewController *verificationVC = [[UIStoryboard loginStoryboard] instantiateViewControllerWithIdentifier:@"Verification"];
+    verificationVC.title = NSLocalizedString(@"Rebind Your Mobile", nil);
+    verificationVC.verifiedType = VerifiedTypeRebind;
+    
+    if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)]) {
+        // conditionly check for any version >= iOS 8
+        [self showViewController:verificationVC sender:nil];
+        
+    } else
+    {
+        // iOS 7 or below
+        [self.navigationController pushViewController:verificationVC animated:YES];
+    }
+    
+    
 }
 
 #pragma mark - TextFieldDelegate

@@ -17,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *codeField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
+@property (weak, nonatomic) IBOutlet UIButton *getAgainBtn;
+@property (nonatomic) NSInteger secondsCountDown;
+@property (strong, nonatomic) NSTimer *countDownTimer;
+
 @end
 
 @implementation ResetPwdViewController
@@ -26,12 +30,31 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = NSLocalizedString(@"Reset", nil);
+    [self configureCountDownTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self.view endEditing:YES];
+}
+
+- (void)configureCountDownTimer
+{
+    self.secondsCountDown = 60;
+    self.countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
+}
+
+- (void)timeFireMethod
+{
+    self.secondsCountDown--;
+    [self.getAgainBtn setTitle:[NSString stringWithFormat:@"%d%@",self.secondsCountDown,NSLocalizedString(@"s", nil)] forState:UIControlStateNormal];
+    self.getAgainBtn.userInteractionEnabled = NO;
+    if (self.secondsCountDown==0) {
+        [self.countDownTimer invalidate];
+        [self.getAgainBtn setTitle:NSLocalizedString(@"重新获取", nil) forState:UIControlStateNormal];
+        self.getAgainBtn.userInteractionEnabled = YES;
+    }
 }
 
 - (IBAction)getCodeAgain:(id)sender
@@ -56,25 +79,34 @@
                                      @"zone":self.areaCode};
         
         [GCRequest userGetCodeWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+            hud.mode = MBProgressHUDModeText;
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
-            if (!error && [ret_code isEqualToString:@"0"]) {
-                hud.mode = MBProgressHUDModeText;
-                hud.labelText = NSLocalizedString(@"Sending code succeed", nil);
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            if (!error) {
+                if ([ret_code isEqualToString:@"0"]) {
+                    hud.mode = MBProgressHUDModeText;
+                    hud.labelText = NSLocalizedString(@"Sending code succeed", nil);
+                    [self configureCountDownTimer];
+                }else{
+                    hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
+                }
+                
+            }else{
+                hud.labelText = [error localizedDescription];
             }
-            else{
-                [hud hide:YES];
-                //获取验证码失败
-                NSString* str=[NSString stringWithFormat:NSLocalizedString(@"codesenderrormsg", nil)];
-                UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"codesenderrtitle", nil) message:str delegate:self cancelButtonTitle:NSLocalizedString(@"sure", nil) otherButtonTitles:nil, nil];
-                [alert show];
-            }
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
+
         }];
     }
 }
 
 - (IBAction)resetAndLogin:(id)sender
 {
+    [self.view endEditing:YES];
+    
+    if (![ParseData parsePasswordIsAvaliable:self.passwordField.text]) {
+        return;
+    }
+    
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:hud];
     

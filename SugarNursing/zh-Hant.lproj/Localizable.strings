@@ -39,7 +39,7 @@
 "Recovery Log" = "康復日誌";
 "My Tips" = "我的提醒";
 "Member Center" = "個人中心";
-"Service Center" = "服務中心";
+"Service Center" = "我的客服";
 "Log Out" = "退出登陸";
 
 /* Login And Register */
@@ -61,6 +61,7 @@
 "cancel"="取消";
 "Sending code" = "發送驗證碼";
 "User Exists" = "用戶已註冊";
+"User No Exists" = "用戶不存在";
 "Sending code succeed" = "驗證碼發送成功";
 
 
@@ -78,9 +79,14 @@
 "Date Format is not avaliable" = "不能選擇今天之後的日期";
 "Password Format is not avaliable" = "密碼不能少於6位數";
 "UserName Format is not avaliable" = "用戶名不能包含中文字符";
+"UserName cannot be empty" = "用戶名不能為空";
 "Not your mobile phone" = "這不是您的手機號碼";
 "You are not the current user" = "這不是您的賬號";
 "Phone number is not valid" = "手機號碼無效";
+"Mobile phone is rebinded" = "手機號碼已被綁定，請重新輸入";
+"Input the code you received" = "输入获取到验证码";
+"s" = "秒";
+"Code cannot be empty" = "驗證碼不能為空";
 
 
 
@@ -92,9 +98,9 @@
 "A month earlier" = "近一個月";
 
 /* Control Effect */
-"空腹血糖G3" = "空腹血糖G3";
-"餐后血糖G2" = "餐後血糖G2";
-"餐后血糖G1" = "餐後血糖G1";
+"空腹血糖G3" = "空腹血糖";
+"餐后血糖G2" = "餐後2小時血糖";
+"餐后血糖G1" = "餐後1小時血糖";
 "选择周期" = "選擇週期";
 "综合疗效评估" = "綜合療效評估";
 "检测次数" = "檢測次數";
@@ -102,6 +108,8 @@
 "最高值" = "最高值";
 "最低值" = "最低值";
 "平均值" = "平均值";
+"暂时无法获取控糖成效" = "暫時無法獲取控糖成效";
+
 
 
 
@@ -110,7 +118,8 @@
 "Verifying..." = "驗證中...";
 "Rebinding..." = "重新綁定中...";
 "Rebind Your Mobile"="重新綁定";
-"Rebind succeed" = "綁定成功";
+"To Rebind Your Mobile" = "完成綁定";
+"Rebind succeed" = "綁定成功，請重新登錄";
 "Setting"="設置";
 "Personal Information" = "個人信息";
 "Please edit your info" = "請填寫您的資料";
@@ -129,6 +138,8 @@
 "确诊医院的名称" = "確診醫院的名稱";
 "治疗状况" = "治療狀況";
 "治疗方案" = "治療方案";
+"Version" = "版本";
+
 
 /* Recovery Log */
 "Custom" = "自定義";
@@ -150,13 +161,14 @@
 "Send Message Succeed" = "發送成功，感謝您的配合";
 
 /* Add New Recovery Record */
+"others" = "其他設備";
 "detect" = "检测";
 "diet" = "飲食";
 "exercise" = "運動";
 "drug" = "用藥";
 "Add New Recovery Record" = "新增日誌";
 "Edit Recovery Record" = "編輯日誌";
-"calorie" = "卡路里";
+"calorie" = "大卡";
 "minutes" = "分鐘";
 "Input Detect Value" = "輸入檢測值";
 "breakfast" = "早餐";

@@ -2,6 +2,15 @@
 /* Class = "IBUITextField"; placeholder = "Input the code you received"; ObjectID = "6eo-Pd-Vtl"; */
 "6eo-Pd-Vtl.placeholder" = "輸入收到的驗證碼";
 
+/* Class = "IBUIButton"; normalTitle = "Rebind"; ObjectID = "Lt1-pd-ruc"; */
+"Lt1-pd-ruc.normalTitle" = "完成綁定";
+
+/* Class = "IBUIButton"; normalTitle = "Get again2"; ObjectID = "o3V-jN-vBX"; */
+"o3V-jN-vBX.normalTitle" = "重新獲取";
+
+/* Class = "IBUITextField"; placeholder = "Input the code you received"; ObjectID = "6eo-Pd-Vtl"; */
+"6eo-Pd-Vtl.placeholder" = "輸入收到的驗證碼";
+
 /* Class = "IBUILabel"; text = "Login password"; ObjectID = "7bF-zV-wsi"; */
 "7bF-zV-wsi.text" = "登陸密碼";
 

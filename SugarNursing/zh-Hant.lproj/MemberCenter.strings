@@ -1,4 +1,6 @@
 
+/* Class = "IBUIButton"; normalTitle = "Version Update"; ObjectID = "5ng-tx-pNg"; */
+"5ng-tx-pNg.normalTitle" = "檢測更新";
 /* Class = "IBUITextField"; placeholder = "Input your new mobile number"; ObjectID = "1pP-vd-R0x"; */
 "1pP-vd-R0x.placeholder" = "請輸入您的手機號/身份證號/郵箱";
 
@@ -156,7 +158,7 @@
 "pyd-O4-pMR.normalTitle" = "確定";
 
 /* Class = "IBUILabel"; text = "Rebind your mobile number"; ObjectID = "rZe-50-hx5"; */
-"rZe-50-hx5.text" = "重新綁定您的手機號碼";
+"rZe-50-hx5.text" = "輸入你要綁定的新手機號碼";
 
 /* Class = "IBUILabel"; text = "Thumbnail"; ObjectID = "rzz-N6-W8e"; */
 "rzz-N6-W8e.text" = "頭像";

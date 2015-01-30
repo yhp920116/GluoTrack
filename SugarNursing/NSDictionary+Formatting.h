@@ -19,6 +19,7 @@
 - (void)medicineUsageFormattingToUserForKey:(NSString *)key;
 - (void)eatPeriodFormattingToUserForKey:(NSString *)key;
 - (void)feelingFormattingToUserForKey:(NSString *)key;
+- (void)dataSourceFormattingToUserForKey:(NSString *)key;
 
 
 @end

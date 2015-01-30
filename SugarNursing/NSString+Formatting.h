@@ -24,4 +24,6 @@
 
 + (NSString *)formattingFeeling:(NSString *)feeling;
 
++ (NSString *)formattingDataSource:(NSString *)dataSource;
+
 @end

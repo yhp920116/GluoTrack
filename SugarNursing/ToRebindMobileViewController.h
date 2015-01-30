@@ -10,4 +10,8 @@
 
 @interface ToRebindMobileViewController : UITableViewController
 
+@property (strong, nonatomic) NSString *areaCode;
+@property (strong, nonatomic) NSString *phoneNumber;
+
+
 @end

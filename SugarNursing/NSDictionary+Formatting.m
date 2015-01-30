@@ -226,5 +226,22 @@
     [self setValue:feeling forKey:key];
 }
 
+- (void)dataSourceFormattingToUserForKey:(NSString *)key
+{
+    if (![[self allKeys] containsObject:key]) {
+        return;
+    }
+    if (![self isKindOfClass:[NSMutableDictionary class]]) {
+        DDLogInfo(@"Running %@, %@ is not Mutable!",NSStringFromSelector(_cmd),self);
+        return;
+    }
+    NSString *dataSource = [NSString stringWithFormat:@"%@",self[key]];
+    
+    NSDictionary *sourceDic = @{@"01":NSLocalizedString(@"GlucoTrack", nil),
+                                @"02":NSLocalizedString(@"others", nil)};
+    
+    [self setValue:sourceDic[dataSource] forKey:key];
+}
+
 
 @end

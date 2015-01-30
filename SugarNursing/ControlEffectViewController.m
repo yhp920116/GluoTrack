@@ -123,8 +123,8 @@
                 hemoglobin.name = NSLocalizedString(@"糖化血糖蛋白", nil);
                 
                 [lists addObject:g3];
-                [lists addObject:g2];
                 [lists addObject:g1];
+                [lists addObject:g2];
                 [lists addObject:hemoglobin];
                 
                 controlEffect.effectList = lists;
@@ -205,8 +205,20 @@
     
     
     cell.scoreLabel.text = NSLocalizedString(@"综合疗效评估",nil);
-    cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@分",controlEffect.conclusionScore?controlEffect.conclusionScore : @"0"]];
-    cell.evaluateTextLabel.text = [NSString stringWithFormat:@"%@  %@",controlEffect.conclusion?controlEffect.conclusion:@"",controlEffect.conclusionDesc?controlEffect.conclusionDesc:@""];
+    if (controlEffect.conclusionScore) {
+        cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@分",controlEffect.conclusionScore]];
+    }else{
+        cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@",@"--"]];
+    }
+    
+    if (controlEffect.conclusionDesc || controlEffect.conclusion) {
+        cell.evaluateTextLabel.text = [NSString stringWithFormat:@"%@  %@",controlEffect.conclusion?controlEffect.conclusion:@"",controlEffect.conclusionDesc];
+    }else{
+        NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor orangeColor]};
+        NSAttributedString *aString = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"暂时无法获取控糖成效", nil) attributes:attributes];
+        cell.evaluateTextLabel.attributedText = aString;
+    }
+    
     
     [self setupConstraintsWithCell:cell];
 

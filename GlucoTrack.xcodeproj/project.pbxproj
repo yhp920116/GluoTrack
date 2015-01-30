@@ -12,6 +12,7 @@
 		37014DCE1A6431CC0048A2D8 /* ret_code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37014DD01A6431CC0048A2D8 /* ret_code.plist */; };
 		37074C901A6614BE00D65EFF /* NoDataTips.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37074C921A6614BE00D65EFF /* NoDataTips.xib */; };
 		37074C9A1A662C7500D65EFF /* DetectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37074C991A662C7500D65EFF /* DetectCell.xib */; };
+		37077B811A7B785200F69AB5 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37077B801A7B785200F69AB5 /* NoDataView.m */; };
 		370E28701A761861000A34E6 /* DetectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 370E286F1A761861000A34E6 /* DetectCell.m */; };
 		370E28731A7618E5000A34E6 /* DetectDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 370E28721A7618E5000A34E6 /* DetectDataCell.m */; };
 		3715D9291A787A2500A7E26F /* Drugs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D92B1A787A2500A7E26F /* Drugs.plist */; };
@@ -208,9 +209,12 @@
 		37014DD31A64320D0048A2D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/ret_code.plist"; sourceTree = "<group>"; };
 		37014DD41A64320E0048A2D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/ret_code.plist"; sourceTree = "<group>"; };
 		37074C911A6614BE00D65EFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NoDataTips.xib; sourceTree = "<group>"; };
-		37074C941A6614CB00D65EFF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NoDataTips.strings"; sourceTree = "<group>"; };
-		37074C961A6614CC00D65EFF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/NoDataTips.strings"; sourceTree = "<group>"; };
 		37074C991A662C7500D65EFF /* DetectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetectCell.xib; sourceTree = "<group>"; };
+		37077B7F1A7B785200F69AB5 /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoDataView.h; sourceTree = "<group>"; };
+		37077B801A7B785200F69AB5 /* NoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoDataView.m; sourceTree = "<group>"; };
+		37077B831A7B7FA100F69AB5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NoDataTips.strings"; sourceTree = "<group>"; };
+		37077B851A7B7FA200F69AB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NoDataTips.strings; sourceTree = "<group>"; };
+		37077B871A7B7FA500F69AB5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/NoDataTips.strings"; sourceTree = "<group>"; };
 		370E286E1A761861000A34E6 /* DetectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectCell.h; sourceTree = "<group>"; };
 		370E286F1A761861000A34E6 /* DetectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectCell.m; sourceTree = "<group>"; };
 		370E28711A7618E4000A34E6 /* DetectDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectDataCell.h; sourceTree = "<group>"; };
@@ -905,6 +909,8 @@
 				37C5C4211A18964400365824 /* RegistViewController.m */,
 				3720AFA41A199ADF0011D930 /* ResetPwdViewController.h */,
 				3720AFA51A199ADF0011D930 /* ResetPwdViewController.m */,
+				372BF5E11A579388006E717A /* ToRebindMobileViewController.h */,
+				372BF5E21A579388006E717A /* ToRebindMobileViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -920,8 +926,6 @@
 				3769EB791A23941400ACD101 /* SettingViewController.m */,
 				37453B4A1A426ECF006D2CD8 /* RebindMobileViewController.h */,
 				37453B4B1A426ECF006D2CD8 /* RebindMobileViewController.m */,
-				372BF5E11A579388006E717A /* ToRebindMobileViewController.h */,
-				372BF5E21A579388006E717A /* ToRebindMobileViewController.m */,
 				37C647311A61320900BC2E78 /* MedicalRecordViewController.h */,
 				37C647321A61320900BC2E78 /* MedicalRecordViewController.m */,
 				3737B1641A25999000F0D97B /* MedicalRecordEditViewController.h */,
@@ -1103,6 +1107,8 @@
 				37A945651A3845D800E78322 /* RecoveryLogHeaderView.m */,
 				375EC4D71A6F8B6800320F66 /* LogTextField.h */,
 				375EC4D81A6F8B6800320F66 /* LogTextField.m */,
+				37077B7F1A7B785200F69AB5 /* NoDataView.h */,
+				37077B801A7B785200F69AB5 /* NoDataView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1451,6 +1457,7 @@
 				370E28701A761861000A34E6 /* DetectCell.m in Sources */,
 				379C89E41A2D711D00F33BAE /* BasicCell.m in Sources */,
 				373D77EF1A5A84BA008819B2 /* ParseData.m in Sources */,
+				37077B811A7B785200F69AB5 /* NoDataView.m in Sources */,
 				37CA3BA51A263C54009A2403 /* ServiceCell.m in Sources */,
 				378F90711A16698000201353 /* UIViewController+Gestures.m in Sources */,
 				3737B16C1A25C4B700F0D97B /* PatientImage.m in Sources */,
@@ -1537,8 +1544,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				37074C911A6614BE00D65EFF /* Base */,
-				37074C941A6614CB00D65EFF /* zh-Hans */,
-				37074C961A6614CC00D65EFF /* zh-Hant */,
+				37077B831A7B7FA100F69AB5 /* zh-Hans */,
+				37077B851A7B7FA200F69AB5 /* en */,
+				37077B871A7B7FA500F69AB5 /* zh-Hant */,
 			);
 			name = NoDataTips.xib;
 			sourceTree = "<group>";

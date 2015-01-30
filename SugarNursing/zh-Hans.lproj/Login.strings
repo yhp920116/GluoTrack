@@ -1,4 +1,13 @@
 
+/* Class = "IBUITextField"; placeholder = "Input the code you received"; ObjectID = "6eo-Pd-Vtl"; */
+"6eo-Pd-Vtl.placeholder" = "请输入验证码";
+
+/* Class = "IBUIButton"; normalTitle = "Rebind"; ObjectID = "Lt1-pd-ruc"; */
+"Lt1-pd-ruc.normalTitle" = "完成绑定";
+
+/* Class = "IBUIButton"; normalTitle = "Get again2"; ObjectID = "o3V-jN-vBX"; */
+"o3V-jN-vBX.normalTitle" = "重新获取";
+
 /* Class = "IBUITextField"; placeholder = "Only Support For China"; ObjectID = "GOa-rI-zr5"; */
 "GOa-rI-zr5.placeholder" = "输入手机号码";
 

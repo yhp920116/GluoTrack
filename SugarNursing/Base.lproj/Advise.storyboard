@@ -65,9 +65,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="08i-1P-cpv" firstAttribute="top" secondItem="7r4-vl-bXI" secondAttribute="top" id="NVE-9V-CRh"/>
+                            <constraint firstAttribute="bottom" secondItem="08i-1P-cpv" secondAttribute="bottom" id="3p3-jc-1RZ"/>
                             <constraint firstItem="08i-1P-cpv" firstAttribute="leading" secondItem="7r4-vl-bXI" secondAttribute="leading" id="cu6-Iw-h11"/>
-                            <constraint firstItem="WaH-2o-VD3" firstAttribute="top" secondItem="08i-1P-cpv" secondAttribute="bottom" id="ohQ-Fx-Hks"/>
+                            <constraint firstItem="08i-1P-cpv" firstAttribute="top" secondItem="7r4-vl-bXI" secondAttribute="top" id="v1b-7z-oFg"/>
                             <constraint firstAttribute="trailing" secondItem="08i-1P-cpv" secondAttribute="trailing" id="xU1-E9-wue"/>
                         </constraints>
                     </view>

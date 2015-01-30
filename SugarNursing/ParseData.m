@@ -97,6 +97,17 @@
 
 + (BOOL)parseUserNameIsAvaliable:(NSString *)userName
 {
+    if ([userName isEqualToString:@""] || !userName) {
+        UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:windowView];
+        [windowView addSubview:hud];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"UserName cannot be empty", nil);
+        [hud show:YES];
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        return NO;
+    }
+    
     NSString *match = @"(^[A-Za-z0-9_@.]{1,24}$)";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",match];
     if (![predicate evaluateWithObject:userName]) {
@@ -115,7 +126,7 @@
 
 + (BOOL)parsePasswordIsAvaliable:(NSString *)password
 {
-    if (!password || [password length] < 6) {
+    if (!password || [password length] < 6 || [password length] > 16) {
         
         UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:windowView];
@@ -162,6 +173,22 @@
         }
         
        
+    }
+    return YES;
+}
+
++ (BOOL)parseCodeIsAvaliable:(NSString *)codeString
+{
+    if (!codeString) {
+        UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:windowView];
+        [windowView addSubview:hud];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"Code cannot be empty", nil);
+        [hud show:YES];
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        
+        return NO;
     }
     return YES;
 }

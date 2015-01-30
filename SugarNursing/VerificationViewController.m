@@ -10,6 +10,7 @@
 #import "AreaNameAndCodeViewController.h"
 #import "RegistViewController.h"
 #import "ResetPwdViewController.h"
+#import "ToRebindMobileViewController.h"
 #import "UtilsMacro.h"
 
 
@@ -130,7 +131,8 @@
         hud.labelText = NSLocalizedString(@"Sending code", nil);
         [hud show:YES];
         
-        if (self.verifiedType == VerifiedTypeReset || self.verifiedType == VerifiedTypeInReset) {
+        // 如果是註冊、未登錄狀態的重設密碼、重新綁定都需要驗證用戶是否已經註冊
+        if (self.verifiedType == VerifiedTypeInReset) {
             [self userGetCode];
             return;
         }
@@ -145,21 +147,29 @@
             if (!error) {
                 NSString *ret_code = [responseData objectForKey:@"ret_code"];
                 if ([ret_code isEqualToString:@"0"]) {
-                    if ([[responseData valueForKey:@"isMember"] isEqualToString:@"0"]){
-                        [self userGetCode];
-                    }else{
-                        hud.labelText = NSLocalizedString(@"User Exists", nil);
-                        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                    
+                    if (self.verifiedType == VerifiedTypeReset) {
+                        if ([[responseData valueForKey:@"isMember"] isEqualToString:@"1"]) {
+                            [self userGetCode];
+                        }else{ hud.labelText = NSLocalizedString(@"User No Exists", nil);}
+                    }else if (self.verifiedType == VerifiedTypeRegister){
+                        if ([[responseData valueForKey:@"isMember"] isEqualToString:@"0"]){
+                            [self userGetCode];
+                        }else{ hud.labelText = NSLocalizedString(@"User Exists", nil); }
+                    }else if (self.verifiedType == VerifiedTypeRebind){
+                        if ([[responseData valueForKey:@"isMember"] isEqualToString:@"0"]){
+                            [self userGetCode];
+                        }else{ hud.labelText = NSLocalizedString(@"Mobile phone is rebinded", nil); }
                     }
                     
                 }else{
                     hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
-                    [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 }
             }else{
                 hud.labelText = [error localizedDescription];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
+            
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
         }];
 
     }
@@ -188,6 +198,9 @@
                     case 1:
                     case 2:
                         [self performSegueWithIdentifier:@"Reset" sender:nil];
+                        break;
+                    case 3:
+                        [self performSegueWithIdentifier:@"Rebind" sender:nil];
                         break;
                 }
             }
@@ -224,6 +237,11 @@
         ResetPwdViewController *resetVC = [segue destinationViewController];
         resetVC.areaCode = self.countryAndAreaCode.areaCode;
         resetVC.phoneNumber = self.phoneField.text;
+    }else if ([segue.identifier isEqualToString:@"Rebind"])
+    {
+        ToRebindMobileViewController *rebindVC = [segue destinationViewController];
+        rebindVC.phoneNumber = self.phoneField.text;
+        rebindVC.areaCode = self.countryAndAreaCode.areaCode;
     }
 }
 

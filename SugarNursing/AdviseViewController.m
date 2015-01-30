@@ -10,6 +10,7 @@
 #import "AdviseCell.h"
 #import <SSPullToRefresh.h>
 #import "UtilsMacro.h"
+#import "NoDataView.h"
 
 @interface AdviseViewController ()<UITableViewDataSource,UITableViewDelegate,SSPullToRefreshViewDelegate,NSFetchedResultsControllerDelegate>{
 }
@@ -33,6 +34,7 @@
 {
     if (self.pullToRefreshView == nil) {
         self.pullToRefreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
+        self.pullToRefreshView.style = SSPullToRefreshViewStyleScrolling;
         [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
     }
 
@@ -112,7 +114,10 @@
     if (self.fetchController.fetchedObjects.count > 0) {
         self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     }else{
+        
         self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
+
+        
     }
 }
 

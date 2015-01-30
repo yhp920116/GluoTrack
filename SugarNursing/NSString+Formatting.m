@@ -132,4 +132,20 @@
     
 }
 
++ (NSString *)formattingDataSource:(NSString *)dataSource
+{
+    NSDictionary *sourceDic = @{NSLocalizedString(@"GlucoTrack", nil):@"01",
+                                NSLocalizedString(@"others", nil):@"02"};
+    
+    if (!dataSource) {
+        return nil;
+    }
+    if (![[sourceDic allKeys] containsObject:dataSource]) {
+        return nil;
+    }
+    
+    return [sourceDic valueForKey:dataSource];
+    
+}
+
 @end

@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, VerifiedType) {
     VerifiedTypeRegister = 0,
     VerifiedTypeReset = 1,
     VerifiedTypeInReset = 2,
+    VerifiedTypeRebind = 3,
 };
 
 @interface VerificationViewController : UITableViewController
