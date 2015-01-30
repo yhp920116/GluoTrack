@@ -15,7 +15,7 @@
 
 static NSString * const GCHttpBaseURLString = @"http://192.168.1.4:8080/lcp-laop/";
 static NSString * const GCHttpTestURLString = @"http://172.16.24.72:8083/lcp-laop/";
-static NSString * const GCUserURLString = @"http://120.24.60.25:8081/lcp-laop";
+static NSString * const GCUserURLString = @"http://user.lifecaring.cn/lcp-laop";
 
 // Login URL
 #define GC_LOGIN_URL @"rest/laop/linkMan/account"

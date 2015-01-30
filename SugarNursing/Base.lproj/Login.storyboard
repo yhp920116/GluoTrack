@@ -166,7 +166,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="170"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" image="007" translatesAutoresizingMaskIntoConstraints="NO" id="rwI-Jg-Mhh" userLabel="fieldBG1">
-                                        <rect key="frame" x="155" y="48" width="216" height="7"/>
+                                        <rect key="frame" x="155" y="48" width="207" height="7"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEE-wL-zK3" customClass="CustomLabel">
                                         <rect key="frame" x="155" y="15" width="110" height="17"/>
@@ -175,14 +175,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Input the code you received" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UGk-6z-NB0">
-                                        <rect key="frame" x="160" y="35" width="211" height="17"/>
+                                        <rect key="frame" x="160" y="35" width="202" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFf-eh-f31">
-                                        <rect key="frame" x="381" y="30" width="64" height="25"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFf-eh-f31">
+                                        <rect key="frame" x="372" y="28" width="73" height="27"/>
                                         <color key="backgroundColor" red="1" green="0.51260264600000005" blue="0.051294479929999998" alpha="1" colorSpace="deviceRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                         <state key="normal" title="Get again">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -543,7 +543,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="330"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" image="007" translatesAutoresizingMaskIntoConstraints="NO" id="KrC-3a-0Uw" userLabel="fieldBG1">
-                                                <rect key="frame" x="155" y="44" width="216" height="7"/>
+                                                <rect key="frame" x="155" y="44" width="207" height="7"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MoL-Nl-X0q" customClass="CustomLabel">
                                                 <rect key="frame" x="155" y="11" width="110" height="17"/>
@@ -552,7 +552,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Input the code you received" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6eo-Pd-Vtl">
-                                                <rect key="frame" x="160" y="31" width="211" height="17"/>
+                                                <rect key="frame" x="160" y="31" width="202" height="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
@@ -560,10 +560,10 @@
                                                     <outlet property="delegate" destination="gUK-xJ-mbo" id="KwY-Te-3c9"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCg-Rs-f1f">
-                                                <rect key="frame" x="381" y="26" width="64" height="25"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCg-Rs-f1f">
+                                                <rect key="frame" x="372" y="24" width="73" height="27"/>
                                                 <color key="backgroundColor" red="1" green="0.51260264600000005" blue="0.051294479929999998" alpha="1" colorSpace="deviceRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <state key="normal" title="Get again">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -817,16 +817,16 @@
                                                         <constraint firstAttribute="width" constant="290" id="Cac-pY-kUg"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Input the code you received" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zh4-b7-F0j">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Input the code you received" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zh4-b7-F0j">
                                                     <rect key="frame" x="159" y="17" width="207" height="25"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3V-jN-vBX">
-                                                    <rect key="frame" x="370" y="17" width="71" height="25"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3V-jN-vBX">
+                                                    <rect key="frame" x="360" y="15" width="81" height="27"/>
                                                     <color key="backgroundColor" red="1" green="0.51260264600000005" blue="0.051294479929999998" alpha="1" colorSpace="deviceRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                     <state key="normal" title="Get again2">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

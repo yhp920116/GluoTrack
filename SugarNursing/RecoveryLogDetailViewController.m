@@ -602,10 +602,11 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             return ;
         }
  
+        NSString *foodUnit = [NSString formattingFoodUnit:food.unit];
         NSDictionary *foodDic = @{@"calorie":[NSNumber numberWithFloat:food.calorie.floatValue],
                                   @"food":food.food,
                                   @"sort":food.sort,
-                                  @"unit":food.unit,
+                                  @"unit":foodUnit,
                                   @"weight":food.weight};
         
         calorie += food.calorie.floatValue;

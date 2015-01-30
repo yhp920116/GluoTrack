@@ -108,7 +108,7 @@
         return NO;
     }
     
-    NSString *match = @"(^[A-Za-z0-9_@.]{1,24}$)";
+    NSString *match = @"(^[A-Za-z0-9_@. ]{1,24}$)";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",match];
     if (![predicate evaluateWithObject:userName]) {
         UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;

@@ -48,7 +48,7 @@
 - (void)timeFireMethod
 {
     self.secondsCountDown--;
-    [self.getAgainBtn setTitle:[NSString stringWithFormat:@"%d%@",self.secondsCountDown,NSLocalizedString(@"s", nil)] forState:UIControlStateNormal];
+    [self.getAgainBtn setTitle:[NSString stringWithFormat:@"%ld%@",(long)self.secondsCountDown,NSLocalizedString(@"s", nil)] forState:UIControlStateNormal];
     self.getAgainBtn.userInteractionEnabled = NO;
     if (self.secondsCountDown==0) {
         [self.countDownTimer invalidate];

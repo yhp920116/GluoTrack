@@ -189,6 +189,21 @@
     }
 }
 
+- (void)eatUnitsFormattingToUserForKey:(NSString *)key
+{
+    if (![[self allKeys] containsObject:key]) {
+        return;
+    }
+    if (![self isKindOfClass:[NSMutableDictionary class]]) {
+        DDLogInfo(@"Running %@, %@ is not Mutable!",NSStringFromSelector(_cmd),self);
+        return;
+    }
+    NSString *eatUnit = [NSString stringWithFormat:@"%@",self[key]];
+    if ([eatUnit isEqualToString:@"01"]) {
+        [self setValue:NSLocalizedString(@"g", nil) forKey:key];
+    }
+}
+
 - (void)feelingFormattingToUserForKey:(NSString *)key
 {
     if (![[self allKeys] containsObject:key]) {

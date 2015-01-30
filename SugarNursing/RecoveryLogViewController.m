@@ -231,7 +231,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                     for (NSDictionary *foodDic in [dietDic objectForKey:@"foodList"]) {
                         
                         NSMutableDictionary *fooDic_ = [foodDic mutableCopy];
-//                        [fooDic_ unitFormattingToUserForKey:@"unit"];
+                        [fooDic_ eatUnitsFormattingToUserForKey:@"unit"];
                         
                         Food *food = [Food createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                         [food updateCoreDataForData:fooDic_ withKeyPath:nil];

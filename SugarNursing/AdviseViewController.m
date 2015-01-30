@@ -34,7 +34,6 @@
 {
     if (self.pullToRefreshView == nil) {
         self.pullToRefreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
-        self.pullToRefreshView.style = SSPullToRefreshViewStyleScrolling;
         [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
     }
 
@@ -116,6 +115,7 @@
     }else{
         
         self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
+        
 
         
     }

@@ -150,6 +150,8 @@
 "Medical Case" = "病例資料";
 "Add Medical Record" = "新增病史";
 "Edit Meical Record" = "編輯病史";
+"Images is more than 10" = "病例圖片不能超過10張";
+
 
 /* About Us */
 "About Us" = "關於我們";

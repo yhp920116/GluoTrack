@@ -96,7 +96,7 @@
 + (NSString *)formattingFoodUnit:(NSString *)unit
 {
     NSDictionary *unitDic = @{NSLocalizedString(@"g", nil):@"01",
-                              NSLocalizedString(@"kg", nil):@"02",
+//                              NSLocalizedString(@"kg", nil):@"02",
                               };
     
     if (!unit) {

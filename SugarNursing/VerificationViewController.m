@@ -71,6 +71,7 @@
 
 - (IBAction)GetVerificationCode:(id)sender
 {
+    [self.view endEditing:YES];
     
     if ([self.countryAndAreaCode.areaCode isEqualToString:@"852"]) {
         if (self.phoneField.text.length != 8) {

@@ -366,8 +366,18 @@
 
 - (void)uploadImageToServer
 {
+    
     hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:hud];
+    
+    if (self.medicalRecord.recordPhoto.count >= 10) {
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"Images is more than 10", nil);
+        [hud show:YES];
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        return;
+    }
+    
     hud.labelText = NSLocalizedString(@"Thumbnail uploading", nil);
     [hud show:YES];
     
