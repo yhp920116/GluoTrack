@@ -161,7 +161,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    self.tableView.userInteractionEnabled
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITalbeView DataSource
