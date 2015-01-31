@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GCTableView.h"
 
-@interface TimelineTableView : UITableView
+@interface TimelineTableView : GCTableView
 
 @end

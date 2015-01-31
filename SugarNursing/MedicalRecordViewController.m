@@ -53,7 +53,6 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
     
     [self configureFetchController];
     [self configureTableView];
-    [self configureNoDataView];
     
 }
 
@@ -208,30 +207,21 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
 //            break;
 //    }
 //    
-//    [self configureNoDataView];
 //}
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-        [self configureNoDataView];
         [self.tableView reloadData];
-}
-
-- (void)configureNoDataView
-{
-    if (self.fetchController.fetchedObjects.count > 0) {
-        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    }else{
-        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
-    }
 }
 
 #pragma mark - Table view data source / delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-
-    return [self.fetchController.fetchedObjects count];
+    NSInteger sections;
+    if (self.fetchController.fetchedObjects.count == 0) {
+        sections = 0;
+    }else sections = [self.fetchController.sections count];
+    return sections;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

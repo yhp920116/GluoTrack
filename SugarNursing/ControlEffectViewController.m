@@ -49,7 +49,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureFetchController];
-//    [self configureNoDataView];
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
@@ -65,7 +64,6 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-//    [self configureNoDataView];
     [self.tableView reloadData];
 }
 
@@ -139,15 +137,6 @@
     }];
 }
 
-- (void)configureNoDataView
-{
-    if (self.fetchController.fetchedObjects.count > 0) {
-        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    }else{
-        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
-    }
-}
-
 #pragma mark - tableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -155,7 +144,7 @@
     NSInteger sections = 1;
     if (self.fetchController.sections.count > 0) {
         sections = self.fetchController.sections.count;
-    }
+    }else sections = 0;
     return sections;
 
 }

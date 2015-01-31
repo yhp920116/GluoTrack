@@ -143,7 +143,6 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     self.fetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:NO withPredicate:predicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
     
     [self.tableView reloadData];
-    [self configureNoDataView];
 
 }
 
@@ -154,15 +153,6 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     self.refreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-}
-
-- (void)configureNoDataView
-{
-    if (self.fetchController.fetchedObjects.count > 0) {
-        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    }else{
-        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
     }
 }
 
@@ -310,7 +300,6 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView reloadData];
-    [self configureNoDataView];
 }
 
 
@@ -342,7 +331,6 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 //        default:
 //            break;
 //    }
-//    [self configureNoDataView];
 //}
 //
 //- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
@@ -366,7 +354,12 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.fetchController.sections.count;
+    NSInteger sections;
+    if (self.fetchController.fetchedObjects.count == 0) {
+        sections = 0;
+    }else sections = [self.fetchController.sections count];
+    return sections;
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

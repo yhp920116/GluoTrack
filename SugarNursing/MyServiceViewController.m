@@ -32,7 +32,6 @@
     [super viewDidLoad];
     [self fetchMessages];
     [self configureTableViewAndTextView];
-    [self configureNoDataView];
     
     self.pullToRefreshView  = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
     [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
@@ -162,25 +161,18 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self configureNoDataView];
-    [self.tableView reloadData];
+    self.tableView.userInteractionEnabled
 }
-
-- (void)configureNoDataView
-{
-    if (self.fetchController.fetchedObjects.count > 0) {
-        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    }else{
-        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
-    }
-}
-
 
 #pragma mark - UITalbeView DataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    NSInteger sections;
+    if (self.fetchController.fetchedObjects.count == 0) {
+        sections = 0;
+    }else sections = [self.fetchController.sections count];
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

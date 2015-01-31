@@ -27,7 +27,6 @@
     // Do any additional setup after loading the view.
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
     [self configureFetchController];
-    [self configureNoDataView];
 }
 
 - (void)viewDidLayoutSubviews
@@ -56,7 +55,6 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self configureNoDataView];
     [self.tableView reloadData];
 }
 
@@ -108,24 +106,15 @@
     }];
 }
 
-- (void)configureNoDataView
-{
-    if (self.fetchController.fetchedObjects.count > 0) {
-        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    }else{
-        
-        self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
-        
-
-        
-    }
-}
-
 #pragma mark - TableView DataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    NSInteger sections;
+    if (self.fetchController.fetchedObjects.count == 0) {
+        sections = 0;
+    }else sections = [self.fetchController.sections count];
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

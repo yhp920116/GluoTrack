@@ -79,6 +79,7 @@
 		3769EB7A1A23941400ACD101 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3769EB791A23941400ACD101 /* SettingViewController.m */; };
 		377127911A1AF320009008D3 /* RecoveryLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 377127901A1AF320009008D3 /* RecoveryLogViewController.m */; };
 		377127971A1B26E8009008D3 /* TimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 377127961A1B26E8009008D3 /* TimelineCell.m */; };
+		377B88BD1A7C99B800D1E91A /* GCTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 377B88BC1A7C99B800D1E91A /* GCTableView.m */; };
 		3783A6091A5E5A2D00AC2B9F /* CountryAndAreaCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3783A6081A5E5A2D00AC2B9F /* CountryAndAreaCode.m */; };
 		378631D11A789AEE00882784 /* FeelingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 378631D31A789AEE00882784 /* FeelingCell.xib */; };
 		3786359D1A47C8CF00922539 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E4AC781A2EFD6900779807 /* Main.storyboard */; };
@@ -217,8 +218,6 @@
 		37077B831A7B7FA100F69AB5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NoDataTips.strings"; sourceTree = "<group>"; };
 		37077B851A7B7FA200F69AB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NoDataTips.strings; sourceTree = "<group>"; };
 		37077B871A7B7FA500F69AB5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/NoDataTips.strings"; sourceTree = "<group>"; };
-		37077B881A7B9BC400F69AB5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/foodRate.plist"; sourceTree = "<group>"; };
-		37077B891A7B9BC700F69AB5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/foodRate.plist"; sourceTree = "<group>"; };
 		37077B8A1A7B9C2600F69AB5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		370E286E1A761861000A34E6 /* DetectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectCell.h; sourceTree = "<group>"; };
 		370E286F1A761861000A34E6 /* DetectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectCell.m; sourceTree = "<group>"; };
@@ -362,6 +361,10 @@
 		377127901A1AF320009008D3 /* RecoveryLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecoveryLogViewController.m; sourceTree = "<group>"; };
 		377127951A1B26E8009008D3 /* TimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineCell.h; sourceTree = "<group>"; };
 		377127961A1B26E8009008D3 /* TimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineCell.m; sourceTree = "<group>"; };
+		377B88B91A7C94CB00D1E91A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/foodRate.plist"; sourceTree = "<group>"; };
+		377B88BA1A7C94CE00D1E91A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/foodRate.plist"; sourceTree = "<group>"; };
+		377B88BB1A7C99B800D1E91A /* GCTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCTableView.h; sourceTree = "<group>"; };
+		377B88BC1A7C99B800D1E91A /* GCTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCTableView.m; sourceTree = "<group>"; };
 		3783A6071A5E5A2D00AC2B9F /* CountryAndAreaCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryAndAreaCode.h; sourceTree = "<group>"; };
 		3783A6081A5E5A2D00AC2B9F /* CountryAndAreaCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryAndAreaCode.m; sourceTree = "<group>"; };
 		378631CD1A78990300882784 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Insulin.plist; sourceTree = "<group>"; };
@@ -1125,6 +1128,8 @@
 				375EC4D81A6F8B6800320F66 /* LogTextField.m */,
 				37077B7F1A7B785200F69AB5 /* NoDataView.h */,
 				37077B801A7B785200F69AB5 /* NoDataView.m */,
+				377B88BB1A7C99B800D1E91A /* GCTableView.h */,
+				377B88BC1A7C99B800D1E91A /* GCTableView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1451,6 +1456,7 @@
 				37EEB6A41A64C531008B0892 /* EffectList.m in Sources */,
 				37E7DF501A7081B50003B0F0 /* RecordLog.m in Sources */,
 				37AA24451A6CA1E900439A33 /* Medicine.m in Sources */,
+				377B88BD1A7C99B800D1E91A /* GCTableView.m in Sources */,
 				371628BC1A15DD4C0043EED2 /* UIViewController+Notifications.m in Sources */,
 				37DE6A821A271B73000533BB /* SectionHeaderView.m in Sources */,
 				373A86FB1A79D0C100CCCE83 /* UserSetting.m in Sources */,
@@ -1624,8 +1630,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				373A86FF1A7A1AB600CCCE83 /* en */,
-				37077B881A7B9BC400F69AB5 /* zh-Hans */,
-				37077B891A7B9BC700F69AB5 /* zh-Hant */,
+				377B88B91A7C94CB00D1E91A /* zh-Hans */,
+				377B88BA1A7C94CE00D1E91A /* zh-Hant */,
 			);
 			name = foodRate.plist;
 			sourceTree = "<group>";

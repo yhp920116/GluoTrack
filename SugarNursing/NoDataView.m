@@ -35,10 +35,9 @@
         self.noLabel.textColor = [UIColor grayColor];
         [self addSubview:self.noLabel];
         
-//        [self.noLabel mas_centerX];
-//        [self.noLabel mas_centerY];
         [self.noLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self);
+            make.centerX.equalTo(self);
+            make.centerY.equalTo(self);
         }];
     }
     return self;

@@ -121,7 +121,6 @@ typedef NS_ENUM(NSInteger, GCLineType) {
     self.HfetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:timeAscending withPredicate:Hpredicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
     
     [self.tableView reloadData];
-    [self configureNoDataView];
     [self.trackerChart reloadGraph];
 }
 
@@ -286,27 +285,6 @@ typedef NS_ENUM(NSInteger, GCLineType) {
     
 }
 
-- (void)configureNoDataView
-{
-    switch (self.lineType) {
-        case GCLineTypeGlucose:
-            if (self.GfetchController.fetchedObjects.count > 0 ) {
-                self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-            }else{
-                self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
-            }
-            break;
-            
-        case GCLineTypeHemo:
-            if (self.HfetchController.fetchedObjects.count > 0 ) {
-                self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-            }else{
-                self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"NoDataTips" owner:self options:nil][0];
-            }
-            break;
-    }
-    
-}
 
 #pragma mark - trackerChart Data Source
 
@@ -458,6 +436,30 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 }
 
 #pragma mark - TableView
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    NSInteger sections;
+    switch (self.lineType) {
+        case GCLineTypeGlucose:
+            if (self.GfetchController.fetchedObjects.count > 0 ) {
+                sections = [self.GfetchController.sections count];
+            }else{
+                sections = 0;
+            }
+            break;
+            
+        case GCLineTypeHemo:
+            if (self.HfetchController.fetchedObjects.count > 0 ) {
+                sections = [self.GfetchController.sections count];
+
+            }else{
+                sections = 0;
+            }
+            break;
+    }
+    return sections;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
