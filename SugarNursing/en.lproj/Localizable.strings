@@ -15,7 +15,7 @@
 /* Basic */
 "New Version" = "New Version";
 "Skip" = "Skip";
-"Go to Store" = "Go to Store";
+"Go" = "Go";
 
 /* SSPullToRefreshView */
 "Pull down to refresh…" = "Pull down to refresh…";

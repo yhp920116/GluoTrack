@@ -125,7 +125,7 @@
 	<key>-58</key>
 	<string>手机号没有找到验证码</string>
 	<key>-59</key>
-	<string>今天已接受五次验证码，明天再來吧</string>
+	<string>发送失败，超过每天可发送的最大数值</string>
 	<key>-60</key>
 	<string>查找检测日志错误</string>
 	<key>-61</key>

@@ -17,7 +17,7 @@
 #import "SwipeView.h"
 #import "UtilsMacro.h"
 
-#define NUMBERS @"123456789."
+#define NUMBERS @"1234567890."
 #define DIET_PATH [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"diet.plist"]
 #define DIET_RATE_PATH [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"diet_rate.plist"]
 #define EXERCISE_PATH [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"exercise.plist"]
@@ -2248,8 +2248,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         case RecoveryLogTypeExercise:
         {
             if ([self numberPredicateString:string]) {
-                string = [self filterZeroNumber:string];
                 NSString *text = [[textField.text stringByAppendingString:string] substringWithRange:NSMakeRange(0, range.location+1-range.length)];
+                text = [self filterZeroNumber:text];
+
 
                 if ([logField.logFieldIdentify isEqualToString:@"weight"]) {
                     

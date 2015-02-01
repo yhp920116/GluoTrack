@@ -245,6 +245,7 @@ static const int kStateKey;
 
 - (UIEdgeInsets)TPKeyboardAvoiding_contentInsetForKeyboard {
     TPKeyboardAvoidingState *state = self.keyboardAvoidingState;
+
     UIEdgeInsets newInset = self.contentInset;
     CGRect keyboardRect = state.keyboardRect;
     newInset.bottom = keyboardRect.size.height - MAX((CGRectGetMaxY(keyboardRect) - CGRectGetMaxY(self.bounds)), 0);

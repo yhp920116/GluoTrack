@@ -70,8 +70,6 @@
 		3749B5611A09D9920031D00C /* LeftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3749B5601A09D9920031D00C /* LeftMenuCell.m */; };
 		3749B5641A09DAFA0031D00C /* MemberInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3749B5631A09DAFA0031D00C /* MemberInfoCell.m */; };
 		3749B57F1A0A11700031D00C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3749B5811A0A11700031D00C /* Localizable.strings */; };
-		375525031A7BF3FF008F175D /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 375525011A7BF3FF008F175D /* YALSunnyRefreshControl.m */; };
-		375525041A7BF3FF008F175D /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375525021A7BF3FF008F175D /* YALSunnyRefreshControl.xib */; };
 		3756DC551A1D92A200879398 /* RecoveryLogDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3756DC541A1D92A200879398 /* RecoveryLogDetailViewController.m */; };
 		375EC4D91A6F8B6800320F66 /* LogTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 375EC4D81A6F8B6800320F66 /* LogTextField.m */; };
 		3761FA571A10BCC700F31D2F /* TestTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3761FA561A10BCC700F31D2F /* TestTrackerViewController.m */; };
@@ -135,6 +133,8 @@
 		37B183B01A4BF2D4001932AE /* GlucoCare.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37B183AE1A4BF2D4001932AE /* GlucoCare.xcdatamodeld */; };
 		37B187BF1A2C431F00A2D63F /* detect.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B187BE1A2C431F00A2D63F /* detect.xib */; };
 		37B187C31A2C74C300A2D63F /* diet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B187C21A2C74C300A2D63F /* diet.xib */; };
+		37B5081D1A7E93E300D6B36E /* YALSunnyRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B5081B1A7E93E300D6B36E /* YALSunnyRefreshControl.m */; };
+		37B5081E1A7E93E300D6B36E /* YALSunnyRefreshControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37B5081C1A7E93E300D6B36E /* YALSunnyRefreshControl.xib */; };
 		37C26A6E1A62CFA50095EFC6 /* NSString+Formatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C26A6D1A62CFA50095EFC6 /* NSString+Formatting.m */; };
 		37C5C4221A18964400365824 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C5C4211A18964400365824 /* RegistViewController.m */; };
 		37C6472D1A612D4600BC2E78 /* TipsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C6472C1A612D4600BC2E78 /* TipsCell.xib */; };
@@ -334,9 +334,6 @@
 		3749B5631A09DAFA0031D00C /* MemberInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberInfoCell.m; sourceTree = "<group>"; };
 		3749B5801A0A11700031D00C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		374A581C1A2F09E90048E33B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
-		375525001A7BF3FF008F175D /* YALSunnyRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YALSunnyRefreshControl.h; sourceTree = "<group>"; };
-		375525011A7BF3FF008F175D /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YALSunnyRefreshControl.m; sourceTree = "<group>"; };
-		375525021A7BF3FF008F175D /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
 		3756DC531A1D92A200879398 /* RecoveryLogDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecoveryLogDetailViewController.h; sourceTree = "<group>"; };
 		3756DC541A1D92A200879398 /* RecoveryLogDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecoveryLogDetailViewController.m; sourceTree = "<group>"; };
 		375EC4D71A6F8B6800320F66 /* LogTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogTextField.h; sourceTree = "<group>"; };
@@ -452,6 +449,9 @@
 		37B183AF1A4BF2D4001932AE /* GlucoCare.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GlucoCare.xcdatamodel; sourceTree = "<group>"; };
 		37B187BE1A2C431F00A2D63F /* detect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detect.xib; sourceTree = "<group>"; };
 		37B187C21A2C74C300A2D63F /* diet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = diet.xib; sourceTree = "<group>"; };
+		37B5081A1A7E93E300D6B36E /* YALSunnyRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YALSunnyRefreshControl.h; sourceTree = "<group>"; };
+		37B5081B1A7E93E300D6B36E /* YALSunnyRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YALSunnyRefreshControl.m; sourceTree = "<group>"; };
+		37B5081C1A7E93E300D6B36E /* YALSunnyRefreshControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YALSunnyRefreshControl.xib; sourceTree = "<group>"; };
 		37C26A6C1A62CFA50095EFC6 /* NSString+Formatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Formatting.h"; sourceTree = "<group>"; };
 		37C26A6D1A62CFA50095EFC6 /* NSString+Formatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Formatting.m"; sourceTree = "<group>"; };
 		37C5C4201A18964400365824 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
@@ -857,7 +857,7 @@
 		3749B5471A09C7950031D00C /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				375524FF1A7BF3FF008F175D /* YALSunnyRefreshControll */,
+				37B508191A7E93E300D6B36E /* YALSunnyRefreshControll */,
 				37F5080A1A34917400879605 /* FXBlurView */,
 				371903A11A28584F00A9657B /* SwipeView */,
 				371903941A28236800A9657B /* TPKeyboardAvoiding */,
@@ -1061,16 +1061,6 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		375524FF1A7BF3FF008F175D /* YALSunnyRefreshControll */ = {
-			isa = PBXGroup;
-			children = (
-				375525001A7BF3FF008F175D /* YALSunnyRefreshControl.h */,
-				375525011A7BF3FF008F175D /* YALSunnyRefreshControl.m */,
-				375525021A7BF3FF008F175D /* YALSunnyRefreshControl.xib */,
-			);
-			path = YALSunnyRefreshControll;
-			sourceTree = "<group>";
-		};
 		37B183A91A4BC101001932AE /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -1089,6 +1079,16 @@
 				37B183AC1A4BC128001932AE /* CoreDataStack.m */,
 			);
 			name = CoreDataStack;
+			sourceTree = "<group>";
+		};
+		37B508191A7E93E300D6B36E /* YALSunnyRefreshControll */ = {
+			isa = PBXGroup;
+			children = (
+				37B5081A1A7E93E300D6B36E /* YALSunnyRefreshControl.h */,
+				37B5081B1A7E93E300D6B36E /* YALSunnyRefreshControl.m */,
+				37B5081C1A7E93E300D6B36E /* YALSunnyRefreshControl.xib */,
+			);
+			path = YALSunnyRefreshControll;
 			sourceTree = "<group>";
 		};
 		37F5080A1A34917400879605 /* FXBlurView */ = {
@@ -1346,7 +1346,7 @@
 				379F20251A353BA80026BF95 /* RemindCell.xib in Resources */,
 				37FF58801A4096CA00F3564E /* country.plist in Resources */,
 				3715D92E1A787AAC00A7E26F /* Insulin.plist in Resources */,
-				375525041A7BF3FF008F175D /* YALSunnyRefreshControl.xib in Resources */,
+				37B5081E1A7E93E300D6B36E /* YALSunnyRefreshControl.xib in Resources */,
 				379C89FA1A2DA60A00F33BAE /* LogSectionHeaderView.xib in Resources */,
 				379C8A0C1A2DC5B000F33BAE /* ExerciseCell.xib in Resources */,
 				3749B5261A09C50D0031D00C /* Images.xcassets in Resources */,
@@ -1444,7 +1444,6 @@
 				3749B5611A09D9920031D00C /* LeftMenuCell.m in Sources */,
 				3798B10C1A5135A600074232 /* NSDictionary+LowerCaseKey.m in Sources */,
 				37F5080D1A34917400879605 /* FXBlurView.m in Sources */,
-				375525031A7BF3FF008F175D /* YALSunnyRefreshControl.m in Sources */,
 				37EEB6A71A64C532008B0892 /* ControlEffect.m in Sources */,
 				373904A71A1F345900A7B30F /* ControlEffectViewController.m in Sources */,
 				37EA290F1A21C7B900B43CD0 /* RemindViewController.m in Sources */,
@@ -1454,6 +1453,7 @@
 				3737B1751A25EDAA00F0D97B /* AdviseViewController.m in Sources */,
 				37EA29171A21F5E600B43CD0 /* RemindDetailViewController.m in Sources */,
 				37EEB6A41A64C531008B0892 /* EffectList.m in Sources */,
+				37B5081D1A7E93E300D6B36E /* YALSunnyRefreshControl.m in Sources */,
 				37E7DF501A7081B50003B0F0 /* RecordLog.m in Sources */,
 				37AA24451A6CA1E900439A33 /* Medicine.m in Sources */,
 				377B88BD1A7C99B800D1E91A /* GCTableView.m in Sources */,

@@ -16,6 +16,7 @@
 #import "AppDelegate+UserLogInOut.h"
 #import <MobClick.h>
 
+
 @interface AppDelegate ()
 
 @end
@@ -96,9 +97,9 @@
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick startWithAppkey:UM_ANALYTICS_KEY reportPolicy:BATCH channelId:nil];
     [MobClick setAppVersion:version];
-    [MobClick checkUpdate:NSLocalizedString(@"New Version", nil) cancelButtonTitle:NSLocalizedString(@"Skip", nil) otherButtonTitles:NSLocalizedString(@"Go to store", nil)];
-    
+    [MobClick checkUpdate:NSLocalizedString(@"New Version", nil) cancelButtonTitle:NSLocalizedString(@"Skip", nil) otherButtonTitles:NSLocalizedString(@"Go", nil)];
 }
+
 
 
 

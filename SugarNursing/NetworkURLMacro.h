@@ -46,6 +46,7 @@ static NSString * const GCUserURLString = @"http://user.lifecaring.cn/lcp-laop";
 #define GC_USER_DELETE_DRUGLOG_URL @"rest/laop/linkMan/cureLog"
 #define GC_USER_DELETE_DIETLOG_URL @"rest/laop/linkMan/cureLog"
 #define GC_USER_DELETE_EXERCISELOG_URL @"rest/laop/linkMan/cureLog"
+#define GC_USER_GET_NEWMESSAGES_URL @"rest/laop/common/message"
 
 
 #endif

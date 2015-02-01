@@ -160,15 +160,18 @@
             
             if (![[NSString indentityCard] isEqualToString:userName]) {
                 
-                UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;
-                MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:windowView];
-                [windowView addSubview:hud];
-                hud.mode = MBProgressHUDModeText;
-                hud.labelText = NSLocalizedString(@"You are not the current user", nil);
-                [hud show:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                if (![[NSString phoneNumber] isEqualToString:userName]) {
+                    UIView *windowView = [UIApplication sharedApplication].keyWindow.viewForBaselineLayout;
+                    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:windowView];
+                    [windowView addSubview:hud];
+                    hud.mode = MBProgressHUDModeText;
+                    hud.labelText = NSLocalizedString(@"You are not the current user", nil);
+                    [hud show:YES];
+                    [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                    
+                    return NO;
+                }
                 
-                return NO;
             }
         }
         

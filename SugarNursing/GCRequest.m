@@ -687,6 +687,28 @@
     }];
 }
 
++ (NSURLSessionDataTask *)userGetNewMessagesWithParameters:(id)parameters withBlock:(void (^)(NSDictionary *, NSError *))block
+{
+    DDLogInfo(@"Running %@ %@",[self class],NSStringFromSelector(_cmd));
+    DDLogInfo(@"Requesting for URL: %@", [NSURL URLWithString:GC_USER_GET_NEWMESSAGES_URL relativeToURL:[GCHttpClient sharedClient].baseURL]);
+    
+    parameters = [parameters mutableCopy];
+    [self signValueFor:parameters];
+    
+    return [[GCHttpClient sharedClient] POST:GC_USER_GET_NEWMESSAGES_URL parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        DDLogDebug(@"Get New Messages resonseData: %@", responseObject);
+        if (block) {
+            block(responseObject, nil);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        DDLogDebug(@"Request Error: %@ %@",[error localizedDescription], NSStringFromSelector(_cmd));
+        if (block) {
+            block(nil, error);
+        }
+    }];
+    
+}
+
 + (id)signValueFor:(id)parameters
 {
     if ([parameters isKindOfClass:[NSDictionary class]]) {

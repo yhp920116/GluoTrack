@@ -8,7 +8,7 @@
 "2dg-ka-HVM.text" = "身份證";
 
 /* Class = "IBUILabel"; text = "Reset Password"; ObjectID = "2mr-vS-BVQ"; */
-"2mr-vS-BVQ.text" = "重置密碼";
+"2mr-vS-BVQ.text" = "修改密碼";
 
 /* Class = "IBUILabel"; text = "疾病名称"; ObjectID = "48l-fo-qIf"; */
 "48l-fo-qIf.text" = "疾病名稱";
@@ -50,7 +50,7 @@
 "GKS-nb-NKl.text" = "治療狀況";
 
 /* Class = "IBUIButton"; normalTitle = "Rebind"; ObjectID = "GNG-w9-7Zy"; */
-"GNG-w9-7Zy.normalTitle" = "重新綁定";
+"GNG-w9-7Zy.normalTitle" = "重新綁定手機號碼";
 
 /* Class = "IBUIButton"; normalTitle = "取消"; ObjectID = "GSX-we-HH6"; */
 "GSX-we-HH6.normalTitle" = "取消";
@@ -146,7 +146,7 @@
 "lOz-gC-2X6.text" = "既往病史";
 
 /* Class = "IBUILabel"; text = "About us"; ObjectID = "lmc-Ob-PiE"; */
-"lmc-Ob-PiE.text" = "關於糖無忌";
+"lmc-Ob-PiE.text" = "關於我們";
 
 /* Class = "IBUILabel"; text = "确诊医院"; ObjectID = "mwh-Ou-H9t"; */
 "mwh-Ou-H9t.text" = "確診醫院";

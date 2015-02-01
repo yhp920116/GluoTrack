@@ -231,7 +231,7 @@
     NSData *imageData = UIImageJPEGRepresentation(self.thumbnailImage, 0.5);
     NSDictionary *parameters = @{@"method": @"uploadFile",
                                  @"fileType": @"2"};
-    NSURLSessionDataTask *uploadThumbnialTask = [GCRequest userUploadFileWithParameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [GCRequest userUploadFileWithParameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"thumbnail.jpg" mimeType:@"image/jpeg"];
         
         
@@ -245,17 +245,17 @@
                 self.thumbnailURLString = [ParseData parseDictionary:responseData ForKeyPath:@"fileUrl"];
                 
                 [self updateDataToServer];
-                
                 hud.labelText = NSLocalizedString(@"Upload succeed", nil);
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }else{
                 [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
             }
         }else {
-            [hud hide:YES];
+            hud.labelText = [error localizedDescription];
         }
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:uploadThumbnialTask delegate:nil];
+
 }
 
 - (void)updateDataToServer
@@ -271,7 +271,7 @@
                                  @"userName": self.userNameField.text,
                                  @"headImageUrl": !self.thumbnailURLString ? self.userInfo.headImageUrl : self.thumbnailURLString,
                                  };
-    NSURLSessionDataTask *editUserInfoTask = [GCRequest userEditUserInfoWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+    [GCRequest userEditUserInfoWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
@@ -283,18 +283,20 @@
 
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = NSLocalizedString(@"Data Updated", nil);
-                [hud hide:YES];
                 
-                [self.navigationController popViewControllerAnimated:YES];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(HUD_TIME_DELAY * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+
+                });
             }else{
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
            
-        }else{ [hud hide:YES]; }
-        
+        }else{ hud.labelText = [error localizedDescription]; }
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:editUserInfoTask delegate:nil];
+ 
 }
 
 #pragma mark - TextFieldDelegate

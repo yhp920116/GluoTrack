@@ -96,9 +96,8 @@
 // delete Exercise Log
 + (NSURLSessionDataTask *)userDeleteExerciseLogWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
 
-
-
-//
+// get New Messages
++ (NSURLSessionDataTask *)userGetNewMessagesWithParameters:(id)parameters withBlock:(void (^) (NSDictionary *responseData, NSError *error))block;
 
 
 @end

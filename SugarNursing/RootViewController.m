@@ -9,11 +9,10 @@
 #import "RootViewController.h"
 #import "UIStoryboard+Storyboards.h"
 #import "TestTrackerViewController.h"
-#import "FXBlurView.h"
+#import "UtilsMacro.h"
 
 @interface RootViewController ()
 
-@property (weak, nonatomic) IBOutlet FXBlurView *blurView;
 @end
 
 @implementation RootViewController
@@ -37,8 +36,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.blurView.blurRadius = 30;
+    [self getNewMessages];
     [self performSelector:@selector(showMenu:) withObject:nil afterDelay:1.25];
+}
+
+//- (void)configureNewMessages
+//{
+//    [NSTimer scheduledTimerWithTimeInterval:60*30 target:self selector:@selector(getNewMessages) userInfo:nil repeats:YES];
+//}
+
+- (void)getNewMessages
+{
+    NSDictionary *parameters = @{@"method":@"getNewMessageCount",
+                                 @"recvUser":[NSString linkmanID],
+                                 @"sessionId":[NSString sessionID],
+                                 @"sign":@"sign"};
+    
+    [GCRequest userGetNewMessagesWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        if (!error) {
+            NSString *ret_code = [responseData valueForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
+                NSString *newMessages = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"countListSize"]];
+                [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
+            }
+        }
+    }];
 }
 
 - (void)showMenu:(id)sender

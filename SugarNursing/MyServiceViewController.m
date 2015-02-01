@@ -56,12 +56,13 @@
 }
 
 - (void)getMessages
-{    
+{
     NSDictionary *parameters = @{@"method":@"getAgentMessageList",
                                  @"sign":@"sign",
                                  @"sessionId":[NSString sessionID],
                                  @"centerId":[NSString centerID],
                                  @"recvUser":[NSString userID],
+                                 @"size":@"20",
                                  };
     [GCRequest userGetMessageListWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
         
@@ -134,10 +135,13 @@
         if (!error) {
             NSString *ret_code = [responseData objectForKey:@"ret_code"];
             if ([ret_code isEqualToString:@"0"]) {
+                
+                self.serverTextView.text =nil;
                 hud.labelText = NSLocalizedString(@"Send Message Succeed", nil);
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
                 
                 [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
+                
             }else{
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
@@ -249,10 +253,5 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-
-
-
-
 
 @end

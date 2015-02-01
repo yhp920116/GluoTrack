@@ -15,7 +15,7 @@
 /* Basic */
 "New Version" = "发现新版本";
 "Skip" = "忽略";
-"Go to Store" = "下载更新";
+"Go" = "前往";
 
 /* SSPullToRefreshView */
 "Pull down to refresh…" = "下拉刷新…";
@@ -160,7 +160,8 @@
 
 "FeedBack" = "用户反馈";
 "Sending FeedBack…" = "发送中…";
-"Send Message Succeed" = "反馈成功，感谢您的配合";
+"Send Message Succeed" = "发送成功";
+"Send Feedback Succeed" = "反馈成功，感谢您的配合";
 
 /* Add New Recovery Record */
 "others" = "其他设备";

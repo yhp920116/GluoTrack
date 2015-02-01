@@ -11,13 +11,13 @@
 @interface NSString (UserCommon)
 
 // User
-+ (NSString *)userName;
 + (NSString *)userID;
 + (NSString *)linkmanID;
 + (NSString *)sessionID;
 + (NSString *)sessionToken;
 
 // UserInfo
++ (NSString *)userName;
 + (NSString *)centerID;
 + (NSString *)userThumbnail;
 + (NSString *)phoneNumber;

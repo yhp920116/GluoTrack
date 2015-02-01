@@ -49,11 +49,13 @@
 - (void)timeFireMethod
 {
     self.secondsCountDown--;
-    [self.getCodeAginBtn setTitle:[NSString stringWithFormat:@"%d%@",self.secondsCountDown,NSLocalizedString(@"s", nil)] forState:UIControlStateNormal];
+    [self.getCodeAginBtn setTitle:[NSString stringWithFormat:@"%ld%@",(long)self.secondsCountDown,NSLocalizedString(@"s", nil)] forState:UIControlStateNormal];
+    [self.getCodeAginBtn setBackgroundColor:[UIColor grayColor]];
     self.getCodeAginBtn.userInteractionEnabled = NO;
     if (self.secondsCountDown==0) {
         [self.countDownTimer invalidate];
         [self.getCodeAginBtn setTitle:NSLocalizedString(@"重新获取", nil) forState:UIControlStateNormal];
+        [self.getCodeAginBtn setBackgroundColor:[UIColor colorWithRed:255/255.0 green:131/255.0 blue:13/255.0 alpha:1]];
         self.getCodeAginBtn.userInteractionEnabled = YES;
     }
 }

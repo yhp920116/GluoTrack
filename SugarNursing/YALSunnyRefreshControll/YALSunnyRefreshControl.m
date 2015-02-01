@@ -11,9 +11,9 @@
 #define DEGREES_TO_RADIANS(x) (M_PI * (x) / 180.0)
 
 static const CGFloat DefaultHeight = 100.f;
-static const CGFloat AnimationDuration = 1.f;
-static const CGFloat AnimationDamping = 0.4f;
-static const CGFloat AnimationVelosity= 0.8f;
+static const CGFloat AnimationDuration = 0.25f;
+//static const CGFloat AnimationDamping = 0.4f;
+//static const CGFloat AnimationVelosity= 0.8f;
 
 static const CGFloat SunTopPoint = 5.f;
 static const CGFloat SunBottomPoint = 55.f;
@@ -44,8 +44,9 @@ static const CGFloat DefaultScreenWidth = 320.f;
 @property (nonatomic,weak) IBOutlet UIImageView *skyImageView;
 @property (nonatomic,weak) IBOutlet UIImageView *buildingsImageView;
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, assign) id target;
-@property (nonatomic) SEL action;
+@property (nonatomic) CGFloat scrollViewInitialOffsetY;
+@property (nonatomic) CGFloat scrollViewInitialInsetTop;
+@property (nonatomic,assign) BOOL wasLoading;
 @property (nonatomic,assign) BOOL forbidSunSet;
 @property (nonatomic,assign) BOOL isSunRotating;
 @property (nonatomic,assign) BOOL forbidOffsetChanges;
@@ -59,34 +60,34 @@ static const CGFloat DefaultScreenWidth = 320.f;
     [self removeObserver:self.scrollView forKeyPath:@"contentOffset"];
 }
 
-+ (YALSunnyRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
-                                      target:(id)target
-                               refreshAction:(SEL)refreshAction{
++ (YALSunnyRefreshControl*)attachToScrollView:(UIScrollView *)scrollView{
     
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"YALSunnyRefreshControl" owner:self options:nil];
     YALSunnyRefreshControl *refreshControl = (YALSunnyRefreshControl *)[topLevelObjects firstObject];
 
     refreshControl.scrollView = scrollView;
     [refreshControl.scrollView addObserver:refreshControl forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    refreshControl.target = target;
-    refreshControl.action = refreshAction;
     [scrollView setDelegate:refreshControl];
     [refreshControl setFrame:CGRectMake(0.f,
                                         0.f,
                                         scrollView.frame.size.width,
                                         0.f)];
     [scrollView addSubview:refreshControl];
+    
     return refreshControl;
 }
 
 -(void)awakeFromNib{
-    
     [super awakeFromNib];
-    
+    [self commonInit];
+}
+
+- (void)commonInit
+{
+    self.wasLoading = NO;
     CGFloat leadingRatio = [UIScreen mainScreen].bounds.size.width / DefaultScreenWidth;
     [self.skyLeadingConstraint setConstant:self.skyLeadingConstraint.constant * leadingRatio];
     [self.skyTrailingConstraint setConstant:self.skyTrailingConstraint.constant * leadingRatio];
-    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -101,26 +102,35 @@ static const CGFloat DefaultScreenWidth = 320.f;
     [self setFrame:CGRectMake(0.f,
                               0.f,
                               self.scrollView.frame.size.width,
-                              self.scrollView.contentOffset.y)];
+                              self.scrollView.contentOffset.y-self.scrollViewInitialOffsetY)];
     
-    if(self.scrollView.contentOffset.y <= -DefaultHeight){
+    if(self.scrollView.contentOffset.y <= self.scrollViewInitialOffsetY-DefaultHeight){
         
-        if(self.scrollView.contentOffset.y < -SpringTreshold){
+        if(self.scrollView.contentOffset.y < self.scrollViewInitialOffsetY-SpringTreshold){
             
-            [self.scrollView setContentOffset:CGPointMake(0.f, -SpringTreshold)];
+            [self.scrollView setContentOffset:CGPointMake(0.f, self.scrollViewInitialOffsetY -SpringTreshold)];
         }
         [self scaleItems];
         [self rotateSunInfinitly];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self.target performSelector:self.action withObject:nil];
-#pragma clang diagnostic pop
+        
+        if(!self.scrollView.dragging && self.forbidSunSet && self.scrollView.decelerating && !self.forbidOffsetChanges ){
+            [self startRefreshing];
+        }
+        
+        if (!self.wasLoading) {
+            
+            id<YALSunnyRefreshControlDelegate>delegate = self.delegate;
+            if ([delegate respondsToSelector:@selector(YALRefreshViewDidStartLoading:)]) {
+                [delegate YALRefreshViewDidStartLoading:self];
+            }
+            
+            self.wasLoading = YES;
+        }
+        
         self.forbidSunSet = YES;
     }
    
-    if(!self.scrollView.dragging && self.forbidSunSet && self.scrollView.decelerating && !self.forbidOffsetChanges){
-        [self startRefreshing];
-    }
+
     
     if(!self.forbidSunSet){
         [self setupSunHeightAboveHorisont];
@@ -129,26 +139,31 @@ static const CGFloat DefaultScreenWidth = 320.f;
 }
 
 - (void)startRefreshing {
-    [self.scrollView setContentOffset:CGPointMake(0.f, -DefaultHeight) animated:YES];
+    if (!self.scrollViewInitialOffsetY ) {
+        self.scrollViewInitialOffsetY = self.scrollView.contentOffset.y;
+        self.scrollViewInitialInsetTop = self.scrollView.contentInset.top;
+    }
+    CGPoint offset = CGPointMake(0.f, self.scrollViewInitialOffsetY + -DefaultHeight);
+    [self.scrollView setContentOffset:offset animated:YES];
     self.forbidOffsetChanges = YES;
 }
 
 -(void)endRefreshing{
     
+    [self stopSunRotating];
     self.forbidOffsetChanges = NO;
     
-    [UIView animateWithDuration:AnimationDuration
-                          delay:0.f
-         usingSpringWithDamping:AnimationDamping
-          initialSpringVelocity:AnimationVelosity
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         [self.scrollView setContentInset:UIEdgeInsetsMake(0, 0.f, 0.f, 0.f)];
-                     } completion:^(BOOL finished) {
-                         
-                         self.forbidSunSet = NO;
-                         [self stopSunRotating];
-                     }];
+    [UIView animateWithDuration:AnimationDuration animations:^{
+         [self.scrollView setContentInset:UIEdgeInsetsMake(self.scrollViewInitialInsetTop, 0.f, 0.f, 0.f)];
+    } completion:^(BOOL finished) {
+        if (finished) {
+
+            self.forbidSunSet = NO;
+            self.wasLoading = NO;
+            
+        }
+    }];
+    
 }
 
 -(void)setupSunHeightAboveHorisont{
@@ -164,7 +179,7 @@ static const CGFloat DefaultScreenWidth = 320.f;
 
 -(CGFloat)shiftInPercents{
     
-    return (DefaultHeight / 100) * -self.scrollView.contentOffset.y;
+    return (DefaultHeight / 100) * (-self.scrollView.contentOffset.y+self.scrollViewInitialOffsetY);
 }
 
 -(void)setupSkyPosition{
@@ -181,7 +196,7 @@ static const CGFloat DefaultScreenWidth = 320.f;
     
     if(buildigsScaleRatio <= BuildingsMaximumScale){
         
-        CGFloat extraOffset = ABS(self.scrollView.contentOffset.y) - DefaultHeight;
+        CGFloat extraOffset = ABS(self.scrollView.contentOffset.y-self.scrollViewInitialOffsetY) - DefaultHeight;
         self.buildingsHeightConstraint.constant = BuildingDefaultHeight + extraOffset;
         [self.buildingsImageView setTransform:CGAffineTransformMakeScale(buildigsScaleRatio,1.f)];
         
@@ -211,16 +226,18 @@ static const CGFloat DefaultScreenWidth = 320.f;
 
 -(void)stopSunRotating{
     
-    self.isSunRotating = NO;
-    self.forbidSunSet = NO;
-    [self.sunImageView.layer removeAnimationForKey:@"rotationAnimation"];
+    if (!self.wasLoading) {
+        self.isSunRotating = NO;
+        self.forbidSunSet = NO;
+        [self.sunImageView.layer removeAnimationForKey:@"rotationAnimation"];
+    }
+
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     
     if(self.forbidOffsetChanges){
-        
-        [self.scrollView setContentInset:UIEdgeInsetsMake(DefaultHeight, 0.f, 0.f, 0.f)];
+        [self.scrollView setContentInset:UIEdgeInsetsMake(self.scrollViewInitialInsetTop+DefaultHeight, 0.f, 0.f, 0.f)];
     }
 }
 

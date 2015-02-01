@@ -384,7 +384,7 @@
     NSData *imageData = UIImageJPEGRepresentation(self.uploadImage, 0.5);
     NSDictionary *parameters = @{@"method": @"uploadFile",
                                  @"fileType": @"2"};
-    NSURLSessionDataTask *uploadThumbnialTask = [GCRequest userUploadFileWithParameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [GCRequest userUploadFileWithParameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"medicalCase.jpg" mimeType:@"image/jpeg"];
         
         
@@ -418,17 +418,17 @@
                 
                 
                 hud.labelText = NSLocalizedString(@"Upload succeed", nil);
-                [hud hide:YES];
 
             }else{
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else {
-            [hud hide:YES];
+            hud.labelText = [error localizedDescription];
         }
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+
     }];
-    [UIAlertView showAlertViewForTaskWithErrorOnCompletion:uploadThumbnialTask delegate:nil];
+
 }
 
 #pragma mark - TextViewDelegate

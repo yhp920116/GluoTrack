@@ -9,7 +9,7 @@
 "2dg-ka-HVM.text" = "身份证";
 
 /* Class = "IBUILabel"; text = "Reset Password"; ObjectID = "2mr-vS-BVQ"; */
-"2mr-vS-BVQ.text" = "重设密码";
+"2mr-vS-BVQ.text" = "修改密码";
 
 /* Class = "IBUILabel"; text = "疾病名称"; ObjectID = "48l-fo-qIf"; */
 "48l-fo-qIf.text" = "疾病名称";
@@ -111,7 +111,7 @@
 "a14-UV-ega.text" = "治疗方案";
 
 /* Class = "IBUILabel"; text = "Rebinding Phone"; ObjectID = "cnG-pa-oZS"; */
-"cnG-pa-oZS.text" = "重新绑定";
+"cnG-pa-oZS.text" = "重新绑定手机号码";
 
 /* Class = "IBUITextField"; placeholder = "Choose Date"; ObjectID = "dFt-NJ-sot"; */
 "dFt-NJ-sot.placeholder" = "选择日期";
@@ -147,7 +147,7 @@
 "lOz-gC-2X6.text" = "既往病史";
 
 /* Class = "IBUILabel"; text = "About us"; ObjectID = "lmc-Ob-PiE"; */
-"lmc-Ob-PiE.text" = "关于糖无忌";
+"lmc-Ob-PiE.text" = "关于我们";
 
 /* Class = "IBUILabel"; text = "确诊医院"; ObjectID = "mwh-Ou-H9t"; */
 "mwh-Ou-H9t.text" = "确诊医院";

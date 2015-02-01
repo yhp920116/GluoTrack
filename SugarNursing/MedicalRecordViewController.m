@@ -220,7 +220,7 @@ static NSString *MedicalHistoryCellIndentifier = @"MedicalHistoryDetailCell";
     NSInteger sections;
     if (self.fetchController.fetchedObjects.count == 0) {
         sections = 0;
-    }else sections = [self.fetchController.sections count];
+    }else sections = self.fetchController.fetchedObjects.count;
     return sections;
 }
 

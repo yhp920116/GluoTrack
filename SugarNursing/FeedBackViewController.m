@@ -71,7 +71,7 @@
         NSString *ret_code = [responseData objectForKey:@"ret_code"];
         if (!error) {
             if ([ret_code isEqualToString:@"0"]) {
-                hud.labelText = NSLocalizedString(@"Send Message Succeed", nil);
+                hud.labelText = NSLocalizedString(@"Send Feedback Succeed", nil);
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(HUD_TIME_DELAY * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self.navigationController popViewControllerAnimated:YES];
                 });

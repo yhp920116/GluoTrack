@@ -37,15 +37,6 @@
     return userInfo;
 }
 
-+ (NSString *)userName
-{
-    User *user = [self fetchUser];
-    if (!user) {
-        return @"";
-    }
-    return user.userName ? user.userName : @"";
-}
-
 + (NSString *)userID
 {
     User *user = [self fetchUser];
@@ -80,6 +71,15 @@
         return @"";
     }
     return user.sessionToken ? user.sessionToken :@"";
+}
+
++ (NSString *)userName
+{
+    UserInfo *userInfo = [self fetchUserInfo];
+    if (!userInfo) {
+        return @"";
+    }
+    return userInfo.userName ? userInfo.userName : @"";
 }
 
 + (NSString *)centerID

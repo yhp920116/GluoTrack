@@ -8,14 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol YALSunnyRefreshControlDelegate;
+
 @interface YALSunnyRefreshControl : UIView
 
-+ (YALSunnyRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
-                                      target:(id)target
-                               refreshAction:(SEL)refreshAction;
+@property (nonatomic, assign) id<YALSunnyRefreshControlDelegate>delegate;
+
++ (YALSunnyRefreshControl*)attachToScrollView:(UIScrollView *)scrollView;
 
 - (void)startRefreshing;
 
 - (void)endRefreshing;
+
+@end
+
+@protocol YALSunnyRefreshControlDelegate <NSObject>
+
+@required
+
+- (void)YALRefreshViewDidStartLoading:(YALSunnyRefreshControl *)view;
 
 @end
