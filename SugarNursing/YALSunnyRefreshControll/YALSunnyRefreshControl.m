@@ -85,6 +85,7 @@ static const CGFloat DefaultScreenWidth = 320.f;
 - (void)commonInit
 {
     self.wasLoading = NO;
+    self.scrollViewInitialOffsetY = -1;
     CGFloat leadingRatio = [UIScreen mainScreen].bounds.size.width / DefaultScreenWidth;
     [self.skyLeadingConstraint setConstant:self.skyLeadingConstraint.constant * leadingRatio];
     [self.skyTrailingConstraint setConstant:self.skyTrailingConstraint.constant * leadingRatio];
@@ -139,7 +140,7 @@ static const CGFloat DefaultScreenWidth = 320.f;
 }
 
 - (void)startRefreshing {
-    if (!self.scrollViewInitialOffsetY ) {
+    if (self.scrollViewInitialOffsetY == -1) {
         self.scrollViewInitialOffsetY = self.scrollView.contentOffset.y;
         self.scrollViewInitialInsetTop = self.scrollView.contentInset.top;
     }
