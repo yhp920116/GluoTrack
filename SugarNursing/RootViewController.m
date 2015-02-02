@@ -57,7 +57,7 @@
             NSString *ret_code = [responseData valueForKey:@"ret_code"];
             if ([ret_code isEqualToString:@"0"]) {
                 NSString *newMessages = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"countListSize"]];
-                [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
+                [UIApplication sharedApplication].applicationIconBadgeNumber = newMessages.integerValue;
             }
         }
     }];

@@ -11,6 +11,22 @@
 
 @implementation NSDictionary (Formatting)
 
+- (void)dateFormattingFromServer:(NSString *)dateFormatting ForKey:(NSString *)key
+{
+    if (![[self allKeys] containsObject:key]) {
+        return;
+    }
+    if (![self isKindOfClass:[NSMutableDictionary class]]) {
+        DDLogInfo(@"Running %@, %@ is not Mutable!",NSStringFromSelector(_cmd),self);
+        return;
+    }
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:dateFormatting];
+    NSString *dateString = [NSString stringWithFormat:@"%@",self[key]];
+    NSDate *date = [dateFormatter dateFromString:dateString];
+    [self setValue:date forKey:key];
+}
 
 - (void)dateFormattingToUser:(NSString *)dateFormatting ForKey:(NSString *)key
 {

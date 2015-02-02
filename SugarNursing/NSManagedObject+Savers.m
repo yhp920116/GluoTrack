@@ -50,6 +50,9 @@
                 propertyValue = [NSString stringWithFormat:@"%@",propertyValue];
                 [self setValue:propertyValue forKey:propertyName];
             }
+            if (propertyValue && [propertyValue isKindOfClass:[NSDate class]]) {
+                [self setValue:propertyValue forKey:propertyName];
+            }
         }
         
     }

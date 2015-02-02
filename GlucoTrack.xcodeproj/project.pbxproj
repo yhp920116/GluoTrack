@@ -16,6 +16,11 @@
 		37077B8B1A7B9C2600F69AB5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37077B8A1A7B9C2600F69AB5 /* Info.plist */; };
 		370E28701A761861000A34E6 /* DetectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 370E286F1A761861000A34E6 /* DetectCell.m */; };
 		370E28731A7618E5000A34E6 /* DetectDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 370E28721A7618E5000A34E6 /* DetectDataCell.m */; };
+		3714308F1A7F2AB70071BFA1 /* DetectLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3714308E1A7F2AB70071BFA1 /* DetectLog.m */; };
+		371430921A7F2AB80071BFA1 /* DrugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 371430911A7F2AB80071BFA1 /* DrugLog.m */; };
+		371430951A7F2AB80071BFA1 /* RecordLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 371430941A7F2AB80071BFA1 /* RecordLog.m */; };
+		371430981A7F2AB80071BFA1 /* ExerciseLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 371430971A7F2AB80071BFA1 /* ExerciseLog.m */; };
+		3714309B1A7F2AB80071BFA1 /* DietLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3714309A1A7F2AB80071BFA1 /* DietLog.m */; };
 		3715D9291A787A2500A7E26F /* Drugs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D92B1A787A2500A7E26F /* Drugs.plist */; };
 		3715D92E1A787AAC00A7E26F /* Insulin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D9301A787AAC00A7E26F /* Insulin.plist */; };
 		3715D9331A787C6A00A7E26F /* food.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3715D9351A787C6A00A7E26F /* food.plist */; };
@@ -116,11 +121,7 @@
 		379F20331A355A750026BF95 /* ControlPlanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F20321A355A750026BF95 /* ControlPlanCell.m */; };
 		379F20361A3580AE0026BF95 /* ClockBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F20351A3580AE0026BF95 /* ClockBtn.m */; };
 		37A945661A3845D800E78322 /* RecoveryLogHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A945651A3845D800E78322 /* RecoveryLogHeaderView.m */; };
-		37AA24331A6CA1E800439A33 /* ExerciseLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AA24321A6CA1E800439A33 /* ExerciseLog.m */; };
-		37AA24361A6CA1E800439A33 /* DietLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AA24351A6CA1E800439A33 /* DietLog.m */; };
-		37AA24391A6CA1E800439A33 /* DetectLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AA24381A6CA1E800439A33 /* DetectLog.m */; };
 		37AA243F1A6CA1E900439A33 /* Food.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AA243E1A6CA1E900439A33 /* Food.m */; };
-		37AA24421A6CA1E900439A33 /* DrugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AA24411A6CA1E900439A33 /* DrugLog.m */; };
 		37AA24451A6CA1E900439A33 /* Medicine.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AA24441A6CA1E900439A33 /* Medicine.m */; };
 		37AC34C01A0B14AE0037029A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AC34BF1A0B14AE0037029A /* LoginViewController.m */; };
 		37AC34C31A0B52420037029A /* AppDelegate+UserLogInOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AC34C21A0B52420037029A /* AppDelegate+UserLogInOut.m */; };
@@ -147,7 +148,6 @@
 		37DE6A7F1A2719AE000533BB /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DE6A7E1A2719AE000533BB /* SectionHeaderView.xib */; };
 		37DE6A821A271B73000533BB /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE6A811A271B73000533BB /* SectionHeaderView.m */; };
 		37E4AC6E1A2EF0FB00779807 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E4AC6D1A2EF0FB00779807 /* LaunchScreen.xib */; };
-		37E7DF501A7081B50003B0F0 /* RecordLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E7DF4F1A7081B50003B0F0 /* RecordLog.m */; };
 		37E7DF551A70F62B0003B0F0 /* FeelingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E7DF541A70F62B0003B0F0 /* FeelingCell.m */; };
 		37EA290F1A21C7B900B43CD0 /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA290E1A21C7B900B43CD0 /* RemindViewController.m */; };
 		37EA29141A21E9B600B43CD0 /* RemindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA29131A21E9B600B43CD0 /* RemindCell.m */; };
@@ -225,6 +225,16 @@
 		370E28721A7618E5000A34E6 /* DetectDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectDataCell.m; sourceTree = "<group>"; };
 		370E28751A763A45000A34E6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MyRemind.strings"; sourceTree = "<group>"; };
 		370E28771A763A47000A34E6 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MyRemind.strings"; sourceTree = "<group>"; };
+		3714308D1A7F2AB70071BFA1 /* DetectLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectLog.h; sourceTree = "<group>"; };
+		3714308E1A7F2AB70071BFA1 /* DetectLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectLog.m; sourceTree = "<group>"; };
+		371430901A7F2AB80071BFA1 /* DrugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugLog.h; sourceTree = "<group>"; };
+		371430911A7F2AB80071BFA1 /* DrugLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugLog.m; sourceTree = "<group>"; };
+		371430931A7F2AB80071BFA1 /* RecordLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordLog.h; sourceTree = "<group>"; };
+		371430941A7F2AB80071BFA1 /* RecordLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordLog.m; sourceTree = "<group>"; };
+		371430961A7F2AB80071BFA1 /* ExerciseLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExerciseLog.h; sourceTree = "<group>"; };
+		371430971A7F2AB80071BFA1 /* ExerciseLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExerciseLog.m; sourceTree = "<group>"; };
+		371430991A7F2AB80071BFA1 /* DietLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DietLog.h; sourceTree = "<group>"; };
+		3714309A1A7F2AB80071BFA1 /* DietLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DietLog.m; sourceTree = "<group>"; };
 		3715D92A1A787A2500A7E26F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Drugs.plist; sourceTree = "<group>"; };
 		3715D92C1A787A2800A7E26F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Drugs.plist"; sourceTree = "<group>"; };
 		3715D92D1A787A2A00A7E26F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/Drugs.plist"; sourceTree = "<group>"; };
@@ -418,16 +428,8 @@
 		37A0E0851A4323FB00427137 /* NetworkURLMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkURLMacro.h; sourceTree = "<group>"; };
 		37A945641A3845D800E78322 /* RecoveryLogHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecoveryLogHeaderView.h; sourceTree = "<group>"; };
 		37A945651A3845D800E78322 /* RecoveryLogHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecoveryLogHeaderView.m; sourceTree = "<group>"; };
-		37AA24311A6CA1E800439A33 /* ExerciseLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExerciseLog.h; sourceTree = "<group>"; };
-		37AA24321A6CA1E800439A33 /* ExerciseLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExerciseLog.m; sourceTree = "<group>"; };
-		37AA24341A6CA1E800439A33 /* DietLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DietLog.h; sourceTree = "<group>"; };
-		37AA24351A6CA1E800439A33 /* DietLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DietLog.m; sourceTree = "<group>"; };
-		37AA24371A6CA1E800439A33 /* DetectLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectLog.h; sourceTree = "<group>"; };
-		37AA24381A6CA1E800439A33 /* DetectLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectLog.m; sourceTree = "<group>"; };
 		37AA243D1A6CA1E900439A33 /* Food.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Food.h; sourceTree = "<group>"; };
 		37AA243E1A6CA1E900439A33 /* Food.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Food.m; sourceTree = "<group>"; };
-		37AA24401A6CA1E900439A33 /* DrugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugLog.h; sourceTree = "<group>"; };
-		37AA24411A6CA1E900439A33 /* DrugLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugLog.m; sourceTree = "<group>"; };
 		37AA24431A6CA1E900439A33 /* Medicine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Medicine.h; sourceTree = "<group>"; };
 		37AA24441A6CA1E900439A33 /* Medicine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Medicine.m; sourceTree = "<group>"; };
 		37AC34BE1A0B14AE0037029A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -475,8 +477,6 @@
 		37E4AC6D1A2EF0FB00779807 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		37E4AC791A2EFD6900779807 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37E4AC7C1A2EFDCF00779807 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MemberCenter.storyboard; sourceTree = "<group>"; };
-		37E7DF4E1A7081B50003B0F0 /* RecordLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordLog.h; sourceTree = "<group>"; };
-		37E7DF4F1A7081B50003B0F0 /* RecordLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordLog.m; sourceTree = "<group>"; };
 		37E7DF531A70F62B0003B0F0 /* FeelingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeelingCell.h; sourceTree = "<group>"; };
 		37E7DF541A70F62B0003B0F0 /* FeelingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeelingCell.m; sourceTree = "<group>"; };
 		37EA290D1A21C7B900B43CD0 /* RemindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemindViewController.h; sourceTree = "<group>"; };
@@ -752,20 +752,20 @@
 			isa = PBXGroup;
 			children = (
 				37B183AE1A4BF2D4001932AE /* GlucoCare.xcdatamodeld */,
-				37E7DF4E1A7081B50003B0F0 /* RecordLog.h */,
-				37E7DF4F1A7081B50003B0F0 /* RecordLog.m */,
+				371430991A7F2AB80071BFA1 /* DietLog.h */,
+				3714309A1A7F2AB80071BFA1 /* DietLog.m */,
+				371430961A7F2AB80071BFA1 /* ExerciseLog.h */,
+				371430971A7F2AB80071BFA1 /* ExerciseLog.m */,
+				371430931A7F2AB80071BFA1 /* RecordLog.h */,
+				371430941A7F2AB80071BFA1 /* RecordLog.m */,
+				371430901A7F2AB80071BFA1 /* DrugLog.h */,
+				371430911A7F2AB80071BFA1 /* DrugLog.m */,
+				3714308D1A7F2AB70071BFA1 /* DetectLog.h */,
+				3714308E1A7F2AB70071BFA1 /* DetectLog.m */,
 				37AA24431A6CA1E900439A33 /* Medicine.h */,
 				37AA24441A6CA1E900439A33 /* Medicine.m */,
-				37AA24401A6CA1E900439A33 /* DrugLog.h */,
-				37AA24411A6CA1E900439A33 /* DrugLog.m */,
 				37AA243D1A6CA1E900439A33 /* Food.h */,
 				37AA243E1A6CA1E900439A33 /* Food.m */,
-				37AA24371A6CA1E800439A33 /* DetectLog.h */,
-				37AA24381A6CA1E800439A33 /* DetectLog.m */,
-				37AA24341A6CA1E800439A33 /* DietLog.h */,
-				37AA24351A6CA1E800439A33 /* DietLog.m */,
-				37AA24311A6CA1E800439A33 /* ExerciseLog.h */,
-				37AA24321A6CA1E800439A33 /* ExerciseLog.m */,
 				37EEB6A51A64C532008B0892 /* ControlEffect.h */,
 				37EEB6A61A64C532008B0892 /* ControlEffect.m */,
 				37EEB6A21A64C531008B0892 /* EffectList.h */,
@@ -1420,7 +1420,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37AA24361A6CA1E800439A33 /* DietLog.m in Sources */,
 				379211251A233EB8000413D4 /* PersonalInfoViewController.m in Sources */,
 				3719039D1A28236800A9657B /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				3737B1781A25F01B00F0D97B /* AdviseCell.m in Sources */,
@@ -1447,20 +1446,21 @@
 				37EEB6A71A64C532008B0892 /* ControlEffect.m in Sources */,
 				373904A71A1F345900A7B30F /* ControlEffectViewController.m in Sources */,
 				37EA290F1A21C7B900B43CD0 /* RemindViewController.m in Sources */,
+				371430951A7F2AB80071BFA1 /* RecordLog.m in Sources */,
 				37014D9C1A63D4FB0048A2D8 /* NSString+Ret_msg.m in Sources */,
 				37EDEA141A0A79C7009EB54D /* UIStoryboard+Storyboards.m in Sources */,
 				37278D821A5F85A7008D21EE /* Advise.m in Sources */,
 				3737B1751A25EDAA00F0D97B /* AdviseViewController.m in Sources */,
 				37EA29171A21F5E600B43CD0 /* RemindDetailViewController.m in Sources */,
 				37EEB6A41A64C531008B0892 /* EffectList.m in Sources */,
+				371430921A7F2AB80071BFA1 /* DrugLog.m in Sources */,
 				37B5081D1A7E93E300D6B36E /* YALSunnyRefreshControl.m in Sources */,
-				37E7DF501A7081B50003B0F0 /* RecordLog.m in Sources */,
+				3714309B1A7F2AB80071BFA1 /* DietLog.m in Sources */,
 				37AA24451A6CA1E900439A33 /* Medicine.m in Sources */,
 				377B88BD1A7C99B800D1E91A /* GCTableView.m in Sources */,
 				371628BC1A15DD4C0043EED2 /* UIViewController+Notifications.m in Sources */,
 				37DE6A821A271B73000533BB /* SectionHeaderView.m in Sources */,
 				373A86FB1A79D0C100CCCE83 /* UserSetting.m in Sources */,
-				37AA24421A6CA1E900439A33 /* DrugLog.m in Sources */,
 				37C647301A612DAE00BC2E78 /* TipsCell.m in Sources */,
 				3749B55A1A09D0950031D00C /* RightMenuController.m in Sources */,
 				37AEC7A21A52A8430011B53F /* NSDictionary+Formatting.m in Sources */,
@@ -1491,7 +1491,6 @@
 				3749B5541A09CFD30031D00C /* RootViewController.m in Sources */,
 				371D31491A36AEC4007C4AE1 /* AppDelegate+CustomAppearence.m in Sources */,
 				37FF586F1A407EA500F3564E /* VerificationViewController.m in Sources */,
-				37AA24331A6CA1E800439A33 /* ExerciseLog.m in Sources */,
 				37453B4C1A426ECF006D2CD8 /* RebindMobileViewController.m in Sources */,
 				37B183A81A4BBA49001932AE /* NSString+Signatrue.m in Sources */,
 				37FF586C1A401E5700F3564E /* GCRequest.m in Sources */,
@@ -1517,11 +1516,12 @@
 				377127911A1AF320009008D3 /* RecoveryLogViewController.m in Sources */,
 				3719039F1A28236800A9657B /* TPKeyboardAvoidingTableView.m in Sources */,
 				37B038881A41841B00AFEA2D /* NSString+MD5.m in Sources */,
+				3714308F1A7F2AB70071BFA1 /* DetectLog.m in Sources */,
 				379AE1261A4EC14800478332 /* NSManagedObject+Finders.m in Sources */,
-				37AA24391A6CA1E800439A33 /* DetectLog.m in Sources */,
 				3749B5641A09DAFA0031D00C /* MemberInfoCell.m in Sources */,
 				37AA243F1A6CA1E900439A33 /* Food.m in Sources */,
 				37E7DF551A70F62B0003B0F0 /* FeelingCell.m in Sources */,
+				371430981A7F2AB80071BFA1 /* ExerciseLog.m in Sources */,
 				379211221A233AA1000413D4 /* MemberCenterViewController.m in Sources */,
 				379AE1291A4ECC5000478332 /* NSString+UserCommon.m in Sources */,
 				379F202E1A35554F0026BF95 /* ControlHeaderView.m in Sources */,

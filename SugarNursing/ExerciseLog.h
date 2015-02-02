@@ -2,7 +2,7 @@
 //  ExerciseLog.h
 //  GlucoTrack
 //
-//  Created by Dan on 15-1-19.
+//  Created by Dan on 15-2-2.
 //  Copyright (c) 2015年 Tisson. All rights reserved.
 //
 
@@ -18,8 +18,8 @@
 @property (nonatomic, retain) NSString * sportId;
 @property (nonatomic, retain) NSString * sportName;
 @property (nonatomic, retain) NSString * sportPeriod;
-@property (nonatomic, retain) NSString * sportTime;
-@property (nonatomic, retain) NSString * updateTime;
+@property (nonatomic, retain) NSDate * sportTime;
+@property (nonatomic, retain) NSDate * updateTime;
 @property (nonatomic, retain) RecordLog *recordLog;
 
 @end

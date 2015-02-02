@@ -2,7 +2,7 @@
 //  DietLog.h
 //  GlucoTrack
 //
-//  Created by Dan on 15-1-19.
+//  Created by Dan on 15-2-2.
 //  Copyright (c) 2015年 Tisson. All rights reserved.
 //
 
@@ -16,8 +16,8 @@
 @property (nonatomic, retain) NSString * calorie;
 @property (nonatomic, retain) NSString * eatId;
 @property (nonatomic, retain) NSString * eatPeriod;
-@property (nonatomic, retain) NSString * eatTime;
-@property (nonatomic, retain) NSString * updateTime;
+@property (nonatomic, retain) NSDate * eatTime;
+@property (nonatomic, retain) NSDate * updateTime;
 @property (nonatomic, retain) NSOrderedSet *foodList;
 @property (nonatomic, retain) RecordLog *recordLog;
 @end

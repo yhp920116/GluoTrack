@@ -2,7 +2,7 @@
 //  RecordLog.h
 //  GlucoTrack
 //
-//  Created by Dan on 15-1-22.
+//  Created by Dan on 15-2-2.
 //  Copyright (c) 2015年 Tisson. All rights reserved.
 //
 
@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * id;
 @property (nonatomic, retain) NSString * logType;
-@property (nonatomic, retain) NSString * time;
+@property (nonatomic, retain) NSDate * time;
 @property (nonatomic, retain) DetectLog *detectLog;
 @property (nonatomic, retain) DietLog *dietLog;
 @property (nonatomic, retain) DrugLog *drugLog;

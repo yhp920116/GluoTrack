@@ -10,6 +10,7 @@
 
 @interface NSDictionary (Formatting)
 
+- (void)dateFormattingFromServer:(NSString *)dateFormatting ForKey:(NSString *)key;
 - (void)dateFormattingToUser:(NSString *)dateFormatting ForKey:(NSString *)key;
 - (void)dateFormattingFromUser:(NSString *)userDateFormatting ToServer:(NSString *)serverDateFormatting ForKey:(NSString *)key;
 - (void)sexFormattingToUserForKey:(NSString *)key;

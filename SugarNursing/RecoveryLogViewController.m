@@ -117,26 +117,41 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     
 }
 
+- (NSDate *)timeZoneDate:(NSDate *)date
+{
+    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [timeZone secondsFromGMTForDate:date];
+    return [date dateByAddingTimeInterval:interval];
+}
+
 - (void)configureFetchController:(BOOL)refresh
 {
+    NSDate *formerDate;
+    NSDate *laterDate;
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyyMMdd"];
-    NSString *dateString = [dateFormatter stringFromDate:self.selectedDate];
+    [dateFormatter setDateFormat:@"yyyyMMdd000000"];
+    NSDate *aDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:self.selectedDate]];
+    formerDate = [self timeZoneDate:aDate];
+    
+    laterDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:formerDate];
     
     NSPredicate *predicate;
     if (refresh) {
         predicate = [NSPredicate predicateWithFormat:
-                                  @"userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@ && logType in %@",
+                                  @"userid.userId = %@ && userid.linkManId = %@ && time > %@ && time < %@ && logType in %@",
                                   [NSString userID],
                                   [NSString linkmanID],
-                                  dateString,
+                                  formerDate,
+                                  laterDate,
                                   @[@"detect",@"exercise",@"drug",@"diet"]];
     }else{
         predicate = [NSPredicate predicateWithFormat:
-                                @"userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@ && logType in %@",
+                                @"userid.userId = %@ && userid.linkManId = %@ && time > %@ && time < %@ && logType in %@",
                                 [NSString userID],
                                 [NSString linkmanID],
-                                dateString,
+                                formerDate,
+                                laterDate,
                                 self.logTypeArray];
     }
     
@@ -160,9 +175,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 {
     [self configureFetchController:YES];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyyMMdd"];
-    NSString *queryDay = [dateFormatter stringFromDate:self.selectedDate];
+    NSString *queryDay = [NSString formattingDate:self.selectedDate to:@"yyyyMMdd"];
     
     NSDictionary *parameters = @{@"method":@"queryCureLogTimeLine2",
                                  @"sign":@"sign",
@@ -188,12 +201,16 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                 for (NSDictionary *detectLogDic in detectLogArr) {
                 
                     RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [recordLog updateCoreDataForData:detectLogDic withKeyPath:nil];
+                    NSMutableDictionary *detectLogDic_ = [detectLogDic mutableCopy];
+                    [detectLogDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"time"];
+                    [recordLog updateCoreDataForData:detectLogDic_ withKeyPath:nil];
                     
                     DetectLog *detect = [DetectLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                     NSMutableDictionary *detectDic = [[detectLogDic objectForKey:@"detectLog"] mutableCopy];
                     [detectDic feelingFormattingToUserForKey:@"selfSense"];
                     [detectDic dataSourceFormattingToUserForKey:@"dataSource"];
+                    [detectDic dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"detectTime"];
+                    [detectDic dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"updateTime"];
                     [detect updateCoreDataForData:detectDic withKeyPath:nil];
                     
                     UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
@@ -206,7 +223,9 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                 
                 for (NSDictionary *dietLogDic in dietLogArr) {
                     RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [recordLog updateCoreDataForData:dietLogDic withKeyPath:nil];
+                    NSMutableDictionary *dietLogDic_ = [dietLogDic mutableCopy];
+                    [dietLogDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"time"];
+                    [recordLog updateCoreDataForData:dietLogDic_ withKeyPath:nil];
                     
                     UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                     userID.userId = [NSString userID];
@@ -214,6 +233,8 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                     
                     DietLog *diet = [DietLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                     NSMutableDictionary *dietDic = [[dietLogDic objectForKey:@"dietLog"] mutableCopy];
+                    [dietDic dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"eatTime"];
+                    [dietDic dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"updateTime"];
                     [dietDic eatPeriodFormattingToUserForKey:@"eatPeriod"];
                     [diet updateCoreDataForData:dietDic withKeyPath:nil];
                     
@@ -236,14 +257,20 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                 
                 for (NSDictionary *drugLogDic in drugLogArr) {
                     RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [recordLog updateCoreDataForData:drugLogDic withKeyPath:nil];
+                    NSMutableDictionary *drugLogDic_ = [drugLogDic mutableCopy];
+                    [drugLogDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"time"];
+                    [recordLog updateCoreDataForData:drugLogDic_ withKeyPath:nil];
                     
                     UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                     userID.userId = [NSString userID];
                     userID.linkManId = [NSString linkmanID];
                     
                     DrugLog *drug = [DrugLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [drug updateCoreDataForData:[drugLogDic objectForKey:@"drugLog"] withKeyPath:nil];
+                    
+                    NSMutableDictionary *drugDic_ = [[drugLogDic objectForKey:@"drugLog"] mutableCopy];
+                    [drugDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"medicineTime"];
+                    [drugDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"updateTime"];
+                    [drug updateCoreDataForData:drugDic_ withKeyPath:nil];
                     
                     NSMutableOrderedSet *medicineList = [[NSMutableOrderedSet alloc] initWithCapacity:10];
                     
@@ -266,10 +293,16 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
                 
                 for (NSDictionary *exerciseLogDic in exerciseLogArr) {
                     RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [recordLog updateCoreDataForData:exerciseLogDic withKeyPath:nil];
+                    NSMutableDictionary *exerciseLogDic_ = [exerciseLogDic mutableCopy];
+                    [exerciseLogDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"time"];
+                    
+                    [recordLog updateCoreDataForData:exerciseLogDic_ withKeyPath:nil];
                     
                     ExerciseLog *exercise = [ExerciseLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [exercise updateCoreDataForData:[exerciseLogDic objectForKey:@"exerciseLog"] withKeyPath:nil];
+                    NSMutableDictionary *exerciseDic_ = [[exerciseLogDic objectForKey:@"exerciseLog"] mutableCopy];
+                    [exerciseDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"sportTime"];
+                    [exerciseDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"updateTime"];
+                    [exercise updateCoreDataForData:exerciseDic_ withKeyPath:nil];
                     
                     UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                     userID.userId = [NSString userID];
@@ -410,7 +443,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     
     // Configure Time
     
-    cell.timeLabel.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"HH:mm"];
+    cell.timeLabel.text = [NSString formattingDate:recordLog.time to:@"HH:mm"];
 
     // Configure Icon
     cell.timelineImageView.image = [self configureImageForTimelineCell:recordLog.logType];

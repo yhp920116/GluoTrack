@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>西洋菜</key>
+	<string>0.17</string>
 	<key>苹果</key>
 	<string>0.52</string>
 	<key>香蕉</key>

@@ -2,7 +2,7 @@
 //  DrugLog.h
 //  GlucoTrack
 //
-//  Created by Dan on 15-1-19.
+//  Created by Dan on 15-2-2.
 //  Copyright (c) 2015年 Tisson. All rights reserved.
 //
 
@@ -15,8 +15,8 @@
 
 @property (nonatomic, retain) NSString * medicineId;
 @property (nonatomic, retain) NSString * medicinePeriod;
-@property (nonatomic, retain) NSString * medicineTime;
-@property (nonatomic, retain) NSString * updateTime;
+@property (nonatomic, retain) NSDate * medicineTime;
+@property (nonatomic, retain) NSDate * updateTime;
 @property (nonatomic, retain) NSOrderedSet *medicineList;
 @property (nonatomic, retain) RecordLog *recordLog;
 @end

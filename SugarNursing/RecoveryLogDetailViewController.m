@@ -295,6 +295,13 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
 }
 
+- (NSDate *)dateFormattingWithString:(NSString *)dateString
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [dateFormatter dateFromString:dateString];
+}
+
 - (void)editDetectLog
 {
     MBProgressHUD *aHud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
@@ -308,6 +315,24 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         [aHud hide:YES afterDelay:HUD_TIME_DELAY];
         return;
     }
+    
+    if (self.gluco.floatValue < 3.5f || self.gluco.floatValue > 40.0f) {
+
+        aHud.mode = MBProgressHUDModeText;
+        aHud.labelText = NSLocalizedString(@"血糖的值只能在3.5~30", nil);
+        [aHud show:YES];
+        [aHud hide:YES afterDelay:HUD_TIME_DELAY];
+        return;
+    }
+
+    if (self.hemo.floatValue < 4.0f || self.hemo.floatValue > 30.0f) {
+        aHud.mode = MBProgressHUDModeText;
+        aHud.labelText = NSLocalizedString(@"糖化血红蛋白的值只能在4~30", nil);
+        [aHud show:YES];
+        [aHud hide:YES afterDelay:HUD_TIME_DELAY];
+        return ;
+    }
+    
     
     NSString *dateTime = [NSString stringWithFormat:@"%@ %@",self.date,self.time];
     dateTime = [NSString formattingDateString:dateTime From:@"yyyy-MM-dd HH:mm" to:@"yyyyMMddHHmmss"];
@@ -360,24 +385,25 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                 aHud.labelText = NSLocalizedString(@"Data Updated", nil);
                 
                 // CoreData 中数据的更新通知只有对其属性的修改有效，如果是其属性的属性进行修改，则通知会无效化
-                
+                [parameters dateFormattingFromServer:@"yyyy-MM-dd HH:mm:ss" ForKey:@"detectTime"];
                 DetectLog *detectLog;
                 switch (self.recoveryLogStatus) {
                     case RecoveryLogStatusEdit:
                         
                         detectLog = self.recordLog.detectLog;
+                        
                         [detectLog updateCoreDataForData:parameters withKeyPath:nil];
                         detectLog.selfSense = [self.feelingArray componentsJoinedByString:@","];
                         
                         
-                        self.recordLog.time = dateTime;
+                        self.recordLog.time = parameters[@"detectTime"];
                         self.recordLog.detectLog = detectLog;
                         break;
                     case RecoveryLogStatusAdd:
                     {
                         RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                         recordLog.logType = @"detect";
-                        recordLog.time = dateTime ;
+                        recordLog.time = parameters[@"detectTime"] ;
                         recordLog.id = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"detectId"]];
                         NSLog(@"id = %@",recordLog.id);
                         
@@ -536,7 +562,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     {
                         DrugLog *drugLog;
                         drugLog = self.recordLog.drugLog;
-                        drugLog.medicineTime = dateTime;
+                        drugLog.medicineTime = [self dateFormattingWithString:dateTime];
                         drugLog.medicineList = medicineSet;
                         self.recordLog.drugLog = drugLog;
                         
@@ -547,14 +573,14 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                         RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                         recordLog.id = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"medicineId"]];
                         recordLog.logType = @"drug";
-                        recordLog.time = dateTime;
+                        recordLog.time = [self dateFormattingWithString:dateTime];
                         
                         UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                         userID.userId = [NSString userID];
                         userID.linkManId = [NSString linkmanID];
                         
                         DrugLog *drugLog = [DrugLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                        drugLog.medicineTime = dateTime;
+                        drugLog.medicineTime = [self dateFormattingWithString:dateTime];
                         drugLog.medicineId = recordLog.id;
 
                         recordLog.userid = userID;
@@ -653,11 +679,11 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                         DietLog *dietLog = self.recordLog.dietLog;
                         dietLog.calorie = [NSString stringWithFormat:@"%.1f",calorie];
                         dietLog.eatPeriod = self.period;
-                        dietLog.eatTime = dateTime;
+                        dietLog.eatTime = [self dateFormattingWithString:dateTime];
                         dietLog.foodList = foodSet;
                         
                         
-                        self.recordLog.time = dateTime;
+                        self.recordLog.time = [self dateFormattingWithString:dateTime];
                         self.recordLog.dietLog = dietLog;
                         
                         break;
@@ -674,14 +700,14 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                         dietLog.eatId = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"eatId"]];
                         dietLog.calorie = [NSString stringWithFormat:@"%.1f",calorie];
                         dietLog.eatPeriod = self.period;
-                        dietLog.eatTime = dateTime;
+                        dietLog.eatTime = [self dateFormattingWithString:dateTime];
                         dietLog.foodList = foodSet;;
                         
                         
                         recordLog.userid = userID;
                         recordLog.dietLog = dietLog;
                         recordLog.logType = @"diet";
-                        recordLog.time = dateTime;
+                        recordLog.time = [self dateFormattingWithString:dateTime];
                         recordLog.id = dietLog.eatId;
             
                         break;
@@ -745,6 +771,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             if ([ret_code isEqualToString:@"0"]) {
                 aHud.labelText = NSLocalizedString(@"Data Updated", nil);
                 
+                [parameters dateFormattingFromServer:@"yyyy-MM-dd HH:mm:ss" ForKey:@"sportTime"];
+                
                 switch (self.recoveryLogStatus) {
                     case RecoveryLogStatusEdit:
                     {
@@ -753,7 +781,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
   
                         [exerciseLog updateCoreDataForData:parameters withKeyPath:nil];
                         
-                        self.recordLog.time = dateTime;
+                        self.recordLog.time = [self dateFormattingWithString:dateTime];
                         self.recordLog.exerciseLog = exerciseLog;
                         break;
                     }
@@ -761,7 +789,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     {
                         RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                         recordLog.logType = @"exercise";
-                        recordLog.time = dateTime ;
+                        recordLog.time = [self dateFormattingWithString:dateTime] ;
                         recordLog.id = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"sportId"]];
                         
                         UserID *userId = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
@@ -1350,9 +1378,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
 - (void)configureTableView:(UITableView *)tableView withBasicCell:(BasicCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSString *dateString = [NSString formattingDateString:self.recordLog.time From:@"yyyyMMddHHmmss" to:@"yyyy-MM-dd"];
-    NSString *timeString = [NSString formattingDateString:self.recordLog.time From:@"yyyyMMddHHmmss" to:@"HH:mm"];
+    NSString *dateString = [NSString formattingDate:self.recordLog.time to:@"yyyy-MM-dd"];
+    NSString *timeString =  [NSString formattingDate:self.recordLog.time to:@"HH:mm"];
+
     
     if (!dateString || !timeString) {
         NSDate *nowDate = [NSDate date];
@@ -2330,31 +2358,6 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 {
     if ([text isEqualToString:@""]) {
         return YES;
-    }
-    
-    if ([logField.logFieldIdentify isEqualToString:@"glucose"]) {
-        
-        if (text.floatValue < 3.5f || text.floatValue > 40.0f) {
-            MBProgressHUD *aHud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            [self.navigationController.view addSubview:aHud];
-            aHud.mode = MBProgressHUDModeText;
-            aHud.labelText = NSLocalizedString(@"血糖的值只能在3.5~30", nil);
-            [aHud show:YES];
-            [aHud hide:YES afterDelay:HUD_TIME_DELAY];
-            return NO;
-        }
-    }
-    
-    if ([logField.logFieldIdentify isEqualToString:@"hemoglobinef"]) {
-        if (text.floatValue < 4.0f || text.floatValue > 30.0f) {
-            MBProgressHUD *aHud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            [self.navigationController.view addSubview:aHud];
-            aHud.mode = MBProgressHUDModeText;
-            aHud.labelText = NSLocalizedString(@"糖化血红蛋白的值只能在4~30", nil);
-            [aHud show:YES];
-            [aHud hide:YES afterDelay:HUD_TIME_DELAY];
-            return NO;
-        }
     }
     
     NSRange range = [text rangeOfString:@"."];

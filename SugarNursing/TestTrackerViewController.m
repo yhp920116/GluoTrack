@@ -86,42 +86,80 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.trackerChart reloadGraph];
+    [self.tableView reloadData];
+}
+
+- (NSDate *)timeZoneDate:(NSDate *)date
+{
+    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+    NSInteger interval = [timeZone secondsFromGMTForDate:date];
+    return [date dateByAddingTimeInterval:interval];
 }
 
 - (void)configureFetchController
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     BOOL timeAscending;
+    
+    NSPredicate *Gpredicate;
+    NSPredicate *Hpredicate;
+    
+    NSDate *formerDate;
+    NSDate *laterDate;
     
     switch (self.searchMode) {
         case GCSearchModeByDay:
         {
-            [dateFormatter setDateFormat:@"yyyyMMdd"];
             timeAscending = YES;
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyyMMdd000000"];
+            NSDate *aDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:self.selectedDate]];
+            formerDate = [self timeZoneDate:aDate];
+            
+            laterDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:formerDate];
+            
+            
+             Gpredicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time > %@ && time < %@ && detectLog.glucose != %@ && detectLog.glucose != %@" ,@"detect",[NSString userID],[NSString linkmanID],formerDate,laterDate,@"",@"",nil];
+            
+             Hpredicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time > %@ && time < %@ && detectLog.hemoglobinef != %@ && detectLog.hemoglobinef != %@" ,@"detect",[NSString userID],[NSString linkmanID],formerDate,laterDate,@"",@"",nil];
+            
             break;
         }
         case GCSearchModeByMonth:
         {
-            [dateFormatter setDateFormat:@"yyyyMM"];
             timeAscending = NO;
+
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyyMMdd000000"];
+            NSDate *aDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:self.selectedDate]];
+            laterDate = [self timeZoneDate:aDate];
+            
+            laterDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:laterDate];
+
+            
+            NSTimeInterval timeInterVal = -30 * 24 * 60 * 60;
+            formerDate = [NSDate dateWithTimeInterval:timeInterVal sinceDate:laterDate];
+            
+            Gpredicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time > %@ && time < %@ && detectLog.glucose != %@ && detectLog.glucose != %@" ,@"detect",[NSString userID],[NSString linkmanID],formerDate,laterDate,@"",@"",nil];
+            
+            Hpredicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time > %@ && time < %@ && detectLog.hemoglobinef != %@ && detectLog.hemoglobinef != %@" ,@"detect",[NSString userID],[NSString linkmanID],formerDate,laterDate,@"",@"",nil];
+            
             break;
         }
         default:
             break;
     }
-
-    NSString *dateString = [dateFormatter stringFromDate:self.selectedDate];
-    
-    NSPredicate *Gpredicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@ && detectLog.glucose != %@ && detectLog.glucose != %@" ,@"detect",[NSString userID],[NSString linkmanID],dateString,@"",nil];
     
     self.GfetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:timeAscending withPredicate:Gpredicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
     
-    NSPredicate *Hpredicate = [NSPredicate predicateWithFormat:@"logType = %@ && userid.userId = %@ && userid.linkManId = %@ && time beginswith[cd] %@ && detectLog.hemoglobinef != %@ && detectLog.hemoglobinef != %@" ,@"detect",[NSString userID],[NSString linkmanID],dateString,@"",nil];
+
     
     self.HfetchController = [RecordLog fetchAllGroupedBy:nil sortedBy:@"time" ascending:timeAscending withPredicate:Hpredicate delegate:self incontext:[CoreDataStack sharedCoreDataStack].context];
     
-    [self.tableView reloadData];
+    
     [self.trackerChart reloadGraph];
+    [self.tableView reloadData];
+    
 }
 
 - (void)getDetectionData
@@ -182,10 +220,15 @@ typedef NS_ENUM(NSInteger, GCLineType) {
                 for (NSDictionary *detectLogDic in detectLogArr) {
                     
                     RecordLog *recordLog = [RecordLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [recordLog updateCoreDataForData:detectLogDic withKeyPath:nil];
+                    NSMutableDictionary *detectLogDic_ = [detectLogDic mutableCopy];
+                    [detectLogDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"time"];
+                    [recordLog updateCoreDataForData:detectLogDic_ withKeyPath:nil];
                     
                     DetectLog *detect = [DetectLog createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
-                    [detect updateCoreDataForData:[detectLogDic objectForKey:@"detectLog"] withKeyPath:nil];
+                    NSMutableDictionary *detectDic_ = [[detectLogDic objectForKey:@"detectLog"] mutableCopy];
+                    [detectDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"detectTime"];
+                    [detectDic_ dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"updateTime"];
+                    [detect updateCoreDataForData:detectDic_ withKeyPath:nil];
                     
                     UserID *userID = [UserID createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                     userID.userId = [NSString userID];
@@ -196,6 +239,7 @@ typedef NS_ENUM(NSInteger, GCLineType) {
                 }
                 
                 [[CoreDataStack sharedCoreDataStack] saveContext];
+
             }else{
                 [NSString localizedMsgFromRet_code:ret_code withHUD:NO];
             }
@@ -408,9 +452,7 @@ typedef NS_ENUM(NSInteger, GCLineType) {
 
     }
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-    return [dateFormatter dateFromString:recordLog.time];
+    return recordLog.time;
 }
 
 //- (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index
@@ -499,9 +541,8 @@ typedef NS_ENUM(NSInteger, GCLineType) {
             break;
     }
     
-    cell.detectDate.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"yyyy-MM-dd, EEEE"];
-    cell.detectTime.text = [NSString formattingDateString:recordLog.time From:@"yyyyMMddHHmmss" to:@"HH:mm"];
-
+    cell.detectDate.text = [NSString formattingDate:recordLog.time to:@"yyyy-MM-dd, EEEE"];
+    cell.detectTime.text = [NSString formattingDate:recordLog.time to:@"HH:mm"];
 
 }
 

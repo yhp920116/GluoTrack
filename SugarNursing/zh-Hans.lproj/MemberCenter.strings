@@ -57,7 +57,7 @@
 "GSX-we-HH6.normalTitle" = "取消";
 
 /* Class = "IBUILabel"; text = "Setting"; ObjectID = "HLV-Nc-5rF"; */
-"HLV-Nc-5rF.text" = "设置";
+"HLV-Nc-5rF.text" = "基本设置";
 
 /* Class = "IBUILabel"; text = "Glucose Units"; ObjectID = "HQ3-Mp-TT7"; */
 "HQ3-Mp-TT7.text" = "血糖单位";

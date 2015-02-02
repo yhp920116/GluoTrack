@@ -690,9 +690,22 @@
             }
             case GraphSearchModeByMonth:
             {
-                [dateFormatter setDateFormat:@"yyyyMM00000000"];
-                NSString *dateString = [dateFormatter stringFromDate:currentDate];
-                currentDate = [dateFormatter dateFromString:dateString];
+                
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyyMMdd000000"];
+                NSDate *aDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:currentDate]];
+                
+                NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+                NSInteger zoneInterval = [timeZone secondsFromGMTForDate:aDate];
+                aDate = [aDate dateByAddingTimeInterval:zoneInterval];
+                
+                
+                NSTimeInterval timeInterVal = -30 * 24 * 60 * 60;
+                currentDate = [NSDate dateWithTimeInterval:timeInterVal sinceDate:aDate];
+                
+//                [dateFormatter setDateFormat:@"yyyyMM00000000"];
+//                NSString *dateString = [dateFormatter stringFromDate:currentDate];
+//                currentDate = [dateFormatter dateFromString:dateString];
                 
                 if ([self.dataSource respondsToSelector:@selector(intervalForDayInLineGraph:)]) {
                     interval = [self.dataSource intervalForSecondInLineGraph:self];
