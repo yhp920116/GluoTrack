@@ -82,7 +82,9 @@ static const int kStateKey;
     [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
     [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]];
     
-    self.contentInset = [self TPKeyboardAvoiding_contentInsetForKeyboard];
+    if (self) {
+        self.contentInset = [self TPKeyboardAvoiding_contentInsetForKeyboard];
+    }
     
     if ( firstResponder ) {
         CGFloat viewableHeight = self.bounds.size.height - self.contentInset.top - self.contentInset.bottom;
