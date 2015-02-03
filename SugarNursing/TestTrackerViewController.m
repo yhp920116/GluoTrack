@@ -533,11 +533,11 @@ typedef NS_ENUM(NSInteger, GCLineType) {
     switch (self.lineType) {
         case GCLineTypeGlucose:
             recordLog = [self.GfetchController.fetchedObjects objectAtIndex:indexPath.row];
-            cell.detectValue.text = recordLog.detectLog.glucose;
+            cell.detectValue.text = [NSString stringWithFormat:@"%.1f",recordLog.detectLog.glucose.floatValue];
             break;
         case GCLineTypeHemo:
             recordLog = [self.HfetchController.fetchedObjects objectAtIndex:indexPath.row];
-            cell.detectValue.text = recordLog.detectLog.hemoglobinef;
+            cell.detectValue.text = [NSString stringWithFormat:@"%.1f",recordLog.detectLog.hemoglobinef.floatValue];
             break;
     }
     

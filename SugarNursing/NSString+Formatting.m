@@ -134,7 +134,7 @@
 
 + (NSString *)formattingDataSource:(NSString *)dataSource
 {
-    NSDictionary *sourceDic = @{NSLocalizedString(@"GlucoTrack", nil):@"01",
+    NSDictionary *sourceDic = @{@"GlucoTrack":@"01",
                                 NSLocalizedString(@"others", nil):@"02"};
     
     if (!dataSource) {

@@ -147,7 +147,6 @@
 		37DE6A7B1A26CB34000533BB /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE6A7A1A26CB34000533BB /* FeedBackViewController.m */; };
 		37DE6A7F1A2719AE000533BB /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DE6A7E1A2719AE000533BB /* SectionHeaderView.xib */; };
 		37DE6A821A271B73000533BB /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE6A811A271B73000533BB /* SectionHeaderView.m */; };
-		37E4AC6E1A2EF0FB00779807 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E4AC6D1A2EF0FB00779807 /* LaunchScreen.xib */; };
 		37E7DF551A70F62B0003B0F0 /* FeelingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E7DF541A70F62B0003B0F0 /* FeelingCell.m */; };
 		37EA290F1A21C7B900B43CD0 /* RemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA290E1A21C7B900B43CD0 /* RemindViewController.m */; };
 		37EA29141A21E9B600B43CD0 /* RemindCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA29131A21E9B600B43CD0 /* RemindCell.m */; };
@@ -474,7 +473,6 @@
 		37DE6A7E1A2719AE000533BB /* SectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
 		37DE6A801A271B73000533BB /* SectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionHeaderView.h; sourceTree = "<group>"; };
 		37DE6A811A271B73000533BB /* SectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
-		37E4AC6D1A2EF0FB00779807 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		37E4AC791A2EFD6900779807 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37E4AC7C1A2EFDCF00779807 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MemberCenter.storyboard; sourceTree = "<group>"; };
 		37E7DF531A70F62B0003B0F0 /* FeelingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeelingCell.h; sourceTree = "<group>"; };
@@ -884,7 +882,6 @@
 		3749B5491A09C7AE0031D00C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				37E4AC6D1A2EF0FB00779807 /* LaunchScreen.xib */,
 				3749B5251A09C50D0031D00C /* Images.xcassets */,
 				3765D7921A72435F008A21AF /* InfoPlist.strings */,
 				3749B5811A0A11700031D00C /* Localizable.strings */,
@@ -1259,7 +1256,12 @@
 					};
 					3749B5111A09C50D0031D00C = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 9XKC3SNG2H;
+						DevelopmentTeam = 8RT47Z9F5Q;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
+						};
 					};
 					3749B52D1A09C50D0031D00C = {
 						CreatedOnToolsVersion = 6.1;
@@ -1339,7 +1341,6 @@
 				378631D11A789AEE00882784 /* FeelingCell.xib in Resources */,
 				379C89FF1A2DB0C600F33BAE /* MedicateCell.xib in Resources */,
 				37C6472D1A612D4600BC2E78 /* TipsCell.xib in Resources */,
-				37E4AC6E1A2EF0FB00779807 /* LaunchScreen.xib in Resources */,
 				3749B57F1A0A11700031D00C /* Localizable.strings in Resources */,
 				379F20291A3548280026BF95 /* ControlPlan.xib in Resources */,
 				37DE6A7F1A2719AE000533BB /* SectionHeaderView.xib in Resources */,
@@ -1848,7 +1849,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1890,7 +1892,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

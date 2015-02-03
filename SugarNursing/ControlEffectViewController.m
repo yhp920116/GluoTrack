@@ -200,7 +200,7 @@
         cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@",@"--"]];
     }
     
-    if ((!controlEffect.conclusionDesc && [controlEffect.conclusionDesc isEqualToString:@""]) || (!controlEffect.conclusion && ![controlEffect.conclusion isEqualToString:@""])) {
+    if ((controlEffect.conclusionDesc && ![controlEffect.conclusionDesc isEqualToString:@""]) || (controlEffect.conclusion && ![controlEffect.conclusion isEqualToString:@""])) {
         cell.evaluateTextLabel.text = [NSString stringWithFormat:@"%@  %@",controlEffect.conclusion?controlEffect.conclusion:@"",controlEffect.conclusionDesc];
     }else{
         NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor orangeColor]};

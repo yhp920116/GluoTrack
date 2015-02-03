@@ -477,10 +477,10 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
         DetectLog *detect = recordLog.detectLog;
 
         if (detect.glucose && ![detect.glucose isEqualToString:@""]) {
-            detailContent = [NSString stringWithFormat:@"%@  %@mmol/L  %@",NSLocalizedString(@"glucose", nil), detect.glucose, detect.dataSource ];
+            detailContent = [NSString stringWithFormat:@"%@  %.1fmmol/L  %@",NSLocalizedString(@"glucose", nil), detect.glucose.floatValue,detect.dataSource ];
         }
         if (detect.hemoglobinef && ![detect.hemoglobinef isEqualToString:@""]) {
-            detailContent = [detailContent stringByAppendingFormat:@"\n%@  %@%%  %@",NSLocalizedString(@"hemoglobin", nil), detect.hemoglobinef, detect.dataSource];
+            detailContent = [detailContent stringByAppendingFormat:@"\n%@  %.1f%%  %@",NSLocalizedString(@"hemoglobin", nil), detect.hemoglobinef.floatValue, detect.dataSource];
         }
         
         if ([detailContent hasPrefix:@"\n"]) {

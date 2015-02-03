@@ -268,7 +268,7 @@
     }
     NSString *dataSource = [NSString stringWithFormat:@"%@",self[key]];
     
-    NSDictionary *sourceDic = @{@"01":NSLocalizedString(@"GlucoTrack", nil),
+    NSDictionary *sourceDic = @{@"01":@"GlucoTrack",
                                 @"02":NSLocalizedString(@"others", nil)};
     
     [self setValue:sourceDic[dataSource] forKey:key];

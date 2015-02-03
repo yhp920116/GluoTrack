@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet MyTextView *serverTextView;
 
+
 @property (strong, nonatomic) SSPullToRefreshView *pullToRefreshView;
 
 @end
@@ -53,6 +54,53 @@
     self.serverTextView.placeholderColor = [UIColor lightGrayColor];
     [[self.serverTextView layer] setBorderColor:[[[UIColor lightGrayColor] colorWithAlphaComponent:0.5] CGColor]];
     [[self.serverTextView layer] setBorderWidth:1.0];
+}
+- (IBAction)sendMessages:(id)sender
+{
+    [self.view endEditing:YES];
+    
+    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:hud];
+    hud.mode = MBProgressHUDModeText;
+    
+    if (![ParseData parseStringIsAvaliable:self.serverTextView.text]) {
+        hud.labelText = NSLocalizedString(@"Format is not avaliable", nil);
+        [hud show:YES];
+        [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        return;
+    }
+    
+    NSDictionary *parameters = @{@"method":@"sendAgentMessage",
+                                 @"sign":@"sign",
+                                 @"sessionId":[NSString sessionID],
+                                 @"centerId":[NSString centerID],
+                                 @"content":self.serverTextView.text,
+                                 @"contentType":@"01",
+                                 @"sendUser":[NSString userID]};
+    [GCRequest userSendMessageWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
+        
+        [hud show:YES];
+        
+        if (!error) {
+            NSString *ret_code = [responseData objectForKey:@"ret_code"];
+            if ([ret_code isEqualToString:@"0"]) {
+                
+                self.serverTextView.text =nil;
+                hud.labelText = NSLocalizedString(@"Send Message Succeed", nil);
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+                
+                [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
+                
+            }else{
+                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
+                [hud hide:YES afterDelay:HUD_TIME_DELAY];
+            }
+        }else{
+            hud.labelText = NSLocalizedString(@"Cannot Sending", nil);
+            [hud hide:YES afterDelay:HUD_TIME_DELAY];
+        }
+        
+    }];
 }
 
 - (void)getMessages
@@ -106,53 +154,6 @@
     }];
 }
 
-- (IBAction)sendMessage:(id)sender
-{
-    [self.view endEditing:YES];
-    
-    hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-    [self.navigationController.view addSubview:hud];
-    hud.mode = MBProgressHUDModeText;
-    
-    if (![ParseData parseStringIsAvaliable:self.serverTextView.text]) {
-        hud.labelText = NSLocalizedString(@"Format is not avaliable", nil);
-        [hud show:YES];
-        [hud hide:YES afterDelay:HUD_TIME_DELAY];
-        return;
-    }
-
-    NSDictionary *parameters = @{@"method":@"sendAgentMessage",
-                                 @"sign":@"sign",
-                                 @"sessionId":[NSString sessionID],
-                                 @"centerId":[NSString centerID],
-                                 @"content":self.serverTextView.text,
-                                 @"contentType":@"01",
-                                 @"sendUser":[NSString userID]};
-    [GCRequest userSendMessageWithParameters:parameters withBlock:^(NSDictionary *responseData, NSError *error) {
-        
-        [hud show:YES];
-        
-        if (!error) {
-            NSString *ret_code = [responseData objectForKey:@"ret_code"];
-            if ([ret_code isEqualToString:@"0"]) {
-                
-                self.serverTextView.text =nil;
-                hud.labelText = NSLocalizedString(@"Send Message Succeed", nil);
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
-                
-                [self.pullToRefreshView startLoadingAndExpand:YES animated:YES];
-                
-            }else{
-                hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
-                [hud hide:YES afterDelay:HUD_TIME_DELAY];
-            }
-        }else{
-            hud.labelText = NSLocalizedString(@"Cannot Sending", nil);
-            [hud hide:YES afterDelay:HUD_TIME_DELAY];
-        }
-        
-    }];
-}
 
 #pragma mark - SSPullToRefreshDelegate
 

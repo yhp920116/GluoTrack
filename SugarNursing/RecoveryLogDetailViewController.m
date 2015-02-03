@@ -298,7 +298,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (NSDate *)dateFormattingWithString:(NSString *)dateString
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
     return [dateFormatter dateFromString:dateString];
 }
 
@@ -372,7 +372,6 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         case RecoveryLogStatusEdit:
         {
             [parameters setValue:self.recordLog.detectLog.detectId forKey:@"detectId"];
-//            [parameters setValue:[NSString formattingDataSource:self.recordLog.detectLog.dataSource] forKey:@"dataSource"];
             break;
         }
     }
@@ -385,7 +384,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                 aHud.labelText = NSLocalizedString(@"Data Updated", nil);
                 
                 // CoreData 中数据的更新通知只有对其属性的修改有效，如果是其属性的属性进行修改，则通知会无效化
-                [parameters dateFormattingFromServer:@"yyyy-MM-dd HH:mm:ss" ForKey:@"detectTime"];
+                [parameters dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"detectTime"];
                 DetectLog *detectLog;
                 switch (self.recoveryLogStatus) {
                     case RecoveryLogStatusEdit:
@@ -416,7 +415,6 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                         detectLog.selfSense = [self.feelingArray componentsJoinedByString:@","];
                         detectLog.detectId = recordLog.id;
                         detectLog.dataSource = NSLocalizedString(@"others", nil);
-
                         
                         recordLog.userid = userId;
                         recordLog.detectLog = detectLog;
@@ -424,6 +422,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     }
     
                 }
+                
                 [[CoreDataStack sharedCoreDataStack] saveContext];
                 double delayInSeconds = 1.35;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -771,7 +770,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             if ([ret_code isEqualToString:@"0"]) {
                 aHud.labelText = NSLocalizedString(@"Data Updated", nil);
                 
-                [parameters dateFormattingFromServer:@"yyyy-MM-dd HH:mm:ss" ForKey:@"sportTime"];
+                [parameters dateFormattingFromServer:@"yyyyMMddHHmmss" ForKey:@"sportTime"];
                 
                 switch (self.recoveryLogStatus) {
                     case RecoveryLogStatusEdit:
@@ -1225,7 +1224,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         cell.detectField.delegate = self;
         cell.detectType.text = NSLocalizedString(@"glucose", nil);
         cell.detectUnit.text = NSLocalizedString(@"mmol/L", nil);
-        cell.detectField.text = self.recordLog.detectLog.glucose;
+        if (self.recordLog.detectLog.glucose) {
+            cell.detectField.text = [NSString stringWithFormat:@"%.1f",self.recordLog.detectLog.glucose.floatValue];
+        }
         self.gluco = cell.detectField.text;
         cell.detectField.placeholder = NSLocalizedString(@"Input Detect Value", nil);
     }
@@ -1240,7 +1241,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         cell.detectField.delegate = self;
         cell.detectType.text = NSLocalizedString(@"hemoglobin", nil);
         cell.detectUnit.text = NSLocalizedString(@"%", nil);
-        cell.detectField.text = self.recordLog.detectLog.hemoglobinef;
+        if (self.recordLog.detectLog.hemoglobinef) {
+            cell.detectField.text = [NSString stringWithFormat:@"%.1f",self.recordLog.detectLog.hemoglobinef.floatValue];
+        }
         self.hemo = cell.detectField.text;
         cell.detectField.placeholder = NSLocalizedString(@"Input Detect Value", nil);
     }
