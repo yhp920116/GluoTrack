@@ -65,7 +65,7 @@
 
 /*  For Debug  */
 
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = DDLogLevelOff;
 
 #define HUD_TIME_DELAY 1.25
 

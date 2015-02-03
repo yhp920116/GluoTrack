@@ -101,17 +101,18 @@
 "A month earlier" = "近1个月";
 
 /* Control Effect */
-"空腹血糖G3" = "空腹血糖";
-"餐后血糖G2" = "餐后2小时血糖";
-"餐后血糖G1" = "餐后1小时血糖";
-"选择周期" = "选择周期";
-"综合疗效评估" = "综合疗效评估";
-"检测次数" = "检测次数";
-"超标次数" = "超标次数";
-"最高值" = "最高值";
-"最低值" = "最低值";
-"平均值" = "平均值";
-"暂时无法获取控糖成效" = "暂时无法获取控糖成效";
+"Fasting Blood-glucose" = "空腹血糖";
+"Postprandial Blood-glucose After 2 hours" = "餐后2小时血糖";
+"Postprandial Blood-glucose After 1 hours" = "餐后1小时血糖";
+"Glycated hemoglobin" = "糖化血糖蛋白";
+"Select Period" = "选择周期";
+"Curative Effect Evaluation" = "综合疗效评估";
+"DetectionTime" = "检测次数";
+"Exceeding Time" = "超标次数";
+"Maximum Value" = "最高值";
+"Minimum Value" = "最低值";
+"Average Value" = "平均值";
+"Cannot get the Evaluation" = "暂时无法获取控糖成效";
 
 /* Member Center */
 "Verify your account" = "验证账户";
@@ -135,10 +136,11 @@
 "Data Updated" = "数据更新成功";
 "Thumbnail uploading" = "正在上传图片";
 "Upload succeed" = "上传成功";
-"确诊医院的名称" = "确诊医院的名称";
-"治疗状况" = "治疗状况";
-"治疗方案" = "治疗方案";
+"Hospital Name" = "确诊医院的名称";
+"Treatment Condition" = "治疗状况";
+"Treatment Scheme" = "治疗方案";
 "Version" = "版本";
+"Leave your feedback." = "请输入您的反馈信息";
 
 
 /* Recovery Log */
@@ -181,49 +183,50 @@
 "Not to Add More" = "最多只能添加十条";
 
 
-"检测设备" = "检测设备";
-"检测日期" = "检测日期";
-"检测时间" = "检测时间";
-"选择日期" = "选择日期";
-"选择时间" = "选择时间";
-"增加备注" = "增加备注";
-"用药日期" = "用药日期";
-"用药时间" = "用药时间";
-"饮食日期" = "饮食日期";
-"饮食时间" = "饮食时间";
-"三餐情况" = "三餐情况";
-"运动日期" = "运动日期";
-"开始时间" = "开始时间";
-"选择用餐类型" = "选择用餐类型";
-"请输入药物名称" = "请输入药物名称";
-"请输入食物名称" = "请输入食物名称";
-"请输入运动名称" = "请输入运动名称";
-"可选" = "可选";
+"Detection Equipment" = "检测设备";
+"Detection Date" = "检测日期";
+"Detection Time" = "检测时间";
+"Select Date" = "选择日期";
+"Select Time" = "选择时间";
+"Add Remark" = "增加备注";
+"Medication Date" = "用药日期";
+"Medication Time" = "用药时间";
+"Diet Date" = "饮食日期";
+"Diet Time" = "饮食时间";
+"Diet Category" = "三餐情况";
+"Select Diet Time" = "选择用餐时间";
+"Exercise Date" = "运动日期";
+"Start Time" = "开始时间";
+"Select Diet Category" = "选择用餐类型";
+"Enter Medication Name" = "请输入药物名称";
+"Enter Food Name" = "请输入食物名称";
+"Enter Exercise Name" = "请输入运动名称";
+"Options" = "可选";
 "Value cannot be empty" = "检测值不能为空";
-"检测值超过最大或最小值" = "检测值超过最大或最小值";
-"用药不能为空" = "用药不能为空";
-"检测结果" = "检测结果";
-"胰岛素" = "胰岛素";
-"降糖药" = "降糖药";
-"其他" = "其他";
-"摄入食物" = "摄入食物";
-"运动数据" = "运动数据";
-"自我感觉" = "自我感觉";
-"检测类型" = "检测类型";
-"检测值" = "检测值";
-"单位" = "单位";
-"药品名称" = "药品名称";
-"用法" = "用法";
-"用量" = "用量";
-"食物名称" = "食物名称";
-"摄入量" = "摄入量";
-"摄入卡路里" = "摄入卡路里";
-"输入名称" = "输入名称";
-"输入时长" = "输入时长";
-"消耗卡路里" = "消耗卡路里";
-"运动项目" = "运动项目";
-"时长" = "时长";
-"消耗卡路里" = "消耗卡路里";
+"Glucose Value is invalid" = "血糖的值只能在3.5~30";
+"Hemo Value is invalid" = "糖化血红蛋白的值只能在4~30";
+"Medication cannot be empty" = "用药不能为空";
+"Detection Result" = "检测结果";
+"Glucose" = "胰岛素";
+"Hemoglobin" = "降糖药";
+"Others" = "其他";
+"Food Intaked" = "摄入食物";
+"Exercise Data" = "运动数据";
+"Feeling" = "自我感觉";
+"Detection Type" = "检测类型";
+"Detection Value" = "检测值";
+"Unit" = "单位";
+"Medication Name" = "药品名称";
+"Usage" = "用法";
+"Dosage" = "用量";
+"Food Name" = "食物名称";
+"Intaked Value" = "摄入量";
+"Calorie Intaked" = "摄入卡路里";
+"Enter Name" = "输入名称";
+"Enter Time" = "输入时长";
+"Calorie Outtaked" = "消耗卡路里";
+"Sport Name" = "运动项目";
+"Sport Time" = "时长";
 
 
 "g" = "克";
@@ -238,3 +241,5 @@
 "Oral" = "口服/不服药";
 "Insulin" = "胰岛素泵";
 "Injection" = "注射";
+
+"Please leave your message." = "请输入您的问题，至少20个字符";

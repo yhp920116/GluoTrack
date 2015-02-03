@@ -32,7 +32,7 @@
 
 - (void)configureTextView
 {
-    self.textView.placeholder = @"请输入您的反馈";
+    self.textView.placeholder = NSLocalizedString(@"Leave your feedback.", nil) ;
     self.textView.placeholderColor = [UIColor lightGrayColor];
     [[self.textView layer] setBorderColor:[[[UIColor lightGrayColor] colorWithAlphaComponent:0.5] CGColor]];
     [[self.textView layer] setBorderWidth:1.0];

@@ -319,7 +319,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     if (self.gluco.floatValue < 3.5f || self.gluco.floatValue > 40.0f) {
 
         aHud.mode = MBProgressHUDModeText;
-        aHud.labelText = NSLocalizedString(@"血糖的值只能在3.5~30", nil);
+        aHud.labelText = NSLocalizedString(@"Detection Value is invalid", nil);
         [aHud show:YES];
         [aHud hide:YES afterDelay:HUD_TIME_DELAY];
         return;
@@ -327,7 +327,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
     if (self.hemo.floatValue < 4.0f || self.hemo.floatValue > 30.0f) {
         aHud.mode = MBProgressHUDModeText;
-        aHud.labelText = NSLocalizedString(@"糖化血红蛋白的值只能在4~30", nil);
+        aHud.labelText = NSLocalizedString(@"Hemo Value is invalid", nil);
         [aHud show:YES];
         [aHud hide:YES afterDelay:HUD_TIME_DELAY];
         return ;
@@ -449,7 +449,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     
     if (self.insulinArray.count == 0 && self.drugsArray.count == 0 && self.othersArray.count == 0) {
         aHud.mode = MBProgressHUDModeText;
-        aHud.labelText = NSLocalizedString(@"用药不能为空", nil);
+        aHud.labelText = NSLocalizedString(@"Medication cannot be empty", nil);
         [aHud hide:YES afterDelay:HUD_TIME_DELAY];
         return;
     }
@@ -1059,29 +1059,29 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     switch (tableView.tag) {
         case RecoveryLogTypeDetect:
             if (section == 1) {
-                headerView.titleLabel.text = NSLocalizedString(@"检测结果",nil);
+                headerView.titleLabel.text = NSLocalizedString(@"Detection Result",nil);
                 headerView.addBtn.hidden = YES;
             }
             break;
         case RecoveryLogTypeDrug:
             if (section == 1) {
-                headerView.titleLabel.text = NSLocalizedString(@"胰岛素", nil);
+                headerView.titleLabel.text = NSLocalizedString(@"Glucose", nil);
             }
             if (section == 2) {
-                headerView.titleLabel.text = NSLocalizedString(@"降糖药", nil);
+                headerView.titleLabel.text = NSLocalizedString(@"Hemoglobin", nil);
             }
             if (section == 3) {
-                headerView.titleLabel.text = NSLocalizedString(@"其他", nil);
+                headerView.titleLabel.text = NSLocalizedString(@"Others", nil);
             }
             break;
         case RecoveryLogTypeDiet:
             if (section == 1) {
-                headerView.titleLabel.text = NSLocalizedString(@"摄入食物", nil);
+                headerView.titleLabel.text = NSLocalizedString(@"Food Intaked", nil);
             }
             break;
         case RecoveryLogTypeExercise:
             if (section == 1) {
-                headerView.titleLabel.text = NSLocalizedString(@"运动数据", nil);
+                headerView.titleLabel.text = NSLocalizedString(@"Exercise Data", nil);
                 headerView.addBtn.hidden = YES;
             }
             break;
@@ -1195,7 +1195,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (void)configureTableView:(UITableView *)tableView withFeelingCell:(FeelingCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.title.text = NSLocalizedString(@"自我感觉", nil);
+    cell.title.text = NSLocalizedString(@"Feeling", nil);
     cell.selectedArray = self.feelingArray;
     [cell initialSelectedBtn];
     cell.selectedFeelingBlock = ^void (NSMutableArray *selecteArray){
@@ -1208,9 +1208,9 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 
     if (indexPath.row == 0) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.detectType.text = NSLocalizedString(@"检测类型", nil);
-        cell.detectField.text = NSLocalizedString(@"检测值", nil);
-        cell.detectUnit.text = NSLocalizedString(@"单位", nil);
+        cell.detectType.text = NSLocalizedString(@"Detection Type", nil);
+        cell.detectField.text = NSLocalizedString(@"Detection Value", nil);
+        cell.detectUnit.text = NSLocalizedString(@"Unit", nil);
     }
                 
     if (indexPath.row == 1) {
@@ -1254,10 +1254,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 - (void)configureTableView:(UITableView *)tableView withMedicateCell:(MedicateCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     if (!indexPath.row == 0) {
-        cell.drugField.placeholder = NSLocalizedString(@"药品名称", nil);
-        cell.usageField.placeholder = NSLocalizedString(@"用法", nil);
-        cell.dosageField.placeholder = NSLocalizedString(@"用量", nil);
-        cell.unitField.placeholder = NSLocalizedString(@"单位", nil);
+        cell.drugField.placeholder = NSLocalizedString(@"Medication Name", nil);
+        cell.usageField.placeholder = NSLocalizedString(@"Usage", nil);
+        cell.dosageField.placeholder = NSLocalizedString(@"Dosage", nil);
+        cell.unitField.placeholder = NSLocalizedString(@"Unit", nil);
         
         cell.dosageField.userInteractionEnabled = YES;
         cell.dosageField.delegate = self;
@@ -1295,10 +1295,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
     }else{
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        cell.drugField.text = NSLocalizedString(@"药品名称", nil);
-        cell.usageField.text = NSLocalizedString(@"用法", nil);
-        cell.dosageField.text = NSLocalizedString(@"用量", nil);
-        cell.unitField.text = NSLocalizedString(@"单位", nil);
+        cell.drugField.text = NSLocalizedString(@"Medication Name", nil);
+        cell.usageField.text = NSLocalizedString(@"Usage", nil);
+        cell.dosageField.text = NSLocalizedString(@"Dosage", nil);
+        cell.unitField.text = NSLocalizedString(@"Unit", nil);
     }
     
     
@@ -1308,10 +1308,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 {
     if (!indexPath.row == 0) {
         
-        cell.food.placeholder = NSLocalizedString(@"食物名称", nil);
-        cell.weight.placeholder = NSLocalizedString(@"摄入量", nil);
-        cell.unit.placeholder = NSLocalizedString(@"单位", nil);
-        cell.calorie.placeholder = NSLocalizedString(@"摄入卡路里", nil);
+        cell.food.placeholder = NSLocalizedString(@"Food Name", nil);
+        cell.weight.placeholder = NSLocalizedString(@"Intaked Value", nil);
+        cell.unit.placeholder = NSLocalizedString(@"Unit", nil);
+        cell.calorie.placeholder = NSLocalizedString(@"Calorie Intaked", nil);
         
         cell.weight.delegate = self;
         cell.weight.logIndexPath = indexPath;
@@ -1334,10 +1334,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         }
     }else{
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.food.text = NSLocalizedString(@"食物名称", nil);
-        cell.weight.text = NSLocalizedString(@"摄入量", nil);
-        cell.unit.text = NSLocalizedString(@"单位", nil);
-        cell.calorie.text = NSLocalizedString(@"摄入卡路里", nil);
+        cell.food.text = NSLocalizedString(@"Food Name", nil);
+        cell.weight.text = NSLocalizedString(@"Intaked Value", nil);
+        cell.unit.text = NSLocalizedString(@"Unit", nil);
+        cell.calorie.text = NSLocalizedString(@"Calorie Intaked", nil);
     }
    
 }
@@ -1346,10 +1346,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
 {
     if (indexPath.row == 1) {
         
-        cell.exerciseName.placeholder = NSLocalizedString(@"输入名称", nil);
-        cell.time.placeholder = NSLocalizedString(@"输入时长", nil);
-        cell.unit.placeholder = NSLocalizedString(@"单位", nil);
-        cell.calorie.placeholder = NSLocalizedString(@"消耗卡路里", nil);
+        cell.exerciseName.placeholder = NSLocalizedString(@"Sport Name", nil);
+        cell.time.placeholder = NSLocalizedString(@"Sport Time", nil);
+        cell.unit.placeholder = NSLocalizedString(@"Unit", nil);
+        cell.calorie.placeholder = NSLocalizedString(@"Calorie Outtaked", nil);
         
         cell.time.delegate = self;
         cell.time.logIndexPath = indexPath;
@@ -1371,10 +1371,10 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         
     }else{
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.exerciseName.text = NSLocalizedString(@"运动项目", nil);
-        cell.time.text = NSLocalizedString(@"时长", nil);
-        cell.unit.text = NSLocalizedString(@"单位", nil);
-        cell.calorie.text = NSLocalizedString(@"消耗卡路里", nil);
+        cell.exerciseName.text = NSLocalizedString(@"Enter Name", nil);
+        cell.time.text = NSLocalizedString(@"Enter Time", nil);
+        cell.unit.text = NSLocalizedString(@"Unit", nil);
+        cell.calorie.text = NSLocalizedString(@"Calorie Outtaked", nil);
     }
     
 }
@@ -1402,21 +1402,21 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
             switch (indexPath.row) {
                 case 0:
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.title.text = NSLocalizedString(@"检测设备",nil);
+                    cell.title.text = NSLocalizedString(@"Detection Equipment",nil);
                     cell.detailText.text = self.recordLog.detectLog.dataSource?self.recordLog.detectLog.dataSource:NSLocalizedString(@"others", nil);
                     break;
                 case 1:
                 {
-                    cell.title.text = NSLocalizedString(@"检测日期",nil);
-                    cell.detailText.placeholder = NSLocalizedString(@"选择日期", nil);
+                    cell.title.text = NSLocalizedString(@"Detection Date",nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Select Date", nil);
                     cell.detailText.text = dateString;
                     self.date = dateString;
                     break;
                 }
                 case 2:
                 {
-                    cell.title.text = NSLocalizedString(@"检测时间", nil);
-                    cell.detailText.placeholder = NSLocalizedString(@"选择时间",nil);
+                    cell.title.text = NSLocalizedString(@"Detection Time", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Select Time",nil);
                     cell.detailText.text = timeString;
                     self.time = timeString;
                     break;
@@ -1427,8 +1427,8 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     cell.detailText.delegate = self;
                     cell.detailText.logIndexPath = indexPath;
                     cell.detailText.logFieldIdentify = @"remark";
-                    cell.title.text = NSLocalizedString(@"增加备注", nil);
-                    cell.detailText.placeholder = NSLocalizedString(@"可选", nil);
+                    cell.title.text = NSLocalizedString(@"Add Remark", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Options", nil);
                     cell.detailText.text = self.recordLog.detectLog.remar;
                     self.remark = self.recordLog.detectLog.remar;
                     cell.detailText.enabled = YES;
@@ -1440,14 +1440,14 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         case RecoveryLogTypeDrug:
             switch (indexPath.row) {
                 case 0:
-                    cell.title.text = NSLocalizedString(@"用药日期",nil);
-                    cell.detailText.placeholder = NSLocalizedString(@"选择日期", nil);
+                    cell.title.text = NSLocalizedString(@"Medication Date",nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Select Date", nil);
                     cell.detailText.text = dateString;
                     self.date = dateString;
                     break;
                 case 1:
-                    cell.title.text = NSLocalizedString(@"用药时间", nil);
-                    cell.detailText.placeholder = NSLocalizedString(@"选择时间",nil);
+                    cell.title.text = NSLocalizedString(@"Medication Time", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Select Time",nil);
                     cell.detailText.text = timeString;
                     self.time = timeString;
                     break;
@@ -1458,22 +1458,22 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         case RecoveryLogTypeDiet:
             switch (indexPath.row) {
                 case 0:
-                    cell.title.text = NSLocalizedString(@"饮食日期",nil);
-                    cell.detailText.placeholder = NSLocalizedString(@"选择日期", nil);
+                    cell.title.text = NSLocalizedString(@"Diet Date",nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Select Date", nil);
                     cell.detailText.text = dateString;
                     self.date = dateString;
                     break;
                 case 1:
-                    cell.title.text = NSLocalizedString(@"饮食时间", nil);
-                    cell.detailText.placeholder = NSLocalizedString(@"选择时间",nil);
+                    cell.title.text = NSLocalizedString(@"Diet Time", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Select Time",nil);
                     cell.detailText.text = timeString;
                     self.time = timeString;
                     break;
                 case 2:
-                    cell.title.text = NSLocalizedString(@"三餐情况", nil);
+                    cell.title.text = NSLocalizedString(@"Diet Category", nil);
                     cell.detailText.text = self.recordLog.dietLog.eatPeriod;
                     self.period = self.recordLog.dietLog.eatPeriod;
-                    cell.detailText.placeholder = NSLocalizedString(@"选择用餐时间", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Select Diet Time", nil);
                     break;
                 default:
                     break;
@@ -1482,14 +1482,14 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
         case RecoveryLogTypeExercise:
             switch (indexPath.row) {
                 case 0:
-                    cell.title.text = NSLocalizedString(@"运动日期",nil);
-                    cell.detailText.placeholder = NSLocalizedString(@"选择日期", nil);
+                    cell.title.text = NSLocalizedString(@"Exercise Date",nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Select Date", nil);
                     cell.detailText.text = dateString;
                     self.date = dateString;
                     break;
                 case 1:
-                    cell.title.text = NSLocalizedString(@"开始时间", nil);
-                    cell.detailText.placeholder = NSLocalizedString(@"选择时间",nil);
+                    cell.title.text = NSLocalizedString(@"Start Time", nil);
+                    cell.detailText.placeholder = NSLocalizedString(@"Select Time",nil);
                     cell.detailText.text = timeString;
                     self.time = timeString;
                     break;
@@ -1576,11 +1576,11 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                             [self showDatePickerHUDWithMode:UIDatePickerModeTime];
                             break;
                         case 2:
-                            self.sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"选择用餐类型",nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:
-                                          NSLocalizedString(@"早餐", nil) ,
-                                          NSLocalizedString(@"午餐",nil),
-                                          NSLocalizedString(@"晚餐",nil),
-                                          NSLocalizedString(@"加餐",nil),nil];
+                            self.sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select Diet Category",nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"cancel" otherButtonTitles:
+                                          NSLocalizedString(@"breakfast", nil) ,
+                                          NSLocalizedString(@"lunch",nil),
+                                          NSLocalizedString(@"dinner",nil),
+                                          NSLocalizedString(@"snack",nil),nil];
                             [self.sheet showInView:self.view];
                             break;
                         default:
@@ -1839,7 +1839,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                         
                         
                         if ([medicine.drug isEqualToString:NSLocalizedString(@"Custom", nil)]) {
-                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"请输入药物名称", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
+                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Medication Name", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
                             alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
                             
                             UITextField *tf = [alertView textFieldAtIndex:0];
@@ -1873,7 +1873,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     food.calorie = [NSString stringWithFormat:@"%.1f",rate.floatValue * 100];
                     
                     if ([food.food isEqualToString:NSLocalizedString(@"Custom", nil)]) {
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"请输入食物名称", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Food Name", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
                         alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
                         
                         UITextField *tf = [alertView textFieldAtIndex:0];
@@ -1904,7 +1904,7 @@ static NSString *SectionHeaderViewIdentifier = @"SectionHeaderViewIdentifier";
                     
                     
                     if ([sportName.text isEqualToString:NSLocalizedString(@"Custom", nil)]) {
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"请输入运动名称", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter Exercise Name", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"sure", nil), nil];
                         alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
                         
                         UITextField *tf = [alertView textFieldAtIndex:0];

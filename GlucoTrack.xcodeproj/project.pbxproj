@@ -1932,7 +1932,7 @@
 					"$(PROJECT_DIR)/SugarNursing/UMSocial_Sdk_4.2.1",
 				);
 				PRODUCT_NAME = GlucoTrack;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ea561dc9-7cfd-4d89-8d88-6a8819beaeca";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1943,8 +1943,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: hanming zhang";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hanming zhang";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SugarNursing",
@@ -1957,7 +1957,7 @@
 					"$(PROJECT_DIR)/SugarNursing/UMSocial_Sdk_4.2.1",
 				);
 				PRODUCT_NAME = GlucoTrack;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ea561dc9-7cfd-4d89-8d88-6a8819beaeca";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

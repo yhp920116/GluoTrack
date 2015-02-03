@@ -109,16 +109,16 @@
                 
                 EffectList *g3 = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 [g3 updateCoreDataForData:[responseData objectForKey:@"g3"] withKeyPath:nil];
-                g3.name = NSLocalizedString(@"空腹血糖G3", nil);
+                g3.name = NSLocalizedString(@"Fasting Blood-glucose", nil);
                 EffectList *g2 = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 [g2 updateCoreDataForData:[responseData objectForKey:@"g2"] withKeyPath:nil];
-                g2.name = NSLocalizedString(@"餐后血糖G2", nil);
+                g2.name = NSLocalizedString(@"Postprandial Blood-glucose After 2 hours", nil);
                 EffectList *g1 = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 [g1 updateCoreDataForData:[responseData objectForKey:@"g1"] withKeyPath:nil];
-                g1.name = NSLocalizedString(@"餐后血糖G1", nil);
+                g1.name = NSLocalizedString(@"Postprandial Blood-glucose After 1 hours", nil);
                 EffectList *hemoglobin = [EffectList createEntityInContext:[CoreDataStack sharedCoreDataStack].context];
                 [hemoglobin updateCoreDataForData:[responseData objectForKey:@"hemoglobin"] withKeyPath:nil];
-                hemoglobin.name = NSLocalizedString(@"糖化血糖蛋白", nil);
+                hemoglobin.name = NSLocalizedString(@"Glycated hemoglobin", nil);
                 
                 [lists addObject:g3];
                 [lists addObject:g1];
@@ -168,7 +168,7 @@
         return cell;
     } else if (indexPath.row == 1) {
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Basic" forIndexPath:indexPath];
-        cell.textLabel.text = NSLocalizedString(@"选择周期",nil);
+        cell.textLabel.text = NSLocalizedString(@"Select Period",nil);
         cell.detailTextLabel.text = [self.countDayDic valueForKey:self.countDay];
         return cell;
     } else {
@@ -193,7 +193,7 @@
     }
     
     
-    cell.scoreLabel.text = NSLocalizedString(@"综合疗效评估",nil);
+    cell.scoreLabel.text = NSLocalizedString(@"Curative Effect Evaluation",nil);
     if (controlEffect.conclusionScore) {
         cell.scoreLabel.attributedText = [self configureLastLetter:[cell.scoreLabel.text stringByAppendingFormat:@" %@分",controlEffect.conclusionScore]];
     }else{
@@ -204,7 +204,7 @@
         cell.evaluateTextLabel.text = [NSString stringWithFormat:@"%@  %@",controlEffect.conclusion?controlEffect.conclusion:@"",controlEffect.conclusionDesc];
     }else{
         NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor orangeColor]};
-        NSAttributedString *aString = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"暂时无法获取控糖成效", nil) attributes:attributes];
+        NSAttributedString *aString = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Cannot get the Evaluation", nil) attributes:attributes];
         cell.evaluateTextLabel.attributedText = aString;
     }
     
@@ -223,11 +223,11 @@
     }
     
     
-    cell.testCount.text = NSLocalizedString(@"检测次数",nil);
-    cell.overproofCount.text = NSLocalizedString(@"超标次数",nil);
-    cell.maximumValue.text = NSLocalizedString(@"最高值",nil);
-    cell.minimumValue.text = NSLocalizedString(@"最低值",nil);
-    cell.averageValue.text = NSLocalizedString(@"平均值",nil);
+    cell.testCount.text = NSLocalizedString(@"DetectionTime",nil);
+    cell.overproofCount.text = NSLocalizedString(@"Exceeding Time",nil);
+    cell.maximumValue.text = NSLocalizedString(@"Maximum Value",nil);
+    cell.minimumValue.text = NSLocalizedString(@"Minimum Value",nil);
+    cell.averageValue.text = NSLocalizedString(@"Average Value",nil);
     
     
     cell.evaluateType.text = effectList.name;

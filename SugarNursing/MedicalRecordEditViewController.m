@@ -49,11 +49,11 @@
     self.medicalNameField.text = self.medicalRecord.mediName;
     self.dateField.text = self.medicalRecord.diagTime;
     self.hospitalField.text = self.medicalRecord.diagHosp;
-    self.hospitalField.placeholder = NSLocalizedString(@"确诊医院的名称", nil);
+    self.hospitalField.placeholder = NSLocalizedString(@"Hospital Name", nil);
     self.treatMentField.text = self.medicalRecord.treatMent;
-    self.treatMentField.placeholder = NSLocalizedString(@"治疗状况", nil);
+    self.treatMentField.placeholder = NSLocalizedString(@"Treatment Condition", nil);
     self.treatPlanField.text = self.medicalRecord.treatPlan;
-    self.treatPlanField.placeholder = NSLocalizedString(@"治疗方案", nil);
+    self.treatPlanField.placeholder = NSLocalizedString(@"Treatment Scheme", nil);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -96,6 +96,20 @@
 "No Data" = "No Data";
 "A month earlier" = "A month earlier";
 
+/* Control Effect */
+"Fasting Blood-glucose" = "Fasting Blood-glucose";
+"Postprandial Blood-glucose After 2 hours" = "Postprandial Blood-glucose After 2 hours";
+"Postprandial Blood-glucose After 1 hours" = "Postprandial Blood-glucose After 1 hours";
+"Glycated hemoglobin" = "Glycated hemoglobin";
+"Select Period" = "Select Period";
+"Curative Effect Evaluation" = "Curative Effect Evaluation";
+"DetectionTime" = "DetTime";
+"Exceeding Time" = "ExTime";
+"Maximum Value" = "MaxValue";
+"Minimum Value" = "MinValue";
+"Average Value" = "AveValue";
+"Cannot get the Evaluation" = "Cannot get the Evaluation";
+
 /* Member Center */
 "Verify your account" = "Verify your account";
 "Verifying..." = "Verifying...";
@@ -117,7 +131,12 @@
 "Data Updated" = "Data Updated";
 "Thumbnail uploading" = "Thumbnail uploading";
 "Upload succeed" = "Upload succeed";
+"Hospital Name" = "Hospital Name";
+"Treatment Condition" = "Treatment Condition";
+"Treatment Scheme" = "Treatment Scheme";
 "Version" = "Version";
+"Leave your feedback." = "Leave your feedback.";
+
 
 /* Recovery Log */
 "Custom" = "Custom";
@@ -155,7 +174,51 @@
 "dinner" = "dinner";
 "snack" = "snack";
 "Not to Add More" = "Not to Add More";
+
+
+"Detection Equipment" = "Detection Equipment";
+"Detection Date" = "Detection Date";
+"Detection Time" = "Detection Time";
+"Select Date" = "Select Date";
+"Select Time" = "Select Time";
+"Add Remark" = "Add Remark";
+"Medication Date" = "Medication Date";
+"Medication Time" = "Medication Time";
+"Diet Date" = "Diet Date";
+"Diet Time" = "Diet Time";
+"Diet Category" = "Diet Category";
+"Exercise Date" = "Exercise Date";
+"Start Time" = "Start Time";
+"Select Diet Category" = "Select Diet Category";
+"Enter Medication Name" = "Enter Medication Name";
+"Enter Food Name" = "Enter Food Name";
+"Enter Exercise Name" = "Enter Exercise Name";
+"Options" = "Options";
 "Value cannot be empty" = "Value cannot be empty";
+"Glucose Value is invalid" = "Glucose Value is invalid";
+"Hemo Value is invalid" = "Hemo Value is invalid";
+"Medication cannot be empty" = "Medication cannot be empty";
+"Detection Result" = "Detection Result";
+"Glucose" = "Glucose";
+"Hemoglobin" = "Hemoglobin";
+"Others" = "Others";
+"Food Intaked" = "Food Intaked";
+"Exercise Data" = "Exercise Data";
+"Feeling" = "Feeling";
+"Detection Type" = "Detection Type";
+"Detection Value" = "Detection Value";
+"Unit" = "Unit";
+"Medication Name" = "Medication Name";
+"Usage" = "Usage";
+"Dosage" = "Dosage";
+"Food Name" = "Food Name";
+"Intaked Value" = "Intaked Value";
+"Calorie Intaked" = "Calorie Intaked";
+"Enter Name" = "Enter Name";
+"Enter Time" = "Enter Time";
+"Calorie Outtaked" = "Calorie Outtaked";
+"Sport Name" = "Sport Name";
+"Sport Time" = "Sport Time";
 
 "g" = "g";
 "kg" = "kg";
@@ -169,3 +232,5 @@
 "Oral" = "Oral";
 "Insulin" = "Insulin";
 "Injection" = "Injection";
+
+"Please leave your message." = "Please leave your message.";

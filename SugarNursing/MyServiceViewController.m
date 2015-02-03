@@ -50,7 +50,7 @@
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.serverTextView.placeholder = @"请输入您的问题，至少20个字符";
+    self.serverTextView.placeholder = NSLocalizedString(@"Please leave your message.", nil);
     self.serverTextView.placeholderColor = [UIColor lightGrayColor];
     [[self.serverTextView layer] setBorderColor:[[[UIColor lightGrayColor] colorWithAlphaComponent:0.5] CGColor]];
     [[self.serverTextView layer] setBorderWidth:1.0];
