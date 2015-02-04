@@ -12,4 +12,6 @@
 
 + (NSString *)localizedMsgFromRet_code:(NSString *)ret_code withHUD:(BOOL)hasHud;
 
++ (NSString *)localizedErrorMesssagesFromError:(NSError *)error;
+
 @end

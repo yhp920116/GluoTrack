@@ -46,5 +46,44 @@
     return localizedString;
 }
 
++ (NSString *)localizedErrorMesssagesFromError:(NSError *)error
+{
+    NSString *message;
+    if (error.localizedDescription && (error.localizedRecoverySuggestion || error.localizedFailureReason)) {
+        
+        if (error.localizedRecoverySuggestion) {
+            message = error.localizedRecoverySuggestion;
+        } else {
+            message = error.localizedFailureReason;
+        }
+    } else if (error.localizedDescription) {
+        
+        if ([[error domain] isEqualToString:NSURLErrorDomain]) {
+            switch ([error code]) {
+                case NSURLErrorCannotFindHost:
+                    message = NSLocalizedString(@"Cannot find specified host.", nil);
+                    break;
+                case NSURLErrorCannotConnectToHost:
+                    message = NSLocalizedString(@"Cannot connect to specified host.", nil);
+                    break;
+                case NSURLErrorNotConnectedToInternet:
+                    message = NSLocalizedString(@"Cannot connect to the internet.", nil);
+                    break;
+                default:
+                    message = [error localizedDescription];
+                    break;
+            }
+        }else{
+            message = [error localizedDescription];
+        }
+        
+        
+    } else {
+        message = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%@ Error: %ld", @"Localizable", @"Fallback Error Failure Reason Format"), error.domain, (long)error.code];
+    }
+    
+    return message;
+}
+
 
 @end

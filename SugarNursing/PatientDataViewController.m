@@ -159,7 +159,7 @@
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
             }
         }else {
-            hud.labelText = [error localizedDescription];
+            hud.labelText = [NSString localizedErrorMesssagesFromError:error];
         }
         [hud hide:YES afterDelay:HUD_TIME_DELAY];
 
@@ -423,7 +423,7 @@
                 hud.labelText = [NSString localizedMsgFromRet_code:ret_code withHUD:YES];
             }
         }else {
-            hud.labelText = [error localizedDescription];
+            hud.labelText = [NSString localizedErrorMesssagesFromError:error];
         }
         [hud hide:YES afterDelay:HUD_TIME_DELAY];
 

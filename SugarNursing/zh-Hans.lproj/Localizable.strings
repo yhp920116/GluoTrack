@@ -243,3 +243,9 @@
 "Injection" = "注射";
 
 "Please leave your message." = "请输入您的问题，至少20个字符";
+
+/* Network Error */
+"Fallback Error Failure Reason Format" = "连接网络失败";
+"Cannot find specified host." = "连接网络失败";
+"Cannot connect to specified host." = "连接网络失败";
+"Cannot connect to the internet." = "连接网络失败";

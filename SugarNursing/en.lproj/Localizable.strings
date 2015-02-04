@@ -234,3 +234,10 @@
 "Injection" = "Injection";
 
 "Please leave your message." = "Please leave your message.";
+
+/* Network Error */
+"Fallback Error Failure Reason Format" = "Fallback Error Failure Reason Format";
+"Cannot find specified host." = "Cannot find specified host.";
+"Cannot connect to specified host." = "Cannot connect to specified host.";
+"Cannot connect to the internet." = "Cannot connect to the internet.";
+
