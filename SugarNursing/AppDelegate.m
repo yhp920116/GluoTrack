@@ -157,6 +157,7 @@
     
     //for log
     [UMessage setLogEnabled:NO];
+    [UMessage setAutoAlert:NO];
 
 }
 

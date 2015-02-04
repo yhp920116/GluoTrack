@@ -1945,7 +1945,7 @@
 					"$(PROJECT_DIR)/SugarNursing/UMessage_Sdk_1.1.0",
 				);
 				PRODUCT_NAME = GlucoTrack;
-				PROVISIONING_PROFILE = "7ad9e622-ea45-4519-94dd-c7e7d8f56867";
+				PROVISIONING_PROFILE = "75688ef4-92bb-480c-83e1-ef0a2f6a4250";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1971,7 +1971,7 @@
 					"$(PROJECT_DIR)/SugarNursing/UMessage_Sdk_1.1.0",
 				);
 				PRODUCT_NAME = GlucoTrack;
-				PROVISIONING_PROFILE = "7ad9e622-ea45-4519-94dd-c7e7d8f56867";
+				PROVISIONING_PROFILE = "75688ef4-92bb-480c-83e1-ef0a2f6a4250";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
