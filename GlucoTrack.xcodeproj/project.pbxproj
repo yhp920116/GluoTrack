@@ -143,6 +143,7 @@
 		37CA3B9D1A262F6F009A2403 /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CA3B9C1A262F6F009A2403 /* MyTextView.m */; };
 		37CA3BA01A2633D5009A2403 /* MyServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CA3B9F1A2633D5009A2403 /* MyServiceViewController.m */; };
 		37CA3BA51A263C54009A2403 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CA3BA41A263C54009A2403 /* ServiceCell.m */; };
+		37D5D6D41A82009E00D66A67 /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D5D6D21A82009E00D66A67 /* libUMessage_Sdk_1.1.0.a */; };
 		37DE6A7B1A26CB34000533BB /* FeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE6A7A1A26CB34000533BB /* FeedBackViewController.m */; };
 		37DE6A7F1A2719AE000533BB /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DE6A7E1A2719AE000533BB /* SectionHeaderView.xib */; };
 		37DE6A821A271B73000533BB /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE6A811A271B73000533BB /* SectionHeaderView.m */; };
@@ -467,6 +468,8 @@
 		37CA3BA41A263C54009A2403 /* ServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCell.m; sourceTree = "<group>"; };
 		37D5D6CE1A81F69B00D66A67 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MyService.strings"; sourceTree = "<group>"; };
 		37D5D6D01A81F6A700D66A67 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MyService.strings"; sourceTree = "<group>"; };
+		37D5D6D21A82009E00D66A67 /* libUMessage_Sdk_1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.1.0.a; sourceTree = "<group>"; };
+		37D5D6D31A82009E00D66A67 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		37DE6A791A26CB34000533BB /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
 		37DE6A7A1A26CB34000533BB /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		37DE6A7E1A2719AE000533BB /* SectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
@@ -539,6 +542,7 @@
 				37FF58771A40912900F3564E /* AddressBookUI.framework in Frameworks */,
 				37FF58751A40912300F3564E /* AddressBook.framework in Frameworks */,
 				37FF58731A40911900F3564E /* MessageUI.framework in Frameworks */,
+				37D5D6D41A82009E00D66A67 /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				3716F02A1A13448800BE3841 /* UIKit.framework in Frameworks */,
 				1847DA780B1F9C304A08AC6C /* libPods-SugarNursing.a in Frameworks */,
 			);
@@ -854,6 +858,7 @@
 		3749B5471A09C7950031D00C /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				37D5D6D11A82009E00D66A67 /* UMessage_Sdk_1.1.0 */,
 				37B508191A7E93E300D6B36E /* YALSunnyRefreshControll */,
 				37F5080A1A34917400879605 /* FXBlurView */,
 				371903A11A28584F00A9657B /* SwipeView */,
@@ -1085,6 +1090,15 @@
 				37B5081C1A7E93E300D6B36E /* YALSunnyRefreshControl.xib */,
 			);
 			path = YALSunnyRefreshControll;
+			sourceTree = "<group>";
+		};
+		37D5D6D11A82009E00D66A67 /* UMessage_Sdk_1.1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				37D5D6D21A82009E00D66A67 /* libUMessage_Sdk_1.1.0.a */,
+				37D5D6D31A82009E00D66A67 /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
 		37F5080A1A34917400879605 /* FXBlurView */ = {
@@ -1928,9 +1942,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SugarNursing/UMSocial_Sdk_4.2.1",
+					"$(PROJECT_DIR)/SugarNursing/UMessage_Sdk_1.1.0",
 				);
 				PRODUCT_NAME = GlucoTrack;
-				PROVISIONING_PROFILE = "098fd58f-0cdc-4dbd-a319-d3c910519424";
+				PROVISIONING_PROFILE = "7ad9e622-ea45-4519-94dd-c7e7d8f56867";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1953,9 +1968,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SugarNursing/UMSocial_Sdk_4.2.1",
+					"$(PROJECT_DIR)/SugarNursing/UMessage_Sdk_1.1.0",
 				);
 				PRODUCT_NAME = GlucoTrack;
-				PROVISIONING_PROFILE = "098fd58f-0cdc-4dbd-a319-d3c910519424";
+				PROVISIONING_PROFILE = "7ad9e622-ea45-4519-94dd-c7e7d8f56867";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
