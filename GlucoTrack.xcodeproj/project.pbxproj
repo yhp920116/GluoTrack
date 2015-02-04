@@ -13,7 +13,6 @@
 		37074C901A6614BE00D65EFF /* NoDataTips.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37074C921A6614BE00D65EFF /* NoDataTips.xib */; };
 		37074C9A1A662C7500D65EFF /* DetectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37074C991A662C7500D65EFF /* DetectCell.xib */; };
 		37077B811A7B785200F69AB5 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37077B801A7B785200F69AB5 /* NoDataView.m */; };
-		37077B8B1A7B9C2600F69AB5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37077B8A1A7B9C2600F69AB5 /* Info.plist */; };
 		370E28701A761861000A34E6 /* DetectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 370E286F1A761861000A34E6 /* DetectCell.m */; };
 		370E28731A7618E5000A34E6 /* DetectDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 370E28721A7618E5000A34E6 /* DetectDataCell.m */; };
 		3714308F1A7F2AB70071BFA1 /* DetectLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3714308E1A7F2AB70071BFA1 /* DetectLog.m */; };
@@ -204,8 +203,6 @@
 		37014DBF1A63EE890048A2D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ControlEffect.strings"; sourceTree = "<group>"; };
 		37014DC51A63EFE90048A2D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Advise.strings"; sourceTree = "<group>"; };
 		37014DC71A63EFEA0048A2D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Advise.strings"; sourceTree = "<group>"; };
-		37014DC91A63F0650048A2D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MyService.strings"; sourceTree = "<group>"; };
-		37014DCB1A63F0670048A2D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MyService.strings"; sourceTree = "<group>"; };
 		37014DCD1A63F0F20048A2D8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Login.strings"; sourceTree = "<group>"; };
 		37014DCF1A6431CC0048A2D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/ret_code.plist; sourceTree = "<group>"; };
 		37014DD31A64320D0048A2D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/ret_code.plist"; sourceTree = "<group>"; };
@@ -468,6 +465,8 @@
 		37CA3B9F1A2633D5009A2403 /* MyServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyServiceViewController.m; sourceTree = "<group>"; };
 		37CA3BA31A263C54009A2403 /* ServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCell.h; sourceTree = "<group>"; };
 		37CA3BA41A263C54009A2403 /* ServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCell.m; sourceTree = "<group>"; };
+		37D5D6CE1A81F69B00D66A67 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MyService.strings"; sourceTree = "<group>"; };
+		37D5D6D01A81F6A700D66A67 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MyService.strings"; sourceTree = "<group>"; };
 		37DE6A791A26CB34000533BB /* FeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewController.h; sourceTree = "<group>"; };
 		37DE6A7A1A26CB34000533BB /* FeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewController.m; sourceTree = "<group>"; };
 		37DE6A7E1A2719AE000533BB /* SectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
@@ -1325,7 +1324,6 @@
 				373A87001A7A1AB600CCCE83 /* foodRate.plist in Resources */,
 				3715D9291A787A2500A7E26F /* Drugs.plist in Resources */,
 				378635A51A47C8CF00922539 /* Login.storyboard in Resources */,
-				37077B8B1A7B9C2600F69AB5 /* Info.plist in Resources */,
 				3715D9421A787F6900A7E26F /* exerciseRate.plist in Resources */,
 				379C89E11A2D709600F33BAE /* BasicCell.xib in Resources */,
 				379F20271A353C470026BF95 /* Remind.xib in Resources */,
@@ -1721,8 +1719,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				376D95801A2EFF2400734113 /* Base */,
-				37014DC91A63F0650048A2D8 /* zh-Hans */,
-				37014DCB1A63F0670048A2D8 /* zh-Hant */,
+				37D5D6CE1A81F69B00D66A67 /* zh-Hans */,
+				37D5D6D01A81F6A700D66A67 /* zh-Hant */,
 			);
 			name = MyService.storyboard;
 			sourceTree = "<group>";
@@ -1918,7 +1916,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hanming zhang";
+				CODE_SIGN_IDENTITY = "iPhone Developer: hanming zhang (232Z2BKCNF)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hanming zhang";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1932,7 +1930,7 @@
 					"$(PROJECT_DIR)/SugarNursing/UMSocial_Sdk_4.2.1",
 				);
 				PRODUCT_NAME = GlucoTrack;
-				PROVISIONING_PROFILE = "ea561dc9-7cfd-4d89-8d88-6a8819beaeca";
+				PROVISIONING_PROFILE = "098fd58f-0cdc-4dbd-a319-d3c910519424";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1943,7 +1941,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hanming zhang";
+				CODE_SIGN_IDENTITY = "iPhone Developer: hanming zhang (232Z2BKCNF)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hanming zhang";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1957,7 +1955,7 @@
 					"$(PROJECT_DIR)/SugarNursing/UMSocial_Sdk_4.2.1",
 				);
 				PRODUCT_NAME = GlucoTrack;
-				PROVISIONING_PROFILE = "ea561dc9-7cfd-4d89-8d88-6a8819beaeca";
+				PROVISIONING_PROFILE = "098fd58f-0cdc-4dbd-a319-d3c910519424";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
