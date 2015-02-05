@@ -89,12 +89,12 @@ typedef NS_ENUM(NSInteger, GCLineType) {
     [self.tableView reloadData];
 }
 
-- (NSDate *)timeZoneDate:(NSDate *)date
-{
-    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
-    NSInteger interval = [timeZone secondsFromGMTForDate:date];
-    return [date dateByAddingTimeInterval:interval];
-}
+//- (NSDate *)timeZoneDate:(NSDate *)date
+//{
+//    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+//    NSInteger interval = [timeZone secondsFromGMTForDate:date];
+//    return [date dateByAddingTimeInterval:interval];
+//}
 
 - (void)configureFetchController
 {
@@ -114,7 +114,8 @@ typedef NS_ENUM(NSInteger, GCLineType) {
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyyMMdd000000"];
             NSDate *aDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:self.selectedDate]];
-            formerDate = [self timeZoneDate:aDate];
+//            formerDate = [self timeZoneDate:aDate];
+            formerDate = aDate;
             
             laterDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:formerDate];
             
@@ -132,7 +133,8 @@ typedef NS_ENUM(NSInteger, GCLineType) {
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyyMMdd000000"];
             NSDate *aDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:self.selectedDate]];
-            laterDate = [self timeZoneDate:aDate];
+//            laterDate = [self timeZoneDate:aDate];
+            laterDate = aDate;
             
             laterDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:laterDate];
 
@@ -381,7 +383,7 @@ typedef NS_ENUM(NSInteger, GCLineType) {
         case GCSearchModeByDay:
             return 1.0/60;
         case GCSearchModeByMonth:
-            return 0.0005;
+            return 0.0010;
     }
 }
 

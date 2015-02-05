@@ -163,14 +163,18 @@
         [self configureMemberInfoCell:cell atIndexPath:indexPath];
         return cell;
     }
-    
     LeftMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LeftMenuCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
     [cell configureCellWithIconName:self.menuArray[indexPath.row-1][1] LabelText:self.menuArray[indexPath.row-1][0]];
     return cell;
 }
 
 - (void)configureMemberInfoCell:(MemberInfoCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    
     UserInfo *userInfo;
     if ([self.fetchController.fetchedObjects count] == 0) {
         userInfo = nil;

@@ -117,12 +117,12 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     
 }
 
-- (NSDate *)timeZoneDate:(NSDate *)date
-{
-    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
-    NSInteger interval = [timeZone secondsFromGMTForDate:date];
-    return [date dateByAddingTimeInterval:interval];
-}
+//- (NSDate *)timeZoneDate:(NSDate *)date
+//{
+//    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+//    NSInteger interval = [timeZone secondsFromGMTForDate:date];
+//    return [date dateByAddingTimeInterval:interval];
+//}
 
 - (void)configureFetchController:(BOOL)refresh
 {
@@ -132,7 +132,7 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMdd000000"];
     NSDate *aDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:self.selectedDate]];
-    formerDate = [self timeZoneDate:aDate];
+    formerDate = aDate;
     
     laterDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:formerDate];
     
@@ -439,6 +439,9 @@ static NSString * const TimelineCellIdentifier = @"TimelineCell";
 
 - (void)configureTimelineCell:(TimelineCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    
     RecordLog *recordLog = [self.fetchController objectAtIndexPath:indexPath];
     
     // Configure Time

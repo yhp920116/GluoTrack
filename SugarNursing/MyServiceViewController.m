@@ -96,7 +96,7 @@
                 [hud hide:YES afterDelay:HUD_TIME_DELAY];
             }
         }else{
-            hud.labelText = NSLocalizedString(@"Cannot Sending", nil);
+            hud.labelText = [NSString localizedErrorMesssagesFromError:error];
             [hud hide:YES afterDelay:HUD_TIME_DELAY];
         }
         

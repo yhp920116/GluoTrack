@@ -156,7 +156,7 @@
 #endif
     
     //for log
-    [UMessage setLogEnabled:NO];
+    [UMessage setLogEnabled:YES];
     [UMessage setAutoAlert:NO];
 
 }
