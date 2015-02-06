@@ -1947,7 +1947,7 @@
 				);
 				PRODUCT_NAME = GlucoTrack;
 				PROVISIONING_PROFILE = "d01691a6-b400-4f03-a45c-bebcd3e02bc8";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1973,7 +1973,7 @@
 				);
 				PRODUCT_NAME = GlucoTrack;
 				PROVISIONING_PROFILE = "d01691a6-b400-4f03-a45c-bebcd3e02bc8";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
