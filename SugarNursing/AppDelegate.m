@@ -16,6 +16,7 @@
 #import "AppDelegate+UserLogInOut.h"
 #import <MobClick.h>
 #import "UMessage.h"
+#import "UMSocial.h"
 
 
 @interface AppDelegate ()
@@ -31,6 +32,7 @@
     [self configureCustomizing];
     [self configureCocoaLumberjackFramework];
     [self configureUMAnalytics];
+    [self configureUMSocialService];
     [self configureUMAPNS:launchOptions];
     [self configureUserLogin];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
@@ -110,6 +112,11 @@
     [MobClick startWithAppkey:UM_ANALYTICS_KEY reportPolicy:BATCH channelId:nil];
     [MobClick setAppVersion:version];
     [MobClick checkUpdate:NSLocalizedString(@"New Version", nil) cancelButtonTitle:NSLocalizedString(@"Skip", nil) otherButtonTitles:NSLocalizedString(@"Go", nil)];
+}
+
+- (void)configureUMSocialService
+{
+    [UMSocialData setAppKey:UM_ANALYTICS_KEY];
 }
 
 - (void)configureUMAPNS:(NSDictionary *)launchOptions

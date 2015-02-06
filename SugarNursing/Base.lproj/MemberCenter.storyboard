@@ -1081,6 +1081,9 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="Dqg-mC-DvW" id="IWH-1s-qzs"/>
+                                                    </connections>
                                                 </textView>
                                             </subviews>
                                             <constraints>

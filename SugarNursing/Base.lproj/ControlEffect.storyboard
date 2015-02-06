@@ -186,6 +186,7 @@
                                 <action selector="presentLeftMenuViewController:" destination="O3h-8j-oRm" id="fP2-2Y-Rjd"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="vpv-U8-wBQ"/>
                     </navigationItem>
                     <connections>
                         <outlet property="pickerView" destination="wI0-5w-B0N" id="zCe-kU-BWc"/>

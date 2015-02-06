@@ -60,11 +60,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.view endEditing:YES];
-    [self configureRightBarButton];
     
     switch (indexPath.row) {
         case 1:
         {
+            [self configureRightBarButton];
+
             if ([self.medicalRecord.diagTime isEqualToString:@""] || !self.medicalRecord.diagTime) {
                 self.datePicker.date = [NSDate date];
             }else{
@@ -196,6 +197,11 @@
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self configureRightBarButton];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [self configureRightBarButton];
 }
